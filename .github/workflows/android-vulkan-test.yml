@@ -14,7 +14,7 @@ jobs:
       - name: Install shader compiler and headers
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y glslc libvulkan-dev ninja-build
+          sudo apt-get install -y glslc libvulkan-dev spirv-headers ninja-build
           mkdir -p /tmp/vulkan-headers
           cp -a /usr/include/vulkan /tmp/vulkan-headers/
       - name: Fetch pinned llama.cpp
@@ -28,6 +28,7 @@ jobs:
             -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=android-28 \
             -DCMAKE_BUILD_TYPE=Release -DGGML_NATIVE=OFF -DGGML_OPENMP=OFF \
             -DGGML_LLAMAFILE=OFF -DGGML_VULKAN=ON -DLLAMA_CURL=OFF \
+            -DCMAKE_FIND_ROOT_PATH_MODE_PACKAGE=BOTH \
             -DVulkan_INCLUDE_DIR=/tmp/vulkan-headers \
             -DVulkan_LIBRARY="$NDK/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/28/libvulkan.so" \
             -DVulkan_GLSLC_EXECUTABLE=/usr/bin/glslc
