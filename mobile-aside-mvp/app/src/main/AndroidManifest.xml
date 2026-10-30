@@ -19,6 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ConcertTripActivity" android:exported="false" />
         <activity android:name=".AppRegistryActivity" android:exported="false" />
         <activity android:name=".PlanAssistantActivity" android:exported="false" />
         <activity android:name=".LifeActivity" android:exported="true" android:label="Aside에 관심 내용 저장">

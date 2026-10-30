@@ -35,6 +35,10 @@ public class MainActivity extends Activity {
         content.addView(Ui.text(this, "Aside Mobile", 32, Ui.WHITE, true), Ui.match(this,-2,10));
         content.addView(Ui.text(this, "한 번 설치하고, 다른 앱 위에서 명령하세요.", 15, Ui.MUTED, false), Ui.match(this,-2,9));
 
+        android.widget.Button trip=Ui.button(this,"공연 원정 비교하기");
+        trip.setOnClickListener(v->startActivity(new Intent(this,ConcertTripActivity.class)));
+        content.addView(trip,Ui.match(this,54,14));
+
         android.widget.Button life=Ui.button(this,"내 생활 계획 열기");
         life.setOnClickListener(v->startActivity(new Intent(this,LifeActivity.class)));
         content.addView(life,Ui.match(this,54,14));

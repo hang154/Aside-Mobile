@@ -28,6 +28,7 @@ jobs:
           cd mobile-aside-mvp
           bash scripts/test_parser.sh
           bash scripts/test_actions.sh
+          bash scripts/test_concert.sh
           python3 scripts/test_static.py
       - name: Install Android SDK packages
         run: |
