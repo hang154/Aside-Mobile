@@ -35,6 +35,10 @@ public class MainActivity extends Activity {
         content.addView(Ui.text(this, "Aside Mobile", 32, Ui.WHITE, true), Ui.match(this,-2,10));
         content.addView(Ui.text(this, "한 번 설치하고, 다른 앱 위에서 명령하세요.", 15, Ui.MUTED, false), Ui.match(this,-2,9));
 
+        android.widget.Button browser=Ui.button(this,"AI 브라우저 작업 공간");
+        browser.setOnClickListener(v->startActivity(new Intent(this,BrowserWorkspaceActivity.class)));
+        content.addView(browser,Ui.match(this,54,14));
+
         android.widget.Button trip=Ui.button(this,"공연 원정 비교하기");
         trip.setOnClickListener(v->startActivity(new Intent(this,ConcertTripActivity.class)));
         content.addView(trip,Ui.match(this,54,14));
@@ -79,7 +83,7 @@ public class MainActivity extends Activity {
         LinearLayout micCard = Ui.vertical(this,Ui.PANEL,16); micCard.setBackground(Ui.bg(Ui.PANEL,16,this));
         content.addView(micCard, Ui.match(this,-2,16));
         micCard.addView(Ui.text(this,"02  음성 · 텍스트 명령",18,Ui.WHITE,true));
-        micCard.addView(Ui.text(this,"음성은 기기 내 음성인식 엔진이 있는 경우에만 동작합니다. 앱은 인터넷 권한이 없습니다.",13,Ui.MUTED,false),Ui.match(this,-2,7));
+        micCard.addView(Ui.text(this,"음성은 기기 내 음성인식 엔진이 있는 경우에만 동작합니다. 브라우저 기능은 인터넷을 사용합니다.",13,Ui.MUTED,false),Ui.match(this,-2,7));
         command = new EditText(this);
         command.setSingleLine(true);
         command.setTextColor(Ui.WHITE);command.setHintTextColor(Ui.MUTED);command.setTextSize(15);
@@ -126,7 +130,7 @@ public class MainActivity extends Activity {
         }
         status = Ui.text(this,"테스트: 먼저 접근성 권한을 켠 뒤 'ASIDE' 버블을 누르세요.",13,Ui.MUTED,false);
         status.setTextIsSelectable(true); content.addView(status,Ui.match(this,-2,20));
-        TextView footer=Ui.text(this,"MVP · 디버그 테스트 · 서버/AI 연결 없음 · Android 8+",11,Ui.MUTED,false);
+        TextView footer=Ui.text(this,"MVP · 디버그 테스트 · 원격 에이전트 미연결 · Android 8+",11,Ui.MUTED,false);
         footer.setGravity(Gravity.CENTER);content.addView(footer,Ui.match(this,-2,24));
         setContentView(scroll);
     }

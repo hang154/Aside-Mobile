@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Explicitly no INTERNET, READ_SMS, SEND_SMS, CALL_PHONE, READ_CONTACTS permissions -->
+    <!-- WebView needs network; no SMS, call, or contacts permissions. -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <queries>
         <intent><action android:name="android.speech.RecognitionService" /></intent>
@@ -19,6 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".BrowserWorkspaceActivity" android:exported="false" />
         <activity android:name=".ConcertTripActivity" android:exported="false" />
         <activity android:name=".AppRegistryActivity" android:exported="false" />
         <activity android:name=".PlanAssistantActivity" android:exported="false" />
