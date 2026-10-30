@@ -66,3 +66,9 @@ The APK is a *debug test build*, not a Play Store package. Its signature may cha
 - `scripts/test_parser.sh` — JDK-only parser tests.
 - `scripts/reproduce_result_file.py` — outputs and hashes; compares against baseline when provided.
 - `reports/RESULT_FILE_README.md` — assumptions and validation summary.
+
+## Local AI experiment (0.2)
+
+This experimental build uses a separate application ID, `ai.decisionos.aside.llm`, so it can coexist with the original app. On arm64 devices, choose a GGUF file in the app; it is copied into private app storage, then the bundled llama.cpp Android CPU engine runs user-initiated questions offline. The model itself is not bundled. Replies are text only and are not dispatched as device actions. Inference takes time and small-model answers may be wrong. The experimental build uses up to 2 GB for the selected model and loads it per question. GPU acceleration is not included.
+
+The private-repository workflow retrieves the official llama.cpp b12000 Android release and validates its SHA-256 before building. This is an experimental debug APK; native subprocess support and model import must be verified on the target device.

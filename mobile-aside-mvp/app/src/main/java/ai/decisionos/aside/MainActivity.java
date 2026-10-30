@@ -20,7 +20,8 @@ import android.widget.TextView;
 public class MainActivity extends Activity {
     private TextView status, serviceState;
     private CheckBox consent;
-    private EditText command;
+    private EditText command, aiPrompt;
+    private TextView aiResult;
 
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +84,22 @@ public class MainActivity extends Activity {
         voice.setOnClickListener(v -> startMicrophone());
         micCard.addView(actions,Ui.match(this,-2,12));
 
+        LinearLayout aiCard = Ui.vertical(this,Ui.PANEL,16); aiCard.setBackground(Ui.bg(Ui.PANEL,16,this));
+        content.addView(aiCard,Ui.match(this,-2,16));
+        aiCard.addView(Ui.text(this,"로컬 AI",18,Ui.WHITE,true));
+        aiCard.addView(Ui.text(this,"GGUF 모델을 선택하면 기기에서 질문에 답합니다.",13,Ui.MUTED,false),Ui.match(this,-2,7));
+        android.widget.Button modelButton=Ui.button(this,"모델 파일 선택");
+        modelButton.setOnClickListener(v->{Intent pick=new Intent(Intent.ACTION_OPEN_DOCUMENT);pick.addCategory(Intent.CATEGORY_OPENABLE);pick.setType("*/*");startActivityForResult(pick,42);});
+        aiCard.addView(modelButton,Ui.match(this,50,10));
+        aiPrompt=new EditText(this);aiPrompt.setSingleLine(true);aiPrompt.setTextColor(Ui.WHITE);aiPrompt.setHintTextColor(Ui.MUTED);aiPrompt.setTextSize(15);
+        aiPrompt.setHint("AI에게 질문");aiPrompt.setBackground(Ui.bg(Ui.BG,9,this));aiPrompt.setPadding(Ui.dp(this,12),0,Ui.dp(this,12),0);
+        aiCard.addView(aiPrompt,Ui.match(this,49,10));
+        android.widget.Button ask=Ui.button(this,"질문하기");
+        ask.setOnClickListener(v->{aiResult.setText("답변을 준비하는 중…");LocalModel.infer(this,aiPrompt.getText().toString(),answer->runOnUiThread(()->aiResult.setText(answer)));});
+        aiCard.addView(ask,Ui.match(this,50,10));
+        aiResult=Ui.text(this,LocalModel.model(this).isFile()?"모델 준비됨":"모델 파일을 먼저 선택하세요.",13,Ui.MUTED,false);
+        aiResult.setTextIsSelectable(true);aiCard.addView(aiResult,Ui.match(this,-2,10));
+
         LinearLayout demos = Ui.vertical(this,Ui.PANEL,16);demos.setBackground(Ui.bg(Ui.PANEL,16,this));
         content.addView(demos,Ui.match(this,-2,16));
         demos.addView(Ui.text(this,"03  빠른 테스트",18,Ui.WHITE,true));
@@ -118,6 +135,13 @@ public class MainActivity extends Activity {
         if(AsideAccessibilityService.instance==null){show("먼저 접근성 서비스를 켜세요.");return;}
         AsideAccessibilityService.instance.listen();
         show("음성 명령을 기다리는 중…");
+    }
+    @Override protected void onActivityResult(int requestCode,int resultCode,Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+        if(requestCode==42 && resultCode==RESULT_OK && data!=null && data.getData()!=null){
+            aiResult.setText("모델을 기기에 준비하는 중…");
+            LocalModel.importModel(this,data.getData(),message->runOnUiThread(()->aiResult.setText(message)));
+        }
     }
     @Override public void onRequestPermissionsResult(int requestCode, String[] permissions,int[] results){
         super.onRequestPermissionsResult(requestCode, permissions, results);
