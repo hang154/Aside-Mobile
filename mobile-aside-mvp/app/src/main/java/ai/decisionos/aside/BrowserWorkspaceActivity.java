@@ -27,7 +27,7 @@ public class BrowserWorkspaceActivity extends Activity {
     private static final String ENUMERATE="Array.from(document.querySelectorAll('a[href],button,[role=button]')).filter(e=>{let r=e.getBoundingClientRect(),s=getComputedStyle(e);return r.width>0&&r.height>0&&s.visibility!=='hidden'&&s.display!=='none'}).slice(0,30)";
     @Override public void onCreate(Bundle state){super.onCreate(state);
         LinearLayout root=Ui.vertical(this,Ui.BG,12);
-        root.addView(Ui.text(this,"Aside 브라우저 작업 공간",22,Ui.WHITE,true),Ui.match(this,-2,2));
+        root.addView(Ui.text(this,"누비 브라우저",22,Ui.WHITE,true),Ui.match(this,-2,2));
         root.addView(Ui.text(this,"사용자 전용 웹 공간 · 원격 연결 준비 전 · 로그인과 인증은 직접 진행",12,Ui.MUTED,false),Ui.match(this,-2,4));
         LinearLayout nav=new LinearLayout(this); address=new EditText(this);address.setSingleLine(true);address.setTextColor(Ui.WHITE);address.setHintTextColor(Ui.MUTED);address.setTextSize(14);address.setHint("https:// 주소 입력");address.setText("https://example.com");nav.addView(address,new LinearLayout.LayoutParams(0,Ui.dp(this,48),1));
         Button go=Ui.button(this,"열기");nav.addView(go,new LinearLayout.LayoutParams(Ui.dp(this,70),Ui.dp(this,48)));root.addView(nav,Ui.match(this,-2,4));
