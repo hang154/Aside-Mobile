@@ -54,7 +54,7 @@ public final class LocalModel {
                 if(!p.waitFor(120,TimeUnit.SECONDS)){p.destroyForcibly();reader.join(3000);throw new IOException("추론 시간 초과");}
                 reader.join(3000); errReader.join(3000); String all=captured.toString(StandardCharsets.UTF_8.name()); String diagnostics=errors.toString(StandardCharsets.UTF_8.name());
                 if(p.exitValue()!=0)throw new IOException("엔진 종료 코드 "+p.exitValue()+": "+diagnostics.substring(Math.max(0,diagnostics.length()-500)));
-                String answer=all.trim();
+                String answer=all.replaceAll("(?s)<think>.*?</think>", "").trim();
                 int end=answer.indexOf("[end of text]");if(end>=0)answer=answer.substring(0,end).trim();
                 if(answer.isEmpty())throw new IOException("빈 응답");
                 cb.done(answer);

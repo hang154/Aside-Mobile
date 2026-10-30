@@ -33,7 +33,7 @@ public final class Ui {
         b.setTextSize(13);b.setBackground(bg(PRIMARY,11,c));return b;
     }
     public static LinearLayout.LayoutParams lp(Context c,int width,int height,int top) {
-        LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(width,height);p.topMargin=dp(c,top);return p;
+        LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(width,height>0 ? dp(c,height) : height);p.topMargin=dp(c,top);return p;
     }
     public static LinearLayout.LayoutParams match(Context c,int height,int top) { return lp(c,-1,height,top); }
     private Ui(){}
