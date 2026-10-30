@@ -19,10 +19,12 @@ public class LifeActivity extends Activity {
     private EditText origin, destination, venue, people, budget, shared;
     private TextView when, summary;
     private Calendar event;
+    private boolean dateSet, timeSet;
     private final String[] interests={"공연·팬덤","야구·스포츠","데이트·맛집","축제·여행","패션·뷰티","친구 모임","부업·알바","취업·대외활동","창업 지원","자취·생활"};
     @Override public void onCreate(Bundle b){
         super.onCreate(b); prefs=getSharedPreferences("life_plans",MODE_PRIVATE);
         event=Calendar.getInstance(); event.setTimeInMillis(prefs.getLong("event_time",System.currentTimeMillis()+86400000L));
+        dateSet=prefs.getBoolean("event_date_set",false);timeSet=prefs.getBoolean("event_time_set",false);
         ScrollView scroll=new ScrollView(this);scroll.setFillViewport(true);scroll.setBackgroundColor(Ui.BG);
         LinearLayout root=Ui.vertical(this,Ui.BG,22);scroll.addView(root);
         root.addView(Ui.text(this,"내 생활 계획",28,Ui.WHITE,true),Ui.match(this,-2,8));
@@ -39,14 +41,14 @@ public class LifeActivity extends Activity {
         venue=field(plan,"공연장 또는 목적지","venue");people=field(plan,"인원","people");budget=field(plan,"총 예산 (원)","budget");
         people.setInputType(InputType.TYPE_CLASS_NUMBER);budget.setInputType(InputType.TYPE_CLASS_NUMBER);
         when=Ui.text(this,"",15,Ui.WHITE,true);plan.addView(when,Ui.match(this,-2,10));updateTime();
-        button(plan,"날짜 선택",()->new DatePickerDialog(this,(v,y,m,d)->{event.set(y,m,d);updateTime();},event.get(Calendar.YEAR),event.get(Calendar.MONTH),event.get(Calendar.DAY_OF_MONTH)).show());
-        button(plan,"공연 종료 예상 시간 선택",()->new TimePickerDialog(this,(v,h,m)->{event.set(Calendar.HOUR_OF_DAY,h);event.set(Calendar.MINUTE,m);updateTime();},event.get(Calendar.HOUR_OF_DAY),event.get(Calendar.MINUTE),true).show());
+        button(plan,"날짜 선택",()->new DatePickerDialog(this,(v,y,m,d)->{event.set(y,m,d);dateSet=true;updateTime();},event.get(Calendar.YEAR),event.get(Calendar.MONTH),event.get(Calendar.DAY_OF_MONTH)).show());
+        button(plan,"공연 종료 예상 시간 선택",()->new TimePickerDialog(this,(v,h,m)->{event.set(Calendar.HOUR_OF_DAY,h);event.set(Calendar.MINUTE,m);timeSet=true;updateTime();},event.get(Calendar.HOUR_OF_DAY),event.get(Calendar.MINUTE),true).show());
         button(plan,"계획 저장",()->{savePlan(); renderPlan();});
         summary=Ui.text(this,"",14,Ui.WHITE,false);summary.setTextIsSelectable(true);plan.addView(summary,Ui.match(this,-2,12));renderPlan();
-        button(plan,"돌아가는 기차 검색",()->search(required(destination)+" "+required(origin)+" "+dateText()+" 기차 막차 시간"));
-        button(plan,"공연장 근처 숙소 검색",()->search(required(destination)+" "+required(venue)+" "+dateText()+" 근처 숙소 가격 비교"));
+        button(plan,"돌아가는 기차 검색",()->search(required(destination)+" "+required(origin)+" "+dateQuery()+" 기차 막차 시간"));
+        button(plan,"공연장 근처 숙소 검색",()->search(required(destination)+" "+required(venue)+" "+dateQuery()+" 근처 숙소 가격 비교"));
         button(plan,"공연장까지 경로 보기",()->map(required(venue).isEmpty()?required(destination):required(venue)));
-        button(plan,"날씨 확인",()->search(required(destination)+" "+dateText()+" 날씨"));
+        button(plan,"날씨 확인",()->search(required(destination)+" "+dateQuery()+" 날씨"));
         button(plan,"종료 예정 시간을 캘린더에 추가",this::calendar);
         LinearLayout explore=card(root,"더 찾아보기");
         explore.addView(Ui.text(this,"검색 결과에서 일정·가격·예약 가능 여부를 직접 확인하세요.",13,Ui.MUTED,false),Ui.match(this,-2,6));
@@ -69,11 +71,18 @@ public class LifeActivity extends Activity {
     private void button(LinearLayout parent,String label,Runnable action){android.widget.Button b=Ui.button(this,label);b.setOnClickListener(v->action.run());parent.addView(b,Ui.match(this,48,8));}
     private String required(EditText e){return e.getText().toString().trim();}
     private String dateText(){return String.format(Locale.KOREA,"%04d-%02d-%02d",event.get(Calendar.YEAR),event.get(Calendar.MONTH)+1,event.get(Calendar.DAY_OF_MONTH));}
-    private void updateTime(){when.setText("공연 종료 예상: "+dateText()+String.format(Locale.KOREA," %02d:%02d",event.get(Calendar.HOUR_OF_DAY),event.get(Calendar.MINUTE)));}
-    private void savePlan(){prefs.edit().putString("origin",required(origin)).putString("destination",required(destination)).putString("venue",required(venue)).putString("people",required(people)).putString("budget",required(budget)).putLong("event_time",event.getTimeInMillis()).apply();Toast.makeText(this,"계획을 저장했어요.",Toast.LENGTH_SHORT).show();}
-    private void renderPlan(){if(summary==null)return;String city=required(destination);String place=required(venue);StringBuilder s=new StringBuilder();if(city.isEmpty()&&place.isEmpty())s.append("방문 도시와 공연장을 입력해 주세요.");else s.append("목적지: ").append(city).append(" ").append(place).append("\n종료 예상: ").append(dateText()).append(String.format(Locale.KOREA," %02d:%02d",event.get(Calendar.HOUR_OF_DAY),event.get(Calendar.MINUTE))).append("\n공연 후 퇴장·이동 시간을 여유 있게 잡고 막차를 확인하세요. 막차가 어렵다면 숙소를 비교해 보세요.");if(!required(people).isEmpty())s.append("\n인원: ").append(required(people)).append("명");if(!required(budget).isEmpty())s.append(" · 예산: ").append(required(budget)).append("원");summary.setText(s);}
+    private String dateQuery(){return dateSet?dateText():"";}
+    private String timeText(){return (dateSet?dateText():"날짜 미선택")+(timeSet?String.format(Locale.KOREA," %02d:%02d",event.get(Calendar.HOUR_OF_DAY),event.get(Calendar.MINUTE)):" · 시간 미선택");}
+    private void updateTime(){when.setText("공연 종료 예상: "+timeText());}
+    private void savePlan(){prefs.edit().putString("origin",required(origin)).putString("destination",required(destination)).putString("venue",required(venue)).putString("people",required(people)).putString("budget",required(budget)).putLong("event_time",event.getTimeInMillis()).putBoolean("event_date_set",dateSet).putBoolean("event_time_set",timeSet).apply();Toast.makeText(this,"계획을 저장했어요.",Toast.LENGTH_SHORT).show();}
+    private void renderPlan(){if(summary==null)return;String city=required(destination);String place=required(venue);StringBuilder s=new StringBuilder();if(city.isEmpty()&&place.isEmpty())s.append("방문 도시와 공연장을 입력해 주세요.");else s.append("목적지: ").append(city).append(" ").append(place).append("\n종료 예상: ").append(timeText()).append("\n공연 후 퇴장·이동 시간을 여유 있게 잡고 막차를 확인하세요. 막차가 어렵다면 숙소를 비교해 보세요.");if(!required(people).isEmpty())s.append("\n인원: ").append(required(people)).append("명");if(!required(budget).isEmpty())s.append(" · 예산: ").append(required(budget)).append("원");if(!required(people).isEmpty()&&!required(budget).isEmpty()){
+            try{long n=Long.parseLong(required(people));long total=Long.parseLong(required(budget));
+                if(n>0){s.append("\n1인당 예상 분담: ").append(total/n).append("원");if(total%n!=0)s.append(" (남는 금액 ").append(total%n).append("원)");}
+                else s.append("\n인원은 1명 이상 입력하세요.");
+            }catch(NumberFormatException e){s.append("\n인원과 예산을 다시 확인하세요.");}
+        }summary.setText(s);}
     private void search(String query){if(query.trim().isEmpty())return;Uri uri=Uri.parse("https://www.google.com/search").buildUpon().appendQueryParameter("q",query.trim()).build();open(uri);}
     private void map(String query){if(query.trim().isEmpty()){Toast.makeText(this,"도시나 장소를 먼저 입력하세요.",Toast.LENGTH_SHORT).show();return;}open(Uri.parse("https://map.naver.com/p/search/").buildUpon().appendPath(query.trim()).build());}
     private void open(Uri uri){try{startActivity(new Intent(Intent.ACTION_VIEW,uri));}catch(Exception e){Toast.makeText(this,"열 수 있는 앱이 없습니다.",Toast.LENGTH_SHORT).show();}}
-    private void calendar(){Intent i=new Intent(Intent.ACTION_INSERT).setData(CalendarContract.Events.CONTENT_URI).putExtra(CalendarContract.Events.TITLE,required(venue).isEmpty()?"공연·외출 종료 예정":required(venue)+" 종료 예정").putExtra(CalendarContract.Events.EVENT_LOCATION,required(destination)+" "+required(venue)).putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,event.getTimeInMillis()).putExtra(CalendarContract.EXTRA_EVENT_END_TIME,event.getTimeInMillis()+3600000L);try{startActivity(i);}catch(Exception e){Toast.makeText(this,"캘린더 앱을 찾지 못했어요.",Toast.LENGTH_SHORT).show();}}
+    private void calendar(){if(!dateSet||!timeSet){Toast.makeText(this,"날짜와 종료 시간을 먼저 선택하세요.",Toast.LENGTH_SHORT).show();return;}Intent i=new Intent(Intent.ACTION_INSERT).setData(CalendarContract.Events.CONTENT_URI).putExtra(CalendarContract.Events.TITLE,required(venue).isEmpty()?"공연·외출 종료 예정":required(venue)+" 종료 예정").putExtra(CalendarContract.Events.EVENT_LOCATION,required(destination)+" "+required(venue)).putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,event.getTimeInMillis()).putExtra(CalendarContract.EXTRA_EVENT_END_TIME,event.getTimeInMillis()+3600000L);try{startActivity(i);}catch(Exception e){Toast.makeText(this,"캘린더 앱을 찾지 못했어요.",Toast.LENGTH_SHORT).show();}}
 }
