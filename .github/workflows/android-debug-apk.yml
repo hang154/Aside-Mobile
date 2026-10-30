@@ -29,6 +29,7 @@ jobs:
           bash scripts/test_parser.sh
           bash scripts/test_actions.sh
           bash scripts/test_concert.sh
+          bash scripts/test_campus.sh
           python3 scripts/test_static.py
           python3 scripts/test_collector.py
       - name: Install Android SDK packages

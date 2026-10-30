@@ -23,7 +23,7 @@ public class TaskActivity extends Activity {
         root.addView(Ui.text(this,"내가 맡긴 일",27,Ui.WHITE,true),Ui.match(this,-2,6));
         root.addView(Ui.text(this,"할 일을 기기에 저장하고 검색을 이어가요. 완료는 직접 확인해 표시합니다.",14,Ui.MUTED,false),Ui.match(this,-2,8));
         type=new Spinner(this);type.setAdapter(new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,TYPES));type.setBackground(Ui.bg(Ui.PRIMARY,8,this));root.addView(type,Ui.match(this,48,10));
-        title=new EditText(this);title.setSingleLine(true);title.setTextColor(Ui.WHITE);title.setHintTextColor(Ui.MUTED);title.setHint("예: 서울 공연 근처 숙소 찾기");title.setBackground(Ui.bg(Ui.PANEL,8,this));title.setPadding(Ui.dp(this,12),0,Ui.dp(this,12),0);root.addView(title,Ui.match(this,52,10));
+        title=new EditText(this);title.setSingleLine(true);title.setTextColor(Ui.WHITE);title.setHintTextColor(Ui.MUTED);title.setHint("예: 서울 공연 근처 숙소 찾기");String draft=getIntent().getStringExtra("task_draft");if(draft!=null && draft.length()<=150)title.setText(draft);title.setBackground(Ui.bg(Ui.PANEL,8,this));title.setPadding(Ui.dp(this,12),0,Ui.dp(this,12),0);root.addView(title,Ui.match(this,52,10));
         Button add=Ui.button(this,"할 일 저장");add.setOnClickListener(v->addTask());root.addView(add,Ui.match(this,48,10));
         status=Ui.text(this,"",13,Ui.MUTED,false);root.addView(status,Ui.match(this,-2,8));
         root.addView(Ui.text(this,"저장된 할 일",19,Ui.WHITE,true),Ui.match(this,-2,15));
