@@ -72,3 +72,9 @@ The APK is a *debug test build*, not a Play Store package. Its signature may cha
 This experimental build uses a separate application ID, `ai.decisionos.aside.llm`, so it can coexist with the original app. On arm64 devices, choose a Qwen3.5 GGUF file in the app; it is copied into private app storage, then the bundled llama.cpp Android CPU engine runs user-initiated questions offline. The model itself is not bundled. Replies are text only and are not dispatched as device actions. Inference takes time and small-model answers may be wrong. The experimental build uses up to 2 GB for the selected model and loads it per question. GPU acceleration is not included.
 
 The private-repository workflow retrieves the official llama.cpp b12000 Android release and validates its SHA-256 before building. This is an experimental debug APK; native subprocess support and model import must be verified on the target device.
+
+## 생활 계획 실험 (0.3)
+
+`ai.decisionos.aside.life`는 기존 앱과 별도로 설치됩니다. 앱의 **내 생활 계획**에서 관심사를 기기에 저장하고, 공연·외출의 출발지·도시·장소·예상 종료 시각·인원·예산을 저장할 수 있습니다. 입력을 바탕으로 막차·숙소·날씨를 브라우저에서 검색하거나 네이버 지도와 캘린더 작성 화면을 열 수 있습니다. 축제·데이트·체험단·부업·창업 공고 검색 바로가기와 텍스트 공유 후 관심 내용 저장·검색도 제공합니다.
+
+이 단계는 사용자가 시작하는 검색과 기록입니다. 실시간 가격 비교, 예약, 신청, 백그라운드 감시, 친구 동행 매칭은 아직 제공하지 않습니다. 검색 결과의 일정·가격·예약 가능 여부는 해당 서비스에서 확인해야 합니다.
