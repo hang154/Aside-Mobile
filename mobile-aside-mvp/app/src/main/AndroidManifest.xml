@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- WebView needs network; no SMS, call, or contacts permissions. -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <queries>
         <intent><action android:name="android.speech.RecognitionService" /></intent>
@@ -20,6 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".CollectorActivity" android:exported="false" />
         <activity android:name=".TaskActivity" android:exported="false" />
         <activity android:name=".BrowserWorkspaceActivity" android:exported="false" />
         <activity android:name=".ConcertTripActivity" android:exported="false" />
@@ -32,6 +34,10 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
+        <service android:name=".EngagementService" android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE" android:exported="true" android:label="Aside 화면 이벤트 수집">
+            <intent-filter><action android:name="android.accessibilityservice.AccessibilityService" /></intent-filter>
+            <meta-data android:name="android.accessibilityservice" android:resource="@xml/aside_engagement" />
+        </service>
         <service
             android:name=".AsideAccessibilityService"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"

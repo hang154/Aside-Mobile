@@ -5,11 +5,11 @@ android {
     compileSdk 35
 
     defaultConfig {
-        applicationId 'ai.decisionos.aside.tasks2'
+        applicationId 'ai.decisionos.aside.collector'
         minSdk 26
         targetSdk 35
-        versionCode 10
-        versionName '0.8.1-tasks'
+        versionCode 11
+        versionName '0.9.0-collector'
     }
     packaging { jniLibs { useLegacyPackaging = true } }
     buildTypes {

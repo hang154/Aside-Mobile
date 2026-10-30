@@ -30,6 +30,7 @@ jobs:
           bash scripts/test_actions.sh
           bash scripts/test_concert.sh
           python3 scripts/test_static.py
+          python3 scripts/test_collector.py
       - name: Install Android SDK packages
         run: |
           SDK_MANAGER="$(find "${ANDROID_HOME:-/usr/local/lib/android/sdk}/cmdline-tools" -type f -name sdkmanager | head -1)"

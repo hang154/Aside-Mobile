@@ -35,6 +35,10 @@ public class MainActivity extends Activity {
         content.addView(Ui.text(this, "Aside Mobile", 32, Ui.WHITE, true), Ui.match(this,-2,10));
         content.addView(Ui.text(this, "한 번 설치하고, 다른 앱 위에서 명령하세요.", 15, Ui.MUTED, false), Ui.match(this,-2,9));
 
+        android.widget.Button collector=Ui.button(this,"화면 이벤트 수집 설정");
+        collector.setOnClickListener(v->startActivity(new Intent(this,CollectorActivity.class)));
+        content.addView(collector,Ui.match(this,54,14));
+
         android.widget.Button tasks=Ui.button(this,"내가 맡긴 일");
         tasks.setOnClickListener(v->startActivity(new Intent(this,TaskActivity.class)));
         content.addView(tasks,Ui.match(this,54,14));
