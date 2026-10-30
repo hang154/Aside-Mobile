@@ -45,17 +45,17 @@ public final class LocalModel {
             try {
                 String libs=c.getApplicationInfo().nativeLibraryDir;
                 File binary=new File(libs,"libllama_exec.so");
-                ProcessBuilder pb=new ProcessBuilder(binary.getAbsolutePath(),"-m",model(c).getAbsolutePath(),"--offline","-ngl","0","-t","4","-c","2048","-n","160","--reasoning","off","-st","--simple-io","--no-display-prompt","--log-disable","-p",prompt);
-                pb.directory(new File(libs));pb.environment().put("LD_LIBRARY_PATH",libs);pb.redirectErrorStream(true);
+                ProcessBuilder pb=new ProcessBuilder(binary.getAbsolutePath(),"-m",model(c).getAbsolutePath(),"--offline","-ngl","0","-t","4","-c","2048","-n","160","--reasoning","off","-st","--simple-io","--no-display-prompt","-p",prompt);
+                pb.directory(new File(libs));pb.environment().put("LD_LIBRARY_PATH",libs);pb.redirectErrorStream(false);
                 p=pb.start(); Process process=p;
-                ByteArrayOutputStream captured=new ByteArrayOutputStream();
+                ByteArrayOutputStream captured=new ByteArrayOutputStream(); ByteArrayOutputStream errors=new ByteArrayOutputStream();
+                Thread errReader=new Thread(() -> { try(InputStream in=process.getErrorStream()){byte[] b=new byte[4096];int n;while((n=in.read(b))!=-1){if(errors.size()<512000)errors.write(b,0,n);}}catch(IOException ignored){} });errReader.start();
                 Thread reader=new Thread(() -> { try(InputStream in=process.getInputStream()){byte[] b=new byte[4096];int n;while((n=in.read(b))!=-1){if(captured.size()<512000)captured.write(b,0,n);}}catch(IOException ignored){} });reader.start();
                 if(!p.waitFor(120,TimeUnit.SECONDS)){p.destroyForcibly();reader.join(3000);throw new IOException("추론 시간 초과");}
-                reader.join(3000); String all=captured.toString(StandardCharsets.UTF_8.name());
-                if(p.exitValue()!=0)throw new IOException("엔진 종료 코드 "+p.exitValue()+": "+all.substring(Math.max(0,all.length()-500)));
-                int start=all.lastIndexOf("> "+prompt); if(start<0)throw new IOException("엔진 응답 형식을 확인할 수 없습니다.");
-                String answer=all.substring(start+2+prompt.length()).trim();
-                int end=answer.indexOf("[ Prompt:");if(end>=0)answer=answer.substring(0,end).trim();
+                reader.join(3000); errReader.join(3000); String all=captured.toString(StandardCharsets.UTF_8.name()); String diagnostics=errors.toString(StandardCharsets.UTF_8.name());
+                if(p.exitValue()!=0)throw new IOException("엔진 종료 코드 "+p.exitValue()+": "+diagnostics.substring(Math.max(0,diagnostics.length()-500)));
+                String answer=all.trim();
+                int end=answer.indexOf("[end of text]");if(end>=0)answer=answer.substring(0,end).trim();
                 if(answer.isEmpty())throw new IOException("빈 응답");
                 cb.done(answer);
             } catch(Exception e){cb.done("로컬 추론 실패: "+e.getMessage());}

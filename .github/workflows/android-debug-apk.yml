@@ -36,7 +36,7 @@ jobs:
           mkdir -p /tmp/llama mobile-aside-mvp/app/src/main/jniLibs/arm64-v8a
           tar -xzf /tmp/llama.tar.gz -C /tmp/llama
           cp /tmp/llama/llama-b12000/lib*.so mobile-aside-mvp/app/src/main/jniLibs/arm64-v8a/
-          cp /tmp/llama/llama-b12000/llama-cli mobile-aside-mvp/app/src/main/jniLibs/arm64-v8a/libllama_exec.so
+          cp /tmp/llama/llama-b12000/llama-completion mobile-aside-mvp/app/src/main/jniLibs/arm64-v8a/libllama_exec.so
       - name: Build APK
         run: |
           cd mobile-aside-mvp
