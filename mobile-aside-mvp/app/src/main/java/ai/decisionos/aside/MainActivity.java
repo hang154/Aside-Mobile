@@ -87,7 +87,7 @@ public class MainActivity extends Activity {
         LinearLayout aiCard = Ui.vertical(this,Ui.PANEL,16); aiCard.setBackground(Ui.bg(Ui.PANEL,16,this));
         content.addView(aiCard,Ui.match(this,-2,16));
         aiCard.addView(Ui.text(this,"로컬 AI",18,Ui.WHITE,true));
-        aiCard.addView(Ui.text(this,"GGUF 모델을 선택하면 기기에서 질문에 답합니다.",13,Ui.MUTED,false),Ui.match(this,-2,7));
+        aiCard.addView(Ui.text(this,"Qwen3.5 GGUF 모델을 선택하면 기기에서 질문에 답합니다.",13,Ui.MUTED,false),Ui.match(this,-2,7));
         android.widget.Button modelButton=Ui.button(this,"모델 파일 선택");
         modelButton.setOnClickListener(v->{Intent pick=new Intent(Intent.ACTION_OPEN_DOCUMENT);pick.addCategory(Intent.CATEGORY_OPENABLE);pick.setType("*/*");startActivityForResult(pick,42);});
         aiCard.addView(modelButton,Ui.match(this,50,10));

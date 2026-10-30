@@ -45,7 +45,7 @@ public final class LocalModel {
             try {
                 String libs=c.getApplicationInfo().nativeLibraryDir;
                 File binary=new File(libs,"libllama_exec.so");
-                ProcessBuilder pb=new ProcessBuilder(binary.getAbsolutePath(),"-m",model(c).getAbsolutePath(),"--offline","-ngl","0","-t","4","-c","2048","-n","160","--reasoning","off","-st","--simple-io","--no-display-prompt","-p",prompt);
+                ProcessBuilder pb=new ProcessBuilder(binary.getAbsolutePath(),"-m",model(c).getAbsolutePath(),"--offline","-ngl","0","-t","4","-c","2048","-n","160","--no-conversation","--simple-io","--no-display-prompt","-p","<|im_start|>user\n"+prompt+"<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n");
                 pb.directory(new File(libs));pb.environment().put("LD_LIBRARY_PATH",libs);pb.redirectErrorStream(false);
                 p=pb.start(); Process process=p;
                 ByteArrayOutputStream captured=new ByteArrayOutputStream(); ByteArrayOutputStream errors=new ByteArrayOutputStream();
