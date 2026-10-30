@@ -33,14 +33,16 @@ public class BrowserWorkspaceActivity extends Activity {
             @Override public boolean shouldOverrideUrlLoading(WebView view,WebResourceRequest req){Uri u=req.getUrl();return !"https".equalsIgnoreCase(u.getScheme());}
             @Override public void onPageStarted(WebView v,String url,Bitmap icon){observedUrl="";candidates=new JSONArray();address.setText(url);info.setText("페이지를 불러오는 중");}
             @Override public void onPageFinished(WebView v,String url){address.setText(url);info.setText("페이지 준비됨 · 관찰을 눌러 선택지를 확인하세요");}
+            @Override public void doUpdateVisitedHistory(WebView v,String url,boolean reload){super.doUpdateVisitedHistory(v,url,reload);if(url!=null && !address.hasFocus())address.setText(url);if(!observedUrl.isEmpty()&&!observedUrl.equals(url)){observedUrl="";candidates=new JSONArray();}}
         });
         root.addView(web,new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,0,1));
         LinearLayout bar=new LinearLayout(this);Button back=Ui.button(this,"뒤로");Button observe=Ui.button(this,"화면 관찰");Button select=Ui.button(this,"항목 선택");Button type=Ui.button(this,"검색어 입력");Button down=Ui.button(this,"아래로");
         for(Button b:new Button[]{back,observe,select,type,down})bar.addView(b,new LinearLayout.LayoutParams(0,Ui.dp(this,48),1));root.addView(bar,Ui.match(this,-2,6));
         info=Ui.text(this,"HTTPS 주소를 열어 주세요.",12,Ui.MUTED,false);root.addView(info,Ui.match(this,-2,5));
         go.setOnClickListener(v->navigate());back.setOnClickListener(v->{if(web.canGoBack())web.goBack();});observe.setOnClickListener(v->observe());select.setOnClickListener(v->choose());type.setOnClickListener(v->enterSearch());down.setOnClickListener(v->web.pageDown(false));setContentView(root);
+        String initial=getIntent().getStringExtra("start_url");if(initial!=null){address.setText(initial);navigate();}
     }
-    private void navigate(){String url=address.getText().toString().trim();try{Uri u=Uri.parse(url);if(!"https".equalsIgnoreCase(u.getScheme())||u.getHost()==null||u.getUserInfo()!=null)throw new IllegalArgumentException();web.loadUrl(url);}catch(Exception e){info.setText("HTTPS 웹 주소만 열 수 있어요.");}}
+    private void navigate(){String url=address.getText().toString().trim();try{Uri u=Uri.parse(url);if(!"https".equalsIgnoreCase(u.getScheme())||u.getHost()==null||u.getUserInfo()!=null)throw new IllegalArgumentException();address.clearFocus();web.loadUrl(url);}catch(Exception e){info.setText("HTTPS 웹 주소만 열 수 있어요.");}}
     private void observe(){if(web.getUrl()==null||!web.getUrl().startsWith("https://")){info.setText("먼저 HTTPS 페이지를 열어 주세요.");return;}
         final String url=web.getUrl();String js="(()=>JSON.stringify("+ENUMERATE+".map(e=>(e.innerText||e.getAttribute('aria-label')||e.getAttribute('title')||'이름 없는 항목').trim().slice(0,80))))()";
         web.evaluateJavascript(js,answer->{try{if(!url.equals(web.getUrl()))return;String decoded=new JSONArray("["+answer+"]").getString(0);candidates=new JSONArray(decoded);observedUrl=url;info.setText("항목 "+candidates.length()+"개 발견 · 항목 선택을 눌러 확인하세요");}catch(Exception ex){info.setText("페이지 항목을 읽지 못했어요.");}});

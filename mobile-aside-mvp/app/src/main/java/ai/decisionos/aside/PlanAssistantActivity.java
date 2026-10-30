@@ -35,6 +35,6 @@ public class PlanAssistantActivity extends Activity {
         if(pending.type==ActionProposal.Type.NAVER)uri=Uri.parse("https://www.naver.com");
         else if(pending.type==ActionProposal.Type.SEARCH)uri=Uri.parse("https://www.google.com/search").buildUpon().appendQueryParameter("q",pending.query).build();
         else return;
-        try{startActivity(new Intent(Intent.ACTION_VIEW,uri));}catch(Exception e){result.setText("브라우저를 열 수 없어요.");}
+        try{Intent i=new Intent(this,BrowserWorkspaceActivity.class);i.putExtra("start_url",uri.toString());startActivity(i);}catch(Exception e){result.setText("브라우저를 열 수 없어요.");}
     }
 }

@@ -5,11 +5,11 @@ android {
     compileSdk 35
 
     defaultConfig {
-        applicationId 'ai.decisionos.aside.browser'
+        applicationId 'ai.decisionos.aside.picklecheck'
         minSdk 26
         targetSdk 35
-        versionCode 6
-        versionName '0.6.0-browser-workspace'
+        versionCode 7
+        versionName '0.7.0-feature-check'
     }
     packaging { jniLibs { useLegacyPackaging = true } }
     buildTypes {
