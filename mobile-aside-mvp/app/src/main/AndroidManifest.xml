@@ -20,6 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".TaskActivity" android:exported="false" />
         <activity android:name=".BrowserWorkspaceActivity" android:exported="false" />
         <activity android:name=".ConcertTripActivity" android:exported="false" />
         <activity android:name=".AppRegistryActivity" android:exported="false" />

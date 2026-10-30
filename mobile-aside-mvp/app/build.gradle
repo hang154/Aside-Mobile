@@ -5,11 +5,11 @@ android {
     compileSdk 35
 
     defaultConfig {
-        applicationId 'ai.decisionos.aside.picklecheck2'
+        applicationId 'ai.decisionos.aside.tasks'
         minSdk 26
         targetSdk 35
-        versionCode 8
-        versionName '0.7.1-feature-check'
+        versionCode 9
+        versionName '0.8.0-tasks'
     }
     packaging { jniLibs { useLegacyPackaging = true } }
     buildTypes {
