@@ -32,7 +32,7 @@ public class PlanAssistantActivity extends Activity {
     }
     private void executeProposal(){
         if(pending==null)return;Uri uri;
-        if(pending.type==ActionProposal.Type.NAVER)uri=Uri.parse("https://www.naver.com");
+        if(pending.type==ActionProposal.Type.NAVER)uri=Uri.parse("https://m.naver.com/");
         else if(pending.type==ActionProposal.Type.SEARCH)uri=Uri.parse("https://www.google.com/search").buildUpon().appendQueryParameter("q",pending.query).build();
         else return;
         try{Intent i=new Intent(this,BrowserWorkspaceActivity.class);i.putExtra("start_url",uri.toString());startActivity(i);}catch(Exception e){result.setText("브라우저를 열 수 없어요.");}

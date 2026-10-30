@@ -20,6 +20,7 @@ public class BrowserWorkspaceActivity extends Activity {
     private EditText address;
     private TextView info;
     private String observedUrl="";
+    private boolean loadFailed;
     private JSONArray candidates=new JSONArray();
     private static final String ENUMERATE="Array.from(document.querySelectorAll('a[href],button,[role=button]')).filter(e=>{let r=e.getBoundingClientRect(),s=getComputedStyle(e);return r.width>0&&r.height>0&&s.visibility!=='hidden'&&s.display!=='none'}).slice(0,30)";
     @Override public void onCreate(Bundle state){super.onCreate(state);
@@ -30,9 +31,10 @@ public class BrowserWorkspaceActivity extends Activity {
         Button go=Ui.button(this,"열기");nav.addView(go,new LinearLayout.LayoutParams(Ui.dp(this,70),Ui.dp(this,48)));root.addView(nav,Ui.match(this,-2,4));
         web=new WebView(this);web.getSettings().setJavaScriptEnabled(true);web.getSettings().setDomStorageEnabled(true);web.getSettings().setAllowFileAccess(false);web.getSettings().setAllowContentAccess(false);web.getSettings().setJavaScriptCanOpenWindowsAutomatically(false);web.getSettings().setMixedContentMode(android.webkit.WebSettings.MIXED_CONTENT_NEVER_ALLOW);web.setWebChromeClient(new WebChromeClient());
         web.setWebViewClient(new WebViewClient(){
-            @Override public boolean shouldOverrideUrlLoading(WebView view,WebResourceRequest req){Uri u=req.getUrl();return !"https".equalsIgnoreCase(u.getScheme());}
-            @Override public void onPageStarted(WebView v,String url,Bitmap icon){observedUrl="";candidates=new JSONArray();address.setText(url);info.setText("페이지를 불러오는 중");}
-            @Override public void onPageFinished(WebView v,String url){address.setText(url);info.setText("페이지 준비됨 · 관찰을 눌러 선택지를 확인하세요");}
+            @Override public boolean shouldOverrideUrlLoading(WebView view,WebResourceRequest req){Uri u=req.getUrl();if(!"https".equalsIgnoreCase(u.getScheme())){if(req.isForMainFrame()){loadFailed=true;info.setText("HTTPS가 아닌 이동은 차단했어요.");}return true;}return false;}
+            @Override public void onPageStarted(WebView v,String url,Bitmap icon){observedUrl="";candidates=new JSONArray();loadFailed=false;address.setText(url);info.setText("페이지를 불러오는 중");}
+            @Override public void onReceivedError(WebView v,WebResourceRequest req,android.webkit.WebResourceError error){if(req.isForMainFrame()){loadFailed=true;info.setText("페이지를 열지 못했어요. 주소와 연결을 확인하세요.");}}
+            @Override public void onPageFinished(WebView v,String url){address.setText(url);if(!loadFailed && url.startsWith("https://"))info.setText("페이지 준비됨 · 관찰을 눌러 선택지를 확인하세요");}
             @Override public void doUpdateVisitedHistory(WebView v,String url,boolean reload){super.doUpdateVisitedHistory(v,url,reload);if(url!=null && !address.hasFocus())address.setText(url);if(!observedUrl.isEmpty()&&!observedUrl.equals(url)){observedUrl="";candidates=new JSONArray();}}
         });
         root.addView(web,new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,0,1));
