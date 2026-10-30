@@ -38,7 +38,7 @@ public class TaskActivity extends Activity {
         }}
     private void details(long id,String t,String kind,String state,long time){String stamp=DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT).format(new Date(time));
         String[] actions={"관련 정보 검색","진행 중으로 표시","직접 확인 후 완료 표시","삭제"};
-        new AlertDialog.Builder(this).setTitle(t).setMessage(kind+" · "+state+"\n마지막 변경: "+stamp+"\n완료 표시는 사용자의 기록이며 실제 예약·주문을 증명하지 않아요.").setItems(actions,(d,which)->{
+        new AlertDialog.Builder(this).setTitle(t+"\n"+kind+" · "+state+" · "+stamp).setItems(actions,(d,which)->{
             if(which==0){Uri uri=Uri.parse("https://www.google.com/search").buildUpon().appendQueryParameter("q",t).build();Intent i=new Intent(this,BrowserWorkspaceActivity.class);i.putExtra("start_url",uri.toString());startActivity(i);}
             else if(which==1)update(id,"진행 중");else if(which==2)new AlertDialog.Builder(this).setTitle("직접 완료를 확인했나요?").setMessage("외부 서비스의 실제 결과는 이 표시와 별개입니다.").setNegativeButton("취소",null).setPositiveButton("완료로 표시",(dialog,w)->update(id,"완료")).show();
             else new AlertDialog.Builder(this).setTitle("이 할 일을 삭제할까요?").setNegativeButton("취소",null).setPositiveButton("삭제",(dialog,w)->{store.getWritableDatabase().delete("tasks","_id=?",new String[]{Long.toString(id)});status.setText("삭제했어요.");render();}).show();
