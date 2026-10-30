@@ -16,7 +16,7 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y glslc libvulkan-dev spirv-headers ninja-build
           mkdir -p /tmp/vulkan-headers
-          cp -a /usr/include/vulkan /tmp/vulkan-headers/
+          cp -a /usr/include/vulkan /usr/include/spirv /tmp/vulkan-headers/
       - name: Fetch pinned llama.cpp
         run: git clone --depth 1 --branch b12000 https://github.com/ggml-org/llama.cpp.git /tmp/llama
       - name: Configure Android Vulkan backend
