@@ -39,6 +39,13 @@ public class MainActivity extends Activity {
         life.setOnClickListener(v->startActivity(new Intent(this,LifeActivity.class)));
         content.addView(life,Ui.match(this,54,14));
 
+        android.widget.Button apps=Ui.button(this,"관심 앱 등록");
+        apps.setOnClickListener(v->startActivity(new Intent(this,AppRegistryActivity.class)));
+        content.addView(apps,Ui.match(this,54,10));
+        android.widget.Button agent=Ui.button(this,"AI와 함께 찾기");
+        agent.setOnClickListener(v->startActivity(new Intent(this,PlanAssistantActivity.class)));
+        content.addView(agent,Ui.match(this,54,10));
+
         LinearLayout card = Ui.vertical(this, Ui.PANEL, 16); card.setBackground(Ui.bg(Ui.PANEL, 16, this));
         content.addView(card, Ui.match(this,-2,22));
         card.addView(Ui.text(this, "01  접근성 서비스", 18, Ui.WHITE, true));
