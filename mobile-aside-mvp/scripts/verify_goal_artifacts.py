@@ -22,12 +22,12 @@ for f in files:
 report={'generated_at':datetime.now(timezone.utc).isoformat(),'timezone':'UTC','base_commit':args.base,'files':rows,'scope':'Source/package bytes only. Does not assert provider live results or deployment approval.'}
 (args.out/'sha256_report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
 with (args.out/'old_vs_new_diff.csv').open('w') as out:
- w=csv.writer(out);w.writerow(['path','base_sha256','current_sha256','status'])
+ w=csv.writer(out,lineterminator="\n");w.writerow(['path','base_sha256','current_sha256','status'])
  for r in rows:
   old=subprocess.run(['git','show',args.base+':'+r['path']],cwd=root,stdout=subprocess.PIPE,stderr=subprocess.DEVNULL)
   digest=hash(old.stdout) if old.returncode==0 else ''
   w.writerow([r['path'],digest,r['sha256'],'unchanged' if digest==r['sha256'] else 'changed' if digest else 'new'])
 with (args.out/'reproduction_check.csv').open('w') as out:
- w=csv.writer(out);w.writerow(['check','result','scope'])
+ w=csv.writer(out,lineterminator="\n");w.writerow(['check','result','scope'])
  for r,f in zip(rows,files):w.writerow([r['path'],'PASS' if hash(f.read_bytes())==r['sha256'] else 'FAIL','repeat byte hash, not functional or live-provider validation'])
 print('Wrote',len(rows),'file hashes to',args.out)

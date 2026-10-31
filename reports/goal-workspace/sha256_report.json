@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-31T06:10:49.512305+00:00",
+  "generated_at": "2026-10-31T06:28:55.988847+00:00",
   "timezone": "UTC",
   "base_commit": "8d6871e",
   "files": [
@@ -15,18 +15,18 @@
     },
     {
       "path": "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CharacterWorkspaceActivity.java",
-      "bytes": 20890,
-      "sha256": "120ec8dd68cf257db0ccfd65ab395605e8b5685ea41d6781f9a0272c28e86bda"
+      "bytes": 20887,
+      "sha256": "5a599812c7cb16ff502ed29000834830b252347e8ce0efba451f8d47a423d313"
     },
     {
       "path": "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/DiscoveryProviders.java",
-      "bytes": 2953,
-      "sha256": "98bed5b2ab9a2e7ef98b315d84d739fe19c2725eed945178bc67cc101f7e2211"
+      "bytes": 2858,
+      "sha256": "3fe6e79ac475dee01f552756567386d4fc901f298bdd13e4e1054f4e9a08bf1f"
     },
     {
       "path": "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/GoalDiscoveryActivity.java",
-      "bytes": 9481,
-      "sha256": "a3769700f10cb1d2574ec429450e41abf40af8ff0055c723617c0f4f6e230494"
+      "bytes": 9641,
+      "sha256": "5a74098ac1a4548a35c3023982b5ff42f8dbbca408fac0d33e03f421fd60a0af"
     },
     {
       "path": "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/GoalHomeActivity.java",
@@ -75,8 +75,8 @@
     },
     {
       "path": "mobile-aside-mvp/app/src/main/assets/goal_extract.js",
-      "bytes": 5496,
-      "sha256": "6bcb0497023e5f8774c6c660a411d497fa815904945f686c24e3e4ddce68cade"
+      "bytes": 5524,
+      "sha256": "79db906e38191e20afba120526c54de0ec6518845d31073ab2d1c4b49de2a1f6"
     },
     {
       "path": "mobile-aside-mvp/app/src/experimental/AndroidManifest.xml",
@@ -85,8 +85,8 @@
     },
     {
       "path": "APK/nubi-goals-0.2.0.apk",
-      "bytes": 83670771,
-      "sha256": "c57f5d3511c75e2354689feb262076016f597e5f8816a029c728ba209eaff660"
+      "bytes": 83790022,
+      "sha256": "94a598d4a086b79db2ad8f97d3f27e7b439ac0c109d90af7bbed8e0d5c9623ff"
     }
   ],
   "scope": "Source/package bytes only. Does not assert provider live results or deployment approval."
