@@ -51,3 +51,12 @@ adb forward --remove tcp:19333
 - `nubi_openalex_search({"query":"battery recycling"})`는 OpenAlex 저작물 10건을 반환한다. `nubi_openalex_detail({"id":"W..."})`은 해당 저작물의 서지 정보와 제공되는 초록을 읽는다. 논문·리뷰·책 등이 섞일 수 있으며 동료심사 여부는 원문에서 확인한다. `kind: "paper"`로 선택을 저장할 수 있다.
 - 2026-10-31 MCP 경유 태블릿에서 부산 11/14~15 성인 2명 숙소 20건, 서울 11/21~22 성인 1명 숙소 20건을 각각 확인했다. 부산 숙소 선택과 저장·재조회도 확인했다. 요금은 조건·조회 시각에 따라 달라지며 세금·취소·최종 결제액은 원문에서 확인한다. 숙소는 공개 웹 화면을 읽으므로 구조 변경과 접근 제한에 영향을 받는다.
 - OpenAlex 배터리 재활용 검색 10건, 첫 항목 상세·초록과 저장·재조회를 확인했다. 공지·축제·공연 등의 모든 외부 연동을 완료한 것은 아니다.
+
+## 상위 웹사이트 목록과 공개 탐색
+
+- `nubi_top_sites({"country":"KR"})`, `nubi_top_sites({"country":"US"})`: Semrush의 **2026년 9월 스냅샷** 각 20개. 자동 갱신되지 않는다.
+- `nubi_platform_probe({"domain":"youtube.com"})`: 스냅샷에 있는 도메인의 HTTPS HEAD 응답과 설치된 OpenCLI 읽기 명령을 반환한다. 읽기 명령 목록은 설치 여부만 나타내며 실행 성공을 뜻하지 않는다.
+- `nubi_platform_preview({"domain":"youtube.com"})`: 공개 홈페이지 GET 상태, 제한된 HTML의 제목과 같은 사이트의 링크 최대 5개를 반환한다. 등록된 33개 도메인만 허용하고 외부 도메인으로의 리디렉션은 따라가지 않는다. 개인 세션을 사용하지 않으며 성인 사이트의 본문 미리보기는 제외한다.
+- `nubi_web_discover({"provider":"wikipedia","query":"UNIST"})`: Wikipedia 문서 검색. 제공자는 `wikipedia`, `google_news`, `google_suggest`, `duckduckgo_suggest`다. 두 suggest는 자동완성 제안이며 문서 검색이 아니다.
+
+각국 순위·33개 도메인의 실제 응답 및 명령 목록은 [점검 보고서](../docs/TOP_WEB_PLATFORMS_2026_09.md)를 참조한다. 국가별 방문량은 국적별 사용자 수나 앱 사용량이 아니다. 공개 페이지의 200 응답은 로그인, 검색, 해당 플랫폼의 서비스 기능이 정상 동작한다는 의미가 아니다.
