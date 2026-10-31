@@ -22,6 +22,7 @@
         </activity>
         <activity android:name=".GoalHomeActivity" android:exported="false" />
         <activity android:name=".CharacterWorkspaceActivity" android:exported="false" />
+        <activity android:name=".GoalAgentActivity" android:exported="false" />
         <activity android:name=".GoalDiscoveryActivity" android:exported="false" />
         <activity android:name=".CampusToolsActivity" android:exported="false" />
         <activity android:name=".UnistCalendarActivity" android:exported="false" />

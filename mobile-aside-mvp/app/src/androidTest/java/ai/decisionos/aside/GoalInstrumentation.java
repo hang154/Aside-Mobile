@@ -21,6 +21,7 @@ public class GoalInstrumentation extends Instrumentation {
   try(TaskStore migrated=new TaskStore(scoped)){try(Cursor c=migrated.getReadableDatabase().rawQuery("SELECT _id,title,goal_id,source_url,due FROM tasks",null)){check(c.moveToFirst(),"legacy record preserved");check(c.getLong(0)==42&&c.getString(1).equals("legacy task"),"legacy fields preserved");check(c.isNull(2),"legacy goal stays unassigned");check(migrated.getReadableDatabase().getVersion()==2,"schema version 2");}ContentValues v=new ContentValues();v.put("title","goal task");v.put("kind","目标");v.put("state","대기");v.put("updated",1);v.put("goal_id","goal-a");migrated.getWritableDatabase().insertOrThrow("tasks",null,v);try(Cursor c=migrated.getReadableDatabase().rawQuery("SELECT count(*) FROM tasks",null)){c.moveToFirst();check(c.getInt(0)==2,"old and new coexist");}}
   for(File f:testDir.listFiles())f.delete();testDir.delete();
   checks+=GoalFlowChecks.run(this);
+  checks+=GoalAgentChecks.run(this);
  }catch(Throwable t){error=t.getClass().getSimpleName()+": "+t.getMessage();}
  result.putString("stream",error.isEmpty()?"PASS "+checks+" real-device database and flow checks\n":"FAIL "+error+"\n");result.putInt("checks",checks);result.putString("error",error);finish(error.isEmpty()?-1:0,result);
  }

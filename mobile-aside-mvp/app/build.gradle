@@ -9,8 +9,8 @@ android {
         minSdk 26
         targetSdk 35
         testInstrumentationRunner 'ai.decisionos.aside.GoalInstrumentation'
-        versionCode 20
-        versionName '0.2.1-goal-workspace'
+        versionCode 21
+        versionName '0.2.2-qwen-goals'
     }
     packaging { jniLibs { useLegacyPackaging = true } }
     buildTypes {

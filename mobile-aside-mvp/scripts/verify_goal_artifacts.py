@@ -9,7 +9,7 @@ from pathlib import Path
 from datetime import datetime,timezone
 root=Path(__file__).resolve().parents[2]
 p=argparse.ArgumentParser();p.add_argument('--apk',required=True,type=Path);p.add_argument('--base',default='8d6871e');p.add_argument('--out',type=Path,default=root/'reports/goal-workspace');args=p.parse_args();args.out.mkdir(parents=True,exist_ok=True)
-names=['CampusActivity','CampusToolsActivity','CharacterWorkspaceActivity','DiscoveryProviders','GoalDiscoveryActivity','GoalHomeActivity','GoalRules','GoalStore','GoalUi','MediaRepository','TaskActivity','TaskStore']
+names=['GoalAgentActivity','GoalAgentRelay','CampusActivity','CampusToolsActivity','CharacterWorkspaceActivity','DiscoveryProviders','GoalDiscoveryActivity','GoalHomeActivity','GoalRules','GoalStore','GoalUi','MediaRepository','TaskActivity','TaskStore']
 files=[root/f'mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/{n}.java' for n in names]
 files += [root/'mobile-aside-mvp/app/src/main/AndroidManifest.xml',root/'mobile-aside-mvp/app/build.gradle',root/'mobile-aside-mvp/app/src/main/assets/goal_extract.js',root/'mobile-aside-mvp/app/src/experimental/AndroidManifest.xml',args.apk]
 hash=lambda data:hashlib.sha256(data).hexdigest()
