@@ -175,3 +175,65 @@ cli({site:'nubi-unist',name:'shopping-search',access:'read',description:'Search 
 cli({site:'nubi-unist',name:'shopping-select',access:'read',description:'Read a selected item from the current visible product results',domain:'msearch.shopping.naver.com',strategy:Strategy.COOKIE,browser:true,navigateBefore:false,args:[{name:'index',type:'int',positional:true,required:true},{name:'title',type:'str',positional:true,required:true}],columns:['index','name','listed_price_krw','shipping','sponsored','source','query','search_url'],func:async(page,args)=>{
  const rows=await shoppingResults(page);const idx=Number(args.index);if(!Number.isInteger(idx)||idx<1||idx>rows.length||rows[idx-1].name!==args.title)throw new Error('The product list changed; refresh choices');return [rows[idx-1]];
 }});
+
+async function saraminSearchRows(page,expected) {
+ const rows=await page.evaluate(`(()=>{
+   if(location.hostname!=='www.saramin.co.kr'||!location.pathname.startsWith('/zf_user/search'))throw new Error('Open Saramin search first');
+   const q=new URL(location.href).searchParams.get('searchword')||'';if(${JSON.stringify(expected||'')} && q!==${JSON.stringify(expected||'')})throw new Error('Waiting for search results');
+   return Array.from(document.querySelectorAll('.item_recruit')).map(e=>{
+     const id=e.getAttribute('value')||'';const title=e.querySelector('.job_tit a')?.innerText.trim()||'';
+     const company=e.querySelector('.corp_name')?.innerText.trim()||'';
+     const conditions=Array.from(e.querySelectorAll('.job_condition span')).map(n=>n.innerText.trim()).filter(Boolean).join(' · ');
+     const deadline=e.querySelector('.job_date .date')?.innerText.trim()||'';
+     if(!/^\\d{1,12}$/.test(id)||!title)return null;
+     return {id,title,company,conditions,deadline,url:'https://www.saramin.co.kr/zf_user/jobs/relay/view?rec_idx='+id,source:'사람인'};
+   }).filter(Boolean).slice(0,20).map((row,i)=>({index:i+1,...row}));
+ })()`);if(!Array.isArray(rows)||!rows.length)throw new Error('No visible Saramin results; check the search page');return rows;
+}
+cli({site:'nubi-unist',name:'saramin-search',access:'read',description:'Search Saramin public job listings in Nubi',domain:'www.saramin.co.kr',strategy:Strategy.COOKIE,browser:true,navigateBefore:false,args:[{name:'query',type:'str',positional:true,required:true}],columns:['index','id','title','company','conditions','deadline','url','source'],func:async(page,args)=>{
+ const q=String(args.query||'').trim();if(!q||q.length>100)throw new Error('Query must contain 1–100 characters');
+ await page.cdp('Page.navigate',{url:'https://www.saramin.co.kr/zf_user/search?searchword='+encodeURIComponent(q)});
+ for(let i=0;i<25;i++){await new Promise(r=>setTimeout(r,1000));try{return await saraminSearchRows(page,q);}catch(e){if(i===24)throw e;}}
+}});
+cli({site:'nubi-unist',name:'saramin-detail',access:'read',description:'Read selected Saramin job information by public job id',domain:'www.saramin.co.kr',strategy:Strategy.COOKIE,browser:true,navigateBefore:false,args:[{name:'id',type:'str',positional:true,required:true},{name:'title',type:'str',positional:true,required:true}],columns:['id','title','key_info','url','source'],func:async(page,args)=>{
+ const id=String(args.id||'');if(!/^\d{1,12}$/.test(id)||!args.title)throw new Error('Provide a job id and title');
+ await page.cdp('Page.navigate',{url:'https://www.saramin.co.kr/zf_user/jobs/relay/view?rec_idx='+id});
+ for(let i=0;i<25;i++){await new Promise(r=>setTimeout(r,1000));try{
+  const data=await page.evaluate(`(()=>{
+   if(location.hostname!=='www.saramin.co.kr'||new URL(location.href).searchParams.get('rec_idx')!==${JSON.stringify(id)})throw new Error('Waiting for selected posting');
+   const section=document.querySelector('section.jview-0-'+${JSON.stringify(id)});const title=section?.querySelector('h1.tit_job')?.innerText.trim()||'';
+   if(!title)throw new Error('Job detail not ready');
+   const key_info=Array.from(section.querySelectorAll('dl')).slice(0,15).map(e=>e.innerText.trim().replace(/\\s+/g,' ')).filter(Boolean);
+   return {id:${JSON.stringify(id)},title,key_info:key_info.join(' | '),url:'https://www.saramin.co.kr/zf_user/jobs/relay/view?rec_idx='+${JSON.stringify(id)},source:'사람인'};
+  })()`);
+  if(data.title!==args.title)throw new Error('The selected posting changed');return [data];
+ }catch(e){if(i===24||String(e).includes('posting changed'))throw e;}}
+}});
+
+cli({site:'nubi-unist',name:'wanted-search',access:'read',description:'Search Wanted positions and related suggestions',domain:'www.wanted.co.kr',strategy:Strategy.COOKIE,browser:true,navigateBefore:false,args:[{name:'query',type:'str',positional:true,required:true}],columns:['index','id','title','company','experience','url','source'],func:async(page,args)=>{
+ const q=String(args.query||'').trim();if(!q||q.length>100)throw new Error('Query must contain 1–100 characters');
+ await page.cdp('Page.navigate',{url:'https://www.wanted.co.kr/search?query='+encodeURIComponent(q)+'&tab=position'});
+ for(let i=0;i<25;i++){await new Promise(r=>setTimeout(r,1000));try{
+  const data=await page.evaluate(`(()=>{
+   if(location.hostname!=='www.wanted.co.kr'||new URL(location.href).searchParams.get('query')!==${JSON.stringify(q)})throw new Error('Waiting for the requested search');
+   const seen=new Set();return Array.from(document.querySelectorAll('a[data-position-id][data-tab-kind="position"]')).map(e=>{
+    const id=e.dataset.positionId||'',title=e.dataset.positionName||'',company=e.dataset.companyName||'';
+    if(!/^\\d{1,12}$/.test(id)||!title||seen.has(id))return null;seen.add(id);
+    const lines=e.innerText.split('\\n').map(s=>s.trim()).filter(Boolean);
+    return {id,title,company,experience:lines.find(s=>s.startsWith('경력')||s==='신입')||'',url:'https://www.wanted.co.kr/wd/'+id,source:'원티드',result_type:'검색 결과 및 관련 추천'};
+   }).filter(Boolean).slice(0,20).map((e,i)=>({index:i+1,...e}));
+  })()`);if(data.length)return data;
+ }catch(e){if(i===24)throw e;}}
+ throw new Error('Wanted search results not available');
+}});
+cli({site:'nubi-unist',name:'wanted-detail',access:'read',description:'Read a selected Wanted job by id and title',domain:'www.wanted.co.kr',strategy:Strategy.COOKIE,browser:true,navigateBefore:false,args:[{name:'id',type:'str',positional:true,required:true},{name:'title',type:'str',positional:true,required:true}],columns:['id','title','description','url','source'],func:async(page,args)=>{
+ const id=String(args.id||'');if(!/^\d{1,12}$/.test(id)||!args.title)throw new Error('Provide job id and title');
+ await page.cdp('Page.navigate',{url:'https://www.wanted.co.kr/wd/'+id});
+ for(let i=0;i<25;i++){await new Promise(r=>setTimeout(r,1000));try{
+  const d=await page.evaluate(`(()=>{
+   if(location.hostname!=='www.wanted.co.kr'||location.pathname!==('/wd/'+${JSON.stringify(id)}))throw new Error('Waiting for selected job');
+   const title=document.querySelector('h1')?.innerText.trim()||'';const article=document.querySelector('article[class*="JobDescription_"]');
+   if(!title||!article)throw new Error('Job details not ready');return {id:${JSON.stringify(id)},title,description:article.innerText.trim().slice(0,8000),url:'https://www.wanted.co.kr/wd/'+${JSON.stringify(id)},source:'원티드'};
+  })()`);if(d.title!==args.title)throw new Error('The selected posting changed');return [d];
+ }catch(e){if(i===24||String(e).includes('posting changed'))throw e;}}
+}});
