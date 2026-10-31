@@ -17,7 +17,10 @@ class ChatJobs:
    if self.active and self.jobs[self.active]['process'].poll() is None:raise RuntimeError('Another goal is browsing; stop it first')
    if len(self.jobs)>=100:raise RuntimeError('Session job limit reached; restart relay')
    ident=uuid.uuid4().hex;trace=self.directory/(ident+'.json');log=(self.directory/(ident+'.log')).open('w')
-   cmd=[sys.executable,str(Path(__file__).with_name('qwen-goal-agent.py')),'--goal',body['character'],'--goal-id',body['goal_id'],'--task',body['task'],'--max-steps','16','--trace-file',str(trace)]
+   current=body['task'].split('현재 사용자 지시:',1)[-1]
+   document=bool(re.search(r'예산서|지원요청서|연구지원금|문서\s*작성|서류\s*작성|docx|hwpx|sharepoint|uirp|l시리즈',current,re.I))
+   interpreter=os.environ.get('NUBI_DOCUMENT_PYTHON',str(Path.home()/'.local/share/nubi-documents/venv/bin/python')) if document else sys.executable
+   cmd=[interpreter,str(Path(__file__).with_name('qwen-document-agent.py' if document else 'qwen-goal-agent.py')),'--goal',body['character'],'--goal-id',body['goal_id'],'--task',body['task'],'--max-steps','16','--trace-file',str(trace)]
    try:p=subprocess.Popen(cmd,stdout=log,stderr=log,env=dict(self.env,NUBI_GOAL_DEVICE_SESSION=body['device_session']),start_new_session=True)
    finally:log.close()
    self.jobs[ident]={'id':ident,'request':dict(body),'process':p,'trace':trace,'cancelled':False,'started':time.monotonic()};self.active=ident
@@ -33,6 +36,8 @@ class ChatJobs:
    try:trace=json.loads(j['trace'].read_text())
    except (OSError,ValueError):pass
    progress=[];items=[];source_page=None
+   try:progress=json.loads(j['trace'].with_suffix('').joinpath('progress.json').read_text())
+   except (OSError,ValueError):pass
    for e in trace.get('events',[]):
     if e.get('type')=='model':
      for c in e.get('calls',[]):
@@ -48,6 +53,8 @@ class ChatJobs:
      if v.get('state')=='not_ready':progress.append('페이지 준비 중')
    state='cancelled' if j['cancelled'] else 'running' if code is None else 'completed' if code==0 and trace.get('completed') else 'failed'
    result={'job_id':ident,'goal_id':j['request']['goal_id'],'character':j['request']['character'],'state':state,'progress':progress[-12:],'answer':trace.get('answer') if state=='completed' else None,'error':trace.get('error','모델 응답 또는 연결을 확인해줘.') if state=='failed' else None,'items':items,'source_page':source_page,'reported_models':sorted(set(trace.get('reported_models',[])))}
+   if trace.get('kind')=='document':
+    result['kind']='document';result['document']=trace.get('document',{});result['document'].pop('artifacts',None)
    if result['error'] is None:result.pop('error')
    return result
  def _stop(self,j):
@@ -65,3 +72,17 @@ class ChatJobs:
  def close(self):
   with self.lock:
    for j in self.jobs.values():self._stop(j)
+
+ def artifact(self,ident,goal_id,name):
+  with self.lock:
+   j=self.jobs.get(ident)
+   if not j or j['request']['goal_id']!=goal_id or name not in ('budget.docx','budget.hwpx','audit.json','preview.txt'):raise ValueError('Unknown goal document')
+   if j['process'].poll()!=0:raise ValueError('Document job is not complete')
+   trace=json.loads(j['trace'].read_text())
+   if trace.get('kind')!='document' or not trace.get('completed'):raise ValueError('No document output')
+   import hashlib
+   expected=next((f for f in trace['document']['manifest']['files'] if f['name']==name),None)
+   path=j['trace'].with_suffix('')/'artifacts'/name
+   data=path.read_bytes()
+   if not expected or len(data)>8*1024*1024 or hashlib.sha256(data).hexdigest()!=expected['sha256']:raise ValueError('Document hash mismatch')
+   return data

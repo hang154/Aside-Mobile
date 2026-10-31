@@ -5,3 +5,5 @@ mobile-aside-mvp/app/src/main/jniLibs/
 mobile-aside-mvp/local.properties
 *.jks
 *.keystore
+
+opencli-nubi/**/__pycache__/

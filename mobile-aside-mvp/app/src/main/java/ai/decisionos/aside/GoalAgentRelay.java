@@ -42,6 +42,17 @@ final class GoalAgentRelay {
         if(!path.equals("/chat-submit")&&!path.equals("/chat-status")&&!path.equals("/chat-cancel"))throw new IllegalArgumentException();
         new Thread(()->{JSONObject out;try{out=post(path,payload);}catch(Exception e){out=new JSONObject();GoalStore.put(out,"error","연결을 확인하고 다시 시도해줘. ("+e.getClass().getSimpleName()+")");}final JSONObject answer=out;ui.post(()->response.receive(answer));},"nubi-chat-request").start();
     }
+    void document(String job,String goal,String name,String sha,Response response){
+        new Thread(()->{JSONObject result=new JSONObject();try{
+            if(!name.matches("budget\\.(docx|hwpx)")||!sha.matches("[0-9a-f]{64}"))throw new IOException("invalid document");
+            if(!connected()&&!restore())throw new IOException("not connected");
+            JSONObject body=new JSONObject();body.put("job_id",job);body.put("goal_id",goal);body.put("name",name);
+            HttpsURLConnection c=(HttpsURLConnection)new URL(endpoint+"/document-file").openConnection();c.setSSLSocketFactory(sockets);c.setHostnameVerifier((h,se)->true);c.setInstanceFollowRedirects(false);c.setConnectTimeout(7000);c.setReadTimeout(22000);c.setRequestMethod("POST");c.setDoOutput(true);c.setRequestProperty("Authorization","Bearer "+token);c.setRequestProperty("Content-Type","application/json");byte[] request=body.toString().getBytes(StandardCharsets.UTF_8);c.setFixedLengthStreamingMode(request.length);try(OutputStream stream=c.getOutputStream()){stream.write(request);}
+            byte[] bytes;try{if(c.getResponseCode()!=200)throw new IOException("document unavailable");ByteArrayOutputStream data=new ByteArrayOutputStream();try(InputStream in=c.getInputStream()){byte[] buf=new byte[8192];int n;while((n=in.read(buf))!=-1){data.write(buf,0,n);if(data.size()>8*1024*1024)throw new IOException("document too large");}}bytes=data.toByteArray();}finally{c.disconnect();}
+            StringBuilder hash=new StringBuilder();for(byte b:MessageDigest.getInstance("SHA-256").digest(bytes))hash.append(String.format(java.util.Locale.ROOT,"%02x",b&255));if(!sha.equals(hash.toString()))throw new IOException("document hash mismatch");
+            File dir=new File(activity.getFilesDir(),"documents");if(!dir.exists()&&!dir.mkdirs())throw new IOException();String filename=sha+name.substring(name.lastIndexOf('.'));File file=new File(dir,filename);try(OutputStream stream=new FileOutputStream(file)){stream.write(bytes);}result.put("uri","content://"+activity.getPackageName()+".documents/"+filename);
+        }catch(Exception e){GoalStore.put(result,"error","문서 다운로드를 확인해줘. ("+e.getClass().getSimpleName()+")");}final JSONObject answer=result;ui.post(()->response.receive(answer));},"nubi-document-download").start();
+    }
     void stop(){active=false;generation++;}
     private JSONObject post(String path,JSONObject payload) throws Exception{
         if(path.equals("/poll")||path.equals("/chat-submit"))payload.put("device_session",deviceSession);

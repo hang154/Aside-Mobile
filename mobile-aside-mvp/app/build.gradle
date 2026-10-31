@@ -9,8 +9,8 @@ android {
         minSdk 26
         targetSdk 35
         testInstrumentationRunner 'ai.decisionos.aside.GoalInstrumentation'
-        versionCode 22
-        versionName '0.2.3-agent-chat'
+        versionCode 23
+        versionName '0.2.4-documents'
     }
     packaging { jniLibs { useLegacyPackaging = true } }
     buildTypes {

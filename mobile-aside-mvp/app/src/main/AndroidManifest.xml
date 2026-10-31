@@ -13,6 +13,7 @@
         android:label="누비" android:icon="@drawable/nubi_icon"
         android:theme="@android:style/Theme.Material.Light.NoActionBar"
         android:usesCleartextTraffic="false">
+        <provider android:name=".NubiDocumentProvider" android:authorities="${applicationId}.documents" android:exported="false" android:grantUriPermissions="true" />
         <activity
             android:name=".MainActivity"
             android:exported="false">

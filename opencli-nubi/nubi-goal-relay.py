@@ -42,6 +42,11 @@ class Handler(BaseHTTPRequestHandler):
             body = json.loads(self.rfile.read(n))
             if not isinstance(body, dict): raise ValueError()
         except Exception: return self.respond(400, {'error':'invalid request'})
+        if self.path=='/document-file':
+            if jobs is None or set(body)!={'job_id','goal_id','name'}:return self.respond(400,{'error':'invalid document request'})
+            try:data=jobs.artifact(body['job_id'],body['goal_id'],body['name'])
+            except (ValueError,OSError):return self.respond(404,{'error':'document not available'})
+            self.send_response(200);self.send_header('Content-Type','application/octet-stream');self.send_header('Content-Length',str(len(data)));self.end_headers();self.wfile.write(data);return
         if self.path.startswith('/chat-'):
             if jobs is None:return self.respond(503, {'error':'App chat worker not enabled'})
             try:
