@@ -237,3 +237,30 @@ cli({site:'nubi-unist',name:'wanted-detail',access:'read',description:'Read a se
   })()`);if(d.title!==args.title)throw new Error('The selected posting changed');return [d];
  }catch(e){if(i===24||String(e).includes('posting changed'))throw e;}}
 }});
+
+async function bookingRows(page,expected){
+ const rows=await page.evaluate(`(()=>{
+  if(location.hostname!=='www.booking.com'||!location.pathname.includes('searchresults'))throw new Error('Open Booking.com search first');
+  const u=new URL(location.href);const checkin=u.searchParams.get('checkin')||'',checkout=u.searchParams.get('checkout')||'',destination=u.searchParams.get('ss')||'';
+  const adults=u.searchParams.get('group_adults')||'';
+  if(${JSON.stringify(expected||null)} && (checkin!==${JSON.stringify(expected?.checkin||'')}||checkout!==${JSON.stringify(expected?.checkout||'')}||destination!==${JSON.stringify(expected?.destination||'')}||adults!==${JSON.stringify(String(expected?.adults||''))})) throw new Error('Waiting for requested booking results');
+  return Array.from(document.querySelectorAll('[data-testid="property-card"]')).slice(0,20).map((e,i)=>{
+   const a=e.querySelector('a[data-testid="title"],a[data-testid="title-link"]');const name=e.querySelector('[data-testid="title"]')?.innerText.trim()||'';
+   let link='';try{const u=new URL(a.href);if(u.hostname==='www.booking.com'&&u.pathname.startsWith('/hotel/')){const v=new URL(u.origin+u.pathname);v.search=new URLSearchParams({checkin,checkout,group_adults:adults,no_rooms:'1',group_children:'0'}).toString();link=v.href;}}catch{}
+   if(!name||!link)return null;
+   return {index:i+1,name,location:e.querySelector('[data-testid="location"], [data-testid="address"]')?.innerText.trim()||'',price:e.querySelector('[data-testid="price-and-discounted-price"]')?.innerText.trim()||'미표시',taxes:e.querySelector('[data-testid="taxes-and-charges"]')?.innerText.trim()||'미표시',rating:e.querySelector('[data-testid="review-score"]')?.innerText.trim().replace(/\\s+/g,' ').slice(0,120)||'',sponsored:(e.querySelector('[data-testid="badges"]')?.innerText||'').includes('광고'),url:link,checkin,checkout,adults:Number(adults),source:'Booking.com'};
+  }).filter(Boolean);
+ })()`);if(!Array.isArray(rows)||!rows.length)throw new Error('No visible hotel results; check availability or service access');return rows;
+}
+function bookingDate(s){return /^\d{4}-\d{2}-\d{2}$/.test(s)&&!Number.isNaN(Date.parse(s))&&new Date(s+'T00:00:00Z').toISOString().slice(0,10)===s;}
+cli({site:'nubi-unist',name:'booking-search',access:'read',description:'Search Booking.com mobile hotel cards for selected dates',domain:'www.booking.com',strategy:Strategy.COOKIE,browser:true,navigateBefore:false,args:[{name:'destination',type:'str',positional:true,required:true},{name:'checkin',type:'str',positional:true,required:true},{name:'checkout',type:'str',positional:true,required:true},{name:'adults',type:'int',positional:true,required:true}],columns:['index','name','location','price','taxes','rating','sponsored','url','checkin','checkout','adults','source'],func:async(page,a)=>{
+ const destination=String(a.destination||'').trim(),checkin=String(a.checkin||''),checkout=String(a.checkout||''),adults=Number(a.adults);
+ const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+ if(!destination||destination.length>100||!bookingDate(checkin)||!bookingDate(checkout)||checkin<today||checkout<=checkin||!Number.isInteger(adults)||adults<1||adults>6)throw new Error('Invalid destination, dates or adult count');
+ const params=new URLSearchParams({ss:destination,checkin,checkout,group_adults:String(adults),no_rooms:'1',group_children:'0',selected_currency:'KRW'});
+ const nav=await page.cdp('Page.navigate',{url:'https://www.booking.com/searchresults.html?'+params});if(nav.errorText)throw new Error('Booking navigation failed: '+nav.errorText);
+ for(let i=0;i<25;i++){await new Promise(r=>setTimeout(r,1000));try{return await bookingRows(page,{destination,checkin,checkout,adults});}catch(e){if(i===24)throw e;}}
+}});
+cli({site:'nubi-unist',name:'booking-select',access:'read',description:'Read selected visible hotel without booking',domain:'www.booking.com',strategy:Strategy.COOKIE,browser:true,navigateBefore:false,args:[{name:'index',type:'int',positional:true,required:true},{name:'title',type:'str',positional:true,required:true}],columns:['index','name','location','price','taxes','rating','sponsored','url','checkin','checkout','adults','source'],func:async(page,a)=>{
+ const rows=await bookingRows(page);const idx=Number(a.index),row=rows.find(x=>x.index===idx);if(!row||row.name!==a.title)throw new Error('Hotel list changed; refresh choices');return [row];
+}});
