@@ -10,7 +10,7 @@ PROVIDERS=['youtube','naverweb','11st','munto','kakaomap','realestate','kmooc','
 def schema(properties,required):return {'type':'object','properties':properties,'required':required,'additionalProperties':False}
 gid={'type':'string','description':'Owned goal_id returned by nubi_goal_open'}
 DEFINITIONS=[
- {'name':'nubi_goal_open','description':'Open the native fitness/love/grades/home goal and return its real ID, title and public topic. Call first.','inputSchema':schema({'character':{'type':'string','enum':['fitness','love','grades','home']}},['character'])},
+ {'name':'nubi_goal_open','description':'Open the native fitness/love/grades/home goal and return its real ID, title and public topic. Call first.','inputSchema':schema({'character':{'type':'string','enum':['fitness','love','grades','home']},'goal_id':gid},['character'])},
  {'name':'nubi_goal_search','description':'Search an allowlisted public site inside the CURRENT goal on the real tablet. One browser; call observe after each search before another search. Returns navigation requested, not results. munto filters public recommended cards by goal words; kmooc is homepage navigation, not full course search.','inputSchema':schema({'goal_id':gid,'provider':{'type':'string','enum':PROVIDERS},'query':{'type':'string','maxLength':100}},['goal_id','provider','query'])},
  {'name':'nubi_goal_observe','description':'Read actual public result metadata (up to 8) or selected source page title. If not_ready retry once. No video/body analysis. Returns observation_id for selecting a result.','inputSchema':schema({'goal_id':gid},['goal_id'])},
  {'name':'nubi_goal_select','description':'Open one actual result (zero-based index) from the latest observation of this goal. Rejects stale lists. Read-only navigation, never purchase/join. Observe afterward.','inputSchema':schema({'goal_id':gid,'observation_id':{'type':'string'},'index':{'type':'integer','minimum':0,'maximum':7}},['goal_id','observation_id','index'])},
@@ -20,7 +20,8 @@ BYNAME={x['name']:x for x in DEFINITIONS}
 def validate(name,a):
  if name not in BYNAME or not isinstance(a,dict):raise ValueError('Unknown tool or arguments')
  spec=BYNAME[name]['inputSchema']
- if set(a)!=set(spec['required']):raise ValueError('Exact required arguments only')
+ if not set(spec['required']).issubset(a) or not set(a).issubset(spec['properties']):raise ValueError('Required and declared arguments only')
+ if 'goal_id' in a and (not isinstance(a['goal_id'],str) or not re.fullmatch(r'[0-9a-f-]{36}',a['goal_id'])):raise ValueError('Owned goal ID required')
  if name=='nubi_goal_explore':
   if a['character'] not in ('fitness','love','grades','home') or not isinstance(a['searches'],list) or not 1<=len(a['searches'])<=3:raise ValueError('Invalid bounded exploration')
   for search in a['searches']:
@@ -38,6 +39,7 @@ def post(path,data):
  global token,context
  if token is None:
   token=open(os.environ['NUBI_GOAL_RELAY_TOKEN_FILE'],encoding='ascii').read().strip();context=ssl.create_default_context(cafile=os.environ['NUBI_GOAL_RELAY_CA_FILE']);context.check_hostname=False
+ if path=='/command' and os.environ.get('NUBI_GOAL_DEVICE_SESSION'):data={**data,'_session':os.environ['NUBI_GOAL_DEVICE_SESSION']}
  request=urllib.request.Request(url+path,data=json.dumps(data).encode(),headers={'Authorization':'Bearer '+token,'Content-Type':'application/json'},method='POST')
  with urllib.request.urlopen(request,context=context,timeout=5) as r:return json.load(r)
 def call(name,a):

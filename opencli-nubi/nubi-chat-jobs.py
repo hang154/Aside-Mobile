@@ -1,0 +1,67 @@
+"""Authenticated relay-owned chat jobs. One real browser, one runner at a time."""
+import json, os, re, subprocess, sys, threading, time, uuid
+from pathlib import Path
+
+class ChatJobs:
+ def __init__(self, directory, env):
+  self.directory=Path(directory);self.directory.mkdir(parents=True,exist_ok=True);self.directory.chmod(0o700)
+  self.env=env;self.jobs={};self.lock=threading.RLock();self.active=None
+ def submit(self, body):
+  required={'goal_id','character','task','request_id','device_session'}
+  if set(body)!=required or any(not isinstance(body[k],str) for k in required) or not isinstance(body['task'],str) or not 1<=len(body['task'].strip())<=2000 or body['character'] not in ('fitness','love','grades','home') or not re.fullmatch(r'[0-9a-f-]{36}',body['goal_id']) or not re.fullmatch(r'[0-9a-f-]{36}',body['request_id']) or not re.fullmatch(r'[0-9a-f-]{36}',body['device_session']):raise ValueError('Invalid chat request')
+  with self.lock:
+   for j in self.jobs.values():
+    if j['request']==body:
+     return self.status(j['id'])
+    if j['request']['request_id']==body['request_id']:raise ValueError('Request ID conflict')
+   if self.active and self.jobs[self.active]['process'].poll() is None:raise RuntimeError('Another goal is browsing; stop it first')
+   if len(self.jobs)>=100:raise RuntimeError('Session job limit reached; restart relay')
+   ident=uuid.uuid4().hex;trace=self.directory/(ident+'.json');log=(self.directory/(ident+'.log')).open('w')
+   cmd=[sys.executable,str(Path(__file__).with_name('qwen-goal-agent.py')),'--goal',body['character'],'--goal-id',body['goal_id'],'--task',body['task'],'--max-steps','16','--trace-file',str(trace)]
+   try:p=subprocess.Popen(cmd,stdout=log,stderr=log,env=dict(self.env,NUBI_GOAL_DEVICE_SESSION=body['device_session']),start_new_session=True)
+   finally:log.close()
+   self.jobs[ident]={'id':ident,'request':dict(body),'process':p,'trace':trace,'cancelled':False,'started':time.monotonic()};self.active=ident
+   return self.status(ident)
+ def status(self, ident):
+  with self.lock:
+   j=self.jobs.get(ident)
+   if j is None:raise ValueError('Unknown chat job')
+   code=j['process'].poll()
+   if code is None and time.monotonic()-j['started']>900:
+    self._stop(j);j['cancelled']=True;code=j['process'].poll()
+   trace={}
+   try:trace=json.loads(j['trace'].read_text())
+   except (OSError,ValueError):pass
+   progress=[];items=[];source_page=None
+   for e in trace.get('events',[]):
+    if e.get('type')=='model':
+     for c in e.get('calls',[]):
+      try:a=json.loads(c.get('arguments','{}'))
+      except ValueError:a={}
+      if c.get('name')=='nubi_goal_search':progress.append('검색 · '+str(a.get('provider',''))+' · '+str(a.get('query','')))
+      elif c.get('name')=='nubi_goal_select':progress.append('선택한 원문 열기')
+    if e.get('type')=='tool':
+     try:v=json.loads(e['result']['content'][0]['text'])
+     except (KeyError,ValueError,IndexError,TypeError):continue
+     if v.get('state')=='results_observed':items=v.get('items',[])[:8];progress.append('실제 선택지 '+str(len(items))+'개 읽음')
+     if v.get('state')=='source_observed':source_page=v.get('page');progress.append('원문 제목 확인')
+     if v.get('state')=='not_ready':progress.append('페이지 준비 중')
+   state='cancelled' if j['cancelled'] else 'running' if code is None else 'completed' if code==0 and trace.get('completed') else 'failed'
+   result={'job_id':ident,'goal_id':j['request']['goal_id'],'character':j['request']['character'],'state':state,'progress':progress[-12:],'answer':trace.get('answer') if state=='completed' else None,'error':trace.get('error','모델 응답 또는 연결을 확인해줘.') if state=='failed' else None,'items':items,'source_page':source_page,'reported_models':sorted(set(trace.get('reported_models',[])))}
+   if result['error'] is None:result.pop('error')
+   return result
+ def _stop(self,j):
+  import signal
+  if j['process'].poll() is None:
+   os.killpg(j['process'].pid,signal.SIGTERM)
+   try:j['process'].wait(timeout=3)
+   except subprocess.TimeoutExpired:os.killpg(j['process'].pid,signal.SIGKILL);j['process'].wait(timeout=3)
+ def cancel(self, ident):
+  with self.lock:
+   j=self.jobs.get(ident)
+   if not j:raise ValueError('Unknown chat job')
+   if j['process'].poll() is None:self._stop(j);j['cancelled']=True
+   return self.status(ident)
+ def close(self):
+  with self.lock:
+   for j in self.jobs.values():self._stop(j)

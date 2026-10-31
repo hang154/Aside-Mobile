@@ -2,9 +2,10 @@ package ai.decisionos.aside;
 import android.app.Instrumentation;import android.os.Bundle;import android.content.*;import android.database.*;import android.database.sqlite.*;import org.json.*;import java.io.*;
 /** Run on a real device: migrations, ownership, deletion and persistence. Never touches browser sessions. */
 public class GoalInstrumentation extends Instrumentation {
+ Bundle scenario;
  int checks=0; void check(boolean ok,String label){checks++;if(!ok)throw new AssertionError(label);}
- public void onCreate(Bundle args){super.onCreate(args);start();}
- public void onStart(){Bundle result=new Bundle();String error="";try{
+ public void onCreate(Bundle args){super.onCreate(args);scenario=args;start();}
+ public void onStart(){if(scenario!=null&&scenario.containsKey("chatTask")){GoalChatScenario.run(this,scenario);return;}Bundle result=new Bundle();String error="";try{
   Context target=getTargetContext();
   try(GoalStore s=new GoalStore(target)){
    JSONObject a=s.create("fitness","INSTRUMENTATION_A","초보 운동",50000),b=s.create("home","INSTRUMENTATION_B","내 집 마련",0);String aid=a.optString("id"),bid=b.optString("id");

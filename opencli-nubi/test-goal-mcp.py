@@ -7,5 +7,9 @@ for name,a in [('nubi_goal_explore',{'character':'home','searches':[{'provider':
  except (ValueError,TypeError):n+=1;continue
  raise AssertionError(name)
 v('nubi_goal_explore',{'character':'home','searches':[{'provider':'youtube','query':'주택 청약'}]});n+=1
+v('nubi_goal_open',{'character':'fitness','goal_id':'a'*36});n+=1
+try:v('nubi_goal_open',{'character':'fitness','goal_id':'foreign'})
+except ValueError:n+=1
+else:raise AssertionError('invalid exact goal ID')
 assert len(m['DEFINITIONS'])==6
 print('PASS',n+1,'MCP argument/goal/tool boundary checks')
