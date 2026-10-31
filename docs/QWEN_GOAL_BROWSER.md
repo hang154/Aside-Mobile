@@ -46,4 +46,4 @@ python3 opencli-nubi/qwen-goal-agent.py --goal fitness \
 
 trace에는 사용자 지시, 실행 모드, 시작·종료 시각, 실행기/MCP 파일 SHA-256, 응답 모델 ID, 모델의 tool_calls와 실제 도구 결과를 기록한다. 이 파일은 로컬에만 보관한다. HTTP 429/502/503/504 또는 타임아웃은 한 번만 재시도하고 실패를 기록한다.
 
-2026-10-31 사용자 지시 실기기 재검증은 모델 게이트웨이의 HTTP 502 `Backend unavailable`로 중단됐다. 목표 열기만 성공했으며, 이 모드의 실제 Qwen 탐색 성공을 주장하지 않는다. 기존 네 목표 성공 기록은 고정 범주 레시피 검증이다. `python3 opencli-nubi/test-user-directed-agent.py`는 모의 모델·MCP로 지시 전달, 강제 도구 제거, 모델 선택 인자 전달과 다른 모델 거부를 확인한다. 실기기 검증을 대신하지 않는다.
+2026-10-31 최초 사용자 지시 실기기 재검증은 모델 게이트웨이 HTTP 502로 중단됐다. 복구 후 같은 fitness 목표에서 영상 전용·쇼핑 전용 지시를 순차 실행해 Qwen의 서로 다른 공급자 선택, 실제 결과 읽기와 요약 저장을 확인했다. 쇼핑 가격 조건은 통과했고 영상은 원문 로딩 실패와 근거 없는 구성 설명이 있어 부분 통과다. 세부 결과는 `reports/QWEN_USER_DIRECTED_VERIFICATION.md`를 따른다. 기존 네 목표 성공 기록은 고정 범주 레시피 검증이다. `python3 opencli-nubi/test-user-directed-agent.py`는 모의 모델·MCP로 지시 전달, 강제 도구 제거, 모델 선택 인자 전달과 다른 모델 거부를 확인한다. 실기기 검증을 대신하지 않는다.
