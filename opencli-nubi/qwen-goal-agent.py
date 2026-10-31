@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Bounded Qwen tool-calling loop using the real Nubi tablet MCP stdio server."""
-import argparse,json,os,subprocess,sys,time,urllib.request,hashlib
+import argparse,json,os,subprocess,sys,time,urllib.request,hashlib,ssl
 from datetime import datetime,timezone
 from pathlib import Path
 parser=argparse.ArgumentParser()
@@ -64,7 +64,7 @@ def main():
    try:
     with urllib.request.urlopen(req,timeout=args.timeout) as response:out=json.load(response)
     break
-   except (TimeoutError,urllib.error.HTTPError) as error:
+   except (TimeoutError,urllib.error.URLError,ssl.SSLError) as error:
     if isinstance(error,urllib.error.HTTPError) and error.code not in (429,502,503,504):raise
     trace['events'].append({'type':'model_transport_retry','step':step+1,'attempt':attempt+1,'error':type(error).__name__,'http_status':getattr(error,'code',None)});checkpoint()
     if attempt:raise
