@@ -45,3 +45,10 @@
 2. 코레일 승차권 화면 접근 및 검색 화면 표시를 확인하고 실제 출발·도착·날짜는 사용자에게 받아 검증한다. 예약 및 결제를 하지 않았으면 미검증으로 남긴다.
 3. 로그인이 필요한 화면과 개인 메일은 녹화하지 않는다. 실기기 영상은 로컬에만 둔다.
 4. 공식 출처 및 API 문서: [카카오맵 REST API](https://developers.kakao.com/docs/ko/kakaomap/rest-api), [네이버 Maps 개요](https://api.ncloud-docs.com/docs/ainaverapi-maps-overview), [코레일 승차권](https://www.korail.com/ticket), [코레일 FAQ](https://www.korail.go.kr/ticket/reserve/guide/faq).
+
+## 0.1.5 실기기 검증 기록
+
+- Lenovo 태블릿 `ai.decisionos.nubi.travelpilot`에 별도 설치. 빌드 CI `41156206670`, APK SHA-256 `07f87cb3e3bb9fc9b4516104c9c5cb5a947a8b8a8e486f560509b6a8e56607fa`.
+- 새 홈의 각 버튼으로 `UNIST`를 전달했다. 네이버 지도는 실제 검색 결과 목록, 코레일은 출발역·도착역·출발일·인원과 열차 조회 화면이 표시됐다. 코레일 열차 조회·예매·결제는 수행하지 않았다.
+- 카카오맵은 검색어가 전달된 앱/웹 선택 중간 화면까지 확인했다. '설치없이 지도보기' 선택 후 웹 검색 주소로 이동하는 것은 확인했으나, 결과 목록은 검증하지 못했다.
+- 같은 기기의 열린 화면을 OpenCLI와 stdio MCP를 통해 읽었다. 네이버·카카오·코레일 각각 예상 도메인과 화면 표식이 반환됐다. 이는 상태 확인이며 장소 데이터 추출과 예약 API가 아니다. ADB 포워딩은 시험 후 제거했다.

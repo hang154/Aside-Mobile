@@ -15,6 +15,27 @@ cli({
   },
 });
 
+// Read-only status checks for a page already opened by the user. They do not
+// navigate, extract credentials, or attempt reservations.
+for (const spec of [
+  {name:'naver-map-status', domain:'map.naver.com', hosts:['map.naver.com'], marker:'네이버지도'},
+  {name:'kakao-map-status', domain:'map.kakao.com', hosts:['map.kakao.com','m.map.kakao.com','applink.map.kakao.com'], marker:'카카오맵'},
+  {name:'korail-status', domain:'www.korail.com', hosts:['www.korail.com'], marker:'열차 조회'},
+]) {
+  cli({site:'nubi-unist',name:spec.name,access:'read',description:'Inspect an already-open '+spec.name+' page',
+    domain:spec.domain,strategy:Strategy.COOKIE,browser:true,navigateBefore:false,
+    columns:['host','title','marker_visible'],
+    func:async page=>{
+      const result=await page.evaluate(`(() => {
+        if (!${JSON.stringify(spec.hosts)}.includes(location.hostname)) throw new Error('Open the requested service in Nubi first');
+        const text = document.body ? document.body.innerText : '';
+        return {host:location.hostname,title:document.title,marker_visible:text.includes(${JSON.stringify(spec.marker)})};
+      })()`);
+      return [result];
+    },
+  });
+}
+
 cli({
   site: 'nubi-unist', name: 'academic-menu', access: 'read',
   description: 'List visible academic menu entries in the already-open portal',
