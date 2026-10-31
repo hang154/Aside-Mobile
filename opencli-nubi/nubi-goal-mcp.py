@@ -15,11 +15,18 @@ DEFINITIONS=[
  {'name':'nubi_goal_observe','description':'Read actual public result metadata (up to 8) or selected source page title. If not_ready retry once. No video/body analysis. Returns observation_id for selecting a result.','inputSchema':schema({'goal_id':gid},['goal_id'])},
  {'name':'nubi_goal_select','description':'Open one actual result (zero-based index) from the latest observation of this goal. Rejects stale lists. Read-only navigation, never purchase/join. Observe afterward.','inputSchema':schema({'goal_id':gid,'observation_id':{'type':'string'},'index':{'type':'integer','minimum':0,'maximum':7}},['goal_id','observation_id','index'])},
  {'name':'nubi_goal_report','description':'Save your final Korean exploration summary into this native goal. Only use source_urls returned by successful observations. Distinguish candidates from confirmed price/match/course, never claim purchase/payment. After successful report, give final answer without more tools.','inputSchema':schema({'goal_id':gid,'summary':{'type':'string','maxLength':3000},'source_urls':{'type':'array','items':{'type':'string'},'minItems':1,'maxItems':12}},['goal_id','summary','source_urls'])}]
+DEFINITIONS.append({'name':'nubi_goal_explore','description':'Open one goal and sequentially search/observe up to three public providers on the real tablet, returning actual results per provider. Efficient batch research. Supply goal-relevant Korean queries, prefer shopping, gatherings, then video last. Only the last successful CURRENT page observation can be selected. Does not save a report or choose a result.','inputSchema':schema({'character':{'type':'string','enum':['fitness','love','grades','home']},'searches':{'type':'array','minItems':1,'maxItems':3,'items':schema({'provider':{'type':'string','enum':PROVIDERS},'query':{'type':'string','maxLength':100}},['provider','query'])}},['character','searches'])})
 BYNAME={x['name']:x for x in DEFINITIONS}
 def validate(name,a):
  if name not in BYNAME or not isinstance(a,dict):raise ValueError('Unknown tool or arguments')
  spec=BYNAME[name]['inputSchema']
  if set(a)!=set(spec['required']):raise ValueError('Exact required arguments only')
+ if name=='nubi_goal_explore':
+  if a['character'] not in ('fitness','love','grades','home') or not isinstance(a['searches'],list) or not 1<=len(a['searches'])<=3:raise ValueError('Invalid bounded exploration')
+  for search in a['searches']:
+   if not isinstance(search,dict) or set(search)!={'provider','query'}:raise ValueError('Invalid search item')
+   validate('nubi_goal_search',{'goal_id':'a'*36,**search})
+  return
  if name=='nubi_goal_open':
   if a['character'] not in ('fitness','love','grades','home'):raise ValueError('Unknown character')
  else:
@@ -34,10 +41,27 @@ def post(path,data):
  request=urllib.request.Request(url+path,data=json.dumps(data).encode(),headers={'Authorization':'Bearer '+token,'Content-Type':'application/json'},method='POST')
  with urllib.request.urlopen(request,context=context,timeout=5) as r:return json.load(r)
 def call(name,a):
- validate(name,a);identifier=post('/command',{'op':name.removeprefix('nubi_'),**a})['id'];end=time.monotonic()+25
+ validate(name,a)
+ if name=='nubi_goal_explore':
+  opened=call('nubi_goal_open',{'character':a['character']})
+  if 'error' in opened:return opened
+  goal=opened['goal'];searches=[]
+  for search in a['searches']:
+   start=call('nubi_goal_search',{'goal_id':goal['goal_id'],**search})
+   if 'error' in start:searches.append({**search,'result':start});continue
+   time.sleep(4);observed={}
+   for attempt in range(3):
+    observed=call('nubi_goal_observe',{'goal_id':goal['goal_id']})
+    if observed.get('state')!='not_ready':break
+    time.sleep(2)
+   searches.append({**search,'result':observed})
+  return {'state':'exploration_observed','goal':goal,'searches':searches,'selection_note':'Only observation_id from the final search page is currently selectable; prior pages are stale.'}
+ identifier=post('/command',{'op':name.removeprefix('nubi_'),**a})['id'];end=time.monotonic()+25
  while time.monotonic()<end:
   result=post('/get-result',{'id':identifier})['result']
-  if result is not None:return result
+  if result is not None:
+   if result.get('state')=='results_observed':result['items']=[{k:v for k,v in row.items() if k in ('title','url','kind','author','priceText','published')} for row in result.get('items',[])]
+   return result
   time.sleep(.3)
  raise TimeoutError('Goal browser must be paired and foreground')
 def handle(req):
