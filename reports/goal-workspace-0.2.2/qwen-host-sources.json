@@ -1,0 +1,25 @@
+{
+  "generated_at": "2026-10-31T08:14:20.364293+00:00",
+  "files": [
+    {
+      "path": "opencli-nubi/nubi-goal-mcp.py",
+      "sha256": "7e7889ca095e4dd70a665ff0dc27501ee3e76ebcb1a934c4dc00541c7b8fab10"
+    },
+    {
+      "path": "opencli-nubi/nubi-goal-relay.py",
+      "sha256": "5081a8b76f49750190f049d28d10fa2c0b1c33af3de7133185e66bb2e23de79f"
+    },
+    {
+      "path": "opencli-nubi/qwen-goal-agent.py",
+      "sha256": "60525be5e388f49e1fad0f1c823f3067895d7328a678442a1f4ca28bb607e728"
+    },
+    {
+      "path": "opencli-nubi/test-goal-mcp.py",
+      "sha256": "8a1d8c719fa131f8c1a6fbd0192dc6f4f0b8a7564650cc8a4ab1594fc40304cd"
+    },
+    {
+      "path": "docs/QWEN_GOAL_BROWSER.md",
+      "sha256": "fb00dc818c1033d2076382a7a0c82796723c0fa6212187527d44f674fcb7af0b"
+    }
+  ]
+}
