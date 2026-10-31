@@ -21,4 +21,12 @@ r=extract('coupang',[optionA,{...optionA,href:optionA.href.replace('utm_source=t
 r=extract('11st',[{...anchor,href:'https://www.11st.co.kr/product/SellerProductDetail.tmall?method=getSellerProductDetail&prdNo=987654&optionId=blue&tracking=1'}]);check(r.items[0].externalId==='987654','legacy query product ID recovered');check(r.items[0].url.includes('/products/ma/987654')&&r.items[0].url.includes('optionId=blue'),'query product becomes exact HTTPS product with option');
 r=extract('11st',[{...anchor,href:'https://m.11st.co.kr/products/not-a-product'}]);check(r.items.length===0,'missing stable product ID rejected');
 r=extract('coupang',[{...optionA,href:'https://evil.org/vp/products/123456?itemId=111'}]);check(r.items.length===0,'foreign seller host rejected');
+const post=(title,url,attrs={})=>({href:url,innerText:title,getAttribute:k=>attrs[k]||null});
+const postUrl='https://m.blog.naver.com/fixture/224448986171';
+r=extract('naverweb',[post('3일 전',postUrl),post('울산 야경 데이트 코스 태화루와 스카이워크',postUrl),post('본문 요약은 제목을 덮어쓰지 않는다',postUrl),post('블로그 작성자 프로필','https://m.blog.naver.com/fixture')]);
+check(r.items.length===1,'date/profile/duplicate description excluded');check(r.items[0].title==='울산 야경 데이트 코스 태화루와 스카이워크','actual heading survives URL dedupe');
+r=extract('realestate',[post('2026. 10. 31.',postUrl),post('울산 아파트 청약 공고 정리',postUrl)]);check(r.items.length===1&&r.items[0].title.includes('청약'),'realestate uses post headings not dates');
+r=extract('naverweb',[post('이전 작성일',postUrl,{'data-heatmap-target':'articleSourceJSX_createdDate'}),post('미적분 공부 자료 모음',postUrl)]);check(r.items[0].title.includes('미적분'),'semantic date link skipped');
+r=extract('naverweb',[post('악성 호스트 위장 링크','https://m.blog.naver.com.evil.org/fixture/123')]);check(r.items.length===0,'exact blog hostname required');
+r=extract('naverweb',[post('Healthy eating guide','https://www.nhs.uk/live-well/eat-well/')]);check(r.items.length===1,'existing public NHS source preserved');
 console.log(`PASS ${checks} fixed extractor contract checks (fixtures, not live evidence)`);

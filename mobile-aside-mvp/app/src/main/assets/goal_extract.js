@@ -22,6 +22,18 @@ if(provider==='youtube'){
  add(title.replace(/\n[0-9,]+$/,''),productUrl.href,{kind:'상품',externalId:productId,itemId:productUrl.searchParams.get('itemId')||'',vendorItemId:productUrl.searchParams.get('vendorItemId')||'',seller:'미확인',priceText:match?match[1]+'원 (검색 표시가)':'가격 미확인',...(match?{price:Number(match[1].replaceAll(',',''))}:{}),shippingText:shipping===null?'미확인':shipping===0?'무료배송':shipping+'원',...(shipping===null?{}:{shipping}),sponsored:raw.includes('광고')?'광고':'미확인'});}
 }else if(provider==='kakaomap'){
  for(const e of document.querySelectorAll('li.search_item[data-type=place]')){const id=e.dataset.id||e.getAttribute('data-id');const a=e.querySelector('a[href]');const title=text(e.querySelector('.tit_g'));if(id||a)add(title,id?'https://m.map.kakao.com/actions/detailMapView?id='+encodeURIComponent(id):a.href,{kind:'장소',author:text(e.querySelector('.txt_ginfo'))||'카카오맵'});}
+}else if(provider==='naverweb'||provider==='realestate'){
+ // Search cards repeat a post URL on its date, title, description and thumbnails.
+ // A date must not win URL deduplication before the actual title anchor.
+ for(const a of document.querySelectorAll('a[href^="https://blog.naver.com"],a[href^="https://m.blog.naver.com"],a[href^="https://www.nhs.uk"]')){
+  try{const u=new URL(a.href,location.href),title=(a.getAttribute('title')||text(a)).trim();
+   if(title.length<6||/^([0-9]+\s*(분|시간|일|주|개월|년)\s*전|[0-9]{4}[.\-/][0-9.\-/\s]+)$/.test(title)||a.getAttribute('data-heatmap-target')==='articleSourceJSX_createdDate')continue;
+   if(u.hostname==='blog.naver.com'||u.hostname==='m.blog.naver.com'){
+    if(!/^\/[^/]+\/[0-9]+\/?$/.test(u.pathname)&&!(u.pathname==='/PostView.naver'&&/^[0-9]+$/.test(u.searchParams.get('logNo')||'')))continue;
+   }else if(provider!=='naverweb'||u.hostname!=='www.nhs.uk')continue;
+   add(title,u.href,{kind:'글',author:'원문에서 확인'});
+  }catch(e){}
+ }
 }else {
  const selectors={naverweb:'a[href^="https://blog.naver.com"],a[href^="https://m.blog.naver.com"],a[href^="https://www.nhs.uk"]',meetup:'a[href*="/events/"],a[href*="/groups/"]',munto:'a[href*="/detail"],a[href*="/socialing"],a[href*="/club/"]',inflearn:'a[href*="/course/"]',kmooc:'a[href*="/course"],a[href*="/view/"]',realestate:'a[href^="https://blog.naver.com"],a[href^="https://m.blog.naver.com"]'};
  for(const a of document.querySelectorAll(selectors[provider]||'__unsupported')){const title=a.getAttribute('title')||text(a);if(provider==='munto'){const q=typeof query==='string'?query:'';const terms=q.includes('부동산')?['부동산','청약','재테크','경제']:q.includes('스터디')?['스터디','공부','독서','자기계발']:q.includes('러닝')?['러닝','조깅','운동','산책']:q.includes('취미')?['취미','대화','수다','카페','미팅']:q.includes('취업')?['취업','면접','커리어']:['여행','나들이'];if(!terms.some(w=>title.includes(w)))continue;}add(title,a.href,{kind:provider==='meetup'||provider==='munto'?'모임':'글',author:'원문에서 확인'});}
