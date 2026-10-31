@@ -1,0 +1,93 @@
+{
+  "generated_at": "2026-10-31T06:10:49.512305+00:00",
+  "timezone": "UTC",
+  "base_commit": "8d6871e",
+  "files": [
+    {
+      "path": "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusActivity.java",
+      "bytes": 166,
+      "sha256": "c5414f524436f14786c142be910c7a0f62368b301f3210f25d9db9ac822641e9"
+    },
+    {
+      "path": "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusToolsActivity.java",
+      "bytes": 9208,
+      "sha256": "0a38bb74b4cc30398052bdda7e1b966c501201371f297dc822fe649d5ad151d5"
+    },
+    {
+      "path": "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CharacterWorkspaceActivity.java",
+      "bytes": 20890,
+      "sha256": "120ec8dd68cf257db0ccfd65ab395605e8b5685ea41d6781f9a0272c28e86bda"
+    },
+    {
+      "path": "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/DiscoveryProviders.java",
+      "bytes": 2953,
+      "sha256": "98bed5b2ab9a2e7ef98b315d84d739fe19c2725eed945178bc67cc101f7e2211"
+    },
+    {
+      "path": "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/GoalDiscoveryActivity.java",
+      "bytes": 9481,
+      "sha256": "a3769700f10cb1d2574ec429450e41abf40af8ff0055c723617c0f4f6e230494"
+    },
+    {
+      "path": "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/GoalHomeActivity.java",
+      "bytes": 5292,
+      "sha256": "7fddebc60f9a8fe786c8c0949c36f99dadae297e7510b477fb4cc2ed25f35a8e"
+    },
+    {
+      "path": "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/GoalRules.java",
+      "bytes": 4195,
+      "sha256": "d8fa07d4a2a852323710f71b323c46ef5b8236934797d4312784c47df0c76ed7"
+    },
+    {
+      "path": "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/GoalStore.java",
+      "bytes": 5972,
+      "sha256": "d541fccbec8c3333c0f8a322933c771d810dc0c3dd33267ed8ad8731f0d469b6"
+    },
+    {
+      "path": "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/GoalUi.java",
+      "bytes": 4891,
+      "sha256": "358e21f86d8646e4e56c7053c534d91701a3ab342f331cb404c23d890cf5e049"
+    },
+    {
+      "path": "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/MediaRepository.java",
+      "bytes": 4120,
+      "sha256": "1cd18426549f20a2edbe0d58f2c396b417640ca93f71b2ef5180537d1505ff9c"
+    },
+    {
+      "path": "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/TaskActivity.java",
+      "bytes": 5302,
+      "sha256": "b8ad42ba0a3db86244cb0658a0ae4ca023c8629920c90c717e277c19513812f8"
+    },
+    {
+      "path": "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/TaskStore.java",
+      "bytes": 765,
+      "sha256": "f8cc21ad3e6489e923ad13e882de56cdc2f3989d5dc4f9de12e1d8528d202986"
+    },
+    {
+      "path": "mobile-aside-mvp/app/src/main/AndroidManifest.xml",
+      "bytes": 2492,
+      "sha256": "ef2c10827598a937b06ad8fd77d279b06e4de9c6643ac285ab36ffff74f70d1f"
+    },
+    {
+      "path": "mobile-aside-mvp/app/build.gradle",
+      "bytes": 772,
+      "sha256": "ef1977812533bb3922a3888dede03eb73f20e958fc6daf52c3c2cc4fb1826589"
+    },
+    {
+      "path": "mobile-aside-mvp/app/src/main/assets/goal_extract.js",
+      "bytes": 5496,
+      "sha256": "6bcb0497023e5f8774c6c660a411d497fa815904945f686c24e3e4ddce68cade"
+    },
+    {
+      "path": "mobile-aside-mvp/app/src/experimental/AndroidManifest.xml",
+      "bytes": 1145,
+      "sha256": "7fba356ed07cf2a0b6acad1b557d1e15c2d0adecfde05a6d11332ce303ac99d8"
+    },
+    {
+      "path": "APK/nubi-goals-0.2.0.apk",
+      "bytes": 83670771,
+      "sha256": "c57f5d3511c75e2354689feb262076016f597e5f8816a029c728ba209eaff660"
+    }
+  ],
+  "scope": "Source/package bytes only. Does not assert provider live results or deployment approval."
+}

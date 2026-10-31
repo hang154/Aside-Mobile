@@ -15,11 +15,15 @@
         android:usesCleartextTraffic="false">
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="false">
         </activity>
         <activity android:name=".CampusActivity" android:exported="true">
             <intent-filter><action android:name="android.intent.action.MAIN" /><category android:name="android.intent.category.LAUNCHER" /></intent-filter>
         </activity>
+        <activity android:name=".GoalHomeActivity" android:exported="false" />
+        <activity android:name=".CharacterWorkspaceActivity" android:exported="false" />
+        <activity android:name=".GoalDiscoveryActivity" android:exported="false" />
+        <activity android:name=".CampusToolsActivity" android:exported="false" />
         <activity android:name=".UnistCalendarActivity" android:exported="false" />
         <activity android:name=".CollectorActivity" android:exported="false" />
         <activity android:name=".TaskActivity" android:exported="false" />
@@ -34,21 +38,5 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
-        <service android:name=".EngagementService" android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE" android:exported="true" android:label="Aside 화면 이벤트 수집">
-            <intent-filter><action android:name="android.accessibilityservice.AccessibilityService" /></intent-filter>
-            <meta-data android:name="android.accessibilityservice" android:resource="@xml/aside_engagement" />
-        </service>
-        <service
-            android:name=".AsideAccessibilityService"
-            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
-            android:exported="true"
-            android:label="Aside 화면 조작 서비스">
-            <intent-filter>
-                <action android:name="android.accessibilityservice.AccessibilityService" />
-            </intent-filter>
-            <meta-data
-                android:name="android.accessibilityservice"
-                android:resource="@xml/aside_accessibility" />
-        </service>
     </application>
 </manifest>

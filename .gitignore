@@ -1,0 +1,7 @@
+mobile-aside-mvp/.gradle/
+mobile-aside-mvp/build/
+mobile-aside-mvp/app/build/
+mobile-aside-mvp/app/src/main/jniLibs/
+mobile-aside-mvp/local.properties
+*.jks
+*.keystore

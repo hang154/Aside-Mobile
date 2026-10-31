@@ -8,11 +8,14 @@ android {
         applicationId 'ai.decisionos.nubi.travelpilot'
         minSdk 26
         targetSdk 35
-        versionCode 18
-        versionName '0.1.5-unist-travelpilot'
+        testInstrumentationRunner 'ai.decisionos.aside.GoalInstrumentation'
+        versionCode 19
+        versionName '0.2.0-goal-workspace'
     }
     packaging { jniLibs { useLegacyPackaging = true } }
     buildTypes {
+        debug { applicationIdSuffix ".goals" }
+        experimental { initWith debug; applicationIdSuffix ".laboratory"; matchingFallbacks = ["debug"] }
         release { minifyEnabled false }
     }
     compileOptions {

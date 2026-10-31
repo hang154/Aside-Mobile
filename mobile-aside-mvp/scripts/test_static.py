@@ -12,7 +12,9 @@ manifest=(root/'app/src/main/AndroidManifest.xml').read_text()
 assert 'getSharedPreferences("aside_prefs",MODE_PRIVATE)' in activity
 assert 'getSharedPreferences("aside_prefs",MODE_PRIVATE)' in service
 assert 'aside_access_disclosure_ack' in activity and 'aside_access_disclosure_ack' in service
-assert 'android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"' in manifest
+experimental=(root/'app/src/experimental/AndroidManifest.xml').read_text()
+assert 'android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"' in experimental
+assert 'BIND_ACCESSIBILITY_SERVICE' not in manifest
 assert 'android.permission.INTERNET' in manifest
 for x in ['android.permission.SEND_SMS','android.permission.READ_SMS','android.permission.CALL_PHONE']:
     assert x not in manifest,x

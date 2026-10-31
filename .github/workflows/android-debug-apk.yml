@@ -30,6 +30,9 @@ jobs:
           bash scripts/test_actions.sh
           bash scripts/test_concert.sh
           bash scripts/test_campus.sh
+          bash scripts/test_goals.sh
+          node scripts/test_goal_extractors.mjs
+          python3 scripts/test_goal_security.py
           python3 scripts/test_static.py
           python3 scripts/test_collector.py
       - name: Install Android SDK packages

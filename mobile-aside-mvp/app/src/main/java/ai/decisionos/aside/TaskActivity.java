@@ -16,9 +16,9 @@ import java.util.Date;
 
 /** Locally saved user tasks. Changes are explicit user decisions. */
 public class TaskActivity extends Activity {
-    private Store store; private EditText title; private Spinner type; private LinearLayout list; private TextView status;
+    private TaskStore store; private EditText title; private Spinner type; private LinearLayout list; private TextView status;
     private static final String[] TYPES={"검색·비교","전화 준비","예약 준비","쇼핑 준비","모임 준비"};
-    @Override public void onCreate(Bundle saved){super.onCreate(saved);store=new Store(this);
+    @Override public void onCreate(Bundle saved){super.onCreate(saved);store=new TaskStore(this);
         ScrollView scroll=new ScrollView(this);scroll.setFillViewport(true);LinearLayout root=Ui.vertical(this,Ui.BG,22);scroll.addView(root);
         root.addView(Ui.text(this,"내가 맡긴 일",27,Ui.WHITE,true),Ui.match(this,-2,6));
         root.addView(Ui.text(this,"할 일을 기기에 저장하고 검색을 이어가요. 완료는 직접 확인해 표시합니다.",14,Ui.MUTED,false),Ui.match(this,-2,8));
@@ -45,5 +45,4 @@ public class TaskActivity extends Activity {
         }).setNegativeButton("닫기",null).show();}
     private void update(long id,String state){ContentValues v=new ContentValues();v.put("state",state);v.put("updated",System.currentTimeMillis());store.getWritableDatabase().update("tasks",v,"_id=?",new String[]{Long.toString(id)});status.setText("상태를 변경했어요.");render();}
     @Override protected void onDestroy(){store.close();super.onDestroy();}
-    private static final class Store extends SQLiteOpenHelper {Store(Context c){super(c,"aside_tasks.db",null,1);}public void onCreate(SQLiteDatabase db){db.execSQL("CREATE TABLE tasks (_id INTEGER PRIMARY KEY AUTOINCREMENT,title TEXT NOT NULL,kind TEXT NOT NULL,state TEXT NOT NULL,updated INTEGER NOT NULL)");}public void onUpgrade(SQLiteDatabase db,int oldV,int newV){}}
 }
