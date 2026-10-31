@@ -18,16 +18,29 @@ final class GoalAgentChecks {
     final boolean[] rejected={false};i.runOnMainSync(()->{try{a.command(cmd,r->{});}catch(IllegalArgumentException e){rejected[0]=true;}catch(Exception e){throw new RuntimeException(e);}});if(!rejected[0]||!gid.equals(a.gid))throw new AssertionError("chat goal crossing");checks++;
    }
    i.runOnMainSync(()->{a.chat.history.put(a.chat.message("user","fixture instruction"));a.chat.input.setText("retained draft");a.chat.save();});
+   final boolean oldStyle=a.chat.modern();
+   i.runOnMainSync(()->{a.getPreferences(0).edit().putBoolean("coworker_ui",true).commit();a.chat.save();a.chat.build();a.chat.workspace.select("실행 기록");});
+   if(!a.chat.input.getText().toString().equals("retained draft")||a.chat.workspace==null)throw new AssertionError("workspace rebuild lost draft");checks++;
+   i.runOnMainSync(()->{try{a.chat.steps=new JSONArray().put("actual fixture tool");a.chat.busy(true);a.chat.workspace.refresh();}catch(Exception e){throw new RuntimeException(e);}});
+   if(a.chat.workspace.latestSteps().length()!=1)throw new AssertionError("running tool log missing");checks++;
+   i.runOnMainSync(()->{a.chat.busy(false);a.chat.workspace.select("파일");});
+   if(!a.chat.workspace.documents().isEmpty())throw new AssertionError("files leaked from another goal");checks++;
+   if(!a.chat.previousUser("missing").equals("fixture instruction"))throw new AssertionError("retry does not use local user instruction");checks++;
+   i.runOnMainSync(()->{a.getPreferences(0).edit().putBoolean("coworker_ui",false).commit();a.chat.save();a.chat.build();});
+   if(a.chat.workspace!=null||!a.chat.input.getText().toString().equals("retained draft"))throw new AssertionError("classic layout loses draft");checks++;
+   i.runOnMainSync(()->{a.getPreferences(0).edit().putBoolean("coworker_ui",oldStyle).commit();a.chat.save();a.chat.build();});
    if(store.goal(otherId).has("chatMessages"))throw new AssertionError("chat leaked to same-character goal");checks++;
    try(GoalStore reopened=new GoalStore(i.getTargetContext())){if(!reopened.goal(id).getJSONArray("chatMessages").getJSONObject(0).getString("text").equals("fixture instruction"))throw new AssertionError("chat history persistence");checks++;}
    i.runOnMainSync(()->{try{a.chat.job="document-fixture";a.chat.visible=true;a.chat.busy(true);a.chat.receive(new JSONObject().put("job_id","document-fixture").put("goal_id",gid).put("state","completed").put("kind","document").put("answer","document fixture draft").put("document",new JSONObject().put("state","needs_information").put("manifest",new JSONObject().put("files",new JSONArray()))));}catch(Exception e){throw new RuntimeException(e);}});
    JSONObject savedDoc=store.goal(id);if(!savedDoc.getJSONObject("documentResult").optString("state").equals("needs_information"))throw new AssertionError("document draft state lost");checks++;
    if(!savedDoc.getJSONArray("chatMessages").getJSONObject(savedDoc.getJSONArray("chatMessages").length()-1).getJSONObject("document").optString("job_id").equals("document-fixture"))throw new AssertionError("document receipt not saved with goal chat");checks++;
+   if(a.chat.workspace!=null&&a.chat.workspace.documents().size()!=1)throw new AssertionError("document not in goal workspace");checks++;
    if(store.goal(otherId).has("documentResult"))throw new AssertionError("document leaked across goals");checks++;
    i.runOnMainSync(()->{a.chat.busy(true);a.chat.pause();});if(a.chat.running||a.chat.visible)throw new AssertionError("pause must stop chat");checks++;
    if(!store.goal(id).optString("chatDraft").equals("retained draft"))throw new AssertionError("draft lost on stop");checks++;
    JSONObject prefs=new JSONObject().put("motivation",false).put("information",false);store.patchGoal(id,prefs);final boolean[] disabled={false};i.runOnMainSync(()->{try{a.command(new JSONObject().put("op","goal_search").put("goal_id",gid).put("provider","youtube").put("query","x"),r->{});}catch(IllegalArgumentException e){disabled[0]=true;}catch(Exception e){throw new RuntimeException(e);}});if(!disabled[0])throw new AssertionError("disabled discovery");checks++;
    final JSONObject[] result={null};i.runOnMainSync(()->{try{a.sources.add("https://www.youtube.com/watch?v=fixture");a.command(new JSONObject().put("op","goal_report").put("goal_id",gid).put("summary","fixture").put("source_urls",new JSONArray().put("https://www.youtube.com/watch?v=fixture")),r->result[0]=r);}catch(Exception e){throw new RuntimeException(e);}});if(result[0]==null||!"report_saved".equals(result[0].optString("state"))||!"fixture".equals(store.goal(id).optString("qwenSummary")))throw new AssertionError("report persistence");checks++;
+   store.deleteGoal(id);i.runOnMainSync(()->a.chat.save());if(store.goals().stream().anyMatch(g->g.optString("id").equals(gid)))throw new AssertionError("deleted goal resurrected on pause save");checks++;
   }finally{if(activity!=null){final Activity a=activity;i.runOnMainSync(a::finish);i.waitForIdleSync();}for(String clean:new String[]{id,otherId})if(clean!=null)try(GoalStore s=new GoalStore(i.getTargetContext())){s.deleteGoal(clean);}}
   return checks;
  }
