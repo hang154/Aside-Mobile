@@ -52,7 +52,7 @@ jobs:
       - name: Build APK
         run: |
           cd mobile-aside-mvp
-          gradle --no-daemon :app:assembleDebug
+          gradle --no-daemon :app:assembleDebug :app:assembleDebugAndroidTest
       - name: Verify package and checksums
         run: |
           find mobile-aside-mvp/app/build/outputs/apk/debug -maxdepth 1 -name '*.apk' -print

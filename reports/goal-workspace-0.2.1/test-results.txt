@@ -1,0 +1,11 @@
+PASS 17 parser cases
+PASS 13 action proposal cases
+Concert scenario calculations: PASS (6 cases)
+PASS campus scenarios: 17 (school=7, general=10)
+PASS 90 goal planning, URL, offer and purchase rule checks
+PASS 24 fixed extractor contract checks (fixtures, not live evidence)
+PASS consent/permission/browser security smoke tests
+PASS collector metadata boundary and opt-in checks
+PASS release manifest, read-only browser, stale selection, ownership and purchase boundary checks
+
+PASS 31 real-device database and flow checks

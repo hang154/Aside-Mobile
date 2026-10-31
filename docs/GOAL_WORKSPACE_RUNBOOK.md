@@ -27,3 +27,5 @@ Debug는 ai.decisionos.nubi.travelpilot.goals에 병행 설치한다. 과거 Git
 TaskStore는 기존 aside_tasks.db를 비파괴 마이그레이션한다. DB는 앱별 Android sandbox 안에 있고, 서로 다른 applicationId 간에 로그인·기록을 임의 복사하지 않는다. 새 앱으로 기존 설치 데이터가 자동 이전됐다고 해석하지 않는다.
 
 `verify_goal_artifacts.py --apk /abs/app.apk`는 소스·패키지의 byte hash 및 기준 커밋 비교를 생성한다. 이는 기능 테스트 결과를 대신하지 않는다. 테스트용 기기 화면 스크립트는 별도 로컬 캡처 폴더에서 실행하며 스크린샷·영상·실사용자 기록을 Git에 올리지 않는다.
+
+0.2.1 수정 검증: `GoalInstrumentation`은 기존 DB 15개와 초안 재개·저장 목록 흐름 16개를 합해 실기기 검사 31개를 실행한다. 검토용 목표를 만들고 종료 시 삭제하며 상품 이동·주문·결제는 누르지 않는다. 추출기 계약은 24개다. CI는 Android 테스트 APK도 컴파일하며, 실기기 실행을 CI 컴파일 성공으로 대신하지 않는다. 로컬 수정 APK는 `../nubi-goal-workspace-release-0.2.1/nubi-goals-0.2.1.apk`, versionCode 20 / versionName 0.2.1-goal-workspace다.
