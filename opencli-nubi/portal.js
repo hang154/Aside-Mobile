@@ -128,3 +128,50 @@ cli({site:'nubi-unist',name:'kakao-search',access:'read',description:'Search Kak
  }
  throw new Error('Kakao Map search did not load');
 }});
+
+// Public official pages. The HTML parser uses only Python's standard library.
+const { execFileSync } = await import('node:child_process');
+const { fileURLToPath } = await import('node:url');
+const officialParser=fileURLToPath(new URL('./official.py',import.meta.url));
+async function readOfficial(url,mode){
+ const r=await fetch(url,{redirect:'error',signal:AbortSignal.timeout(15000)});if(!r.ok)throw new Error('Official source HTTP '+r.status);
+ const html=await r.text();if(html.length>3000000)throw new Error('Official response too large');
+ const result=execFileSync('python3',[officialParser,mode],{input:html,encoding:'utf8',timeout:10000,maxBuffer:1000000});return JSON.parse(result);
+}
+const jobsUrl='https://aigs.unist.ac.kr/employment/';
+cli({site:'nubi-unist',name:'jobs-list',access:'read',description:'Read recent UNIST AI graduate school employment posts',strategy:Strategy.PUBLIC,browser:false,columns:['title','date','url','source'],func:async()=>{
+ const rows=await readOfficial(jobsUrl,'jobs');if(!rows.length)throw new Error('Job list is empty or page format changed');return rows;
+}});
+cli({site:'nubi-unist',name:'jobs-detail',access:'read',description:'Read a selected item from the current UNIST employment list',strategy:Strategy.PUBLIC,browser:false,args:[{name:'index',type:'int',positional:true,required:true},{name:'title',type:'str',positional:true,required:true}],columns:['title','date','body','url'],func:async(args)=>{
+ const rows=await readOfficial(jobsUrl,'jobs');const index=Number(args.index);if(!Number.isInteger(index)||index<1||index>rows.length)throw new Error('Selection is outside the current job list');
+ const row=rows[index-1];if(row.title!==args.title)throw new Error('The job list changed; refresh the choices');const detail=await readOfficial(row.url,'jobdetail');if(detail.title!==row.title)throw new Error('The selected job changed; refresh the choices');return [{...detail,url:row.url,source:jobsUrl}];
+}});
+cli({site:'nubi-unist',name:'dining-list',access:'read',description:'Read UNIST official campus dining locations and hours',strategy:Strategy.PUBLIC,browser:false,columns:['name','location','hours','source'],func:async()=>{
+ const rows=await readOfficial('https://www.unist.ac.kr/unist/life/convenience.do','dining');if(!rows.length)throw new Error('Dining source format changed');return rows;
+}});
+cli({site:'nubi-unist',name:'clubs-list',access:'read',description:'Read the UNIST computer science department club page',strategy:Strategy.PUBLIC,browser:false,columns:['name','description','url','source'],func:async()=>{
+ const rows=await readOfficial('https://cse.unist.ac.kr/cse/community/circle.do','clubs');if(!rows.length)throw new Error('Club source format changed');return rows;
+}});
+
+async function shoppingResults(page,expected){
+ const result=await page.evaluate(`(()=>{
+  if(location.hostname!=='msearch.shopping.naver.com')throw new Error('Open Naver price comparison first');
+  const q=new URL(location.href).searchParams.get('query')||'';
+  if(${JSON.stringify(expected||'')} && q!==${JSON.stringify(expected||'')})throw new Error('Waiting for the requested search');
+  return Array.from(document.querySelectorAll('a[aria-label][data-shp-contents-dtl]')).map(e=>{
+    let details,meta;try{details=Object.fromEntries(JSON.parse(e.getAttribute('data-shp-contents-dtl')).map(v=>[v.key,v.value]));meta=JSON.parse(e.getAttribute('data-nlog-params')||'{}')}catch{return null}
+    if(!details.prod_nm || !(details.price||details.lowest_price))return null;
+    const lines=(e.parentElement?.innerText||'').split('\\n').map(x=>x.trim()).filter(Boolean);let at=lines.indexOf('배송비');
+    return {name:String(details.prod_nm),listed_price_krw:Number(details.lowest_price||details.price),shipping:at>=0?(lines[at+1]||'미표시'):'미표시',sponsored:meta.is_ad===true || lines.includes('광고') || (e.getAttribute('aria-label')||'').startsWith('광고,'),source:'네이버 가격비교',query:q,search_url:'https://msearch.shopping.naver.com/search/all?query='+encodeURIComponent(q)};
+   }).filter(Boolean).slice(0,20).map((x,i)=>({index:i+1,...x}));
+ })()`);
+ if(!Array.isArray(result)||!result.length)throw new Error('No visible product results; check search, service access or page changes');return result;
+}
+cli({site:'nubi-unist',name:'shopping-search',access:'read',description:'Search visible Naver mobile price comparison products',domain:'msearch.shopping.naver.com',strategy:Strategy.COOKIE,browser:true,navigateBefore:false,args:[{name:'query',type:'str',positional:true,required:true}],columns:['index','name','listed_price_krw','shipping','sponsored','source','query','search_url'],func:async(page,args)=>{
+ const q=String(args.query||'').trim();if(!q||q.length>100)throw new Error('Query must contain 1–100 characters');
+ await page.cdp('Page.navigate',{url:'https://msearch.shopping.naver.com/search/all?query='+encodeURIComponent(q)});
+ for(let i=0;i<25;i++){await new Promise(r=>setTimeout(r,1000));try{return await shoppingResults(page,q);}catch(e){if(i===24)throw e;}}
+}});
+cli({site:'nubi-unist',name:'shopping-select',access:'read',description:'Read a selected item from the current visible product results',domain:'msearch.shopping.naver.com',strategy:Strategy.COOKIE,browser:true,navigateBefore:false,args:[{name:'index',type:'int',positional:true,required:true},{name:'title',type:'str',positional:true,required:true}],columns:['index','name','listed_price_krw','shipping','sponsored','source','query','search_url'],func:async(page,args)=>{
+ const rows=await shoppingResults(page);const idx=Number(args.index);if(!Number.isInteger(idx)||idx<1||idx>rows.length||rows[idx-1].name!==args.title)throw new Error('The product list changed; refresh choices');return [rows[idx-1]];
+}});
