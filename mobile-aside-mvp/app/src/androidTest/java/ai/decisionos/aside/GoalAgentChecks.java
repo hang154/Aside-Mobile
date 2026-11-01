@@ -4,6 +4,7 @@ import android.app.*;import android.content.*;import org.json.*;
 final class GoalAgentChecks {
  static int run(Instrumentation i)throws Exception{
   int checks=0;GoalAgentActivity activity=null;String id=null,otherId=null;
+  boolean oldCompanion=i.getTargetContext().getSharedPreferences("nubi_display",0).getBoolean("companion_ui",true);i.getTargetContext().getSharedPreferences("nubi_display",0).edit().putBoolean("companion_ui",false).commit();
   try(GoalStore store=new GoalStore(i.getTargetContext())){
    id=store.create("fitness","QWEN_CONTRACT_FIXTURE","운동",0).getString("id");
    Intent intent=new Intent(i.getTargetContext(),GoalAgentActivity.class).putExtra("goal_id",id).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -40,8 +41,16 @@ final class GoalAgentChecks {
    if(!store.goal(id).optString("chatDraft").equals("retained draft"))throw new AssertionError("draft lost on stop");checks++;
    JSONObject prefs=new JSONObject().put("motivation",false).put("information",false);store.patchGoal(id,prefs);final boolean[] disabled={false};i.runOnMainSync(()->{try{a.command(new JSONObject().put("op","goal_search").put("goal_id",gid).put("provider","youtube").put("query","x"),r->{});}catch(IllegalArgumentException e){disabled[0]=true;}catch(Exception e){throw new RuntimeException(e);}});if(!disabled[0])throw new AssertionError("disabled discovery");checks++;
    final JSONObject[] result={null};i.runOnMainSync(()->{try{a.sources.add("https://www.youtube.com/watch?v=fixture");a.command(new JSONObject().put("op","goal_report").put("goal_id",gid).put("summary","fixture").put("source_urls",new JSONArray().put("https://www.youtube.com/watch?v=fixture")),r->result[0]=r);}catch(Exception e){throw new RuntimeException(e);}});if(result[0]==null||!"report_saved".equals(result[0].optString("state"))||!"fixture".equals(store.goal(id).optString("qwenSummary")))throw new AssertionError("report persistence");checks++;
+   i.runOnMainSync(()->{a.getSharedPreferences("nubi_display",0).edit().putBoolean("companion_ui",true).commit();a.chat.save();a.chat.build();});
+   if(a.chat.companion==null||a.chat.workspace!=null)throw new AssertionError("companion layout missing");checks++;
+   if(!a.chat.input.getText().toString().equals("retained draft"))throw new AssertionError("companion layout lost draft");checks++;
+   i.runOnMainSync(()->a.chat.companion.select("작업"));if(a.chat.companion.documents().size()!=1)throw new AssertionError("companion document scope");checks++;
+   i.runOnMainSync(()->a.chat.companion.select("탐색"));if(!a.chat.companion.page.equals("탐색"))throw new AssertionError("companion discovery missing");checks++;
+   i.runOnMainSync(()->a.chat.companion.browser());if(a.web.getParent()==null||!a.chat.companion.page.equals("브라우저"))throw new AssertionError("companion browser unmounted");checks++;
+   i.runOnMainSync(()->a.chat.companion.select("내 정보"));if(!a.chat.companion.page.equals("내 정보"))throw new AssertionError("companion settings missing");checks++;
+   i.runOnMainSync(()->a.chat.companion.select("대화"));
    store.deleteGoal(id);id=null;i.runOnMainSync(()->a.chat.save());if(store.goals().stream().anyMatch(g->g.optString("id").equals(gid)))throw new AssertionError("deleted goal resurrected on pause save");checks++;
-  }finally{if(activity!=null){final Activity a=activity;i.runOnMainSync(a::finish);i.waitForIdleSync();}for(String clean:new String[]{id,otherId})if(clean!=null)try(GoalStore s=new GoalStore(i.getTargetContext())){s.deleteGoal(clean);}}
+  }finally{i.getTargetContext().getSharedPreferences("nubi_display",0).edit().putBoolean("companion_ui",oldCompanion).commit();if(activity!=null){final Activity a=activity;i.runOnMainSync(a::finish);i.waitForIdleSync();}for(String clean:new String[]{id,otherId})if(clean!=null)try(GoalStore s=new GoalStore(i.getTargetContext())){s.deleteGoal(clean);}}
   return checks;
  }
 }
