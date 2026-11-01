@@ -264,3 +264,93 @@ cli({site:'nubi-unist',name:'booking-search',access:'read',description:'Search B
 cli({site:'nubi-unist',name:'booking-select',access:'read',description:'Read selected visible hotel without booking',domain:'www.booking.com',strategy:Strategy.COOKIE,browser:true,navigateBefore:false,args:[{name:'index',type:'int',positional:true,required:true},{name:'title',type:'str',positional:true,required:true}],columns:['index','name','location','price','taxes','rating','sponsored','url','checkin','checkout','adults','source'],func:async(page,a)=>{
  const rows=await bookingRows(page);const idx=Number(a.index),row=rows.find(x=>x.index===idx);if(!row||row.name!==a.title)throw new Error('Hotel list changed; refresh choices');return [row];
 }});
+
+// The MCP server runs locally; the pages below execute inside the attached tablet WebView.
+const {rankings:tabletRankings}=await import('./top-platforms.mjs');
+const tabletAllowed=new Set(Object.values(tabletRankings).flat());
+const privatePreviewDomains=new Set(['missav123.com','yasyadong02.tv','av19t.com','kissjav.li','avsee.is','xvideos.com','pornhub.com']);
+cli({site:'nubi-unist',name:'tablet-visit',access:'read',description:'Visit a ranked website in the attached tablet WebView and inspect its public page',domain:'example.com',strategy:Strategy.COOKIE,browser:true,navigateBefore:false,args:[{name:'domain',type:'str',positional:true,required:true}],columns:['domain','state','final_host','title','link_count','note'],func:async(page,a)=>{
+ const domain=String(a.domain||'');if(!tabletAllowed.has(domain))throw new Error('Domain is not in the ranking');
+ const nav=await page.cdp('Page.navigate',{url:'https://'+domain+'/'});
+ if(nav.errorText)return [{domain,state:'navigation_error',final_host:'',title:'',link_count:0,note:String(nav.errorText).slice(0,120)}];
+ for(let i=0;i<12;i++){
+  await new Promise(r=>setTimeout(r,1000));
+  try{
+   const data=await page.evaluate(`(()=>{
+    const u=new URL(location.href);const domain=${JSON.stringify(domain)};const host=u.hostname;
+    if(u.protocol==='chrome-error:')return {state:'browser_error',final_host:'',title:'',link_count:0,note:'Browser error page'};
+    if(u.protocol!=='https:' || !(host===domain||host.endsWith('.'+domain)))return null;
+    if(document.readyState==='loading')return null;
+    const hide=${JSON.stringify(privatePreviewDomains.has(domain))};
+    const text=hide?'':(document.body?.innerText||'').slice(0,5000);
+    const challenge=/checking your browser|verify you are human|captcha|access denied|접근이 제한|비정상적인 접근/i.test((document.title||'')+' '+text);
+    return {state:challenge?'challenge':'loaded',final_host:host,title:hide?'':(document.title||'').slice(0,150),link_count:hide?0:document.querySelectorAll('a[href]').length,note:hide?'Page contents not retained':''};
+   })()`);
+   if(data)return [{domain,...data}];
+  }catch(e){if(i===11)return [{domain,state:'read_error',final_host:'',title:'',link_count:0,note:String(e.message||e).slice(0,120)}];}
+ }
+ return [{domain,state:'timeout_or_external_redirect',final_host:'',title:'',link_count:0,note:'No matching public page observed within 12 seconds'}];
+}});
+
+// Read-only, fixed-query experiments. Result links must remain on the requested site.
+const exploreSpecs={
+ 'youtube.com':['https://m.youtube.com/results?search_query=UNIST','/watch'],
+ 'google.com':['https://www.google.com/search?q=UNIST',''],
+ 'naver.com':['https://search.naver.com/search.naver?query=UNIST',''],
+ 'x.com':['https://x.com/search?q=UNIST&src=typed_query','/status/'],
+ 'instagram.com':['https://www.instagram.com/explore/search/keyword/?q=UNIST','/p/'],
+ 'facebook.com':['https://www.facebook.com/search/top?q=UNIST','/posts/'],
+ 'reddit.com':['https://www.reddit.com/search/?q=UNIST','/comments/'],
+ 'amazon.com':['https://www.amazon.com/s?k=notebook','/dp/'],
+ 'yahoo.com':['https://search.yahoo.com/search?p=UNIST',''],
+ 'wikipedia.org':['https://en.wikipedia.org/w/index.php?search=UNIST','/wiki/'],
+ 'duckduckgo.com':['https://duckduckgo.com/?q=UNIST',''],
+ 'bing.com':['https://www.bing.com/search?q=UNIST',''],
+ 'tiktok.com':['https://www.tiktok.com/search?q=UNIST','/video/'],
+ 'walmart.com':['https://www.walmart.com/search?q=notebook','/ip/'],
+ 'temu.com':['https://www.temu.com/search_result.html?search_key=notebook','/goods.html'],
+ 'aliexpress.com':['https://www.aliexpress.com/wholesale?SearchText=notebook','/item/'],
+ 'linkedin.com':['https://www.linkedin.com/jobs/search/?keywords=data%20analyst','/jobs/view/'],
+ 'tistory.com':['https://www.tistory.com/search?keyword=UNIST',''],
+ 'inven.co.kr':['https://www.inven.co.kr/','/webzine/news/'],
+ 'msn.com':['https://www.msn.com/en-us/news','/ar-'],
+ 'espn.com':['https://www.espn.com/nfl/','/story/'],
+ 'weather.com':['https://weather.com/weather/today/l/Seoul+South+Korea','/weather/']
+};
+cli({site:'nubi-unist',name:'tablet-explore',access:'read',description:'Run a fixed public search or news browse on the attached tablet and open a matching result',domain:'example.com',strategy:Strategy.COOKIE,browser:true,navigateBefore:false,args:[{name:'domain',type:'str',positional:true,required:true}],columns:['domain','state','result_count','items','opened','note'],func:async(page,a)=>{
+ const domain=String(a.domain||'');if(!tabletAllowed.has(domain))throw new Error('Domain is not in the ranking');
+ const spec=exploreSpecs[domain];if(!spec)return [{domain,state:'unsupported',result_count:0,items:[],opened:false,note:'No safe public read-only search adapter configured'}];
+ const nav=await page.cdp('Page.navigate',{url:spec[0]});if(nav.errorText)return [{domain,state:'navigation_error',result_count:0,items:[],opened:false,note:nav.errorText}];
+ let data=null,lastError='';
+ for(let i=0;i<10;i++){
+  await new Promise(r=>setTimeout(r,1000));
+  try{data=await page.evaluate(`(()=>{
+   const host=location.hostname, domain=${JSON.stringify(domain)}, pattern=${JSON.stringify(spec[1])};
+   if(location.protocol==='chrome-error:')return {state:'browser_error',items:[]};
+   if(location.protocol!=='https:'||!(host===domain||host.endsWith('.'+domain))||document.readyState==='loading')return null;
+   const body=(document.body?.innerText||'').slice(0,10000),title=document.title||'';
+   if(/captcha|verify you are human|checking your browser|access denied|접근이 제한|비정상적인 접근/i.test(title+' '+body))return {state:'challenge',items:[]};
+   const items=[],seen=new Set();
+   for(const a of document.querySelectorAll('a[href]')){let u;try{u=new URL(a.href)}catch{continue}
+    const label=(a.innerText||a.getAttribute('aria-label')||'').replace(/\\s+/g,' ').trim();
+    if(!label||label.length<8||u.protocol!=='https:')continue;
+    if(pattern&&!(u.hostname===domain||u.hostname.endsWith('.'+domain)))continue;
+    if(pattern&&u.pathname===location.pathname)continue;
+    if(pattern&&!u.pathname.includes(pattern))continue;
+    if(!pattern&&(!a.querySelector('h2,h3')||/login|signin|account/i.test(u.pathname)))continue;
+    if(seen.has(u.href))continue;seen.add(u.href);items.push({title:label.slice(0,150),href:u.href});if(items.length===5)break;
+   }
+   return {state:items.length?'results_found':'no_results',items};
+  })()`);if(data && (data.state!=='no_results'||i===9))break;}catch(e){lastError=String(e.message||e);}
+ }
+ if(!data)return [{domain,state:'timeout_or_external_redirect',result_count:0,items:[],opened:false,note:lastError.slice(0,200)||'No matching page within 10 seconds'}];
+ const items=data.items||[], first=items[0], summary=items.map(x=>({title:x.title}));let opened=false,note='Fixed public query; no account action';
+ if(first&&spec[1]){
+  const target=new URL(first.href);if(target.protocol==='https:'&&(target.hostname===domain||target.hostname.endsWith('.'+domain))&&target.pathname.includes(spec[1])){
+   const next=await page.cdp('Page.navigate',{url:target.href});
+   if(!next.errorText){await new Promise(r=>setTimeout(r,2500));try{opened=await page.evaluate(`(()=>{document.querySelectorAll('video,audio').forEach(x=>{x.muted=true;x.pause()});const h=location.hostname;return location.protocol==='https:'&&(h===${JSON.stringify(domain)}||h.endsWith('.'+${JSON.stringify(domain)}))&&location.pathname.includes(${JSON.stringify(spec[1])})&&document.readyState!=='loading'&&document.body&&document.body.innerText.trim().length>30})()`);}catch{}}
+   if(!opened)note='Result selected but detail page was not confirmed';
+  }
+ }
+ return [{domain,state:data.state,result_count:items.length,items:summary,opened:!!opened,note}];
+}});

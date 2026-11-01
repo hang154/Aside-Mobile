@@ -97,6 +97,24 @@ public class AsideAccessibilityService extends AccessibilityService {
         button(controls,"🎤",this::listen,1);
         button(controls,"읽기",()->run("화면 읽어"),1);
         panel.addView(controls,Ui.match(this,-2,8));
+        Button selectInput=Ui.button(this,"입력 대상 선택 (5초)");
+        selectInput.setTextSize(11);
+        selectInput.setOnClickListener(v->{
+            String command=prompt.getText().toString();
+            if(CommandParser.parse(command).type!=CommandParser.Type.INPUT){status("먼저 '입력 내용' 명령을 적어 주세요.");return;}
+            params.flags |= WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
+            wm.updateViewLayout(overlay,params);
+            status("5초 안에 다른 앱의 입력칸을 누르세요.");
+            new android.os.Handler(getMainLooper()).postDelayed(()->run(command),5000);
+        });
+        panel.addView(selectInput,Ui.match(this,44,4));
+        prompt.setOnClickListener(v->{
+            if((params.flags & WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)!=0){
+                params.flags &= ~WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
+                wm.updateViewLayout(overlay,params);
+                prompt.requestFocus();
+            }
+        });
         LinearLayout nav=new LinearLayout(this);nav.setOrientation(LinearLayout.HORIZONTAL);
         button(nav,"뒤로",()->run("뒤로"),1);
         button(nav,"홈",()->run("홈"),1);
@@ -185,7 +203,8 @@ public class AsideAccessibilityService extends AccessibilityService {
         if(target.isEmpty())return "클릭할 버튼 이름을 적어 주세요.";
         if(dangerousClick(target))return "민감한 확정/전송/권한 작업은 사용자가 직접 눌러야 합니다.";
         AccessibilityNodeInfo root=currentAppRoot();if(root==null)return "조작할 다른 앱 화면이 없습니다.";
-        AccessibilityNodeInfo found=findNode(root,target,0);
+        AccessibilityNodeInfo found=findNode(root,target,0,true);
+        if(found==null)found=findNode(root,target,0,false);
         if(found==null)return "'"+target+"' 버튼을 찾지 못했습니다.";
         AccessibilityNodeInfo p=found;
         for(int i=0;i<5&&p!=null;i++,p=p.getParent()){
@@ -194,16 +213,17 @@ public class AsideAccessibilityService extends AccessibilityService {
         }
         return "버튼을 찾았지만 클릭할 수 없습니다.";
     }
-    private AccessibilityNodeInfo findNode(AccessibilityNodeInfo n,String target,int depth){
+    private AccessibilityNodeInfo findNode(AccessibilityNodeInfo n,String target,int depth,boolean exact){
         if(n==null||depth>20||n.isPassword())return null;
-        String t=target.toLowerCase(Locale.ROOT);
-        CharSequence a=n.getText(),b=n.getContentDescription();
-        if((a!=null&&a.toString().toLowerCase(Locale.ROOT).contains(t)) ||
-           (b!=null&&b.toString().toLowerCase(Locale.ROOT).contains(t)))return n;
         for(int i=0;i<n.getChildCount();i++){
-            AccessibilityNodeInfo found=findNode(n.getChild(i),target,depth+1);
+            AccessibilityNodeInfo found=findNode(n.getChild(i),target,depth+1,exact);
             if(found!=null)return found;
         }
+        String t=target.toLowerCase(Locale.ROOT);
+        CharSequence a=n.getText(),b=n.getContentDescription();
+        String text=a==null?"":a.toString().trim().toLowerCase(Locale.ROOT);
+        String desc=b==null?"":b.toString().trim().toLowerCase(Locale.ROOT);
+        if(exact ? text.equals(t)||desc.equals(t) : text.contains(t)||desc.contains(t))return n;
         return null;
     }
     private String typeText(String value){

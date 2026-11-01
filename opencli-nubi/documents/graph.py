@@ -18,7 +18,7 @@ class Graph:
   app=msal.PublicClientApplication(self.config['client_id'],authority='https://login.microsoftonline.com/'+self.config['tenant_id'],token_cache=cache)
   users=app.get_accounts(username=self.config['account'])
   if len(users)!=1:raise RuntimeError('Graph account not signed in; run document-auth.py')
-  result=app.acquire_token_silent(['Mail.Read','Files.ReadWrite'],account=users[0])
+  result=app.acquire_token_silent(self.config.get('scopes',['Mail.Read','Files.ReadWrite']),account=users[0])
   if not result or 'access_token' not in result:raise RuntimeError('Graph sign-in expired; run document-auth.py')
   if cache.has_state_changed:p.write_text(cache.serialize());p.chmod(0o600)
   return result['access_token']

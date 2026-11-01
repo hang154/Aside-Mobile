@@ -6,12 +6,15 @@ import { promisify } from 'node:util';
 import { promises as fs } from 'node:fs';
 import { homedir } from 'node:os';
 import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { randomUUID } from 'node:crypto';
 import { rankings, ranked, aliasesFor, adapters, probe, preview } from './top-platforms.mjs';
 const execute = promisify(execFile);
+const qwenCampusAgent=join(dirname(fileURLToPath(import.meta.url)),'qwen-campus-agent.py');
+let qwenCampusBusy=false;
 const opencli = process.env.OPENCLI_BIN;
 const endpoint = process.env.OPENCLI_CDP_ENDPOINT;
-const handlers = { nubi_portal_status: 'portal-status', nubi_academic_menu: 'academic-menu', nubi_naver_map_status:'naver-map-status', nubi_kakao_map_status:'kakao-map-status', nubi_korail_status:'korail-status', nubi_naver_places:'naver-places', nubi_unist_calendar:'unist-calendar', nubi_korail_options:'korail-options', nubi_papers_search:'papers-search', nubi_naver_search:'naver-search', nubi_kakao_search:'kakao-search', nubi_kakao_places:'kakao-places', nubi_weather_forecast:'weather-forecast', nubi_jobs_list:'jobs-list', nubi_jobs_detail:'jobs-detail', nubi_dining_list:'dining-list', nubi_clubs_list:'clubs-list', nubi_shopping_search:'shopping-search', nubi_shopping_select:'shopping-select', nubi_saramin_search:'saramin-search', nubi_saramin_detail:'saramin-detail', nubi_wanted_search:'wanted-search', nubi_wanted_detail:'wanted-detail', nubi_booking_search:'booking-search', nubi_booking_select:'booking-select', nubi_openalex_search:'openalex-search', nubi_openalex_detail:'openalex-detail', nubi_web_discover:'web-discover' };
+const handlers = { nubi_portal_status: 'portal-status', nubi_academic_menu: 'academic-menu', nubi_naver_map_status:'naver-map-status', nubi_kakao_map_status:'kakao-map-status', nubi_korail_status:'korail-status', nubi_naver_places:'naver-places', nubi_unist_calendar:'unist-calendar', nubi_korail_options:'korail-options', nubi_papers_search:'papers-search', nubi_naver_search:'naver-search', nubi_kakao_search:'kakao-search', nubi_kakao_places:'kakao-places', nubi_weather_forecast:'weather-forecast', nubi_jobs_list:'jobs-list', nubi_jobs_detail:'jobs-detail', nubi_dining_list:'dining-list', nubi_clubs_list:'clubs-list', nubi_shopping_search:'shopping-search', nubi_shopping_select:'shopping-select', nubi_saramin_search:'saramin-search', nubi_saramin_detail:'saramin-detail', nubi_wanted_search:'wanted-search', nubi_wanted_detail:'wanted-detail', nubi_booking_search:'booking-search', nubi_booking_select:'booking-select', nubi_openalex_search:'openalex-search', nubi_openalex_detail:'openalex-detail', nubi_web_discover:'web-discover', nubi_tablet_visit:'tablet-visit', nubi_tablet_explore:'tablet-explore' };
 const reply = (id, result) => process.stdout.write(JSON.stringify({jsonrpc:'2.0',id,result})+'\n');
 const fail = (id, code, message) => process.stdout.write(JSON.stringify({jsonrpc:'2.0',id,error:{code,message}})+'\n');
 const choicesFile=process.env.NUBI_CHOICES_FILE || join(homedir(),'.local','share','nubi-mcp','choices.json');
@@ -40,6 +43,7 @@ async function handle(message) {
   if (method === 'initialize') return reply(id, {protocolVersion:'2024-11-05',capabilities:{tools:{}},serverInfo:{name:'nubi-unist-local',version:'0.1.0'}});
   if (method === 'ping') return reply(id, {});
   if (method === 'tools/list') return reply(id,{tools:[
+    {name:'nubi_qwen_campus_task',description:'Pass a campus request to the configured Azrael Qwen agent, which uses the connected UNIST/Outlook MCP tools and returns its verified outcome. Uses the foreground tablet browser; mail operations are drafts only.',inputSchema:{type:'object',properties:{task:{type:'string',minLength:1,maxLength:500}},required:['task'],additionalProperties:false}},
     {name:'nubi_portal_status',description:'Read the currently open UNIST portal login status',inputSchema:{type:'object',properties:{},additionalProperties:false}},
     {name:'nubi_academic_menu',description:'Read currently visible UNIST academic menu labels',inputSchema:{type:'object',properties:{},additionalProperties:false}},
     {name:'nubi_naver_map_status',description:'Inspect the open Naver Map page',inputSchema:{type:'object',properties:{},additionalProperties:false}},
@@ -68,6 +72,8 @@ async function handle(message) {
     {name:'nubi_shopping_search',description:'Search visible Naver price comparison product choices',inputSchema:{type:'object',properties:{query:{type:'string',minLength:1,maxLength:100}},required:['query'],additionalProperties:false}},
     {name:'nubi_shopping_select',description:'Read a selected visible product after verifying index and name',inputSchema:{type:'object',properties:{index:{type:'integer',minimum:1,maximum:20},title:{type:'string',minLength:1,maxLength:300}},required:['index','title'],additionalProperties:false}},
     {name:'nubi_web_discover',description:'Search Wikipedia or Google News, or request search suggestions',inputSchema:{type:'object',properties:{provider:{type:'string',enum:['wikipedia','google_news','google_suggest','duckduckgo_suggest']},query:{type:'string',minLength:1,maxLength:100}},required:['provider','query'],additionalProperties:false}},
+    {name:'nubi_tablet_explore',description:'Search or browse public content in the connected tablet WebView and attempt to open a result',inputSchema:{type:'object',properties:{domain:{type:'string',minLength:1,maxLength:100}},required:['domain'],additionalProperties:false}},
+    {name:'nubi_tablet_visit',description:'Visit one ranked website inside the connected tablet WebView and inspect public page state',inputSchema:{type:'object',properties:{domain:{type:'string',minLength:1,maxLength:100}},required:['domain'],additionalProperties:false}},
     {name:'nubi_top_sites',description:'List a dated country-level top 20 website ranking',inputSchema:{type:'object',properties:{country:{type:'string',enum:['KR','US']}},required:['country'],additionalProperties:false}},
     {name:'nubi_platform_preview',description:'Read a bounded public homepage title and same-site links for a ranked domain',inputSchema:{type:'object',properties:{domain:{type:'string',minLength:1,maxLength:100}},required:['domain'],additionalProperties:false}},
     {name:'nubi_platform_probe',description:'Check HTTP response and available OpenCLI read commands for a ranked website',inputSchema:{type:'object',properties:{domain:{type:'string',minLength:1,maxLength:100}},required:['domain'],additionalProperties:false}},
@@ -75,6 +81,20 @@ async function handle(message) {
     {name:'nubi_saved_choices',description:'List the choices saved locally on this computer',inputSchema:{type:'object',properties:{},additionalProperties:false}}
   ]});
   if (method !== 'tools/call') return fail(id,-32601,'Method not found');
+  if(params.name==='nubi_qwen_campus_task') {
+    const a=params.arguments||{};
+    if(typeof a!=='object'||Array.isArray(a)||Object.keys(a).length!==1||typeof a.task!=='string'||!a.task.trim()||a.task.length>500)return fail(id,-32602,'Provide a task of 1–500 characters');
+    if(qwenCampusBusy)return reply(id,{content:[{type:'text',text:'다른 누비 작업이 태블릿을 사용 중입니다. 기존 작업이 끝난 뒤 다시 요청하세요.'}],isError:true});
+    qwenCampusBusy=true;
+    try {
+      const {stdout}=await execute(process.env.NUBI_PYTHON||'python3',[qwenCampusAgent,a.task,'--max-steps','16'],{timeout:240000,maxBuffer:2000000,env:process.env});
+      const entries=stdout.trim().split('\n').filter(Boolean).map(line=>JSON.parse(line));
+      const final=entries.findLast(x=>typeof x.answer==='string');
+      if(!final)throw new Error('Qwen did not produce a final answer');
+      return reply(id,{content:[{type:'text',text:JSON.stringify({answer:final.answer,model:final.model,workflow_state:final.workflow_state,tool_errors:final.tool_errors,events:entries.filter(x=>x.tool)},null,2)}],isError:final.workflow_state!=='도구 오류 없음'});
+    } catch(e) {return reply(id,{content:[{type:'text',text:'Qwen campus task did not finish. Check existing drafts before retrying.'}],isError:true});}
+    finally {qwenCampusBusy=false;}
+  }
   if(params.name==='nubi_top_sites'||params.name==='nubi_platform_probe'||params.name==='nubi_platform_preview') {
     const a=params.arguments||{};if(typeof a!=='object'||Array.isArray(a)||Object.keys(a).length!==1)return fail(id,-32602,'Invalid arguments');
     if(params.name==='nubi_top_sites'){if(!Object.hasOwn(rankings,a.country))return fail(id,-32602,'Use KR or US');return reply(id,{content:[{type:'text',text:JSON.stringify(ranked(a.country))}],isError:false});}
@@ -95,6 +115,8 @@ async function handle(message) {
   if (!command || typeof args !== 'object' || Array.isArray(args)) return fail(id,-32602,'Unknown tool or arguments');
   if (['papers-search','naver-search','kakao-search','shopping-search','saramin-search','wanted-search','openalex-search'].includes(command)) {
     if (Object.keys(args).length!==1 || typeof args.query!=='string' || !args.query.trim() || args.query.length>100 || args.query.trim().startsWith('-')) return fail(id,-32602,'Provide a query of 1–100 characters');
+  } else if(['tablet-visit','tablet-explore'].includes(command)) {
+    if(Object.keys(args).length!==1 || typeof args.domain!=='string' || !Object.values(rankings).flat().includes(args.domain)) return fail(id,-32602,'Provide a ranked domain');
   } else if(command==='web-discover') {
     if(Object.keys(args).length!==2 || !['wikipedia','google_news','google_suggest','duckduckgo_suggest'].includes(args.provider) || typeof args.query!=='string' || !args.query.trim() || args.query.length>100 || args.query.trim().startsWith('-')) return fail(id,-32602,'Provide a supported provider and query');
   } else if(command==='openalex-detail') {
@@ -115,7 +137,7 @@ async function handle(message) {
       if (url.protocol !== 'http:' || !['127.0.0.1','localhost','[::1]'].includes(url.hostname)) throw new Error('Configure a localhost OPENCLI_CDP_ENDPOINT');
     }
     const discover={wikipedia:['wikipedia','search',args.query,'--limit','10','--lang','ko'],google_news:['google','news',args.query,'--limit','10','--lang','ko','--region','KR'],google_suggest:['google','suggest',args.query,'--lang','ko'],duckduckgo_suggest:['duckduckgo','suggest',args.query]};
-    const argv=command==='web-discover' ? [opencli,...discover[args.provider],'-f','json'] : command==='openalex-search' ? [opencli,'openalex','search',args.query.trim(),'--limit','10','-f','json'] : command==='openalex-detail' ? [opencli,'openalex','work',args.id,'-f','json'] : command==='booking-search' ? [opencli,'nubi-unist',command,args.destination.trim(),args.checkin,args.checkout,String(args.adults),'-f','json'] : ['saramin-detail','wanted-detail'].includes(command) ? [opencli,'nubi-unist',command,args.id,args.title,'-f','json'] : ['jobs-detail','shopping-select','booking-select'].includes(command) ? [opencli,'nubi-unist',command,String(args.index),args.title,'-f','json'] : command === 'papers-search' ? [opencli,'arxiv','search',args.query.trim(),'--limit','10','-f','json'] : command === 'weather-forecast' ? [opencli,'wttr','forecast',args.location.trim(),'--days','3','-f','json'] : ['naver-search','kakao-search','shopping-search','saramin-search','wanted-search'].includes(command) ? [opencli,'nubi-unist',command,args.query.trim(),'-f','json'] : [opencli,'nubi-unist',command,'-f','json'];
+    const argv=['tablet-visit','tablet-explore'].includes(command) ? [opencli,'nubi-unist',command,args.domain,'-f','json'] : command==='web-discover' ? [opencli,...discover[args.provider],'-f','json'] : command==='openalex-search' ? [opencli,'openalex','search',args.query.trim(),'--limit','10','-f','json'] : command==='openalex-detail' ? [opencli,'openalex','work',args.id,'-f','json'] : command==='booking-search' ? [opencli,'nubi-unist',command,args.destination.trim(),args.checkin,args.checkout,String(args.adults),'-f','json'] : ['saramin-detail','wanted-detail'].includes(command) ? [opencli,'nubi-unist',command,args.id,args.title,'-f','json'] : ['jobs-detail','shopping-select','booking-select'].includes(command) ? [opencli,'nubi-unist',command,String(args.index),args.title,'-f','json'] : command === 'papers-search' ? [opencli,'arxiv','search',args.query.trim(),'--limit','10','-f','json'] : command === 'weather-forecast' ? [opencli,'wttr','forecast',args.location.trim(),'--days','3','-f','json'] : ['naver-search','kakao-search','shopping-search','saramin-search','wanted-search'].includes(command) ? [opencli,'nubi-unist',command,args.query.trim(),'-f','json'] : [opencli,'nubi-unist',command,'-f','json'];
     const {stdout}=await execute(process.execPath,argv,{timeout:45000,maxBuffer:100000,env:process.env});
     const result=JSON.parse(stdout);
     if (!result.ok) throw new Error('OpenCLI command failed');

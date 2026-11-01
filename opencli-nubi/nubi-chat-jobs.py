@@ -18,9 +18,12 @@ class ChatJobs:
    if len(self.jobs)>=100:raise RuntimeError('Session job limit reached; restart relay')
    ident=uuid.uuid4().hex;trace=self.directory/(ident+'.json');log=(self.directory/(ident+'.log')).open('w')
    current=body['task'].split('현재 사용자 지시:',1)[-1]
+   campus=bool(re.search(r'UNIST|유니스트|학사|장학|학교\s*(공지|메일|포털)|수강|예비수강|COOP|인턴십|Outlook|아웃룩',current,re.I))
    document=bool(re.search(r'예산서|지원요청서|연구지원금|문서\s*작성|서류\s*작성|docx|hwpx|sharepoint|uirp|l시리즈',current,re.I))
-   interpreter=os.environ.get('NUBI_DOCUMENT_PYTHON',str(Path.home()/'.local/share/nubi-documents/venv/bin/python')) if document else sys.executable
-   cmd=[interpreter,str(Path(__file__).with_name('qwen-document-agent.py' if document else 'qwen-goal-agent.py')),'--goal',body['character'],'--goal-id',body['goal_id'],'--task',body['task'],'--max-steps','16','--trace-file',str(trace)]
+   if campus and len(current.strip())>500:raise ValueError('캠퍼스 요청은 500자 이내로 입력해 주세요.')
+   interpreter=os.environ.get('NUBI_DOCUMENT_PYTHON',str(Path.home()/'.local/share/nubi-documents/venv/bin/python')) if document and not campus else sys.executable
+   runner='qwen-campus-chat.py' if campus else 'qwen-document-agent.py' if document else 'qwen-goal-agent.py'
+   cmd=[interpreter,str(Path(__file__).with_name(runner)),'--goal',body['character'],'--goal-id',body['goal_id'],'--task',current.strip() if campus else body['task'],'--max-steps','16','--trace-file',str(trace)]
    try:p=subprocess.Popen(cmd,stdout=log,stderr=log,env=dict(self.env,NUBI_GOAL_DEVICE_SESSION=body['device_session']),start_new_session=True)
    finally:log.close()
    self.jobs[ident]={'id':ident,'request':dict(body),'process':p,'trace':trace,'cancelled':False,'started':time.monotonic()};self.active=ident
@@ -39,6 +42,7 @@ class ChatJobs:
    try:progress=json.loads(j['trace'].with_suffix('').joinpath('progress.json').read_text())
    except (OSError,ValueError):pass
    for e in trace.get('events',[]):
+    if e.get('type')=='campus':progress.append(('확인 필요 · ' if e.get('error') else '실행 · ')+str(e.get('name','')))
     if e.get('type')=='model':
      for c in e.get('calls',[]):
       try:a=json.loads(c.get('arguments','{}'))

@@ -7,7 +7,7 @@ p=argparse.ArgumentParser();p.add_argument('--config',required=True);a=p.parse_a
 cache=msal.SerializableTokenCache();dest=Path(c['cache_file']).expanduser();dest.parent.mkdir(parents=True,exist_ok=True);dest.parent.chmod(0o700)
 if dest.exists():cache.deserialize(dest.read_text())
 app=msal.PublicClientApplication(c['client_id'],authority='https://login.microsoftonline.com/'+c['tenant_id'],token_cache=cache)
-flow=app.initiate_device_flow(scopes=['Mail.Read','Files.ReadWrite'])
+flow=app.initiate_device_flow(scopes=c.get('scopes',['Mail.Read','Files.ReadWrite']))
 if 'user_code' not in flow:raise SystemExit('Device login not available for this registration')
 print(flow['message'],flush=True);r=app.acquire_token_by_device_flow(flow)
 if 'access_token' not in r:raise SystemExit('Sign-in failed: '+r.get('error','unknown'))

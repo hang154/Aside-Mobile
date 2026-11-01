@@ -23,6 +23,8 @@ public class BrowserWorkspaceActivity extends Activity {
     private boolean loadFailed;
     private long webStarted;
     private boolean foreground;
+    private RemoteBrowserRelay relay;
+    private android.app.Dialog popupDialog;
     private JSONArray candidates=new JSONArray();
     private static final String ENUMERATE="Array.from(document.querySelectorAll('a[href],button,[role=button]')).filter(e=>{let r=e.getBoundingClientRect(),s=getComputedStyle(e);return r.width>0&&r.height>0&&s.visibility!=='hidden'&&s.display!=='none'}).slice(0,30)";
     @Override public void onCreate(Bundle state){super.onCreate(state);
@@ -31,7 +33,7 @@ public class BrowserWorkspaceActivity extends Activity {
         root.addView(Ui.text(this,"사용자 전용 웹 공간 · 원격 연결 준비 전 · 로그인과 인증은 직접 진행",12,Ui.MUTED,false),Ui.match(this,-2,4));
         LinearLayout nav=new LinearLayout(this); address=new EditText(this);address.setSingleLine(true);address.setTextColor(Ui.WHITE);address.setHintTextColor(Ui.MUTED);address.setTextSize(14);address.setHint("https:// 주소 입력");address.setText("https://example.com");nav.addView(address,new LinearLayout.LayoutParams(0,Ui.dp(this,48),1));
         Button go=Ui.button(this,"열기");nav.addView(go,new LinearLayout.LayoutParams(Ui.dp(this,70),Ui.dp(this,48)));root.addView(nav,Ui.match(this,-2,4));
-        web=new WebView(this){@Override public boolean dispatchTouchEvent(android.view.MotionEvent e){if(e.getActionMasked()==android.view.MotionEvent.ACTION_UP)CollectorStore.record(BrowserWorkspaceActivity.this,getPackageName(),"web_touch",0);return super.dispatchTouchEvent(e);}};web.getSettings().setJavaScriptEnabled(true);web.getSettings().setDomStorageEnabled(true);web.getSettings().setAllowFileAccess(false);web.getSettings().setAllowContentAccess(false);web.getSettings().setJavaScriptCanOpenWindowsAutomatically(false);web.getSettings().setMixedContentMode(android.webkit.WebSettings.MIXED_CONTENT_NEVER_ALLOW);web.setWebChromeClient(new WebChromeClient());
+        web=new WebView(this){@Override public boolean dispatchTouchEvent(android.view.MotionEvent e){if(e.getActionMasked()==android.view.MotionEvent.ACTION_UP)CollectorStore.record(BrowserWorkspaceActivity.this,getPackageName(),"web_touch",0);return super.dispatchTouchEvent(e);}};web.getSettings().setJavaScriptEnabled(true);web.getSettings().setDomStorageEnabled(true);web.getSettings().setAllowFileAccess(false);web.getSettings().setAllowContentAccess(false);web.getSettings().setJavaScriptCanOpenWindowsAutomatically(false);web.getSettings().setSupportMultipleWindows(true);web.getSettings().setMixedContentMode(android.webkit.WebSettings.MIXED_CONTENT_NEVER_ALLOW);web.setWebChromeClient(new PopupChromeClient());
         web.setWebViewClient(new WebViewClient(){
             @Override public boolean shouldOverrideUrlLoading(WebView view,WebResourceRequest req){Uri u=req.getUrl();if(!"https".equalsIgnoreCase(u.getScheme())){if(req.isForMainFrame()){loadFailed=true;info.setText("HTTPS가 아닌 이동은 차단했어요.");}return true;}return false;}
             @Override public void onPageStarted(WebView v,String url,Bitmap icon){endWeb();observedUrl="";candidates=new JSONArray();loadFailed=false;address.setText(url);info.setText("페이지를 불러오는 중");}
@@ -43,8 +45,35 @@ public class BrowserWorkspaceActivity extends Activity {
         LinearLayout bar=new LinearLayout(this);Button back=Ui.button(this,"뒤로");Button observe=Ui.button(this,"화면 관찰");Button select=Ui.button(this,"항목 선택");Button type=Ui.button(this,"검색어 입력");Button down=Ui.button(this,"아래로");
         for(Button b:new Button[]{back,observe,select,type,down})bar.addView(b,new LinearLayout.LayoutParams(0,Ui.dp(this,48),1));root.addView(bar,Ui.match(this,-2,6));
         info=Ui.text(this,"HTTPS 주소를 열어 주세요.",12,Ui.MUTED,false);root.addView(info,Ui.match(this,-2,5));
+        relay=new RemoteBrowserRelay(this,web,text->info.setText(text));
+        LinearLayout remoteRow=new LinearLayout(this);Button remote=Ui.button(this,"원격 연결");Button disconnect=Ui.button(this,"연결 끊기");remoteRow.addView(remote,new LinearLayout.LayoutParams(0,Ui.dp(this,45),1));remoteRow.addView(disconnect,new LinearLayout.LayoutParams(0,Ui.dp(this,45),1));root.addView(remoteRow,Ui.match(this,-2,3));
+        remote.setOnClickListener(v->{EditText pairing=new EditText(this);pairing.setSingleLine(true);pairing.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD);pairing.setHint("https://서버:포트|연결키|인증서지문");new AlertDialog.Builder(this).setTitle("브라우저 원격 연결").setMessage("신뢰하는 서버의 연결 정보만 입력해 주세요. 테스트 연결은 공개 위키 조회에 한정되며 화면을 벗어나면 중지됩니다.").setView(pairing).setNegativeButton("취소",null).setPositiveButton("연결",(d,w)->{try{relay.connect(pairing.getText().toString());}catch(Exception ex){info.setText("연결 실패 · "+ex.getMessage());}}).show();});
+        disconnect.setOnClickListener(v->{relay.stop();info.setText("원격 연결을 끊었어요.");});
         go.setOnClickListener(v->navigate());back.setOnClickListener(v->{if(web.canGoBack())web.goBack();});observe.setOnClickListener(v->observe());select.setOnClickListener(v->choose());type.setOnClickListener(v->enterSearch());down.setOnClickListener(v->web.pageDown(false));setContentView(root);
         String initial=getIntent().getStringExtra("start_url");if(initial!=null){address.setText(initial);navigate();}
+    }
+
+    /** User-initiated popup is a separate view with the same app WebView session. */
+    private final class PopupChromeClient extends WebChromeClient {
+        @Override public boolean onCreateWindow(WebView parent,boolean isDialog,boolean isUserGesture,android.os.Message resultMsg){
+            if(!isUserGesture || popupDialog!=null || resultMsg==null || !(resultMsg.obj instanceof WebView.WebViewTransport))return false;
+            final WebView child=new WebView(BrowserWorkspaceActivity.this);
+            child.getSettings().setJavaScriptEnabled(true);child.getSettings().setDomStorageEnabled(true);
+            child.getSettings().setAllowFileAccess(false);child.getSettings().setAllowContentAccess(false);
+            child.getSettings().setMixedContentMode(android.webkit.WebSettings.MIXED_CONTENT_NEVER_ALLOW);
+            child.setWebViewClient(new WebViewClient(){
+                @Override public boolean shouldOverrideUrlLoading(WebView view,WebResourceRequest req){return !"https".equalsIgnoreCase(req.getUrl().getScheme());}
+            });
+            android.app.Dialog dialog=new android.app.Dialog(BrowserWorkspaceActivity.this);popupDialog=dialog;
+            LinearLayout panel=new LinearLayout(BrowserWorkspaceActivity.this);panel.setOrientation(LinearLayout.VERTICAL);
+            Button close=Ui.button(BrowserWorkspaceActivity.this,"창 닫기");close.setOnClickListener(v->dialog.dismiss());
+            panel.addView(close,new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,Ui.dp(BrowserWorkspaceActivity.this,48)));
+            panel.addView(child,new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,0,1));dialog.setContentView(panel);
+            dialog.setOnDismissListener(d->{popupDialog=null;child.stopLoading();child.destroy();});
+            ((WebView.WebViewTransport)resultMsg.obj).setWebView(child);resultMsg.sendToTarget();dialog.show();
+            if(dialog.getWindow()!=null)dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
+            return true;
+        }
     }
     private void navigate(){String url=address.getText().toString().trim();try{Uri u=Uri.parse(url);if(!"https".equalsIgnoreCase(u.getScheme())||u.getHost()==null||u.getUserInfo()!=null)throw new IllegalArgumentException();address.clearFocus();web.loadUrl(url);}catch(Exception e){info.setText("HTTPS 웹 주소만 열 수 있어요.");}}
     private void observe(){if(web.getUrl()==null||!web.getUrl().startsWith("https://")){info.setText("먼저 HTTPS 페이지를 열어 주세요.");return;}
@@ -70,8 +99,8 @@ public class BrowserWorkspaceActivity extends Activity {
     }
     private void beginWeb(){if(foreground && webStarted==0 && CollectorStore.allowed(this,getPackageName())){webStarted=android.os.SystemClock.elapsedRealtime();CollectorStore.record(this,getPackageName(),"web_page_open",0);}}
     private void endWeb(){if(webStarted!=0){CollectorStore.record(this,getPackageName(),"web_page_end",android.os.SystemClock.elapsedRealtime()-webStarted);webStarted=0;}}
-    @Override protected void onPause(){endWeb();foreground=false;super.onPause();}
+    @Override protected void onPause(){if(relay!=null)relay.stop();endWeb();foreground=false;super.onPause();}
     @Override protected void onResume(){super.onResume();foreground=true;if(web!=null && web.getUrl()!=null && web.getUrl().startsWith("https://"))beginWeb();}
     @Override public void onBackPressed(){if(web.canGoBack())web.goBack();else super.onBackPressed();}
-    @Override protected void onDestroy(){if(web!=null){web.stopLoading();web.destroy();}super.onDestroy();}
+    @Override protected void onDestroy(){if(popupDialog!=null)popupDialog.dismiss();if(web!=null){web.stopLoading();web.destroy();}super.onDestroy();}
 }
