@@ -1,0 +1,3 @@
+PASS release manifest, read-only browser, stale selection, ownership and purchase boundary checks
+PASS companion-only launcher aliases and absence of legacy wrapper
+PASS consent/permission/browser security smoke tests

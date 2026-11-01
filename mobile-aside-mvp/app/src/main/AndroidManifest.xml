@@ -1,47 +1,51 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- WebView needs network; no SMS, call, or contacts permissions. -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <queries>
-        <intent><action android:name="android.speech.RecognitionService" /></intent>
-    </queries>
-    <application
-        android:allowBackup="false"
-        android:extractNativeLibs="true"
-        android:label="누비" android:icon="@drawable/nubi_icon"
-        android:theme="@android:style/Theme.Material.Light.NoActionBar"
-        android:usesCleartextTraffic="false">
-        <provider android:name=".NubiDocumentProvider" android:authorities="${applicationId}.documents" android:exported="false" android:grantUriPermissions="true" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="false">
-        </activity>
-        <activity android:name=".CampusActivity" android:exported="true">
-            <intent-filter><action android:name="android.intent.action.MAIN" /><category android:name="android.intent.category.LAUNCHER" /></intent-filter>
-        </activity>
-        <activity android:name=".GoalHomeActivity" android:exported="false" />
-        <activity android:name=".CharacterWorkspaceActivity" android:exported="false" />
-        <activity android:name=".GoalAgentActivity" android:exported="false" />
-        <activity android:name=".GoalDiscoveryActivity" android:exported="false" />
-        <service android:name=".CampusNoticeMonitor" android:permission="android.permission.BIND_JOB_SERVICE" android:exported="false" />
-        <activity android:name=".CampusToolsActivity" android:exported="false" />
-        <activity android:name=".UnistCalendarActivity" android:exported="false" />
-        <activity android:name=".CollectorActivity" android:exported="false" />
-        <activity android:name=".TaskActivity" android:exported="false" />
-        <activity android:name=".BrowserWorkspaceActivity" android:exported="false" />
-        <activity android:name=".ConcertTripActivity" android:exported="false" />
-        <activity android:name=".AppRegistryActivity" android:exported="false" />
-        <activity android:name=".PlanAssistantActivity" android:exported="false" />
-        <activity android:name=".LifeActivity" android:exported="true" android:label="Aside에 관심 내용 저장">
-            <intent-filter>
-                <action android:name="android.intent.action.SEND" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="text/plain" />
-            </intent-filter>
-        </activity>
-    </application>
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+  <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+  <uses-permission android:name="android.permission.RECORD_AUDIO" />
+  <queries>
+    <intent>
+      <action android:name="android.speech.RecognitionService" />
+    </intent>
+  </queries>
+  <application android:name=".NubiApplication" android:allowBackup="false" android:extractNativeLibs="true" android:label="누비" android:icon="@drawable/nubi_icon" android:theme="@android:style/Theme.Material.Light.NoActionBar" android:usesCleartextTraffic="false">
+    <activity android:name=".CompanionEntryActivity" android:exported="false" />
+    <provider android:name=".NubiDocumentProvider" android:authorities="${applicationId}.documents" android:exported="false" android:grantUriPermissions="true" />
+    <activity-alias android:name=".MainActivity" android:exported="false" android:targetActivity=".CompanionEntryActivity">
+        </activity-alias>
+    <activity android:name=".CampusActivity" android:exported="true">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+    <activity-alias android:name=".UnifiedToolsActivity" android:exported="false" android:targetActivity=".CompanionEntryActivity" />
+    <service android:name=".EngagementService" android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE" android:exported="true" android:label="누비 화면 이벤트 수집">
+      <intent-filter>
+        <action android:name="android.accessibilityservice.AccessibilityService" />
+      </intent-filter>
+      <meta-data android:name="android.accessibilityservice" android:resource="@xml/aside_engagement" />
+    </service>
+    <activity-alias android:name=".GoalHomeActivity" android:exported="false" android:targetActivity=".CompanionEntryActivity" />
+    <activity-alias android:name=".CharacterWorkspaceActivity" android:exported="false" android:targetActivity=".CompanionEntryActivity" />
+    <activity android:name=".GoalAgentActivity" android:exported="false" android:configChanges="orientation|screenSize|smallestScreenSize|screenLayout|keyboardHidden" />
+    <activity-alias android:name=".GoalDiscoveryActivity" android:exported="false" android:targetActivity=".CompanionEntryActivity" />
+    <service android:name=".CampusNoticeMonitor" android:permission="android.permission.BIND_JOB_SERVICE" android:exported="false" />
+    <activity-alias android:name=".CampusToolsActivity" android:exported="false" android:targetActivity=".CompanionEntryActivity" />
+    <activity-alias android:name=".UnistCalendarActivity" android:exported="false" android:targetActivity=".CompanionEntryActivity" />
+    <activity-alias android:name=".CollectorActivity" android:exported="false" android:targetActivity=".CompanionEntryActivity" />
+    <activity-alias android:name=".TaskActivity" android:exported="false" android:targetActivity=".CompanionEntryActivity" />
+    <activity-alias android:name=".BrowserWorkspaceActivity" android:exported="false" android:targetActivity=".CompanionEntryActivity" />
+    <activity-alias android:name=".ConcertTripActivity" android:exported="false" android:targetActivity=".CompanionEntryActivity" />
+    <activity-alias android:name=".AppRegistryActivity" android:exported="false" android:targetActivity=".CompanionEntryActivity" />
+    <activity-alias android:name=".PlanAssistantActivity" android:exported="false" android:targetActivity=".CompanionEntryActivity" />
+    <activity-alias android:name=".LifeActivity" android:exported="true" android:label="Aside에 관심 내용 저장" android:targetActivity=".CompanionEntryActivity">
+      <intent-filter>
+        <action android:name="android.intent.action.SEND" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <data android:mimeType="text/plain" />
+      </intent-filter>
+    </activity-alias>
+  </application>
 </manifest>

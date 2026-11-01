@@ -42,6 +42,9 @@ final class GoalAgentRelay {
         if(!path.equals("/chat-submit")&&!path.equals("/chat-status")&&!path.equals("/chat-cancel"))throw new IllegalArgumentException();
         new Thread(()->{JSONObject out;try{out=post(path,payload);}catch(Exception e){out=new JSONObject();GoalStore.put(out,"error","연결을 확인하고 다시 시도해줘. ("+e.getClass().getSimpleName()+")");}final JSONObject answer=out;ui.post(()->response.receive(answer));},"nubi-chat-request").start();
     }
+    void friends(JSONObject payload,Response response){
+        new Thread(()->{JSONObject out;try{if(!connected()&&!restore())throw new IOException();out=post("/friends",payload);}catch(Exception e){out=new JSONObject();GoalStore.put(out,"error","친구 서버 연결을 확인해 주세요");}final JSONObject answer=out;ui.post(()->response.receive(answer));},"nubi-friends").start();
+    }
     void document(String job,String goal,String name,String sha,Response response){
         new Thread(()->{JSONObject result=new JSONObject();try{
             if(!name.matches("budget\\.(docx|hwpx)")||!sha.matches("[0-9a-f]{64}"))throw new IOException("invalid document");

@@ -29,6 +29,9 @@ if args.chat_dir:
     spec=importlib.util.spec_from_file_location('nubi_chat_jobs',Path(__file__).with_name('nubi-chat-jobs.py'));module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
     env=dict(os.environ,NUBI_GOAL_RELAY_TOKEN_FILE=args.token_file,NUBI_GOAL_RELAY_CA_FILE=args.cert,NUBI_GOAL_RELAY_URL='https://127.0.0.1:'+str(args.port))
     jobs=module.ChatJobs(args.chat_dir,env)
+spec=importlib.util.spec_from_file_location('nubi_friends',Path(__file__).with_name('nubi-friends.py'));friends_module=importlib.util.module_from_spec(spec);spec.loader.exec_module(friends_module)
+friends=friends_module.Friends(str(Path(args.token_file).with_name('friends.sqlite3')))
+spec=importlib.util.spec_from_file_location('friend_draft',Path(__file__).with_name('nubi-friend-draft.py'));draft_module=importlib.util.module_from_spec(spec);spec.loader.exec_module(draft_module)
 class Handler(BaseHTTPRequestHandler):
     def log_message(self, *args): pass
     def respond(self, status, obj):
@@ -42,6 +45,14 @@ class Handler(BaseHTTPRequestHandler):
             body = json.loads(self.rfile.read(n))
             if not isinstance(body, dict): raise ValueError()
         except Exception: return self.respond(400, {'error':'invalid request'})
+        if self.path=='/friends':
+            try:
+                if body.get('action')=='draft':
+                    friends.call(dict(body,action='list'))
+                    return self.respond(200,draft_module.draft(body.get('instruction')))
+                return self.respond(200,friends.call(body))
+            except ValueError as e:return self.respond(200,{'error':str(e)})
+            except Exception:return self.respond(200,{'error':'친구 작업 연결을 확인해 주세요'})
         if self.path=='/document-file':
             if jobs is None or set(body)!={'job_id','goal_id','name'}:return self.respond(400,{'error':'invalid document request'})
             try:data=jobs.artifact(body['job_id'],body['goal_id'],body['name'])

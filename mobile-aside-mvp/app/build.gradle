@@ -9,8 +9,8 @@ android {
         minSdk 26
         targetSdk 35
         testInstrumentationRunner 'ai.decisionos.aside.GoalInstrumentation'
-        versionCode 31
-        versionName '0.3.1-companion'
+        versionCode 41
+        versionName '0.4.1-companion'
     }
     packaging { jniLibs { useLegacyPackaging = true } }
     buildTypes {

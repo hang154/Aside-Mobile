@@ -1,0 +1,180 @@
+package ai.decisionos.aside;
+
+import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.os.Bundle;
+import android.provider.Settings;
+import android.text.InputType;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
+
+/** User-operated setup and command console; service overlay handles other apps. */
+final class MainPanel extends CompanionPanel {
+ MainPanel(NubiCompanionUi ui){super(ui);}
+
+    private TextView status, serviceState;
+    private CheckBox consent;
+    private EditText command, aiPrompt;
+    private TextView aiResult;
+
+     public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getWindow().setStatusBarColor(0xffffffff);
+        getWindow().setNavigationBarColor(0xffffffff);
+        ScrollView scroll = new ScrollView(this); scroll.setFillViewport(true); scroll.setBackgroundColor(0xffffffff);
+        LinearLayout content = Ui.vertical(this, 0xffffffff, 22);
+        scroll.addView(content);
+        TextView kicker = Ui.text(this, "기기 내 도구", 11, 0xff111111, true);
+        content.addView(kicker, Ui.match(this,-2,12));
+        content.addView(Ui.text(this, "누비", 32, 0xff111111, true), Ui.match(this,-2,10));
+        content.addView(Ui.text(this, "한 번 설치하고, 다른 앱 위에서 명령하세요.", 15, 0xff888888, false), Ui.match(this,-2,9));
+
+        android.widget.Button collector=skinButton("화면 이벤트 수집 설정");
+        collector.setOnClickListener(v->startActivity(new Intent(this,CollectorActivity.class)));
+        content.addView(collector,Ui.match(this,54,14));
+
+        android.widget.Button tasks=skinButton("내가 맡긴 일");
+        tasks.setOnClickListener(v->startActivity(new Intent(this,TaskActivity.class)));
+        content.addView(tasks,Ui.match(this,54,14));
+
+        android.widget.Button browser=skinButton("AI 브라우저 작업 공간");
+        browser.setOnClickListener(v->startActivity(new Intent(this,BrowserWorkspaceActivity.class)));
+        content.addView(browser,Ui.match(this,54,14));
+
+        android.widget.Button trip=skinButton("공연 원정 비교하기");
+        trip.setOnClickListener(v->startActivity(new Intent(this,ConcertTripActivity.class)));
+        content.addView(trip,Ui.match(this,54,14));
+
+        android.widget.Button life=skinButton("내 생활 계획 열기");
+        life.setOnClickListener(v->startActivity(new Intent(this,LifeActivity.class)));
+        content.addView(life,Ui.match(this,54,14));
+
+        android.widget.Button apps=skinButton("관심 앱 등록");
+        apps.setOnClickListener(v->startActivity(new Intent(this,AppRegistryActivity.class)));
+        content.addView(apps,Ui.match(this,54,10));
+        android.widget.Button agent=skinButton("AI와 함께 찾기");
+        agent.setOnClickListener(v->startActivity(new Intent(this,PlanAssistantActivity.class)));
+        content.addView(agent,Ui.match(this,54,10));
+
+        LinearLayout card = Ui.vertical(this, 0xfff4f4f4, 16); card.setBackground(Ui.bg(0xfff4f4f4, 16, this));
+        content.addView(card, Ui.match(this,-2,22));
+        card.addView(Ui.text(this, "01  접근성 서비스", 18, 0xff111111, true));
+        serviceState = Ui.text(this, "연결 상태 확인 중", 13, 0xff888888, false);
+        card.addView(serviceState, Ui.match(this,-2,8));
+        TextView disclosure = Ui.text(this,
+            "접근성을 켜면 Aside는 화면의 텍스트·버튼을 읽고, 사용자가 지시한 클릭·입력·스크롤을 수행할 수 있습니다. " +
+            "화면 정보는 기기 외부로 전송하거나 저장하지 않습니다. 비밀번호·인증번호를 수집하지 않으며 문자 전송, 전화 연결, 결제 확정은 실행하지 않습니다. " +
+            "설정에서 언제든 끌 수 있습니다.", 13, 0xff111111, false);
+        disclosure.setLineSpacing(Ui.dp(this,4),1f);
+        card.addView(disclosure, Ui.match(this,-2,12));
+        consent = new CheckBox(this);
+        consent.setButtonTintList(android.content.res.ColorStateList.valueOf(0xff111111));
+        consent.setTextColor(0xff111111); consent.setTextSize(13);
+        consent.setText("화면 읽기·조작 범위와 위험을 이해했으며 사용에 동의합니다.");
+        consent.setChecked(getSharedPreferences("aside_prefs",MODE_PRIVATE).getBoolean("aside_access_disclosure_ack", false));
+        consent.setOnCheckedChangeListener((button, checked) ->
+            getSharedPreferences("aside_prefs",MODE_PRIVATE).edit().putBoolean("aside_access_disclosure_ack",checked).apply());
+        card.addView(consent, Ui.match(this,-2,9));
+        android.widget.Button settings = skinButton("접근성 설정 열기 → 누비 허용");
+        settings.setOnClickListener(v -> {
+            if (!consent.isChecked()) { show("먼저 접근성 사용에 동의해 주세요."); return; }
+            startActivity(new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS));
+        });
+        card.addView(settings, Ui.match(this,50,9));
+
+        LinearLayout micCard = Ui.vertical(this,0xfff4f4f4,16); micCard.setBackground(Ui.bg(0xfff4f4f4,16,this));
+        content.addView(micCard, Ui.match(this,-2,16));
+        micCard.addView(Ui.text(this,"02  음성 · 텍스트 명령",18,0xff111111,true));
+        micCard.addView(Ui.text(this,"음성은 기기 내 음성인식 엔진이 있는 경우에만 동작합니다. 브라우저 기능은 인터넷을 사용합니다.",13,0xff888888,false),Ui.match(this,-2,7));
+        command = new EditText(this);
+        command.setSingleLine(true);
+        command.setTextColor(0xff111111);command.setHintTextColor(0xff888888);command.setTextSize(15);
+        command.setHint("예: 네이버 열어 / 클릭 검색");
+        command.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+        command.setBackground(Ui.bg(0xffffffff,9,this));
+        command.setPadding(Ui.dp(this,12),0,Ui.dp(this,12),0);
+        micCard.addView(command,Ui.match(this,49,13));
+        LinearLayout actions = new LinearLayout(this); actions.setOrientation(LinearLayout.HORIZONTAL);
+        android.widget.Button execute = skinButton( "명령 실행");
+        execute.setOnClickListener(v -> runCommand(command.getText().toString()));
+        LinearLayout.LayoutParams b = new LinearLayout.LayoutParams(0,Ui.dp(this,50),1);
+        actions.addView(execute,b);
+        android.widget.Button voice = skinButton("오프라인 음성 🎤");
+        LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(0,Ui.dp(this,50),1);p.leftMargin=Ui.dp(this,8);
+        actions.addView(voice,p);
+        voice.setOnClickListener(v -> startMicrophone());
+        micCard.addView(actions,Ui.match(this,-2,12));
+
+        LinearLayout aiCard = Ui.vertical(this,0xfff4f4f4,16); aiCard.setBackground(Ui.bg(0xfff4f4f4,16,this));
+        content.addView(aiCard,Ui.match(this,-2,16));
+        aiCard.addView(Ui.text(this,"로컬 AI",18,0xff111111,true));
+        aiCard.addView(Ui.text(this,"Qwen3.5 GGUF 모델을 선택하면 기기에서 질문에 답합니다.",13,0xff888888,false),Ui.match(this,-2,7));
+        android.widget.Button modelButton=skinButton("모델 파일 선택");
+        modelButton.setOnClickListener(v->{Intent pick=new Intent(Intent.ACTION_OPEN_DOCUMENT);pick.addCategory(Intent.CATEGORY_OPENABLE);pick.setType("*/*");startActivityForResult(pick,42);});
+        aiCard.addView(modelButton,Ui.match(this,50,10));
+        aiPrompt=new EditText(this);aiPrompt.setSingleLine(true);aiPrompt.setTextColor(0xff111111);aiPrompt.setHintTextColor(0xff888888);aiPrompt.setTextSize(15);
+        aiPrompt.setHint("AI에게 질문");aiPrompt.setBackground(Ui.bg(0xffffffff,9,this));aiPrompt.setPadding(Ui.dp(this,12),0,Ui.dp(this,12),0);
+        aiCard.addView(aiPrompt,Ui.match(this,49,10));
+        android.widget.Button ask=skinButton("질문하기");
+        ask.setOnClickListener(v->{aiResult.setText("답변을 준비하는 중…");LocalModel.infer(this,aiPrompt.getText().toString(),answer->runOnUiThread(()->aiResult.setText(answer)));});
+        aiCard.addView(ask,Ui.match(this,50,10));
+        aiResult=Ui.text(this,LocalModel.model(this).isFile()?"모델 준비됨":"모델 파일을 먼저 선택하세요.",13,0xff888888,false);
+        aiResult.setTextIsSelectable(true);aiCard.addView(aiResult,Ui.match(this,-2,10));
+
+        LinearLayout demos = Ui.vertical(this,0xfff4f4f4,16);demos.setBackground(Ui.bg(0xfff4f4f4,16,this));
+        content.addView(demos,Ui.match(this,-2,16));
+        demos.addView(Ui.text(this,"03  빠른 테스트",18,0xff111111,true));
+        String[] samples={"네이버 열어", "문자 01012345678 테스트입니다", "전화 01012345678", "화면 읽어", "아래로", "뒤로"};
+        for(String sample:samples) {
+            android.widget.Button btn=skinButton(sample);
+            btn.setOnClickListener(v->runCommand(sample));
+            demos.addView(btn,Ui.match(this,43,8));
+        }
+        status = Ui.text(this,"테스트: 먼저 접근성 권한을 켠 뒤 'ASIDE' 버블을 누르세요.",13,0xff888888,false);
+        status.setTextIsSelectable(true); content.addView(status,Ui.match(this,-2,20));
+        TextView footer=Ui.text(this,"MVP · 디버그 테스트 · 원격 에이전트 미연결 · Android 8+",11,0xff888888,false);
+        footer.setGravity(Gravity.CENTER);content.addView(footer,Ui.match(this,-2,24));
+        setContentView(scroll);
+    }
+
+     public void onResume() {
+        super.onResume();
+        if(serviceState!=null) serviceState.setText(AsideAccessibilityService.instance!=null ? "● 연결됨 — 다른 앱 위의 ASIDE 버튼 사용 가능" : "○ 꺼짐 — 설정에서 Aside 화면 조작 서비스를 켜세요");
+    }
+
+    private void runCommand(String s) {
+        if(s.trim().isEmpty()) {show("명령을 입력하세요.");return;}
+        CommandRouter.run(this,AsideAccessibilityService.instance,s,this::show);
+    }
+    private void show(String msg){runOnUiThread(()->{if(status!=null)status.setText(msg);});}
+
+    private void startMicrophone() {
+        if(Build.VERSION.SDK_INT<31){show("Android 12 이상에서 온디바이스 음성인식을 지원합니다.");return;}
+        if(checkSelfPermission(Manifest.permission.RECORD_AUDIO)!=PackageManager.PERMISSION_GRANTED){
+            requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO},11);return;
+        }
+        if(AsideAccessibilityService.instance==null){show("먼저 접근성 서비스를 켜세요.");return;}
+        AsideAccessibilityService.instance.listen();
+        show("음성 명령을 기다리는 중…");
+    }
+     protected void onActivityResult(int requestCode,int resultCode,Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+        if(requestCode==42 && resultCode==RESULT_OK && data!=null && data.getData()!=null){
+            aiResult.setText("모델을 기기에 준비하는 중…");
+            LocalModel.importModel(this,data.getData(),message->runOnUiThread(()->aiResult.setText(message)));
+        }
+    }
+     public void onRequestPermissionsResult(int requestCode, String[] permissions,int[] results){
+        super.onRequestPermissionsResult(requestCode, permissions, results);
+        if(requestCode==11 && results.length>0 && results[0]==PackageManager.PERMISSION_GRANTED)startMicrophone();
+        else if(requestCode==11)show("마이크 권한 없이 텍스트 명령을 사용할 수 있습니다.");
+    }
+}

@@ -1,0 +1,7 @@
+Checking fitness
+Checking love
+Checking grades
+Checking home
+Checking career
+Checking travel
+PASS 132 companion-only navigation and preservation checks

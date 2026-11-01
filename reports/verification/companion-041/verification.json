@@ -1,0 +1,41 @@
+{
+  "version": "0.4.1-companion",
+  "date": "2026-11-01",
+  "timezone": "Asia/Seoul",
+  "package": "ai.decisionos.nubi.travelpilot.goals",
+  "apk_sha256": "7fe6daa09392979891d97f856b67c6bffdacdf26b8e503d10d0ef0d82a5b85c7",
+  "installed_apk_matches": true,
+  "companion_device_checks": 132,
+  "regression_device_checks": 62,
+  "goal_rule_checks": 90,
+  "purposes": [
+    "fitness",
+    "love",
+    "grades",
+    "home",
+    "career",
+    "travel"
+  ],
+  "previous_shell_checks": {
+    "responsive_default": 149,
+    "responsive_font_130_percent": 149,
+    "qwen_live_browsing": [
+      "fitness",
+      "love",
+      "grades",
+      "home"
+    ]
+  },
+  "excluded": [
+    "screenshots",
+    "videos",
+    "credentials",
+    "device databases",
+    "mail and document contents"
+  ],
+  "limitations": [
+    "Pending external reservation/payment/upload capabilities remain pending",
+    "DOCX/HWPX preview is text only",
+    "CI debug APK can have a different signing key from the installed local APK"
+  ]
+}

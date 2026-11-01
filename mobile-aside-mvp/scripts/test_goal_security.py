@@ -4,14 +4,28 @@ import xml.etree.ElementTree as ET
 r=Path(__file__).resolve().parents[1];b=r/'app/src/main/java/ai/decisionos/aside';ns='{http://schemas.android.com/apk/res/android}'
 m=ET.parse(r/'app/src/main/AndroidManifest.xml').getroot()
 services=m.findall('.//service')
-assert len(services)==1, 'Only the campus JobService belongs in this release'
-service=services[0]
-assert service.attrib[ns+'name']=='.CampusNoticeMonitor'
-assert service.attrib.get(ns+'exported')=='false'
-assert service.attrib.get(ns+'permission')=='android.permission.BIND_JOB_SERVICE'
-for activity in m.findall('.//activity'):
+assert {x.attrib[ns+'name'] for x in services}=={'.CampusNoticeMonitor','.EngagementService'}
+for service in services:
+ if service.attrib[ns+'name']=='.CampusNoticeMonitor':
+  assert service.attrib.get(ns+'exported')=='false'
+  assert service.attrib.get(ns+'permission')=='android.permission.BIND_JOB_SERVICE'
+ else:
+  assert service.attrib.get(ns+'permission')=='android.permission.BIND_ACCESSIBILITY_SERVICE'
+  config=ET.parse(r/'app/src/main/res/xml/aside_engagement.xml').getroot()
+  assert config.attrib[ns+'canRetrieveWindowContent']=='false'
+  source=(b/'EngagementService.java').read_text()
+  assert 'getRootInActiveWindow' not in source and 'getText()' not in source
+for activity in m.findall('.//activity')+m.findall('.//activity-alias'):
  if 'Goal' in activity.attrib[ns+'name'] or 'CharacterWorkspace' in activity.attrib[ns+'name']:assert activity.attrib.get(ns+'exported')=='false'
 s=(b/'GoalDiscoveryActivity.java').read_text();assert 'addJavascriptInterface' not in s;assert 'setAllowFileAccess(false)' in s and 'setAllowContentAccess(false)' in s;assert 'MIXED_CONTENT_NEVER_ALLOW' in s;assert 'searchMatches' in s;assert 'seenGeneration!=generation' in s;assert 'request!=generation' in s
 s=(b/'GoalStore.java').read_text();assert "owner='device'" in s;assert 'Foreign goal record' in s;assert 'Deleted or foreign goal' in s;assert 'if(!analytics)return' in s;assert 'ON DELETE CASCADE' in s
-s=(b/'CharacterWorkspaceActivity.java').read_text();assert 'manual_only' in s;assert 'conditionsVerified' in s;assert 'self_reported' in s;assert '"state","verified"' not in s;assert 'Intent.ACTION_SEND' not in s
+s=(b/'CompanionGoalTools.java').read_text();assert 'manual_only' in s;assert 'conditionsVerified' in s;assert 'self_reported' in s;assert '"state","verified"' not in s;assert 'Intent.ACTION_SEND' not in s
 print('PASS release manifest, read-only browser, stale selection, ownership and purchase boundary checks')
+
+for name in ['MainActivity','GoalHomeActivity','CharacterWorkspaceActivity','GoalDiscoveryActivity','CampusToolsActivity','UnistCalendarActivity','CollectorActivity','TaskActivity','BrowserWorkspaceActivity','ConcertTripActivity','AppRegistryActivity','PlanAssistantActivity','LifeActivity','UnifiedToolsActivity']:
+ aliases=[x for x in m.findall('.//activity-alias') if x.get(ns+'name')=='.'+name]
+ assert len(aliases)==1 and aliases[0].get(ns+'targetActivity')=='.CompanionEntryActivity',name
+ assert not any(x.get(ns+'name')=='.'+name for x in m.findall('.//activity')),name
+assert 'return true;' in (b/'GoalChatUi.java').read_text().split('boolean companionMode()')[1].split('boolean modern()')[0]
+assert 'ActivityLifecycleCallbacks' not in (b/'NubiApplication.java').read_text()
+print('PASS companion-only launcher aliases and absence of legacy wrapper')

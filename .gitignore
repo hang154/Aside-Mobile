@@ -7,3 +7,17 @@ mobile-aside-mvp/local.properties
 *.keystore
 
 opencli-nubi/**/__pycache__/
+
+# Local verification media and credentials
+*.apk
+*.mp4
+*.webm
+*.sqlite3
+*.sqlite3-*
+*.pem
+*.key
+.env
+.env.*
+!*.example
+captures/
+screenshots/
