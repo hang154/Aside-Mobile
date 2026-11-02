@@ -10,6 +10,7 @@
     </intent>
   </queries>
   <application android:name=".NubiApplication" android:allowBackup="false" android:extractNativeLibs="true" android:label="${appLabel}" android:icon="@drawable/nubi_icon" android:theme="@android:style/Theme.Material.Light.NoActionBar" android:usesCleartextTraffic="false">
+    <activity android:name=".CredentialVaultActivity" android:exported="false" />
     <activity android:name=".CompanionEntryActivity" android:exported="false" />
     <provider android:name=".NubiDocumentProvider" android:authorities="${applicationId}.documents" android:exported="false" android:grantUriPermissions="true" />
     <activity-alias android:name=".MainActivity" android:exported="false" android:targetActivity=".CompanionEntryActivity">

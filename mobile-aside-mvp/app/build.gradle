@@ -9,12 +9,13 @@ android {
         minSdk 26
         targetSdk 35
         testInstrumentationRunner 'ai.decisionos.aside.GoalInstrumentation'
-        versionCode 74
-        versionName '0.6.13.1-session'
+        versionCode 75
+        versionName '0.6.13.2-auth-vault'
         manifestPlaceholders = [appLabel: '누비']
         buildConfigField 'int', 'HOME_STYLE', '0'
         buildConfigField 'boolean', 'HOME_LIGHT', 'false'
     }
+    testBuildType project.hasProperty("authVaultTests") ? "experimental" : "debug"
     buildFeatures { buildConfig = true }
     flavorDimensions += "home"
     productFlavors {
@@ -30,7 +31,7 @@ android {
     packaging { jniLibs { useLegacyPackaging = true } }
     buildTypes {
         debug { applicationIdSuffix ".goals" }
-        experimental { initWith debug; applicationIdSuffix ".laboratory"; matchingFallbacks = ["debug"] }
+        experimental { initWith debug; manifestPlaceholders = [appLabel: "누비 · 인증보관 실험"]; applicationIdSuffix ".laboratory"; matchingFallbacks = ["debug"] }
         release { minifyEnabled false }
     }
     compileOptions {

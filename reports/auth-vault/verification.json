@@ -1,0 +1,68 @@
+{
+  "date": "2026-11-02",
+  "branch": "feature/secure-auth-vault",
+  "baseline": "a3755e4 (separate worktree; existing uncommitted Blackboard changes untouched)",
+  "version": "0.6.13.2-auth-vault",
+  "installed_device": "SM-A546S R5CX407XACF",
+  "package": "ai.decisionos.nubi.groupchat.laboratory",
+  "existing_app_preserved": true,
+  "implementation": [
+    "AndroidKeyStore AES-256-GCM with randomized IV and package/slot AAD",
+    "Hardware-backed key observed on test phone; unlocked-device key restriction on API 28+",
+    "Atomic ciphertext-only files in getNoBackupFilesDir; application allowBackup=false",
+    "Native non-exported activity with device credential confirmation before editor access",
+    "Password masked; no Activity view state persistence; input cleared on pause",
+    "FLAG_SECURE and obscured-touch filtering",
+    "No JS, MCP, clipboard or model secret-reading tool",
+    "App record deletion also removes school vault file and key"
+  ],
+  "evidence": {
+    "native_checks": "PASS 15 native vault checks; AndroidKeyStore hardware-backed=true; production UI device-confirmation success not automated",
+    "process_write": "PASS persisted synthetic credential for next process",
+    "process_read": "PASS decrypt after process restart; synthetic data deleted",
+    "test_secrets_only": true,
+    "test_slots_deleted": true,
+    "apk": {
+      "file": "nubi-0.6.13.2-auth-vault.apk",
+      "sha256": "1924a3d51f0ab298020972244d71706635216258a9962e06a0ec5ee81e6a5549",
+      "bytes": 18817475,
+      "signature_verified": true,
+      "installed_hash_matches": true,
+      "manifest": "package: name='ai.decisionos.nubi.groupchat.laboratory' versionCode='75' versionName='0.6.13.2-auth-vault' platformBuildVersionName='15' platformBuildVersionCode='35' compileSdkVersion='35' compileSdkVersionCodename='15'"
+    }
+  },
+  "scope_limits": [
+    "No real password captured or imported from WebView",
+    "No automated school login, MFA bypass, OAuth token acquisition or refresh",
+    "WebView cookie DB remains Chromium-managed; this vault does not encrypt or migrate that DB",
+    "Device confirmation gate is native UI authorization; key is unlocked-device restricted, not per-operation biometric-auth-bound",
+    "Successful user PIN/biometric confirmation not tested; OS prompt route UI test inconclusive after foreground changed to existing app",
+    "No tablet connected; tested phone only",
+    "Existing uncommitted SchoolAccountKeys and Blackboard work in original worktree not merged into experimental branch"
+  ],
+  "sources": [
+    {
+      "name": "Android Keystore system",
+      "url": "https://developer.android.com/privacy-and-security/keystore",
+      "use": "Implemented platform cryptography pattern; no third-party library or copied repository code"
+    },
+    {
+      "name": "Android cryptography",
+      "url": "https://developer.android.com/privacy-and-security/cryptography",
+      "use": "AES/GCM/NoPadding; Keystore provider"
+    },
+    {
+      "name": "Credential Manager",
+      "url": "https://developer.android.com/identity/credential-manager",
+      "use": "Reviewed; credential exchange is separate from a private native vault"
+    },
+    {
+      "name": "MSAL Android token cache",
+      "url": "https://github.com/AzureAD/microsoft-authentication-library-for-android/blob/dev/docs/tokencache.md",
+      "use": "Reviewed; requires configured OAuth application/account acquisition, not an existing WebView cookie replacement"
+    }
+  ],
+  "build_command": "gradle -PauthVaultTests :app:assembleGroupchatExperimental :app:assembleGroupchatExperimentalAndroidTest --offline",
+  "test_command": "adb shell am instrument -w -e secureVaultChecks 1 [-e vaultPhase write|read] ai.decisionos.nubi.groupchat.laboratory.test/ai.decisionos.aside.GoalInstrumentation",
+  "retry": "Initial Java KeySpec cast compilation error fixed; rebuilt and all checks passed."
+}
