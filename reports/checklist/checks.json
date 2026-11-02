@@ -1,0 +1,65 @@
+[
+  {
+    "test": "test-goal-mcp.py",
+    "exit_code": 0,
+    "seconds": 0.06,
+    "log": "test-goal-mcp.py.log",
+    "kind": "contract/fixture; not real service verification"
+  },
+  {
+    "test": "test-transit.py",
+    "exit_code": 0,
+    "seconds": 0.09,
+    "log": "test-transit.py.log",
+    "kind": "contract/fixture; not real service verification"
+  },
+  {
+    "test": "test-friends.py",
+    "exit_code": 0,
+    "seconds": 0.15,
+    "log": "test-friends.py.log",
+    "kind": "contract/fixture; not real service verification"
+  },
+  {
+    "test": "test-chat-jobs.py",
+    "exit_code": 0,
+    "seconds": 3.27,
+    "log": "test-chat-jobs.py.log",
+    "kind": "contract/fixture; not real service verification"
+  },
+  {
+    "test": "test-document-jobs.py",
+    "exit_code": 0,
+    "seconds": 0.11,
+    "log": "test-document-jobs.py.log",
+    "kind": "contract/fixture; not real service verification"
+  },
+  {
+    "test": "test-group-qwen.py",
+    "exit_code": 0,
+    "seconds": 0.06,
+    "log": "test-group-qwen.py.log",
+    "kind": "contract/fixture; not real service verification"
+  },
+  {
+    "test": "test-run-lease.py",
+    "exit_code": 0,
+    "seconds": 0.57,
+    "log": "test-run-lease.py.log",
+    "kind": "contract/fixture; not real service verification"
+  },
+  {
+    "test": "test-user-directed-agent.py",
+    "exit_code": 0,
+    "seconds": 8.8,
+    "log": "test-user-directed-agent.py.log",
+    "kind": "contract/fixture; not real service verification"
+  },
+  {
+    "test": "test-campus-mail-mcp.py",
+    "exit_code": 0,
+    "seconds": 0.14,
+    "log": "test-campus-mail-mcp.py.log",
+    "kind": "contract/fixture; not real service verification"
+  }
+]

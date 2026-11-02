@@ -14,7 +14,14 @@ def main():
    if ident is None:continue
    if method=='initialize':result={'protocolVersion':'2024-11-05','capabilities':{'tools':{}},'serverInfo':{'name':'nubi-campus-local-documents','version':'0.1'}}
    elif method=='ping':result={}
-   elif method=='tools/list':result={'tools':[definition]}
+   elif method=='tools/list':result={'tools':[definition,{'name':'nubi_lecture_pdf_translate','description':'Translate a real text-layer PDF under the local lecture folder using Qwen. Preserves original visual pages, appends Korean pages, exports PDF+DOCX. Does not upload to Drive. Scans fail explicitly.','inputSchema':{'type':'object','properties':{'source':{'type':'string'}},'required':['source'],'additionalProperties':False}}]}
+   elif method=='tools/call' and p.get('name')=='nubi_lecture_pdf_translate':
+    try:
+     from campus_translation import translate_pdf
+     args=p.get('arguments') or {}
+     if set(args)!={'source'}:raise ValueError('실제 PDF 경로가 필요해요.')
+     result={'content':[{'type':'text','text':json.dumps(translate_pdf(root,args['source']),ensure_ascii=False)}]}
+    except Exception as e:result={'content':[{'type':'text','text':str(e)}],'isError':True}
    elif method=='tools/call' and p.get('name')=='nubi_local_document_draft':
     try:result={'content':[{'type':'text','text':json.dumps(create_application(root,p.get('arguments') or {}),ensure_ascii=False)}]}
     except Exception as e:result={'content':[{'type':'text','text':str(e)}],'isError':True}

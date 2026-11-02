@@ -1,0 +1,6350 @@
+{
+  "source_sha256": "2674135621fa58ceaedbd76f4be9a9cce3414f24e495ecaa73067d454aa45a82",
+  "items": [
+    {
+      "id": "CHK-001",
+      "line": 9,
+      "section": "누비(NUBI) 모바일 앱 전체 구현 체크리스트",
+      "path": [
+        "기구현 — 구현 보고가 있는 기능"
+      ],
+      "requirement": "기구현 — 구현 보고가 있는 기능",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-002",
+      "line": 11,
+      "section": "누비(NUBI) 모바일 앱 전체 구현 체크리스트",
+      "path": [
+        "미구현·고도화 필요 — 기능이 없거나, 완성 여부가 확인되지 않은 기능"
+      ],
+      "requirement": "미구현·고도화 필요 — 기능이 없거나, 완성 여부가 확인되지 않은 기능",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-003",
+      "line": 19,
+      "section": "1-1. 모바일 앱·채팅",
+      "path": [
+        "Android Java + WebView 기반 모바일 앱"
+      ],
+      "requirement": "Android Java + WebView 기반 모바일 앱",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-004",
+      "line": 21,
+      "section": "1-1. 모바일 앱·채팅",
+      "path": [
+        "모바일 UI 연동"
+      ],
+      "requirement": "모바일 UI 연동",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-005",
+      "line": 23,
+      "section": "1-1. 모바일 앱·채팅",
+      "path": [
+        "누비 캐릭터 기반 채팅 인터페이스"
+      ],
+      "requirement": "누비 캐릭터 기반 채팅 인터페이스",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-006",
+      "line": 25,
+      "section": "1-1. 모바일 앱·채팅",
+      "path": [
+        "Qwen 모델과 실제 채팅 연결"
+      ],
+      "requirement": "Qwen 모델과 실제 채팅 연결",
+      "status": "verified_live",
+      "evidence": [
+        "reports/qwen-group/phone-responses.json",
+        "reports/checklist/verification.json"
+      ],
+      "reason": "0.6.12 실기기 응답 검증 및 0.6.13 공개 탐색 실기기 결과 확인.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-007",
+      "line": 27,
+      "section": "1-1. 모바일 앱·채팅",
+      "path": [
+        "목적별 주무 에이전트 선택 및 답변 연결"
+      ],
+      "requirement": "목적별 주무 에이전트 선택 및 답변 연결",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-008",
+      "line": 29,
+      "section": "1-1. 모바일 앱·채팅",
+      "path": [
+        "여러 캐릭터의 응답을 종합하는 단체채팅 기본 흐름"
+      ],
+      "requirement": "여러 캐릭터의 응답을 종합하는 단체채팅 기본 흐름",
+      "status": "verified_live",
+      "evidence": [
+        "reports/qwen-group/phone-responses.json",
+        "reports/checklist/verification.json"
+      ],
+      "reason": "0.6.12 실기기 응답 검증 및 0.6.13 공개 탐색 실기기 결과 확인.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-009",
+      "line": 31,
+      "section": "1-1. 모바일 앱·채팅",
+      "path": [
+        "모바일 설치 및 기본 대화 기능 테스트"
+      ],
+      "requirement": "모바일 설치 및 기본 대화 기능 테스트",
+      "status": "verified_live",
+      "evidence": [
+        "reports/qwen-group/phone-responses.json",
+        "reports/checklist/verification.json"
+      ],
+      "reason": "0.6.12 실기기 응답 검증 및 0.6.13 공개 탐색 실기기 결과 확인.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-010",
+      "line": 35,
+      "section": "1-2. 부분 구현 — 추가 고도화 필요",
+      "path": [
+        "목적별 에이전트 라우팅 기본 구조"
+      ],
+      "requirement": "목적별 에이전트 라우팅 기본 구조",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-011",
+      "line": 37,
+      "section": "1-2. 부분 구현 — 추가 고도화 필요",
+      "path": [
+        "목적별 에이전트 라우팅 기본 구조",
+        "주무 에이전트의 담당 영역 혼동 방지"
+      ],
+      "requirement": "주무 에이전트의 담당 영역 혼동 방지",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-012",
+      "line": 39,
+      "section": "1-2. 부분 구현 — 추가 고도화 필요",
+      "path": [
+        "목적별 에이전트 라우팅 기본 구조",
+        "주무 에이전트가 필요할 때 보조 에이전트를 자동 소환"
+      ],
+      "requirement": "주무 에이전트가 필요할 때 보조 에이전트를 자동 소환",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-013",
+      "line": 41,
+      "section": "1-2. 부분 구현 — 추가 고도화 필요",
+      "path": [
+        "목적별 에이전트 라우팅 기본 구조",
+        "보조 에이전트 실행 결과 통합 및 충돌 해결"
+      ],
+      "requirement": "보조 에이전트 실행 결과 통합 및 충돌 해결",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-014",
+      "line": 43,
+      "section": "1-2. 부분 구현 — 추가 고도화 필요",
+      "path": [
+        "목적별 에이전트 라우팅 기본 구조",
+        "여러 에이전트의 작업 중복 방지"
+      ],
+      "requirement": "여러 에이전트의 작업 중복 방지",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-015",
+      "line": 45,
+      "section": "1-2. 부분 구현 — 추가 고도화 필요",
+      "path": [
+        "목적별 에이전트 라우팅 기본 구조",
+        "실제 웹 제어 작업까지 에이전트에 연결"
+      ],
+      "requirement": "실제 웹 제어 작업까지 에이전트에 연결",
+      "status": "verified_live_public_only",
+      "evidence": [
+        "reports/checklist/phone-research.json",
+        "opencli-nubi/nubi_group_browser.py"
+      ],
+      "reason": "Qwen이 단체챗에서 공개 유튜브 검색·선택·원문 확인 후 링크를 반환. 로그인 서비스 실행까지 검증한 것은 아님.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-016",
+      "line": 47,
+      "section": "1-2. 부분 구현 — 추가 고도화 필요",
+      "path": [
+        "모바일 홈 및 기능 화면의 UI 연동"
+      ],
+      "requirement": "모바일 홈 및 기능 화면의 UI 연동",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-017",
+      "line": 49,
+      "section": "1-2. 부분 구현 — 추가 고도화 필요",
+      "path": [
+        "모바일 홈 및 기능 화면의 UI 연동",
+        "개인화 데이터와 실제 연결 여부 검증"
+      ],
+      "requirement": "개인화 데이터와 실제 연결 여부 검증",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-018",
+      "line": 51,
+      "section": "1-2. 부분 구현 — 추가 고도화 필요",
+      "path": [
+        "모바일 홈 및 기능 화면의 UI 연동",
+        "모든 버튼과 실제 기능 동작 연결"
+      ],
+      "requirement": "모든 버튼과 실제 기능 동작 연결",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-019",
+      "line": 53,
+      "section": "1-2. 부분 구현 — 추가 고도화 필요",
+      "path": [
+        "모바일 홈 및 기능 화면의 UI 연동",
+        "시간·상황별 동적 배너 연결"
+      ],
+      "requirement": "시간·상황별 동적 배너 연결",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-020",
+      "line": 55,
+      "section": "1-2. 부분 구현 — 추가 고도화 필요",
+      "path": [
+        "모바일 홈 및 기능 화면의 UI 연동",
+        "실제 알림·일정·결과물 데이터 연동"
+      ],
+      "requirement": "실제 알림·일정·결과물 데이터 연동",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-021",
+      "line": 57,
+      "section": "1-2. 부분 구현 — 추가 고도화 필요",
+      "path": [
+        "모바일 홈 및 기능 화면의 UI 연동",
+        "스마트폰 6인치 화면의 조작 동선 최적화"
+      ],
+      "requirement": "스마트폰 6인치 화면의 조작 동선 최적화",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-022",
+      "line": 59,
+      "section": "1-2. 부분 구현 — 추가 고도화 필요",
+      "path": [
+        "누비 캐릭터별 기본 대화"
+      ],
+      "requirement": "누비 캐릭터별 기본 대화",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-023",
+      "line": 61,
+      "section": "1-2. 부분 구현 — 추가 고도화 필요",
+      "path": [
+        "누비 캐릭터별 기본 대화",
+        "사용자별 목표·선호·대화 맥락 유지"
+      ],
+      "requirement": "사용자별 목표·선호·대화 맥락 유지",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-024",
+      "line": 63,
+      "section": "1-2. 부분 구현 — 추가 고도화 필요",
+      "path": [
+        "누비 캐릭터별 기본 대화",
+        "건강이·다정이·똑똑이·차곡이의 전문 기능 고도화"
+      ],
+      "requirement": "건강이·다정이·똑똑이·차곡이의 전문 기능 고도화",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-025",
+      "line": 65,
+      "section": "1-2. 부분 구현 — 추가 고도화 필요",
+      "path": [
+        "누비 캐릭터별 기본 대화",
+        "캐릭터별 도구 접근 권한 분리"
+      ],
+      "requirement": "캐릭터별 도구 접근 권한 분리",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-026",
+      "line": 67,
+      "section": "1-2. 부분 구현 — 추가 고도화 필요",
+      "path": [
+        "누비 캐릭터별 기본 대화",
+        "작업 완료 여부와 실행 비용 표시"
+      ],
+      "requirement": "작업 완료 여부와 실행 비용 표시",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-027",
+      "line": 75,
+      "section": "2\\. 튜토리얼·외부 서비스 연결",
+      "path": [
+        "최초 실행 튜토리얼"
+      ],
+      "requirement": "최초 실행 튜토리얼",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-028",
+      "line": 77,
+      "section": "2\\. 튜토리얼·외부 서비스 연결",
+      "path": [
+        "최초 실행 튜토리얼",
+        "블랙보드 계정 연결"
+      ],
+      "requirement": "블랙보드 계정 연결",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-029",
+      "line": 79,
+      "section": "2\\. 튜토리얼·외부 서비스 연결",
+      "path": [
+        "최초 실행 튜토리얼",
+        "에브리타임 계정 연결"
+      ],
+      "requirement": "에브리타임 계정 연결",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-030",
+      "line": 81,
+      "section": "2\\. 튜토리얼·외부 서비스 연결",
+      "path": [
+        "최초 실행 튜토리얼",
+        "대학 포탈 계정 연결"
+      ],
+      "requirement": "대학 포탈 계정 연결",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-031",
+      "line": 83,
+      "section": "2\\. 튜토리얼·외부 서비스 연결",
+      "path": [
+        "최초 실행 튜토리얼",
+        "학사 이메일 연결"
+      ],
+      "requirement": "학사 이메일 연결",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-032",
+      "line": 85,
+      "section": "2\\. 튜토리얼·외부 서비스 연결",
+      "path": [
+        "최초 실행 튜토리얼",
+        "GPT 연결"
+      ],
+      "requirement": "GPT 연결",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-033",
+      "line": 87,
+      "section": "2\\. 튜토리얼·외부 서비스 연결",
+      "path": [
+        "최초 실행 튜토리얼",
+        "Claude·Gemini 추가 연결 선택"
+      ],
+      "requirement": "Claude·Gemini 추가 연결 선택",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-034",
+      "line": 89,
+      "section": "2\\. 튜토리얼·외부 서비스 연결",
+      "path": [
+        "최초 실행 튜토리얼",
+        "연결 성공·실패·재인증 상태 표시"
+      ],
+      "requirement": "연결 성공·실패·재인증 상태 표시",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-035",
+      "line": 91,
+      "section": "2\\. 튜토리얼·외부 서비스 연결",
+      "path": [
+        "최초 실행 튜토리얼",
+        "연결된 서비스의 접근 권한 관리 및 해제"
+      ],
+      "requirement": "연결된 서비스의 접근 권한 관리 및 해제",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-036",
+      "line": 93,
+      "section": "2\\. 튜토리얼·외부 서비스 연결",
+      "path": [
+        "연결 직후 자동 제어 시연"
+      ],
+      "requirement": "연결 직후 자동 제어 시연",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-037",
+      "line": 95,
+      "section": "2\\. 튜토리얼·외부 서비스 연결",
+      "path": [
+        "연결 직후 자동 제어 시연",
+        "실제 사이트에 접속해 정보를 읽는 장면"
+      ],
+      "requirement": "실제 사이트에 접속해 정보를 읽는 장면",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-038",
+      "line": 97,
+      "section": "2\\. 튜토리얼·외부 서비스 연결",
+      "path": [
+        "연결 직후 자동 제어 시연",
+        "브라우저 자동 제어 장면을 채팅 옆 작은 화면에 노출"
+      ],
+      "requirement": "브라우저 자동 제어 장면을 채팅 옆 작은 화면에 노출",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-039",
+      "line": 99,
+      "section": "2\\. 튜토리얼·외부 서비스 연결",
+      "path": [
+        "연결 직후 자동 제어 시연",
+        "누르면 전체 화면으로 확대"
+      ],
+      "requirement": "누르면 전체 화면으로 확대",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-040",
+      "line": 101,
+      "section": "2\\. 튜토리얼·외부 서비스 연결",
+      "path": [
+        "연결 직후 자동 제어 시연",
+        "현재 수행 중인 작업 단계 표시"
+      ],
+      "requirement": "현재 수행 중인 작업 단계 표시",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-041",
+      "line": 103,
+      "section": "2\\. 튜토리얼·외부 서비스 연결",
+      "path": [
+        "연결 직후 자동 제어 시연",
+        "작업 완료 후 결과 카드 출력"
+      ],
+      "requirement": "작업 완료 후 결과 카드 출력",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-042",
+      "line": 105,
+      "section": "2\\. 튜토리얼·외부 서비스 연결",
+      "path": [
+        "연결 직후 자동 제어 시연",
+        "검토·승인·취소 버튼"
+      ],
+      "requirement": "검토·승인·취소 버튼",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-043",
+      "line": 107,
+      "section": "2\\. 튜토리얼·외부 서비스 연결",
+      "path": [
+        "연결 직후 자동 제어 시연",
+        "튜토리얼 건너뛰기 및 재실행"
+      ],
+      "requirement": "튜토리얼 건너뛰기 및 재실행",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-044",
+      "line": 109,
+      "section": "2\\. 튜토리얼·외부 서비스 연결",
+      "path": [
+        "실제 홍보영상용 앱 동선"
+      ],
+      "requirement": "실제 홍보영상용 앱 동선",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-045",
+      "line": 111,
+      "section": "2\\. 튜토리얼·외부 서비스 연결",
+      "path": [
+        "실제 홍보영상용 앱 동선",
+        "서비스 연결 → 공지 수집 → 과제 초안 생성"
+      ],
+      "requirement": "서비스 연결 → 공지 수집 → 과제 초안 생성",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-046",
+      "line": 113,
+      "section": "2\\. 튜토리얼·외부 서비스 연결",
+      "path": [
+        "실제 홍보영상용 앱 동선",
+        "이메일 신청서 작성 → 승인 → 발송"
+      ],
+      "requirement": "이메일 신청서 작성 → 승인 → 발송",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-047",
+      "line": 115,
+      "section": "2\\. 튜토리얼·외부 서비스 연결",
+      "path": [
+        "실제 홍보영상용 앱 동선",
+        "웹사이트가 실제로 조작되는 화면 녹화"
+      ],
+      "requirement": "웹사이트가 실제로 조작되는 화면 녹화",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-048",
+      "line": 117,
+      "section": "2\\. 튜토리얼·외부 서비스 연결",
+      "path": [
+        "실제 홍보영상용 앱 동선",
+        "개인정보 마스킹"
+      ],
+      "requirement": "개인정보 마스킹",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-049",
+      "line": 123,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "포탈 게시판 자동 수집 엔진"
+      ],
+      "requirement": "포탈 게시판 자동 수집 엔진",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-050",
+      "line": 125,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "포탈 게시판 자동 수집 엔진",
+        "학사게시판"
+      ],
+      "requirement": "학사게시판",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-051",
+      "line": 127,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "포탈 게시판 자동 수집 엔진",
+        "장학게시판"
+      ],
+      "requirement": "장학게시판",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-052",
+      "line": 129,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "포탈 게시판 자동 수집 엔진",
+        "전체공지"
+      ],
+      "requirement": "전체공지",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-053",
+      "line": 131,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "포탈 게시판 자동 수집 엔진",
+        "학과·전공별 게시판"
+      ],
+      "requirement": "학과·전공별 게시판",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-054",
+      "line": 133,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "포탈 게시판 자동 수집 엔진",
+        "새로운 공지와 수정된 공지 감지"
+      ],
+      "requirement": "새로운 공지와 수정된 공지 감지",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-055",
+      "line": 135,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "포탈 게시판 자동 수집 엔진",
+        "공지별 신청 기간·자격·금액·링크 추출"
+      ],
+      "requirement": "공지별 신청 기간·자격·금액·링크 추출",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-056",
+      "line": 137,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "포탈 게시판 자동 수집 엔진",
+        "중복 공지 제거 및 중요도 판정"
+      ],
+      "requirement": "중복 공지 제거 및 중요도 판정",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-057",
+      "line": 139,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "학사게시판 중요 일정 감지"
+      ],
+      "requirement": "학사게시판 중요 일정 감지",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-058",
+      "line": 141,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "학사게시판 중요 일정 감지",
+        "계절학기·타 대학 학점교류"
+      ],
+      "requirement": "계절학기·타 대학 학점교류",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-059",
+      "line": 143,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "학사게시판 중요 일정 감지",
+        "기말시험 일정"
+      ],
+      "requirement": "기말시험 일정",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-060",
+      "line": 145,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "학사게시판 중요 일정 감지",
+        "복학·휴학 신청"
+      ],
+      "requirement": "복학·휴학 신청",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-061",
+      "line": 147,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "학사게시판 중요 일정 감지",
+        "전공 신청 및 변경"
+      ],
+      "requirement": "전공 신청 및 변경",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-062",
+      "line": 149,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "학사게시판 중요 일정 감지",
+        "학부·대학원 인턴십"
+      ],
+      "requirement": "학부·대학원 인턴십",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-063",
+      "line": 151,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "학사게시판 중요 일정 감지",
+        "몰입캠프 모집"
+      ],
+      "requirement": "몰입캠프 모집",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-064",
+      "line": 153,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "학사게시판 중요 일정 감지",
+        "박사 자격시험"
+      ],
+      "requirement": "박사 자격시험",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-065",
+      "line": 155,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "학사게시판 중요 일정 감지",
+        "졸업논문 신청"
+      ],
+      "requirement": "졸업논문 신청",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-066",
+      "line": 157,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "학사게시판 중요 일정 감지",
+        "졸업정산·강의평가"
+      ],
+      "requirement": "졸업정산·강의평가",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-067",
+      "line": 159,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "학사게시판 중요 일정 감지",
+        "수업 정원 변경 및 수강신청 연결"
+      ],
+      "requirement": "수업 정원 변경 및 수강신청 연결",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-068",
+      "line": 161,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "학사게시판 중요 일정 감지",
+        "전년도 같은 시기 공지를 참고한 올해 공지 예상 알림"
+      ],
+      "requirement": "전년도 같은 시기 공지를 참고한 올해 공지 예상 알림",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-069",
+      "line": 163,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "장학·지원사업 감지"
+      ],
+      "requirement": "장학·지원사업 감지",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-070",
+      "line": 165,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "장학·지원사업 감지",
+        "학생의 학년·전공·학적·자격에 맞게 필터링"
+      ],
+      "requirement": "학생의 학년·전공·학적·자격에 맞게 필터링",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-071",
+      "line": 167,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "장학·지원사업 감지",
+        "장학금액·지원조건·마감일 표시"
+      ],
+      "requirement": "장학금액·지원조건·마감일 표시",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-072",
+      "line": 169,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "장학·지원사업 감지",
+        "두산연강재단 등 장학 공지 개별 카드 생성"
+      ],
+      "requirement": "두산연강재단 등 장학 공지 개별 카드 생성",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-073",
+      "line": 171,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "장학·지원사업 감지",
+        "장학 신청서 초안 작성"
+      ],
+      "requirement": "장학 신청서 초안 작성",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-074",
+      "line": 173,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "장학·지원사업 감지",
+        "제출용 첨부파일 준비"
+      ],
+      "requirement": "제출용 첨부파일 준비",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-075",
+      "line": 175,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "장학·지원사업 감지",
+        "마감 전 재알림"
+      ],
+      "requirement": "마감 전 재알림",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-076",
+      "line": 177,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "전체게시판 감지"
+      ],
+      "requirement": "전체게시판 감지",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-077",
+      "line": 179,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "전체게시판 감지",
+        "축제·창의축전"
+      ],
+      "requirement": "축제·창의축전",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-078",
+      "line": 181,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "전체게시판 감지",
+        "무료 간식·행사"
+      ],
+      "requirement": "무료 간식·행사",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-079",
+      "line": 183,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "전체게시판 감지",
+        "건물·시설 이용 제한"
+      ],
+      "requirement": "건물·시설 이용 제한",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-080",
+      "line": 185,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "전체게시판 감지",
+        "사용자 위치·수업·관심사에 따라 알림 선별"
+      ],
+      "requirement": "사용자 위치·수업·관심사에 따라 알림 선별",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-081",
+      "line": 187,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "인턴십·공모전 신청 자동화"
+      ],
+      "requirement": "인턴십·공모전 신청 자동화",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-082",
+      "line": 189,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "인턴십·공모전 신청 자동화",
+        "게시글 분석"
+      ],
+      "requirement": "게시글 분석",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-083",
+      "line": 191,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "인턴십·공모전 신청 자동화",
+        "신청 자격 확인"
+      ],
+      "requirement": "신청 자격 확인",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-084",
+      "line": 193,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "인턴십·공모전 신청 자동화",
+        "신청서 및 자기소개서 초안"
+      ],
+      "requirement": "신청서 및 자기소개서 초안",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-085",
+      "line": 195,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "인턴십·공모전 신청 자동화",
+        "이메일 임시저장"
+      ],
+      "requirement": "이메일 임시저장",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-086",
+      "line": 197,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "인턴십·공모전 신청 자동화",
+        "사용자 승인 후 발송·제출"
+      ],
+      "requirement": "사용자 승인 후 발송·제출",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-087",
+      "line": 199,
+      "section": "3\\. 대학 포탈 자동화",
+      "path": [
+        "포탈 공지 → 홈 배너·알림·통합 캘린더 동기화"
+      ],
+      "requirement": "포탈 공지 → 홈 배너·알림·통합 캘린더 동기화",
+      "status": "partial",
+      "evidence": [
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusNoticeMonitor.java",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusSignal.java",
+        "opencli-nubi/campus-notices-mcp.py"
+      ],
+      "reason": "3개 게시판 첫 페이지·원문 조회 도구와 중요 정보 추출 구조가 있으나 현재 앱의 포털 인증은 두 번 모두 미확인. 전체 페이지·학과별 수집·개인별 자격 판단·자동 신청은 별도 구현/실검증 필요.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-088",
+      "line": 207,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "과목별 강의정보 동기화"
+      ],
+      "requirement": "과목별 강의정보 동기화",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "현재 보이는 과목·활동·PDF 링크 조회, 관측 링크 PDF 다운로드와 로컬 Qwen 번역을 구현. 실제 Blackboard 세션 미확인. 전체 과목 동기화·GPT/Claude/Gemini 위임·제출란 업로드/최종 제출·Drive 업로드는 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-089",
+      "line": 209,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "과목별 강의정보 동기화",
+        "수강 과목 자동 인식"
+      ],
+      "requirement": "수강 과목 자동 인식",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "현재 보이는 과목·활동·PDF 링크 조회, 관측 링크 PDF 다운로드와 로컬 Qwen 번역을 구현. 실제 Blackboard 세션 미확인. 전체 과목 동기화·GPT/Claude/Gemini 위임·제출란 업로드/최종 제출·Drive 업로드는 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-090",
+      "line": 211,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "과목별 강의정보 동기화",
+        "Announcements 자동 수집"
+      ],
+      "requirement": "Announcements 자동 수집",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "현재 보이는 과목·활동·PDF 링크 조회, 관측 링크 PDF 다운로드와 로컬 Qwen 번역을 구현. 실제 Blackboard 세션 미확인. 전체 과목 동기화·GPT/Claude/Gemini 위임·제출란 업로드/최종 제출·Drive 업로드는 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-091",
+      "line": 213,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "과목별 강의정보 동기화",
+        "Assignments 자동 감지"
+      ],
+      "requirement": "Assignments 자동 감지",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "현재 보이는 과목·활동·PDF 링크 조회, 관측 링크 PDF 다운로드와 로컬 Qwen 번역을 구현. 실제 Blackboard 세션 미확인. 전체 과목 동기화·GPT/Claude/Gemini 위임·제출란 업로드/최종 제출·Drive 업로드는 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-092",
+      "line": 215,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "과목별 강의정보 동기화",
+        "Messages 감지"
+      ],
+      "requirement": "Messages 감지",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "현재 보이는 과목·활동·PDF 링크 조회, 관측 링크 PDF 다운로드와 로컬 Qwen 번역을 구현. 실제 Blackboard 세션 미확인. 전체 과목 동기화·GPT/Claude/Gemini 위임·제출란 업로드/최종 제출·Drive 업로드는 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-093",
+      "line": 217,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "과목별 강의정보 동기화",
+        "과제 제출기한 파악"
+      ],
+      "requirement": "과제 제출기한 파악",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "현재 보이는 과목·활동·PDF 링크 조회, 관측 링크 PDF 다운로드와 로컬 Qwen 번역을 구현. 실제 Blackboard 세션 미확인. 전체 과목 동기화·GPT/Claude/Gemini 위임·제출란 업로드/최종 제출·Drive 업로드는 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-094",
+      "line": 219,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "과목별 강의정보 동기화",
+        "시험 일정·오픈북 여부·채점 기준 파악"
+      ],
+      "requirement": "시험 일정·오픈북 여부·채점 기준 파악",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "현재 보이는 과목·활동·PDF 링크 조회, 관측 링크 PDF 다운로드와 로컬 Qwen 번역을 구현. 실제 Blackboard 세션 미확인. 전체 과목 동기화·GPT/Claude/Gemini 위임·제출란 업로드/최종 제출·Drive 업로드는 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-095",
+      "line": 221,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "과목별 강의정보 동기화",
+        "팀활동 공지 감지"
+      ],
+      "requirement": "팀활동 공지 감지",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "현재 보이는 과목·활동·PDF 링크 조회, 관측 링크 PDF 다운로드와 로컬 Qwen 번역을 구현. 실제 Blackboard 세션 미확인. 전체 과목 동기화·GPT/Claude/Gemini 위임·제출란 업로드/최종 제출·Drive 업로드는 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-096",
+      "line": 223,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "과목별 강의정보 동기화",
+        "캘린더 자동 연동"
+      ],
+      "requirement": "캘린더 자동 연동",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "현재 보이는 과목·활동·PDF 링크 조회, 관측 링크 PDF 다운로드와 로컬 Qwen 번역을 구현. 실제 Blackboard 세션 미확인. 전체 과목 동기화·GPT/Claude/Gemini 위임·제출란 업로드/최종 제출·Drive 업로드는 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-097",
+      "line": 225,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "과제 자동 처리 고도화"
+      ],
+      "requirement": "과제 자동 처리 고도화",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "현재 보이는 과목·활동·PDF 링크 조회, 관측 링크 PDF 다운로드와 로컬 Qwen 번역을 구현. 실제 Blackboard 세션 미확인. 전체 과목 동기화·GPT/Claude/Gemini 위임·제출란 업로드/최종 제출·Drive 업로드는 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-098",
+      "line": 227,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "과제 자동 처리 고도화",
+        "과제 PDF·첨부파일 다운로드"
+      ],
+      "requirement": "과제 PDF·첨부파일 다운로드",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "현재 보이는 과목·활동·PDF 링크 조회, 관측 링크 PDF 다운로드와 로컬 Qwen 번역을 구현. 실제 Blackboard 세션 미확인. 전체 과목 동기화·GPT/Claude/Gemini 위임·제출란 업로드/최종 제출·Drive 업로드는 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-099",
+      "line": 229,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "과제 자동 처리 고도화",
+        "과제 지시·평가기준 분석"
+      ],
+      "requirement": "과제 지시·평가기준 분석",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "현재 보이는 과목·활동·PDF 링크 조회, 관측 링크 PDF 다운로드와 로컬 Qwen 번역을 구현. 실제 Blackboard 세션 미확인. 전체 과목 동기화·GPT/Claude/Gemini 위임·제출란 업로드/최종 제출·Drive 업로드는 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-100",
+      "line": 231,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "과제 자동 처리 고도화",
+        "GPT에 과제 수행 지시 자동 전달"
+      ],
+      "requirement": "GPT에 과제 수행 지시 자동 전달",
+      "status": "not_implemented",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "전용 서비스 실행 어댑터/파일 업로드·제출 확인 및 외부 계정 연동이 아직 연결되지 않음. 현재 조회·로컬 문서 생성 코드를 해당 기능 완료로 볼 수 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-101",
+      "line": 233,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "과제 자동 처리 고도화",
+        "Claude·Gemini를 대체 수행 모델로 선택"
+      ],
+      "requirement": "Claude·Gemini를 대체 수행 모델로 선택",
+      "status": "not_implemented",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "전용 서비스 실행 어댑터/파일 업로드·제출 확인 및 외부 계정 연동이 아직 연결되지 않음. 현재 조회·로컬 문서 생성 코드를 해당 기능 완료로 볼 수 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-102",
+      "line": 235,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "과제 자동 처리 고도화",
+        "과제별 필요한 참고자료 조사"
+      ],
+      "requirement": "과제별 필요한 참고자료 조사",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "현재 보이는 과목·활동·PDF 링크 조회, 관측 링크 PDF 다운로드와 로컬 Qwen 번역을 구현. 실제 Blackboard 세션 미확인. 전체 과목 동기화·GPT/Claude/Gemini 위임·제출란 업로드/최종 제출·Drive 업로드는 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-103",
+      "line": 237,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "과제 자동 처리 고도화",
+        "제출 가능한 PDF·DOCX·PPTX 등 파일 생성"
+      ],
+      "requirement": "제출 가능한 PDF·DOCX·PPTX 등 파일 생성",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "현재 보이는 과목·활동·PDF 링크 조회, 관측 링크 PDF 다운로드와 로컬 Qwen 번역을 구현. 실제 Blackboard 세션 미확인. 전체 과목 동기화·GPT/Claude/Gemini 위임·제출란 업로드/최종 제출·Drive 업로드는 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-104",
+      "line": 239,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "과제 자동 처리 고도화",
+        "결과물 누락·형식·수치·인용 검증"
+      ],
+      "requirement": "결과물 누락·형식·수치·인용 검증",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "현재 보이는 과목·활동·PDF 링크 조회, 관측 링크 PDF 다운로드와 로컬 Qwen 번역을 구현. 실제 Blackboard 세션 미확인. 전체 과목 동기화·GPT/Claude/Gemini 위임·제출란 업로드/최종 제출·Drive 업로드는 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-105",
+      "line": 241,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "과제 자동 처리 고도화",
+        "사용자에게 검토 사항만 브리핑"
+      ],
+      "requirement": "사용자에게 검토 사항만 브리핑",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "현재 보이는 과목·활동·PDF 링크 조회, 관측 링크 PDF 다운로드와 로컬 Qwen 번역을 구현. 실제 Blackboard 세션 미확인. 전체 과목 동기화·GPT/Claude/Gemini 위임·제출란 업로드/최종 제출·Drive 업로드는 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-106",
+      "line": 243,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "과제 자동 처리 고도화",
+        "블랙보드 제출란에 파일 업로드"
+      ],
+      "requirement": "블랙보드 제출란에 파일 업로드",
+      "status": "not_implemented",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "전용 서비스 실행 어댑터/파일 업로드·제출 확인 및 외부 계정 연동이 아직 연결되지 않음. 현재 조회·로컬 문서 생성 코드를 해당 기능 완료로 볼 수 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-107",
+      "line": 245,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "과제 자동 처리 고도화",
+        "임시저장 지원 시 초안 상태로 보관"
+      ],
+      "requirement": "임시저장 지원 시 초안 상태로 보관",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "현재 보이는 과목·활동·PDF 링크 조회, 관측 링크 PDF 다운로드와 로컬 Qwen 번역을 구현. 실제 Blackboard 세션 미확인. 전체 과목 동기화·GPT/Claude/Gemini 위임·제출란 업로드/최종 제출·Drive 업로드는 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-108",
+      "line": 247,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "과제 자동 처리 고도화",
+        "임시저장 불가 시 제출 직전까지 준비"
+      ],
+      "requirement": "임시저장 불가 시 제출 직전까지 준비",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "현재 보이는 과목·활동·PDF 링크 조회, 관측 링크 PDF 다운로드와 로컬 Qwen 번역을 구현. 실제 Blackboard 세션 미확인. 전체 과목 동기화·GPT/Claude/Gemini 위임·제출란 업로드/최종 제출·Drive 업로드는 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-109",
+      "line": 249,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "과제 자동 처리 고도화",
+        "사용자 최종 승인 후 제출"
+      ],
+      "requirement": "사용자 최종 승인 후 제출",
+      "status": "not_implemented",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "전용 서비스 실행 어댑터/파일 업로드·제출 확인 및 외부 계정 연동이 아직 연결되지 않음. 현재 조회·로컬 문서 생성 코드를 해당 기능 완료로 볼 수 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-110",
+      "line": 251,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "과제 자동 처리 고도화",
+        "실제 제출 성공 여부와 영수증 확인"
+      ],
+      "requirement": "실제 제출 성공 여부와 영수증 확인",
+      "status": "not_implemented",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "전용 서비스 실행 어댑터/파일 업로드·제출 확인 및 외부 계정 연동이 아직 연결되지 않음. 현재 조회·로컬 문서 생성 코드를 해당 기능 완료로 볼 수 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-111",
+      "line": 253,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "과제 자동 처리 고도화",
+        "강의별 AI 사용·학업윤리 정책 확인"
+      ],
+      "requirement": "강의별 AI 사용·학업윤리 정책 확인",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "현재 보이는 과목·활동·PDF 링크 조회, 관측 링크 PDF 다운로드와 로컬 Qwen 번역을 구현. 실제 Blackboard 세션 미확인. 전체 과목 동기화·GPT/Claude/Gemini 위임·제출란 업로드/최종 제출·Drive 업로드는 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-112",
+      "line": 255,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "강의자료 PDF 자동 번역"
+      ],
+      "requirement": "강의자료 PDF 자동 번역",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "현재 보이는 과목·활동·PDF 링크 조회, 관측 링크 PDF 다운로드와 로컬 Qwen 번역을 구현. 실제 Blackboard 세션 미확인. 전체 과목 동기화·GPT/Claude/Gemini 위임·제출란 업로드/최종 제출·Drive 업로드는 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-113",
+      "line": 257,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "강의자료 PDF 자동 번역",
+        "신규 PDF 감지"
+      ],
+      "requirement": "신규 PDF 감지",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "현재 보이는 과목·활동·PDF 링크 조회, 관측 링크 PDF 다운로드와 로컬 Qwen 번역을 구현. 실제 Blackboard 세션 미확인. 전체 과목 동기화·GPT/Claude/Gemini 위임·제출란 업로드/최종 제출·Drive 업로드는 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-114",
+      "line": 259,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "강의자료 PDF 자동 번역",
+        "원문 표·이미지·수식 유지"
+      ],
+      "requirement": "원문 표·이미지·수식 유지",
+      "status": "partial_sample_verified",
+      "evidence": [
+        "opencli-nubi/campus_translation.py",
+        "opencli-nubi/test-campus-translation.py",
+        "reports/checklist/verification.json"
+      ],
+      "reason": "텍스트 PDF 샘플을 실제 Qwen으로 번역하고 원문 페이지 시각 보존 검사 통과. 원문 뒤 번역 페이지를 추가하는 방식. 스캔 OCR·동일 레이아웃 번역·번역 의미 정확도 전체 보증은 미구현.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-115",
+      "line": 261,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "강의자료 PDF 자동 번역",
+        "한국어 전체 번역"
+      ],
+      "requirement": "한국어 전체 번역",
+      "status": "partial_sample_verified",
+      "evidence": [
+        "opencli-nubi/campus_translation.py",
+        "opencli-nubi/test-campus-translation.py",
+        "reports/checklist/verification.json"
+      ],
+      "reason": "텍스트 PDF 샘플을 실제 Qwen으로 번역하고 원문 페이지 시각 보존 검사 통과. 원문 뒤 번역 페이지를 추가하는 방식. 스캔 OCR·동일 레이아웃 번역·번역 의미 정확도 전체 보증은 미구현.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-116",
+      "line": 263,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "강의자료 PDF 자동 번역",
+        "원문·번역본 대조 검증"
+      ],
+      "requirement": "원문·번역본 대조 검증",
+      "status": "partial_sample_verified",
+      "evidence": [
+        "opencli-nubi/campus_translation.py",
+        "opencli-nubi/test-campus-translation.py",
+        "reports/checklist/verification.json"
+      ],
+      "reason": "텍스트 PDF 샘플을 실제 Qwen으로 번역하고 원문 페이지 시각 보존 검사 통과. 원문 뒤 번역 페이지를 추가하는 방식. 스캔 OCR·동일 레이아웃 번역·번역 의미 정확도 전체 보증은 미구현.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-117",
+      "line": 265,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "강의자료 PDF 자동 번역",
+        "Google Drive 자동 업로드"
+      ],
+      "requirement": "Google Drive 자동 업로드",
+      "status": "not_implemented",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "전용 서비스 실행 어댑터/파일 업로드·제출 확인 및 외부 계정 연동이 아직 연결되지 않음. 현재 조회·로컬 문서 생성 코드를 해당 기능 완료로 볼 수 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-118",
+      "line": 267,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "강의자료 PDF 자동 번역",
+        "시험공부용 요약·핵심 개념 생성"
+      ],
+      "requirement": "시험공부용 요약·핵심 개념 생성",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "현재 보이는 과목·활동·PDF 링크 조회, 관측 링크 PDF 다운로드와 로컬 Qwen 번역을 구현. 실제 Blackboard 세션 미확인. 전체 과목 동기화·GPT/Claude/Gemini 위임·제출란 업로드/최종 제출·Drive 업로드는 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-119",
+      "line": 269,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "강의자료 PDF 자동 번역",
+        "강의별 번역본 보관함 연결"
+      ],
+      "requirement": "강의별 번역본 보관함 연결",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "현재 보이는 과목·활동·PDF 링크 조회, 관측 링크 PDF 다운로드와 로컬 Qwen 번역을 구현. 실제 Blackboard 세션 미확인. 전체 과목 동기화·GPT/Claude/Gemini 위임·제출란 업로드/최종 제출·Drive 업로드는 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-120",
+      "line": 271,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "팀프로젝트 자동화"
+      ],
+      "requirement": "팀프로젝트 자동화",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "현재 보이는 과목·활동·PDF 링크 조회, 관측 링크 PDF 다운로드와 로컬 Qwen 번역을 구현. 실제 Blackboard 세션 미확인. 전체 과목 동기화·GPT/Claude/Gemini 위임·제출란 업로드/최종 제출·Drive 업로드는 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-121",
+      "line": 273,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "팀프로젝트 자동화",
+        "팀플레이 주제 및 평가기준 추출"
+      ],
+      "requirement": "팀플레이 주제 및 평가기준 추출",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "현재 보이는 과목·활동·PDF 링크 조회, 관측 링크 PDF 다운로드와 로컬 Qwen 번역을 구현. 실제 Blackboard 세션 미확인. 전체 과목 동기화·GPT/Claude/Gemini 위임·제출란 업로드/최종 제출·Drive 업로드는 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-122",
+      "line": 275,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "팀프로젝트 자동화",
+        "관련 논문·학술지 탐색"
+      ],
+      "requirement": "관련 논문·학술지 탐색",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "현재 보이는 과목·활동·PDF 링크 조회, 관측 링크 PDF 다운로드와 로컬 Qwen 번역을 구현. 실제 Blackboard 세션 미확인. 전체 과목 동기화·GPT/Claude/Gemini 위임·제출란 업로드/최종 제출·Drive 업로드는 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-123",
+      "line": 277,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "팀프로젝트 자동화",
+        "보고서 초안 작성"
+      ],
+      "requirement": "보고서 초안 작성",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "현재 보이는 과목·활동·PDF 링크 조회, 관측 링크 PDF 다운로드와 로컬 Qwen 번역을 구현. 실제 Blackboard 세션 미확인. 전체 과목 동기화·GPT/Claude/Gemini 위임·제출란 업로드/최종 제출·Drive 업로드는 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-124",
+      "line": 279,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "팀프로젝트 자동화",
+        "발표 PPT 제작"
+      ],
+      "requirement": "발표 PPT 제작",
+      "status": "not_implemented",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "전용 서비스 실행 어댑터/파일 업로드·제출 확인 및 외부 계정 연동이 아직 연결되지 않음. 현재 조회·로컬 문서 생성 코드를 해당 기능 완료로 볼 수 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-125",
+      "line": 281,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "팀프로젝트 자동화",
+        "팀원 역할·일정 제안"
+      ],
+      "requirement": "팀원 역할·일정 제안",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "현재 보이는 과목·활동·PDF 링크 조회, 관측 링크 PDF 다운로드와 로컬 Qwen 번역을 구현. 실제 Blackboard 세션 미확인. 전체 과목 동기화·GPT/Claude/Gemini 위임·제출란 업로드/최종 제출·Drive 업로드는 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-126",
+      "line": 283,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "팀프로젝트 자동화",
+        "공동 일정 조율"
+      ],
+      "requirement": "공동 일정 조율",
+      "status": "not_implemented",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "전용 서비스 실행 어댑터/파일 업로드·제출 확인 및 외부 계정 연동이 아직 연결되지 않음. 현재 조회·로컬 문서 생성 코드를 해당 기능 완료로 볼 수 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-127",
+      "line": 285,
+      "section": "4\\. 블랙보드 자동화",
+      "path": [
+        "팀프로젝트 자동화",
+        "블랙보드 마감 일정 연결"
+      ],
+      "requirement": "블랙보드 마감 일정 연결",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus-blackboard-mcp.py",
+        "opencli-nubi/campus_translation.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/BlackboardNoticeMonitor.java"
+      ],
+      "reason": "현재 보이는 과목·활동·PDF 링크 조회, 관측 링크 PDF 다운로드와 로컬 Qwen 번역을 구현. 실제 Blackboard 세션 미확인. 전체 과목 동기화·GPT/Claude/Gemini 위임·제출란 업로드/최종 제출·Drive 업로드는 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-128",
+      "line": 291,
+      "section": "5\\. 학사 이메일 자동화",
+      "path": [
+        "학사메일 신규 수신 감지"
+      ],
+      "requirement": "학사메일 신규 수신 감지",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus_actions.py",
+        "opencli-nubi/campus_mail.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusMailReview.java"
+      ],
+      "reason": "Graph 검색·임시저장과 앱의 사람 승인 후 단일 발송 요청을 구현. Graph 연결 설정이 없고 현재 WebView 메일 인증도 미확인. 실제 수신/발송·계정 전환·대화 이력 추적은 미검증/부분 구현.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-129",
+      "line": 293,
+      "section": "5\\. 학사 이메일 자동화",
+      "path": [
+        "학사메일 신규 수신 감지",
+        "강연·세미나"
+      ],
+      "requirement": "강연·세미나",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus_actions.py",
+        "opencli-nubi/campus_mail.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusMailReview.java"
+      ],
+      "reason": "Graph 검색·임시저장과 앱의 사람 승인 후 단일 발송 요청을 구현. Graph 연결 설정이 없고 현재 WebView 메일 인증도 미확인. 실제 수신/발송·계정 전환·대화 이력 추적은 미검증/부분 구현.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-130",
+      "line": 295,
+      "section": "5\\. 학사 이메일 자동화",
+      "path": [
+        "학사메일 신규 수신 감지",
+        "전공상담"
+      ],
+      "requirement": "전공상담",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus_actions.py",
+        "opencli-nubi/campus_mail.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusMailReview.java"
+      ],
+      "reason": "Graph 검색·임시저장과 앱의 사람 승인 후 단일 발송 요청을 구현. Graph 연결 설정이 없고 현재 WebView 메일 인증도 미확인. 실제 수신/발송·계정 전환·대화 이력 추적은 미검증/부분 구현.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-131",
+      "line": 297,
+      "section": "5\\. 학사 이메일 자동화",
+      "path": [
+        "학사메일 신규 수신 감지",
+        "장학금"
+      ],
+      "requirement": "장학금",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus_actions.py",
+        "opencli-nubi/campus_mail.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusMailReview.java"
+      ],
+      "reason": "Graph 검색·임시저장과 앱의 사람 승인 후 단일 발송 요청을 구현. Graph 연결 설정이 없고 현재 WebView 메일 인증도 미확인. 실제 수신/발송·계정 전환·대화 이력 추적은 미검증/부분 구현.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-132",
+      "line": 299,
+      "section": "5\\. 학사 이메일 자동화",
+      "path": [
+        "학사메일 신규 수신 감지",
+        "공모전·경진대회"
+      ],
+      "requirement": "공모전·경진대회",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus_actions.py",
+        "opencli-nubi/campus_mail.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusMailReview.java"
+      ],
+      "reason": "Graph 검색·임시저장과 앱의 사람 승인 후 단일 발송 요청을 구현. Graph 연결 설정이 없고 현재 WebView 메일 인증도 미확인. 실제 수신/발송·계정 전환·대화 이력 추적은 미검증/부분 구현.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-133",
+      "line": 301,
+      "section": "5\\. 학사 이메일 자동화",
+      "path": [
+        "학사메일 신규 수신 감지",
+        "연구실·인턴십"
+      ],
+      "requirement": "연구실·인턴십",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus_actions.py",
+        "opencli-nubi/campus_mail.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusMailReview.java"
+      ],
+      "reason": "Graph 검색·임시저장과 앱의 사람 승인 후 단일 발송 요청을 구현. Graph 연결 설정이 없고 현재 WebView 메일 인증도 미확인. 실제 수신/발송·계정 전환·대화 이력 추적은 미검증/부분 구현.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-134",
+      "line": 303,
+      "section": "5\\. 학사 이메일 자동화",
+      "path": [
+        "학사메일 신규 수신 감지",
+        "지원사업"
+      ],
+      "requirement": "지원사업",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus_actions.py",
+        "opencli-nubi/campus_mail.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusMailReview.java"
+      ],
+      "reason": "Graph 검색·임시저장과 앱의 사람 승인 후 단일 발송 요청을 구현. Graph 연결 설정이 없고 현재 WebView 메일 인증도 미확인. 실제 수신/발송·계정 전환·대화 이력 추적은 미검증/부분 구현.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-135",
+      "line": 305,
+      "section": "5\\. 학사 이메일 자동화",
+      "path": [
+        "이메일에 포함된 신청 안내 분석"
+      ],
+      "requirement": "이메일에 포함된 신청 안내 분석",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus_actions.py",
+        "opencli-nubi/campus_mail.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusMailReview.java"
+      ],
+      "reason": "Graph 검색·임시저장과 앱의 사람 승인 후 단일 발송 요청을 구현. Graph 연결 설정이 없고 현재 WebView 메일 인증도 미확인. 실제 수신/발송·계정 전환·대화 이력 추적은 미검증/부분 구현.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-136",
+      "line": 307,
+      "section": "5\\. 학사 이메일 자동화",
+      "path": [
+        "이메일에 포함된 신청 안내 분석",
+        "신청 대상·기간 확인"
+      ],
+      "requirement": "신청 대상·기간 확인",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus_actions.py",
+        "opencli-nubi/campus_mail.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusMailReview.java"
+      ],
+      "reason": "Graph 검색·임시저장과 앱의 사람 승인 후 단일 발송 요청을 구현. Graph 연결 설정이 없고 현재 WebView 메일 인증도 미확인. 실제 수신/발송·계정 전환·대화 이력 추적은 미검증/부분 구현.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-137",
+      "line": 309,
+      "section": "5\\. 학사 이메일 자동화",
+      "path": [
+        "이메일에 포함된 신청 안내 분석",
+        "신청서 자동 작성"
+      ],
+      "requirement": "신청서 자동 작성",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus_actions.py",
+        "opencli-nubi/campus_mail.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusMailReview.java"
+      ],
+      "reason": "Graph 검색·임시저장과 앱의 사람 승인 후 단일 발송 요청을 구현. Graph 연결 설정이 없고 현재 WebView 메일 인증도 미확인. 실제 수신/발송·계정 전환·대화 이력 추적은 미검증/부분 구현.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-138",
+      "line": 311,
+      "section": "5\\. 학사 이메일 자동화",
+      "path": [
+        "이메일에 포함된 신청 안내 분석",
+        "필요한 증빙서류 목록화"
+      ],
+      "requirement": "필요한 증빙서류 목록화",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus_actions.py",
+        "opencli-nubi/campus_mail.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusMailReview.java"
+      ],
+      "reason": "Graph 검색·임시저장과 앱의 사람 승인 후 단일 발송 요청을 구현. Graph 연결 설정이 없고 현재 WebView 메일 인증도 미확인. 실제 수신/발송·계정 전환·대화 이력 추적은 미검증/부분 구현.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-139",
+      "line": 313,
+      "section": "5\\. 학사 이메일 자동화",
+      "path": [
+        "이메일에 포함된 신청 안내 분석",
+        "첨부파일 자동 준비"
+      ],
+      "requirement": "첨부파일 자동 준비",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus_actions.py",
+        "opencli-nubi/campus_mail.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusMailReview.java"
+      ],
+      "reason": "Graph 검색·임시저장과 앱의 사람 승인 후 단일 발송 요청을 구현. Graph 연결 설정이 없고 현재 WebView 메일 인증도 미확인. 실제 수신/발송·계정 전환·대화 이력 추적은 미검증/부분 구현.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-140",
+      "line": 315,
+      "section": "5\\. 학사 이메일 자동화",
+      "path": [
+        "이메일에 포함된 신청 안내 분석",
+        "학사메일 임시보관함 저장"
+      ],
+      "requirement": "학사메일 임시보관함 저장",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus_actions.py",
+        "opencli-nubi/campus_mail.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusMailReview.java"
+      ],
+      "reason": "Graph 검색·임시저장과 앱의 사람 승인 후 단일 발송 요청을 구현. Graph 연결 설정이 없고 현재 WebView 메일 인증도 미확인. 실제 수신/발송·계정 전환·대화 이력 추적은 미검증/부분 구현.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-141",
+      "line": 317,
+      "section": "5\\. 학사 이메일 자동화",
+      "path": [
+        "이메일에 포함된 신청 안내 분석",
+        "승인 누르면 발송"
+      ],
+      "requirement": "승인 누르면 발송",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus_actions.py",
+        "opencli-nubi/campus_mail.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusMailReview.java"
+      ],
+      "reason": "Graph 검색·임시저장과 앱의 사람 승인 후 단일 발송 요청을 구현. Graph 연결 설정이 없고 현재 WebView 메일 인증도 미확인. 실제 수신/발송·계정 전환·대화 이력 추적은 미검증/부분 구현.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-142",
+      "line": 319,
+      "section": "5\\. 학사 이메일 자동화",
+      "path": [
+        "이메일에 포함된 신청 안내 분석",
+        "발송 결과 확인 및 중복 발송 방지"
+      ],
+      "requirement": "발송 결과 확인 및 중복 발송 방지",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus_actions.py",
+        "opencli-nubi/campus_mail.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusMailReview.java"
+      ],
+      "reason": "Graph 검색·임시저장과 앱의 사람 승인 후 단일 발송 요청을 구현. Graph 연결 설정이 없고 현재 WebView 메일 인증도 미확인. 실제 수신/발송·계정 전환·대화 이력 추적은 미검증/부분 구현.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-143",
+      "line": 321,
+      "section": "5\\. 학사 이메일 자동화",
+      "path": [
+        "교수님 이메일 자동화"
+      ],
+      "requirement": "교수님 이메일 자동화",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus_actions.py",
+        "opencli-nubi/campus_mail.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusMailReview.java"
+      ],
+      "reason": "Graph 검색·임시저장과 앱의 사람 승인 후 단일 발송 요청을 구현. Graph 연결 설정이 없고 현재 WebView 메일 인증도 미확인. 실제 수신/발송·계정 전환·대화 이력 추적은 미검증/부분 구현.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-144",
+      "line": 323,
+      "section": "5\\. 학사 이메일 자동화",
+      "path": [
+        "교수님 이메일 자동화",
+        "병결·결석 관련 메일"
+      ],
+      "requirement": "병결·결석 관련 메일",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus_actions.py",
+        "opencli-nubi/campus_mail.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusMailReview.java"
+      ],
+      "reason": "Graph 검색·임시저장과 앱의 사람 승인 후 단일 발송 요청을 구현. Graph 연결 설정이 없고 현재 WebView 메일 인증도 미확인. 실제 수신/발송·계정 전환·대화 이력 추적은 미검증/부분 구현.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-145",
+      "line": 325,
+      "section": "5\\. 학사 이메일 자동화",
+      "path": [
+        "교수님 이메일 자동화",
+        "시험 성적 확인 요청"
+      ],
+      "requirement": "시험 성적 확인 요청",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus_actions.py",
+        "opencli-nubi/campus_mail.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusMailReview.java"
+      ],
+      "reason": "Graph 검색·임시저장과 앱의 사람 승인 후 단일 발송 요청을 구현. Graph 연결 설정이 없고 현재 WebView 메일 인증도 미확인. 실제 수신/발송·계정 전환·대화 이력 추적은 미검증/부분 구현.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-146",
+      "line": 327,
+      "section": "5\\. 학사 이메일 자동화",
+      "path": [
+        "교수님 이메일 자동화",
+        "성적 정정 요청"
+      ],
+      "requirement": "성적 정정 요청",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus_actions.py",
+        "opencli-nubi/campus_mail.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusMailReview.java"
+      ],
+      "reason": "Graph 검색·임시저장과 앱의 사람 승인 후 단일 발송 요청을 구현. Graph 연결 설정이 없고 현재 WebView 메일 인증도 미확인. 실제 수신/발송·계정 전환·대화 이력 추적은 미검증/부분 구현.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-147",
+      "line": 329,
+      "section": "5\\. 학사 이메일 자동화",
+      "path": [
+        "교수님 이메일 자동화",
+        "연구실 문의"
+      ],
+      "requirement": "연구실 문의",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus_actions.py",
+        "opencli-nubi/campus_mail.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusMailReview.java"
+      ],
+      "reason": "Graph 검색·임시저장과 앱의 사람 승인 후 단일 발송 요청을 구현. Graph 연결 설정이 없고 현재 WebView 메일 인증도 미확인. 실제 수신/발송·계정 전환·대화 이력 추적은 미검증/부분 구현.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-148",
+      "line": 331,
+      "section": "5\\. 학사 이메일 자동화",
+      "path": [
+        "교수님 이메일 자동화",
+        "면담·전공상담 신청"
+      ],
+      "requirement": "면담·전공상담 신청",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus_actions.py",
+        "opencli-nubi/campus_mail.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusMailReview.java"
+      ],
+      "reason": "Graph 검색·임시저장과 앱의 사람 승인 후 단일 발송 요청을 구현. Graph 연결 설정이 없고 현재 WebView 메일 인증도 미확인. 실제 수신/발송·계정 전환·대화 이력 추적은 미검증/부분 구현.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-149",
+      "line": 333,
+      "section": "5\\. 학사 이메일 자동화",
+      "path": [
+        "교수님 이메일 자동화",
+        "사용자 학번·과목명·교수명 자동 반영"
+      ],
+      "requirement": "사용자 학번·과목명·교수명 자동 반영",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus_actions.py",
+        "opencli-nubi/campus_mail.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusMailReview.java"
+      ],
+      "reason": "Graph 검색·임시저장과 앱의 사람 승인 후 단일 발송 요청을 구현. Graph 연결 설정이 없고 현재 WebView 메일 인증도 미확인. 실제 수신/발송·계정 전환·대화 이력 추적은 미검증/부분 구현.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-150",
+      "line": 335,
+      "section": "5\\. 학사 이메일 자동화",
+      "path": [
+        "교수님 이메일 자동화",
+        "정중한 학교 이메일 양식 적용"
+      ],
+      "requirement": "정중한 학교 이메일 양식 적용",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus_actions.py",
+        "opencli-nubi/campus_mail.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusMailReview.java"
+      ],
+      "reason": "Graph 검색·임시저장과 앱의 사람 승인 후 단일 발송 요청을 구현. Graph 연결 설정이 없고 현재 WebView 메일 인증도 미확인. 실제 수신/발송·계정 전환·대화 이력 추적은 미검증/부분 구현.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-151",
+      "line": 337,
+      "section": "5\\. 학사 이메일 자동화",
+      "path": [
+        "교수님 이메일 자동화",
+        "내용 검토 후 발송"
+      ],
+      "requirement": "내용 검토 후 발송",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus_actions.py",
+        "opencli-nubi/campus_mail.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusMailReview.java"
+      ],
+      "reason": "Graph 검색·임시저장과 앱의 사람 승인 후 단일 발송 요청을 구현. Graph 연결 설정이 없고 현재 WebView 메일 인증도 미확인. 실제 수신/발송·계정 전환·대화 이력 추적은 미검증/부분 구현.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-152",
+      "line": 339,
+      "section": "5\\. 학사 이메일 자동화",
+      "path": [
+        "학사메일과 개인메일 계정 전환"
+      ],
+      "requirement": "학사메일과 개인메일 계정 전환",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus_actions.py",
+        "opencli-nubi/campus_mail.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusMailReview.java"
+      ],
+      "reason": "Graph 검색·임시저장과 앱의 사람 승인 후 단일 발송 요청을 구현. Graph 연결 설정이 없고 현재 WebView 메일 인증도 미확인. 실제 수신/발송·계정 전환·대화 이력 추적은 미검증/부분 구현.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-153",
+      "line": 341,
+      "section": "5\\. 학사 이메일 자동화",
+      "path": [
+        "발송·수신·답변 이력 추적"
+      ],
+      "requirement": "발송·수신·답변 이력 추적",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/campus_actions.py",
+        "opencli-nubi/campus_mail.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusMailReview.java"
+      ],
+      "reason": "Graph 검색·임시저장과 앱의 사람 승인 후 단일 발송 요청을 구현. Graph 연결 설정이 없고 현재 WebView 메일 인증도 미확인. 실제 수신/발송·계정 전환·대화 이력 추적은 미검증/부분 구현.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-154",
+      "line": 345,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "에브리타임 연결"
+      ],
+      "requirement": "에브리타임 연결",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-155",
+      "line": 347,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "에브리타임 연결",
+        "모바일 웹 자동화 가능 여부 확인"
+      ],
+      "requirement": "모바일 웹 자동화 가능 여부 확인",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-156",
+      "line": 349,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "에브리타임 연결",
+        "PC 웹 제어 연동"
+      ],
+      "requirement": "PC 웹 제어 연동",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-157",
+      "line": 351,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "에브리타임 연결",
+        "로그인·세션 관리"
+      ],
+      "requirement": "로그인·세션 관리",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-158",
+      "line": 353,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "에브리타임 연결",
+        "자동화 허용 범위 및 서비스 정책 확인"
+      ],
+      "requirement": "자동화 허용 범위 및 서비스 정책 확인",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-159",
+      "line": 355,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "강의평 자동화"
+      ],
+      "requirement": "강의평 자동화",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-160",
+      "line": 357,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "강의평 자동화",
+        "수강 완료 과목 확인"
+      ],
+      "requirement": "수강 완료 과목 확인",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-161",
+      "line": 359,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "강의평 자동화",
+        "본인의 실제 수강 경험 기반 강의평 초안 작성"
+      ],
+      "requirement": "본인의 실제 수강 경험 기반 강의평 초안 작성",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-162",
+      "line": 361,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "강의평 자동화",
+        "사용자 검토 및 승인"
+      ],
+      "requirement": "사용자 검토 및 승인",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-163",
+      "line": 363,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "강의평 자동화",
+        "강의평 등록"
+      ],
+      "requirement": "강의평 등록",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-164",
+      "line": 365,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "강의평 자동화",
+        "티켓 지급 조건·실제 지급 여부 확인"
+      ],
+      "requirement": "티켓 지급 조건·실제 지급 여부 확인",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-165",
+      "line": 367,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "강의평 열람·수강신청 보조"
+      ],
+      "requirement": "강의평 열람·수강신청 보조",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-166",
+      "line": 369,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "강의평 열람·수강신청 보조",
+        "강의평 자동 수집"
+      ],
+      "requirement": "강의평 자동 수집",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-167",
+      "line": 371,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "강의평 열람·수강신청 보조",
+        "강의 난이도·학점·과제량 비교"
+      ],
+      "requirement": "강의 난이도·학점·과제량 비교",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-168",
+      "line": 373,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "강의평 열람·수강신청 보조",
+        "학생 목표에 따른 수강 우선순위"
+      ],
+      "requirement": "학생 목표에 따른 수강 우선순위",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-169",
+      "line": 375,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "강의평 열람·수강신청 보조",
+        "수강 정원 변경 감지"
+      ],
+      "requirement": "수강 정원 변경 감지",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-170",
+      "line": 377,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "강의평 열람·수강신청 보조",
+        "수강신청 화면까지 자동 이동"
+      ],
+      "requirement": "수강신청 화면까지 자동 이동",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-171",
+      "line": 379,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "캠퍼스픽 및 연합 활동"
+      ],
+      "requirement": "캠퍼스픽 및 연합 활동",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-172",
+      "line": 381,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "캠퍼스픽 및 연합 활동",
+        "공모전·대회"
+      ],
+      "requirement": "공모전·대회",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-173",
+      "line": 383,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "캠퍼스픽 및 연합 활동",
+        "동아리 모집"
+      ],
+      "requirement": "동아리 모집",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-174",
+      "line": 385,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "캠퍼스픽 및 연합 활동",
+        "취업·인턴십"
+      ],
+      "requirement": "취업·인턴십",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-175",
+      "line": 387,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "캠퍼스픽 및 연합 활동",
+        "학생 전공 기반 추천"
+      ],
+      "requirement": "학생 전공 기반 추천",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-176",
+      "line": 389,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "캠퍼스픽 및 연합 활동",
+        "신청서 초안 및 제출 준비"
+      ],
+      "requirement": "신청서 초안 및 제출 준비",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-177",
+      "line": 391,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "자유게시판 정보 자동 수집"
+      ],
+      "requirement": "자유게시판 정보 자동 수집",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-178",
+      "line": 393,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "자유게시판 정보 자동 수집",
+        "취업·랩실·자격증 정보"
+      ],
+      "requirement": "취업·랩실·자격증 정보",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-179",
+      "line": 395,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "자유게시판 정보 자동 수집",
+        "동아리·축제"
+      ],
+      "requirement": "동아리·축제",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-180",
+      "line": 397,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "자유게시판 정보 자동 수집",
+        "학생에게 필요한 정보만 요약"
+      ],
+      "requirement": "학생에게 필요한 정보만 요약",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-181",
+      "line": 399,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "자유게시판 정보 자동 수집",
+        "신뢰성·작성 시점·중복 확인"
+      ],
+      "requirement": "신뢰성·작성 시점·중복 확인",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-182",
+      "line": 401,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "에타 시간표 → 누비 캘린더 동기화"
+      ],
+      "requirement": "에타 시간표 → 누비 캘린더 동기화",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-183",
+      "line": 403,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "에타 책방"
+      ],
+      "requirement": "에타 책방",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-184",
+      "line": 405,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "에타 책방",
+        "수강 과목별 교재 파악"
+      ],
+      "requirement": "수강 과목별 교재 파악",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-185",
+      "line": 407,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "에타 책방",
+        "에타 책방·당근 가격 비교"
+      ],
+      "requirement": "에타 책방·당근 가격 비교",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-186",
+      "line": 409,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "에타 책방",
+        "가격·판본·책 상태 비교"
+      ],
+      "requirement": "가격·판본·책 상태 비교",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-187",
+      "line": 411,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "에타 책방",
+        "구매 또는 거래 요청 준비"
+      ],
+      "requirement": "구매 또는 거래 요청 준비",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-188",
+      "line": 413,
+      "section": "6\\. 에브리타임·캠퍼스픽 자동화",
+      "path": [
+        "에타 책방",
+        "지원되는 경우 장바구니 등록"
+      ],
+      "requirement": "지원되는 경우 장바구니 등록",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-189",
+      "line": 417,
+      "section": "7\\. 대학생활 이외의 주요 자동화",
+      "path": [
+        "강의 실시간 동시통역"
+      ],
+      "requirement": "강의 실시간 동시통역",
+      "status": "not_implemented",
+      "evidence": [
+        "opencli-nubi/nubi_group_browser.py",
+        "opencli-nubi/nubi_ai_compare.py",
+        "opencli-nubi/nubi_transit.py"
+      ],
+      "reason": "실시간 오디오 입력·ASR 스트림·번역 스트림과 강의 녹음 권한 흐름을 구현하지 못함. 텍스트 채팅/문서 번역만으로 대체 구현이라고 판정하지 않음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-190",
+      "line": 419,
+      "section": "7\\. 대학생활 이외의 주요 자동화",
+      "path": [
+        "강의 실시간 동시통역",
+        "마이크·오디오 입력"
+      ],
+      "requirement": "마이크·오디오 입력",
+      "status": "not_implemented",
+      "evidence": [
+        "opencli-nubi/nubi_group_browser.py",
+        "opencli-nubi/nubi_ai_compare.py",
+        "opencli-nubi/nubi_transit.py"
+      ],
+      "reason": "실시간 오디오 입력·ASR 스트림·번역 스트림과 강의 녹음 권한 흐름을 구현하지 못함. 텍스트 채팅/문서 번역만으로 대체 구현이라고 판정하지 않음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-191",
+      "line": 421,
+      "section": "7\\. 대학생활 이외의 주요 자동화",
+      "path": [
+        "강의 실시간 동시통역",
+        "실시간 음성 인식"
+      ],
+      "requirement": "실시간 음성 인식",
+      "status": "not_implemented",
+      "evidence": [
+        "opencli-nubi/nubi_group_browser.py",
+        "opencli-nubi/nubi_ai_compare.py",
+        "opencli-nubi/nubi_transit.py"
+      ],
+      "reason": "실시간 오디오 입력·ASR 스트림·번역 스트림과 강의 녹음 권한 흐름을 구현하지 못함. 텍스트 채팅/문서 번역만으로 대체 구현이라고 판정하지 않음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-192",
+      "line": 423,
+      "section": "7\\. 대학생활 이외의 주요 자동화",
+      "path": [
+        "강의 실시간 동시통역",
+        "한국어 번역·원문 동시 제공"
+      ],
+      "requirement": "한국어 번역·원문 동시 제공",
+      "status": "not_implemented",
+      "evidence": [
+        "opencli-nubi/nubi_group_browser.py",
+        "opencli-nubi/nubi_ai_compare.py",
+        "opencli-nubi/nubi_transit.py"
+      ],
+      "reason": "실시간 오디오 입력·ASR 스트림·번역 스트림과 강의 녹음 권한 흐름을 구현하지 못함. 텍스트 채팅/문서 번역만으로 대체 구현이라고 판정하지 않음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-193",
+      "line": 425,
+      "section": "7\\. 대학생활 이외의 주요 자동화",
+      "path": [
+        "강의 실시간 동시통역",
+        "지연시간 최소화"
+      ],
+      "requirement": "지연시간 최소화",
+      "status": "not_implemented",
+      "evidence": [
+        "opencli-nubi/nubi_group_browser.py",
+        "opencli-nubi/nubi_ai_compare.py",
+        "opencli-nubi/nubi_transit.py"
+      ],
+      "reason": "실시간 오디오 입력·ASR 스트림·번역 스트림과 강의 녹음 권한 흐름을 구현하지 못함. 텍스트 채팅/문서 번역만으로 대체 구현이라고 판정하지 않음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-194",
+      "line": 427,
+      "section": "7\\. 대학생활 이외의 주요 자동화",
+      "path": [
+        "강의 실시간 동시통역",
+        "강의 녹음 권한 확인"
+      ],
+      "requirement": "강의 녹음 권한 확인",
+      "status": "not_implemented",
+      "evidence": [
+        "opencli-nubi/nubi_group_browser.py",
+        "opencli-nubi/nubi_ai_compare.py",
+        "opencli-nubi/nubi_transit.py"
+      ],
+      "reason": "실시간 오디오 입력·ASR 스트림·번역 스트림과 강의 녹음 권한 흐름을 구현하지 못함. 텍스트 채팅/문서 번역만으로 대체 구현이라고 판정하지 않음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-195",
+      "line": 429,
+      "section": "7\\. 대학생활 이외의 주요 자동화",
+      "path": [
+        "연애·플러팅 답장 4중 비교"
+      ],
+      "requirement": "연애·플러팅 답장 4중 비교",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi_group_browser.py",
+        "opencli-nubi/nubi_ai_compare.py",
+        "opencli-nubi/nubi_transit.py"
+      ],
+      "reason": "공개 탐색·교통 조회 API 어댑터·실제 AI 비교 슬롯은 구현. 현재 GPT/Claude/Gemini 연결과 TAGO/서울/TMAP 키가 없음. 자동 예약/결제/구매·실시간 통역은 구현 완료가 아님.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-196",
+      "line": 431,
+      "section": "7\\. 대학생활 이외의 주요 자동화",
+      "path": [
+        "연애·플러팅 답장 4중 비교",
+        "상대 메시지 입력"
+      ],
+      "requirement": "상대 메시지 입력",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi_group_browser.py",
+        "opencli-nubi/nubi_ai_compare.py",
+        "opencli-nubi/nubi_transit.py"
+      ],
+      "reason": "공개 탐색·교통 조회 API 어댑터·실제 AI 비교 슬롯은 구현. 현재 GPT/Claude/Gemini 연결과 TAGO/서울/TMAP 키가 없음. 자동 예약/결제/구매·실시간 통역은 구현 완료가 아님.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-197",
+      "line": 433,
+      "section": "7\\. 대학생활 이외의 주요 자동화",
+      "path": [
+        "연애·플러팅 답장 4중 비교",
+        "GPT 답변 생성"
+      ],
+      "requirement": "GPT 답변 생성",
+      "status": "blocked_provider_connection",
+      "evidence": [
+        "reports/checklist/compare-probe.json",
+        "opencli-nubi/nubi_ai_compare.py"
+      ],
+      "reason": "실제 서비스별 API 슬롯은 구현했지만 연결된 해당 공급자 계정/모델이 없음. 조회 결과 not_connected. Qwen으로 해당 서비스 응답을 위조하지 않음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-198",
+      "line": 435,
+      "section": "7\\. 대학생활 이외의 주요 자동화",
+      "path": [
+        "연애·플러팅 답장 4중 비교",
+        "Claude 답변 생성"
+      ],
+      "requirement": "Claude 답변 생성",
+      "status": "blocked_provider_connection",
+      "evidence": [
+        "reports/checklist/compare-probe.json",
+        "opencli-nubi/nubi_ai_compare.py"
+      ],
+      "reason": "실제 서비스별 API 슬롯은 구현했지만 연결된 해당 공급자 계정/모델이 없음. 조회 결과 not_connected. Qwen으로 해당 서비스 응답을 위조하지 않음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-199",
+      "line": 437,
+      "section": "7\\. 대학생활 이외의 주요 자동화",
+      "path": [
+        "연애·플러팅 답장 4중 비교",
+        "Gemini 답변 생성"
+      ],
+      "requirement": "Gemini 답변 생성",
+      "status": "blocked_provider_connection",
+      "evidence": [
+        "reports/checklist/compare-probe.json",
+        "opencli-nubi/nubi_ai_compare.py"
+      ],
+      "reason": "실제 서비스별 API 슬롯은 구현했지만 연결된 해당 공급자 계정/모델이 없음. 조회 결과 not_connected. Qwen으로 해당 서비스 응답을 위조하지 않음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-200",
+      "line": 439,
+      "section": "7\\. 대학생활 이외의 주요 자동화",
+      "path": [
+        "연애·플러팅 답장 4중 비교",
+        "누비 자체 답변 생성"
+      ],
+      "requirement": "누비 자체 답변 생성",
+      "status": "verified_live",
+      "evidence": [
+        "reports/checklist/compare-probe.json"
+      ],
+      "reason": "합성 문자를 넣어 실제 Qwen 응답 확인. 외부 사용자에게 전송하지 않음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-201",
+      "line": 441,
+      "section": "7\\. 대학생활 이외의 주요 자동화",
+      "path": [
+        "연애·플러팅 답장 4중 비교",
+        "4개 답변 비교 UI"
+      ],
+      "requirement": "4개 답변 비교 UI",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi_group_browser.py",
+        "opencli-nubi/nubi_ai_compare.py",
+        "opencli-nubi/nubi_transit.py"
+      ],
+      "reason": "공개 탐색·교통 조회 API 어댑터·실제 AI 비교 슬롯은 구현. 현재 GPT/Claude/Gemini 연결과 TAGO/서울/TMAP 키가 없음. 자동 예약/결제/구매·실시간 통역은 구현 완료가 아님.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-202",
+      "line": 443,
+      "section": "7\\. 대학생활 이외의 주요 자동화",
+      "path": [
+        "연애·플러팅 답장 4중 비교",
+        "선택·수정·복사·전송 연결"
+      ],
+      "requirement": "선택·수정·복사·전송 연결",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi_group_browser.py",
+        "opencli-nubi/nubi_ai_compare.py",
+        "opencli-nubi/nubi_transit.py"
+      ],
+      "reason": "공개 탐색·교통 조회 API 어댑터·실제 AI 비교 슬롯은 구현. 현재 GPT/Claude/Gemini 연결과 TAGO/서울/TMAP 키가 없음. 자동 예약/결제/구매·실시간 통역은 구현 완료가 아님.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-203",
+      "line": 445,
+      "section": "7\\. 대학생활 이외의 주요 자동화",
+      "path": [
+        "KTX 예매 자동화"
+      ],
+      "requirement": "KTX 예매 자동화",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi_group_browser.py",
+        "opencli-nubi/nubi_ai_compare.py",
+        "opencli-nubi/nubi_transit.py"
+      ],
+      "reason": "공개 탐색·교통 조회 API 어댑터·실제 AI 비교 슬롯은 구현. 현재 GPT/Claude/Gemini 연결과 TAGO/서울/TMAP 키가 없음. 자동 예약/결제/구매·실시간 통역은 구현 완료가 아님.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-204",
+      "line": 447,
+      "section": "7\\. 대학생활 이외의 주요 자동화",
+      "path": [
+        "KTX 예매 자동화",
+        "열차 검색·잔여석 확인"
+      ],
+      "requirement": "열차 검색·잔여석 확인",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi_group_browser.py",
+        "opencli-nubi/nubi_ai_compare.py",
+        "opencli-nubi/nubi_transit.py"
+      ],
+      "reason": "공개 탐색·교통 조회 API 어댑터·실제 AI 비교 슬롯은 구현. 현재 GPT/Claude/Gemini 연결과 TAGO/서울/TMAP 키가 없음. 자동 예약/결제/구매·실시간 통역은 구현 완료가 아님.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-205",
+      "line": 449,
+      "section": "7\\. 대학생활 이외의 주요 자동화",
+      "path": [
+        "KTX 예매 자동화",
+        "사용자 선호 조건 반영"
+      ],
+      "requirement": "사용자 선호 조건 반영",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi_group_browser.py",
+        "opencli-nubi/nubi_ai_compare.py",
+        "opencli-nubi/nubi_transit.py"
+      ],
+      "reason": "공개 탐색·교통 조회 API 어댑터·실제 AI 비교 슬롯은 구현. 현재 GPT/Claude/Gemini 연결과 TAGO/서울/TMAP 키가 없음. 자동 예약/결제/구매·실시간 통역은 구현 완료가 아님.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-206",
+      "line": 451,
+      "section": "7\\. 대학생활 이외의 주요 자동화",
+      "path": [
+        "KTX 예매 자동화",
+        "예매 화면 자동 제어"
+      ],
+      "requirement": "예매 화면 자동 제어",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi_group_browser.py",
+        "opencli-nubi/nubi_ai_compare.py",
+        "opencli-nubi/nubi_transit.py"
+      ],
+      "reason": "공개 탐색·교통 조회 API 어댑터·실제 AI 비교 슬롯은 구현. 현재 GPT/Claude/Gemini 연결과 TAGO/서울/TMAP 키가 없음. 자동 예약/결제/구매·실시간 통역은 구현 완료가 아님.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-207",
+      "line": 453,
+      "section": "7\\. 대학생활 이외의 주요 자동화",
+      "path": [
+        "KTX 예매 자동화",
+        "승인 후 예약·결제"
+      ],
+      "requirement": "승인 후 예약·결제",
+      "status": "not_implemented",
+      "evidence": [
+        "opencli-nubi/nubi_group_browser.py",
+        "opencli-nubi/nubi_ai_compare.py",
+        "opencli-nubi/nubi_transit.py"
+      ],
+      "reason": "실제 거래 어댑터·결제 승인 토큰·거래 영수증 검증이 없음. 공개 웹 검색 도구로 거래 완료를 주장하지 않음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-208",
+      "line": 455,
+      "section": "7\\. 대학생활 이외의 주요 자동화",
+      "path": [
+        "KTX 예매 자동화",
+        "예약 내역 및 변경 관리"
+      ],
+      "requirement": "예약 내역 및 변경 관리",
+      "status": "not_implemented",
+      "evidence": [
+        "opencli-nubi/nubi_group_browser.py",
+        "opencli-nubi/nubi_ai_compare.py",
+        "opencli-nubi/nubi_transit.py"
+      ],
+      "reason": "실제 거래 어댑터·결제 승인 토큰·거래 영수증 검증이 없음. 공개 웹 검색 도구로 거래 완료를 주장하지 않음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-209",
+      "line": 457,
+      "section": "7\\. 대학생활 이외의 주요 자동화",
+      "path": [
+        "콘서트 티켓 예매"
+      ],
+      "requirement": "콘서트 티켓 예매",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi_group_browser.py",
+        "opencli-nubi/nubi_ai_compare.py",
+        "opencli-nubi/nubi_transit.py"
+      ],
+      "reason": "공개 탐색·교통 조회 API 어댑터·실제 AI 비교 슬롯은 구현. 현재 GPT/Claude/Gemini 연결과 TAGO/서울/TMAP 키가 없음. 자동 예약/결제/구매·실시간 통역은 구현 완료가 아님.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-210",
+      "line": 459,
+      "section": "7\\. 대학생활 이외의 주요 자동화",
+      "path": [
+        "콘서트 티켓 예매",
+        "공연 일정 감지"
+      ],
+      "requirement": "공연 일정 감지",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi_group_browser.py",
+        "opencli-nubi/nubi_ai_compare.py",
+        "opencli-nubi/nubi_transit.py"
+      ],
+      "reason": "공개 탐색·교통 조회 API 어댑터·실제 AI 비교 슬롯은 구현. 현재 GPT/Claude/Gemini 연결과 TAGO/서울/TMAP 키가 없음. 자동 예약/결제/구매·실시간 통역은 구현 완료가 아님.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-211",
+      "line": 461,
+      "section": "7\\. 대학생활 이외의 주요 자동화",
+      "path": [
+        "콘서트 티켓 예매",
+        "예매 시작 알림"
+      ],
+      "requirement": "예매 시작 알림",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi_group_browser.py",
+        "opencli-nubi/nubi_ai_compare.py",
+        "opencli-nubi/nubi_transit.py"
+      ],
+      "reason": "공개 탐색·교통 조회 API 어댑터·실제 AI 비교 슬롯은 구현. 현재 GPT/Claude/Gemini 연결과 TAGO/서울/TMAP 키가 없음. 자동 예약/결제/구매·실시간 통역은 구현 완료가 아님.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-212",
+      "line": 463,
+      "section": "7\\. 대학생활 이외의 주요 자동화",
+      "path": [
+        "콘서트 티켓 예매",
+        "좌석·가격 비교"
+      ],
+      "requirement": "좌석·가격 비교",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi_group_browser.py",
+        "opencli-nubi/nubi_ai_compare.py",
+        "opencli-nubi/nubi_transit.py"
+      ],
+      "reason": "공개 탐색·교통 조회 API 어댑터·실제 AI 비교 슬롯은 구현. 현재 GPT/Claude/Gemini 연결과 TAGO/서울/TMAP 키가 없음. 자동 예약/결제/구매·실시간 통역은 구현 완료가 아님.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-213",
+      "line": 465,
+      "section": "7\\. 대학생활 이외의 주요 자동화",
+      "path": [
+        "콘서트 티켓 예매",
+        "예매 및 결제 보조"
+      ],
+      "requirement": "예매 및 결제 보조",
+      "status": "not_implemented",
+      "evidence": [
+        "opencli-nubi/nubi_group_browser.py",
+        "opencli-nubi/nubi_ai_compare.py",
+        "opencli-nubi/nubi_transit.py"
+      ],
+      "reason": "실제 거래 어댑터·결제 승인 토큰·거래 영수증 검증이 없음. 공개 웹 검색 도구로 거래 완료를 주장하지 않음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-214",
+      "line": 467,
+      "section": "7\\. 대학생활 이외의 주요 자동화",
+      "path": [
+        "콘서트 티켓 예매",
+        "예약 성공 확인"
+      ],
+      "requirement": "예약 성공 확인",
+      "status": "not_implemented",
+      "evidence": [
+        "opencli-nubi/nubi_group_browser.py",
+        "opencli-nubi/nubi_ai_compare.py",
+        "opencli-nubi/nubi_transit.py"
+      ],
+      "reason": "실제 거래 어댑터·결제 승인 토큰·거래 영수증 검증이 없음. 공개 웹 검색 도구로 거래 완료를 주장하지 않음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-215",
+      "line": 469,
+      "section": "7\\. 대학생활 이외의 주요 자동화",
+      "path": [
+        "패션·쇼핑 자동화"
+      ],
+      "requirement": "패션·쇼핑 자동화",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi_group_browser.py",
+        "opencli-nubi/nubi_ai_compare.py",
+        "opencli-nubi/nubi_transit.py"
+      ],
+      "reason": "공개 탐색·교통 조회 API 어댑터·실제 AI 비교 슬롯은 구현. 현재 GPT/Claude/Gemini 연결과 TAGO/서울/TMAP 키가 없음. 자동 예약/결제/구매·실시간 통역은 구현 완료가 아님.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-216",
+      "line": 471,
+      "section": "7\\. 대학생활 이외의 주요 자동화",
+      "path": [
+        "패션·쇼핑 자동화",
+        "무신사·4910 상품 탐색"
+      ],
+      "requirement": "무신사·4910 상품 탐색",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi_group_browser.py",
+        "opencli-nubi/nubi_ai_compare.py",
+        "opencli-nubi/nubi_transit.py"
+      ],
+      "reason": "공개 탐색·교통 조회 API 어댑터·실제 AI 비교 슬롯은 구현. 현재 GPT/Claude/Gemini 연결과 TAGO/서울/TMAP 키가 없음. 자동 예약/결제/구매·실시간 통역은 구현 완료가 아님.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-217",
+      "line": 473,
+      "section": "7\\. 대학생활 이외의 주요 자동화",
+      "path": [
+        "패션·쇼핑 자동화",
+        "행사·축제에 맞는 코디 추천"
+      ],
+      "requirement": "행사·축제에 맞는 코디 추천",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi_group_browser.py",
+        "opencli-nubi/nubi_ai_compare.py",
+        "opencli-nubi/nubi_transit.py"
+      ],
+      "reason": "공개 탐색·교통 조회 API 어댑터·실제 AI 비교 슬롯은 구현. 현재 GPT/Claude/Gemini 연결과 TAGO/서울/TMAP 키가 없음. 자동 예약/결제/구매·실시간 통역은 구현 완료가 아님.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-218",
+      "line": 475,
+      "section": "7\\. 대학생활 이외의 주요 자동화",
+      "path": [
+        "패션·쇼핑 자동화",
+        "가격·할인·배송일 비교"
+      ],
+      "requirement": "가격·할인·배송일 비교",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi_group_browser.py",
+        "opencli-nubi/nubi_ai_compare.py",
+        "opencli-nubi/nubi_transit.py"
+      ],
+      "reason": "공개 탐색·교통 조회 API 어댑터·실제 AI 비교 슬롯은 구현. 현재 GPT/Claude/Gemini 연결과 TAGO/서울/TMAP 키가 없음. 자동 예약/결제/구매·실시간 통역은 구현 완료가 아님.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-219",
+      "line": 477,
+      "section": "7\\. 대학생활 이외의 주요 자동화",
+      "path": [
+        "패션·쇼핑 자동화",
+        "장바구니 자동 담기"
+      ],
+      "requirement": "장바구니 자동 담기",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi_group_browser.py",
+        "opencli-nubi/nubi_ai_compare.py",
+        "opencli-nubi/nubi_transit.py"
+      ],
+      "reason": "공개 탐색·교통 조회 API 어댑터·실제 AI 비교 슬롯은 구현. 현재 GPT/Claude/Gemini 연결과 TAGO/서울/TMAP 키가 없음. 자동 예약/결제/구매·실시간 통역은 구현 완료가 아님.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-220",
+      "line": 479,
+      "section": "7\\. 대학생활 이외의 주요 자동화",
+      "path": [
+        "패션·쇼핑 자동화",
+        "주문 최종 승인 후 결제"
+      ],
+      "requirement": "주문 최종 승인 후 결제",
+      "status": "not_implemented",
+      "evidence": [
+        "opencli-nubi/nubi_group_browser.py",
+        "opencli-nubi/nubi_ai_compare.py",
+        "opencli-nubi/nubi_transit.py"
+      ],
+      "reason": "실제 거래 어댑터·결제 승인 토큰·거래 영수증 검증이 없음. 공개 웹 검색 도구로 거래 완료를 주장하지 않음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-221",
+      "line": 481,
+      "section": "7\\. 대학생활 이외의 주요 자동화",
+      "path": [
+        "패션·쇼핑 자동화",
+        "구매 결과 추적"
+      ],
+      "requirement": "구매 결과 추적",
+      "status": "not_implemented",
+      "evidence": [
+        "opencli-nubi/nubi_group_browser.py",
+        "opencli-nubi/nubi_ai_compare.py",
+        "opencli-nubi/nubi_transit.py"
+      ],
+      "reason": "실제 거래 어댑터·결제 승인 토큰·거래 영수증 검증이 없음. 공개 웹 검색 도구로 거래 완료를 주장하지 않음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-222",
+      "line": 489,
+      "section": "8-1. 메인 홈",
+      "path": [
+        "홈 최상단 약 30% 개인화 히어로 배너"
+      ],
+      "requirement": "홈 최상단 약 30% 개인화 히어로 배너",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-223",
+      "line": 491,
+      "section": "8-1. 메인 홈",
+      "path": [
+        "학사·과제·메일 등 꼭 필요한 정보 우선 노출"
+      ],
+      "requirement": "학사·과제·메일 등 꼭 필요한 정보 우선 노출",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-224",
+      "line": 493,
+      "section": "8-1. 메인 홈",
+      "path": [
+        "사용자별 목표 기반 배너"
+      ],
+      "requirement": "사용자별 목표 기반 배너",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-225",
+      "line": 495,
+      "section": "8-1. 메인 홈",
+      "path": [
+        "시간대별 배너 자동 변경"
+      ],
+      "requirement": "시간대별 배너 자동 변경",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-226",
+      "line": 497,
+      "section": "8-1. 메인 홈",
+      "path": [
+        "중요한 알림과 광고 완전 분리"
+      ],
+      "requirement": "중요한 알림과 광고 완전 분리",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-227",
+      "line": 499,
+      "section": "8-1. 메인 홈",
+      "path": [
+        "누비 캐릭터 및 목표별 빠른 실행"
+      ],
+      "requirement": "누비 캐릭터 및 목표별 빠른 실행",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-228",
+      "line": 501,
+      "section": "8-1. 메인 홈",
+      "path": [
+        "자주 사용하는 기능 자동 상단 배치"
+      ],
+      "requirement": "자주 사용하는 기능 자동 상단 배치",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-229",
+      "line": 503,
+      "section": "8-1. 메인 홈",
+      "path": [
+        "사용자가 직접 고정·숨김·순서 변경"
+      ],
+      "requirement": "사용자가 직접 고정·숨김·순서 변경",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-230",
+      "line": 505,
+      "section": "8-1. 메인 홈",
+      "path": [
+        "코스피 등 선택형 위젯"
+      ],
+      "requirement": "코스피 등 선택형 위젯",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-231",
+      "line": 507,
+      "section": "8-1. 메인 홈",
+      "path": [
+        "배너 클릭 → 해당 에이전트 채팅으로 연결"
+      ],
+      "requirement": "배너 클릭 → 해당 에이전트 채팅으로 연결",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-232",
+      "line": 509,
+      "section": "8-1. 메인 홈",
+      "path": [
+        "클릭 시 필요한 작업 맥락·질문 미리 입력"
+      ],
+      "requirement": "클릭 시 필요한 작업 맥락·질문 미리 입력",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-233",
+      "line": 513,
+      "section": "8-2. 개인화 판단 엔진",
+      "path": [
+        "사용자 목표·전공·학년·시간표 반영"
+      ],
+      "requirement": "사용자 목표·전공·학년·시간표 반영",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-234",
+      "line": 515,
+      "section": "8-2. 개인화 판단 엔진",
+      "path": [
+        "수강 과목·시험·과제 마감 반영"
+      ],
+      "requirement": "수강 과목·시험·과제 마감 반영",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-235",
+      "line": 517,
+      "section": "8-2. 개인화 판단 엔진",
+      "path": [
+        "위치 및 이동 일정 반영"
+      ],
+      "requirement": "위치 및 이동 일정 반영",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-236",
+      "line": 519,
+      "section": "8-2. 개인화 판단 엔진",
+      "path": [
+        "수면·운동·식사 루틴 반영"
+      ],
+      "requirement": "수면·운동·식사 루틴 반영",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-237",
+      "line": 521,
+      "section": "8-2. 개인화 판단 엔진",
+      "path": [
+        "현재 시점의 긴급도 계산"
+      ],
+      "requirement": "현재 시점의 긴급도 계산",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-238",
+      "line": 523,
+      "section": "8-2. 개인화 판단 엔진",
+      "path": [
+        "알림 중복 및 피로도 관리"
+      ],
+      "requirement": "알림 중복 및 피로도 관리",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-239",
+      "line": 525,
+      "section": "8-2. 개인화 판단 엔진",
+      "path": [
+        "지나간 일정 자동 제거"
+      ],
+      "requirement": "지나간 일정 자동 제거",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-240",
+      "line": 527,
+      "section": "8-2. 개인화 판단 엔진",
+      "path": [
+        "정보 출처·갱신 시각·신뢰도 표시"
+      ],
+      "requirement": "정보 출처·갱신 시각·신뢰도 표시",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-241",
+      "line": 529,
+      "section": "8-2. 개인화 판단 엔진",
+      "path": [
+        "사용자 반응 기반 추천 순위 개선"
+      ],
+      "requirement": "사용자 반응 기반 추천 순위 개선",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-242",
+      "line": 533,
+      "section": "8-3. 구체적인 배너 시나리오",
+      "path": [
+        "아침: 건강이의 기상·운동·헬스 영상 제안"
+      ],
+      "requirement": "아침: 건강이의 기상·운동·헬스 영상 제안",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-243",
+      "line": 535,
+      "section": "8-3. 구체적인 배너 시나리오",
+      "path": [
+        "수업 전: 강의시간·강의실·과제 알림"
+      ],
+      "requirement": "수업 전: 강의시간·강의실·과제 알림",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-244",
+      "line": 537,
+      "section": "8-3. 구체적인 배너 시나리오",
+      "path": [
+        "시험기간: 시험 일정·오픈북 여부·공부 자료"
+      ],
+      "requirement": "시험기간: 시험 일정·오픈북 여부·공부 자료",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-245",
+      "line": 539,
+      "section": "8-3. 구체적인 배너 시나리오",
+      "path": [
+        "과제 마감: 생성된 과제 결과물 검토 요청"
+      ],
+      "requirement": "과제 마감: 생성된 과제 결과물 검토 요청",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-246",
+      "line": 541,
+      "section": "8-3. 구체적인 배너 시나리오",
+      "path": [
+        "장학금 마감: 신청 자격·지원금액·신청 버튼"
+      ],
+      "requirement": "장학금 마감: 신청 자격·지원금액·신청 버튼",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-247",
+      "line": 543,
+      "section": "8-3. 구체적인 배너 시나리오",
+      "path": [
+        "학교 간식 행사: LG 등 기업 방문·무료 햄버거 안내"
+      ],
+      "requirement": "학교 간식 행사: LG 등 기업 방문·무료 햄버거 안내",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-248",
+      "line": 545,
+      "section": "8-3. 구체적인 배너 시나리오",
+      "path": [
+        "점심시간: 학식 메뉴·혼잡 예상·식권 구매 제안"
+      ],
+      "requirement": "점심시간: 학식 메뉴·혼잡 예상·식권 구매 제안",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-249",
+      "line": 547,
+      "section": "8-3. 구체적인 배너 시나리오",
+      "path": [
+        "귀가시간: 버스·KTX 연계 이동 제안"
+      ],
+      "requirement": "귀가시간: 버스·KTX 연계 이동 제안",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-250",
+      "line": 549,
+      "section": "8-3. 구체적인 배너 시나리오",
+      "path": [
+        "밤: 내일 일정·미완료 작업 브리핑"
+      ],
+      "requirement": "밤: 내일 일정·미완료 작업 브리핑",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-251",
+      "line": 551,
+      "section": "8-3. 구체적인 배너 시나리오",
+      "path": [
+        "목표별: 건강·연애·재정·학점 상황 추천"
+      ],
+      "requirement": "목표별: 건강·연애·재정·학점 상황 추천",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-252",
+      "line": 553,
+      "section": "8-3. 구체적인 배너 시나리오",
+      "path": [
+        "관심 주식·시장지표 등 선택형 정보 배너"
+      ],
+      "requirement": "관심 주식·시장지표 등 선택형 정보 배너",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-253",
+      "line": 557,
+      "section": "8-4. 버스·KTX 실시간 연계 고도화",
+      "path": [
+        "버스 노선·정류장·실시간 도착정보 API 확인"
+      ],
+      "requirement": "버스 노선·정류장·실시간 도착정보 API 확인",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-254",
+      "line": 559,
+      "section": "8-4. 버스·KTX 실시간 연계 고도화",
+      "path": [
+        "513번 등 실제 이용 노선 등록"
+      ],
+      "requirement": "513번 등 실제 이용 노선 등록",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-255",
+      "line": 561,
+      "section": "8-4. 버스·KTX 실시간 연계 고도화",
+      "path": [
+        "수업 종료 시각과 정류장 이동시간 계산"
+      ],
+      "requirement": "수업 종료 시각과 정류장 이동시간 계산",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-256",
+      "line": 563,
+      "section": "8-4. 버스·KTX 실시간 연계 고도화",
+      "path": [
+        "실제 버스 도착 및 울산역 도착 예상시간 계산"
+      ],
+      "requirement": "실제 버스 도착 및 울산역 도착 예상시간 계산",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-257",
+      "line": 565,
+      "section": "8-4. 버스·KTX 실시간 연계 고도화",
+      "path": [
+        "KTX 잔여 좌석과 출발시간 동시 확인"
+      ],
+      "requirement": "KTX 잔여 좌석과 출발시간 동시 확인",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-258",
+      "line": 567,
+      "section": "8-4. 버스·KTX 실시간 연계 고도화",
+      "path": [
+        "환승 가능성·지연 위험 계산"
+      ],
+      "requirement": "환승 가능성·지연 위험 계산",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-259",
+      "line": 569,
+      "section": "8-4. 버스·KTX 실시간 연계 고도화",
+      "path": [
+        "수업 종료 전 최적 출발 시점 알림"
+      ],
+      "requirement": "수업 종료 전 최적 출발 시점 알림",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-260",
+      "line": 571,
+      "section": "8-4. 버스·KTX 실시간 연계 고도화",
+      "path": [
+        "예약 후 버스 지연 시 열차 변경 가능성 재평가"
+      ],
+      "requirement": "예약 후 버스 지연 시 열차 변경 가능성 재평가",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-261",
+      "line": 573,
+      "section": "8-4. 버스·KTX 실시간 연계 고도화",
+      "path": [
+        "취소 수수료·변경 마감·대체편 확인"
+      ],
+      "requirement": "취소 수수료·변경 마감·대체편 확인",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-262",
+      "line": 575,
+      "section": "8-4. 버스·KTX 실시간 연계 고도화",
+      "path": [
+        "사용자 사전 승인 규칙에 따른 취소·재예약"
+      ],
+      "requirement": "사용자 사전 승인 규칙에 따른 취소·재예약",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-263",
+      "line": 577,
+      "section": "8-4. 버스·KTX 실시간 연계 고도화",
+      "path": [
+        "결제액·취소 수수료 상한 초과 시 재승인"
+      ],
+      "requirement": "결제액·취소 수수료 상한 초과 시 재승인",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-264",
+      "line": 579,
+      "section": "8-4. 버스·KTX 실시간 연계 고도화",
+      "path": [
+        "귀가 관련 내용을 메인 배너에 자동 표시"
+      ],
+      "requirement": "귀가 관련 내용을 메인 배너에 자동 표시",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-265",
+      "line": 581,
+      "section": "8-4. 버스·KTX 실시간 연계 고도화",
+      "path": [
+        "실시간 데이터가 없을 때 보수적인 대체 경로 사용"
+      ],
+      "requirement": "실시간 데이터가 없을 때 보수적인 대체 경로 사용",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-266",
+      "line": 585,
+      "section": "8-5. 알림 시스템",
+      "path": [
+        "앱 내 알림함"
+      ],
+      "requirement": "앱 내 알림함",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-267",
+      "line": 587,
+      "section": "8-5. 알림 시스템",
+      "path": [
+        "Android 푸시 알림"
+      ],
+      "requirement": "Android 푸시 알림",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-268",
+      "line": 589,
+      "section": "8-5. 알림 시스템",
+      "path": [
+        "긴급·보통·추천 우선순위"
+      ],
+      "requirement": "긴급·보통·추천 우선순위",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-269",
+      "line": 591,
+      "section": "8-5. 알림 시스템",
+      "path": [
+        "동일한 공지 중복 알림 방지"
+      ],
+      "requirement": "동일한 공지 중복 알림 방지",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-270",
+      "line": 593,
+      "section": "8-5. 알림 시스템",
+      "path": [
+        "사용자별 알림 허용 시간"
+      ],
+      "requirement": "사용자별 알림 허용 시간",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-271",
+      "line": 595,
+      "section": "8-5. 알림 시스템",
+      "path": [
+        "알림을 눌러 즉시 후속 작업 수행"
+      ],
+      "requirement": "알림을 눌러 즉시 후속 작업 수행",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-272",
+      "line": 597,
+      "section": "8-5. 알림 시스템",
+      "path": [
+        "알림을 읽었는지·작업을 완료했는지 추적"
+      ],
+      "requirement": "알림을 읽었는지·작업을 완료했는지 추적",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-273",
+      "line": 603,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "관리자 웹 기본 페이지"
+      ],
+      "requirement": "관리자 웹 기본 페이지",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-274",
+      "line": 605,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "관리자 웹 기본 페이지",
+        "중앙에 실제 모바일 앱 비율의 화면 배치"
+      ],
+      "requirement": "중앙에 실제 모바일 앱 비율의 화면 배치",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-275",
+      "line": 607,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "관리자 웹 기본 페이지",
+        "앱 화면 내 버튼 클릭과 페이지 이동"
+      ],
+      "requirement": "앱 화면 내 버튼 클릭과 페이지 이동",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-276",
+      "line": 609,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "관리자 웹 기본 페이지",
+        "왼쪽에 사용자·상황·시간 제어 패널"
+      ],
+      "requirement": "왼쪽에 사용자·상황·시간 제어 패널",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-277",
+      "line": 611,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "관리자 웹 기본 페이지",
+        "오른쪽에 배너 판단 결과·알고리즘 설명"
+      ],
+      "requirement": "오른쪽에 배너 판단 결과·알고리즘 설명",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-278",
+      "line": 613,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "관리자 웹 기본 페이지",
+        "6인치 스마트폰 화면 미리보기"
+      ],
+      "requirement": "6인치 스마트폰 화면 미리보기",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-279",
+      "line": 615,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "사용자 시나리오 제어"
+      ],
+      "requirement": "사용자 시나리오 제어",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-280",
+      "line": 617,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "사용자 시나리오 제어",
+        "학년·전공·목표 선택"
+      ],
+      "requirement": "학년·전공·목표 선택",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-281",
+      "line": 619,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "사용자 시나리오 제어",
+        "수강 과목과 시간표 변경"
+      ],
+      "requirement": "수강 과목과 시간표 변경",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-282",
+      "line": 621,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "사용자 시나리오 제어",
+        "현재 시각·요일 변경"
+      ],
+      "requirement": "현재 시각·요일 변경",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-283",
+      "line": 623,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "사용자 시나리오 제어",
+        "시험·과제·장학 공지 이벤트 주입"
+      ],
+      "requirement": "시험·과제·장학 공지 이벤트 주입",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-284",
+      "line": 625,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "사용자 시나리오 제어",
+        "위치·버스 지연·KTX 상황 변경"
+      ],
+      "requirement": "위치·버스 지연·KTX 상황 변경",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-285",
+      "line": 627,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "사용자 시나리오 제어",
+        "건강·연애·재정 등 캐릭터 이용 패턴 변경"
+      ],
+      "requirement": "건강·연애·재정 등 캐릭터 이용 패턴 변경",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-286",
+      "line": 629,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "배너 알고리즘 관리"
+      ],
+      "requirement": "배너 알고리즘 관리",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-287",
+      "line": 631,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "배너 알고리즘 관리",
+        "시간별 어떤 배너가 나오는지 타임라인"
+      ],
+      "requirement": "시간별 어떤 배너가 나오는지 타임라인",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-288",
+      "line": 633,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "배너 알고리즘 관리",
+        "개인별 배너 우선순위 점수"
+      ],
+      "requirement": "개인별 배너 우선순위 점수",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-289",
+      "line": 635,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "배너 알고리즘 관리",
+        "배너를 선택한 근거 설명"
+      ],
+      "requirement": "배너를 선택한 근거 설명",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-290",
+      "line": 637,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "배너 알고리즘 관리",
+        "배너 문구·이미지·노출 조건 수정"
+      ],
+      "requirement": "배너 문구·이미지·노출 조건 수정",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-291",
+      "line": 639,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "배너 알고리즘 관리",
+        "배너 간 충돌·중복 검사"
+      ],
+      "requirement": "배너 간 충돌·중복 검사",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-292",
+      "line": 641,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "배너 알고리즘 관리",
+        "중요 공지 강제 노출·숨김"
+      ],
+      "requirement": "중요 공지 강제 노출·숨김",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-293",
+      "line": 643,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "배너 알고리즘 관리",
+        "광고 배너 별도 관리"
+      ],
+      "requirement": "광고 배너 별도 관리",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-294",
+      "line": 645,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "배너 알고리즘 관리",
+        "변경 사항 미리보기 및 배포"
+      ],
+      "requirement": "변경 사항 미리보기 및 배포",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-295",
+      "line": 647,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "실제 동선 시뮬레이션"
+      ],
+      "requirement": "실제 동선 시뮬레이션",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-296",
+      "line": 649,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "실제 동선 시뮬레이션",
+        "배너 클릭 → 채팅 진입"
+      ],
+      "requirement": "배너 클릭 → 채팅 진입",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-297",
+      "line": 651,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "실제 동선 시뮬레이션",
+        "에이전트 선택·소환"
+      ],
+      "requirement": "에이전트 선택·소환",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-298",
+      "line": 653,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "실제 동선 시뮬레이션",
+        "브라우저 작업 실행 화면"
+      ],
+      "requirement": "브라우저 작업 실행 화면",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-299",
+      "line": 655,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "실제 동선 시뮬레이션",
+        "결과물 검토"
+      ],
+      "requirement": "결과물 검토",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-300",
+      "line": 657,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "실제 동선 시뮬레이션",
+        "승인·취소·완료"
+      ],
+      "requirement": "승인·취소·완료",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-301",
+      "line": 659,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "실제 동선 시뮬레이션",
+        "캘린더·보관함 이동"
+      ],
+      "requirement": "캘린더·보관함 이동",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-302",
+      "line": 661,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "실제 동선 시뮬레이션",
+        "모든 화면 전환의 상태·이벤트 기록"
+      ],
+      "requirement": "모든 화면 전환의 상태·이벤트 기록",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-303",
+      "line": 663,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "운영·분석"
+      ],
+      "requirement": "운영·분석",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-304",
+      "line": 665,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "운영·분석",
+        "배너 노출·클릭·작업완료율"
+      ],
+      "requirement": "배너 노출·클릭·작업완료율",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-305",
+      "line": 667,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "운영·분석",
+        "알림 발송·수신·클릭률"
+      ],
+      "requirement": "알림 발송·수신·클릭률",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-306",
+      "line": 669,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "운영·분석",
+        "작업 실패 및 재시도 로그"
+      ],
+      "requirement": "작업 실패 및 재시도 로그",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-307",
+      "line": 671,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "운영·분석",
+        "배너 A/B 테스트"
+      ],
+      "requirement": "배너 A/B 테스트",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-308",
+      "line": 673,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "운영·분석",
+        "관리자 권한 분리"
+      ],
+      "requirement": "관리자 권한 분리",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-309",
+      "line": 675,
+      "section": "9\\. 관리자 웹 — 홈 알고리즘·UI 시뮬레이터",
+      "path": [
+        "운영·분석",
+        "실제 서비스 배포 전 테스트 모드"
+      ],
+      "requirement": "실제 서비스 배포 전 테스트 모드",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "later"
+    },
+    {
+      "id": "CHK-310",
+      "line": 679,
+      "section": "10\\. 단체채팅·에이전트 고도화",
+      "path": [
+        "주무 에이전트 기본 라우팅 및 Qwen 응답 연결"
+      ],
+      "requirement": "주무 에이전트 기본 라우팅 및 Qwen 응답 연결",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi_group_qwen.py",
+        "opencli-nubi/nubi_group_browser.py"
+      ],
+      "reason": "단체챗의 실제 Qwen 라우팅·담당 답변·공개 MCP 탐색·소유권·취소 구현. 도구별 정확도, 복합 작업 병합·계정 권한 분리·비용 표시 등은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-311",
+      "line": 681,
+      "section": "10\\. 단체채팅·에이전트 고도화",
+      "path": [
+        "여러 캐릭터의 응답 종합 기본 흐름"
+      ],
+      "requirement": "여러 캐릭터의 응답 종합 기본 흐름",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi_group_qwen.py",
+        "opencli-nubi/nubi_group_browser.py"
+      ],
+      "reason": "단체챗의 실제 Qwen 라우팅·담당 답변·공개 MCP 탐색·소유권·취소 구현. 도구별 정확도, 복합 작업 병합·계정 권한 분리·비용 표시 등은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-312",
+      "line": 683,
+      "section": "10\\. 단체채팅·에이전트 고도화",
+      "path": [
+        "목적에 따른 주무 에이전트 자동 확정"
+      ],
+      "requirement": "목적에 따른 주무 에이전트 자동 확정",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi_group_qwen.py",
+        "opencli-nubi/nubi_group_browser.py"
+      ],
+      "reason": "단체챗의 실제 Qwen 라우팅·담당 답변·공개 MCP 탐색·소유권·취소 구현. 도구별 정확도, 복합 작업 병합·계정 권한 분리·비용 표시 등은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-313",
+      "line": 685,
+      "section": "10\\. 단체채팅·에이전트 고도화",
+      "path": [
+        "주무 에이전트가 필요한 보조 에이전트 소환"
+      ],
+      "requirement": "주무 에이전트가 필요한 보조 에이전트 소환",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi_group_qwen.py",
+        "opencli-nubi/nubi_group_browser.py"
+      ],
+      "reason": "단체챗의 실제 Qwen 라우팅·담당 답변·공개 MCP 탐색·소유권·취소 구현. 도구별 정확도, 복합 작업 병합·계정 권한 분리·비용 표시 등은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-314",
+      "line": 687,
+      "section": "10\\. 단체채팅·에이전트 고도화",
+      "path": [
+        "보조 에이전트의 하위 작업 수행"
+      ],
+      "requirement": "보조 에이전트의 하위 작업 수행",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi_group_qwen.py",
+        "opencli-nubi/nubi_group_browser.py"
+      ],
+      "reason": "단체챗의 실제 Qwen 라우팅·담당 답변·공개 MCP 탐색·소유권·취소 구현. 도구별 정확도, 복합 작업 병합·계정 권한 분리·비용 표시 등은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-315",
+      "line": 689,
+      "section": "10\\. 단체채팅·에이전트 고도화",
+      "path": [
+        "보조 에이전트 결과를 주무 에이전트가 검증"
+      ],
+      "requirement": "보조 에이전트 결과를 주무 에이전트가 검증",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi_group_qwen.py",
+        "opencli-nubi/nubi_group_browser.py"
+      ],
+      "reason": "단체챗의 실제 Qwen 라우팅·담당 답변·공개 MCP 탐색·소유권·취소 구현. 도구별 정확도, 복합 작업 병합·계정 권한 분리·비용 표시 등은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-316",
+      "line": 691,
+      "section": "10\\. 단체채팅·에이전트 고도화",
+      "path": [
+        "하나의 최종 답변·결과물 생성"
+      ],
+      "requirement": "하나의 최종 답변·결과물 생성",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi_group_qwen.py",
+        "opencli-nubi/nubi_group_browser.py"
+      ],
+      "reason": "단체챗의 실제 Qwen 라우팅·담당 답변·공개 MCP 탐색·소유권·취소 구현. 도구별 정확도, 복합 작업 병합·계정 권한 분리·비용 표시 등은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-317",
+      "line": 693,
+      "section": "10\\. 단체채팅·에이전트 고도화",
+      "path": [
+        "호출된 에이전트와 담당 작업 시각화"
+      ],
+      "requirement": "호출된 에이전트와 담당 작업 시각화",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi_group_qwen.py",
+        "opencli-nubi/nubi_group_browser.py"
+      ],
+      "reason": "단체챗의 실제 Qwen 라우팅·담당 답변·공개 MCP 탐색·소유권·취소 구현. 도구별 정확도, 복합 작업 병합·계정 권한 분리·비용 표시 등은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-318",
+      "line": 695,
+      "section": "10\\. 단체채팅·에이전트 고도화",
+      "path": [
+        "불필요한 다중 호출 억제"
+      ],
+      "requirement": "불필요한 다중 호출 억제",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi_group_qwen.py",
+        "opencli-nubi/nubi_group_browser.py"
+      ],
+      "reason": "단체챗의 실제 Qwen 라우팅·담당 답변·공개 MCP 탐색·소유권·취소 구현. 도구별 정확도, 복합 작업 병합·계정 권한 분리·비용 표시 등은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-319",
+      "line": 697,
+      "section": "10\\. 단체채팅·에이전트 고도화",
+      "path": [
+        "모델 비용·실행시간 최적화"
+      ],
+      "requirement": "모델 비용·실행시간 최적화",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi_group_qwen.py",
+        "opencli-nubi/nubi_group_browser.py"
+      ],
+      "reason": "단체챗의 실제 Qwen 라우팅·담당 답변·공개 MCP 탐색·소유권·취소 구현. 도구별 정확도, 복합 작업 병합·계정 권한 분리·비용 표시 등은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-320",
+      "line": 699,
+      "section": "10\\. 단체채팅·에이전트 고도화",
+      "path": [
+        "인물·학사·교통 등 분야별 답변 정확도 검증"
+      ],
+      "requirement": "인물·학사·교통 등 분야별 답변 정확도 검증",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi_group_qwen.py",
+        "opencli-nubi/nubi_group_browser.py"
+      ],
+      "reason": "단체챗의 실제 Qwen 라우팅·담당 답변·공개 MCP 탐색·소유권·취소 구현. 도구별 정확도, 복합 작업 병합·계정 권한 분리·비용 표시 등은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-321",
+      "line": 701,
+      "section": "10\\. 단체채팅·에이전트 고도화",
+      "path": [
+        "채팅 중 브라우저 작업 화면 실시간 연동"
+      ],
+      "requirement": "채팅 중 브라우저 작업 화면 실시간 연동",
+      "status": "verified_live_public_only",
+      "evidence": [
+        "reports/checklist/phone-research.json",
+        "opencli-nubi/nubi_group_browser.py"
+      ],
+      "reason": "Qwen이 단체챗에서 공개 유튜브 검색·선택·원문 확인 후 링크를 반환. 로그인 서비스 실행까지 검증한 것은 아님.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-322",
+      "line": 703,
+      "section": "10\\. 단체채팅·에이전트 고도화",
+      "path": [
+        "사용자가 에이전트 직접 지정·변경 가능"
+      ],
+      "requirement": "사용자가 에이전트 직접 지정·변경 가능",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi_group_qwen.py",
+        "opencli-nubi/nubi_group_browser.py"
+      ],
+      "reason": "단체챗의 실제 Qwen 라우팅·담당 답변·공개 MCP 탐색·소유권·취소 구현. 도구별 정확도, 복합 작업 병합·계정 권한 분리·비용 표시 등은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-323",
+      "line": 705,
+      "section": "10\\. 단체채팅·에이전트 고도화",
+      "path": [
+        "사용자별 개인정보와 도구 권한 분리"
+      ],
+      "requirement": "사용자별 개인정보와 도구 권한 분리",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi_group_qwen.py",
+        "opencli-nubi/nubi_group_browser.py"
+      ],
+      "reason": "단체챗의 실제 Qwen 라우팅·담당 답변·공개 MCP 탐색·소유권·취소 구현. 도구별 정확도, 복합 작업 병합·계정 권한 분리·비용 표시 등은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-324",
+      "line": 711,
+      "section": "11-1. 현재 방향으로 개선된 항목 — 유지",
+      "path": [
+        "일반 목적·쇼핑 중심에서 대학생 학사 문제 해결 중심으로 진입 전략 변경"
+      ],
+      "requirement": "일반 목적·쇼핑 중심에서 대학생 학사 문제 해결 중심으로 진입 전략 변경",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-325",
+      "line": 713,
+      "section": "11-1. 현재 방향으로 개선된 항목 — 유지",
+      "path": [
+        "캐릭터 선택보다 실제 해결 가능한 문제를 앞에 강조하도록 기획 변경"
+      ],
+      "requirement": "캐릭터 선택보다 실제 해결 가능한 문제를 앞에 강조하도록 기획 변경",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-326",
+      "line": 715,
+      "section": "11-1. 현재 방향으로 개선된 항목 — 유지",
+      "path": [
+        "복잡한 태블릿형 화면 대신 6인치 모바일 간소화 방향 확정"
+      ],
+      "requirement": "복잡한 태블릿형 화면 대신 6인치 모바일 간소화 방향 확정",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-327",
+      "line": 717,
+      "section": "11-1. 현재 방향으로 개선된 항목 — 유지",
+      "path": [
+        "목적별 주무 에이전트의 자동 라우팅 구조 도입"
+      ],
+      "requirement": "목적별 주무 에이전트의 자동 라우팅 구조 도입",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-328",
+      "line": 719,
+      "section": "11-1. 현재 방향으로 개선된 항목 — 유지",
+      "path": [
+        "시간·상황에 따라 바뀌는 개인화 메인 배너 기획"
+      ],
+      "requirement": "시간·상황에 따라 바뀌는 개인화 메인 배너 기획",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-329",
+      "line": 721,
+      "section": "11-1. 현재 방향으로 개선된 항목 — 유지",
+      "path": [
+        "채팅·자동화·학사정보를 연결하는 구조로 발전"
+      ],
+      "requirement": "채팅·자동화·학사정보를 연결하는 구조로 발전",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-330",
+      "line": 723,
+      "section": "11-1. 현재 방향으로 개선된 항목 — 유지",
+      "path": [
+        "실제 모바일 화면에서도 중요 학사정보가 가장 먼저 보이는지 검증"
+      ],
+      "requirement": "실제 모바일 화면에서도 중요 학사정보가 가장 먼저 보이는지 검증",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-331",
+      "line": 725,
+      "section": "11-1. 현재 방향으로 개선된 항목 — 유지",
+      "path": [
+        "배너가 너무 커서 필수 기능을 가리지 않는지 검증"
+      ],
+      "requirement": "배너가 너무 커서 필수 기능을 가리지 않는지 검증",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-332",
+      "line": 727,
+      "section": "11-1. 현재 방향으로 개선된 항목 — 유지",
+      "path": [
+        "캐릭터 선택 단계 최소화"
+      ],
+      "requirement": "캐릭터 선택 단계 최소화",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-333",
+      "line": 729,
+      "section": "11-1. 현재 방향으로 개선된 항목 — 유지",
+      "path": [
+        "채팅 입력까지의 클릭 횟수 최소화"
+      ],
+      "requirement": "채팅 입력까지의 클릭 횟수 최소화",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-334",
+      "line": 731,
+      "section": "11-1. 현재 방향으로 개선된 항목 — 유지",
+      "path": [
+        "토스 참고 이미지의 히어로 배너·정보 카드·하단 메뉴 구조 반영"
+      ],
+      "requirement": "토스 참고 이미지의 히어로 배너·정보 카드·하단 메뉴 구조 반영",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-335",
+      "line": 733,
+      "section": "11-1. 현재 방향으로 개선된 항목 — 유지",
+      "path": [
+        "인스타그램·카카오톡·ChatGPT의 익숙한 탐색·채팅 패턴 비교"
+      ],
+      "requirement": "인스타그램·카카오톡·ChatGPT의 익숙한 탐색·채팅 패턴 비교",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-336",
+      "line": 735,
+      "section": "11-1. 현재 방향으로 개선된 항목 — 유지",
+      "path": [
+        "6인치에서 하단 핵심 메뉴 3~4개로 단순화 검토"
+      ],
+      "requirement": "6인치에서 하단 핵심 메뉴 3~4개로 단순화 검토",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-337",
+      "line": 741,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "화면 자동화 작업을 템플릿으로 저장"
+      ],
+      "requirement": "화면 자동화 작업을 템플릿으로 저장",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-338",
+      "line": 743,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "다른 사람이 만든 오토스 탐색"
+      ],
+      "requirement": "다른 사람이 만든 오토스 탐색",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-339",
+      "line": 745,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "오토스 카드에 자동 제어 리플레이 영상 표시"
+      ],
+      "requirement": "오토스 카드에 자동 제어 리플레이 영상 표시",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-340",
+      "line": 747,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "오토스 실행 결과·필요 권한·작업시간 소개"
+      ],
+      "requirement": "오토스 실행 결과·필요 권한·작업시간 소개",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-341",
+      "line": 749,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "내 오토스에 추가"
+      ],
+      "requirement": "내 오토스에 추가",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-342",
+      "line": 751,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "반복 실행·예약 실행 설정"
+      ],
+      "requirement": "반복 실행·예약 실행 설정",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-343",
+      "line": 753,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "특정 캐릭터에 오토스 연결"
+      ],
+      "requirement": "특정 캐릭터에 오토스 연결",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-344",
+      "line": 755,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "채팅 입력창 근처에서 즐겨찾는 오토스 바로 실행"
+      ],
+      "requirement": "채팅 입력창 근처에서 즐겨찾는 오토스 바로 실행",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-345",
+      "line": 757,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "오늘 실행 예정·실행 중·실패한 오토스 목록"
+      ],
+      "requirement": "오늘 실행 예정·실행 중·실패한 오토스 목록",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-346",
+      "line": 759,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "오토스별 실행 비용 관리"
+      ],
+      "requirement": "오토스별 실행 비용 관리",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-347",
+      "line": 763,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "통합 캘린더"
+      ],
+      "requirement": "통합 캘린더",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-348",
+      "line": 765,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "캐릭터별 캘린더 필터"
+      ],
+      "requirement": "캐릭터별 캘린더 필터",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-349",
+      "line": 767,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "과제·시험·학사·개인 목표 일정 통합"
+      ],
+      "requirement": "과제·시험·학사·개인 목표 일정 통합",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-350",
+      "line": 769,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "오토스 예약 실행 일정 표시"
+      ],
+      "requirement": "오토스 예약 실행 일정 표시",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-351",
+      "line": 771,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "과거 대화 기록을 날짜별 조회"
+      ],
+      "requirement": "과거 대화 기록을 날짜별 조회",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-352",
+      "line": 773,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "목표 달성 계획 및 진행 상황"
+      ],
+      "requirement": "목표 달성 계획 및 진행 상황",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-353",
+      "line": 775,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "만다라트 목표 관리 — 보조 기능으로 배치"
+      ],
+      "requirement": "만다라트 목표 관리 — 보조 기능으로 배치",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-354",
+      "line": 779,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "과제 파일·이메일·신청서·PPT 통합 보관"
+      ],
+      "requirement": "과제 파일·이메일·신청서·PPT 통합 보관",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-355",
+      "line": 781,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "브라우저 작업 결과·스크린샷 보관"
+      ],
+      "requirement": "브라우저 작업 결과·스크린샷 보관",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-356",
+      "line": 783,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "결과물 검색·다운로드·재편집"
+      ],
+      "requirement": "결과물 검색·다운로드·재편집",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-357",
+      "line": 785,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "채팅에서 생성된 결과와 보관함 연결"
+      ],
+      "requirement": "채팅에서 생성된 결과와 보관함 연결",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-358",
+      "line": 787,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "이전 작업 재실행"
+      ],
+      "requirement": "이전 작업 재실행",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-359",
+      "line": 791,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "목표별 오토스 탐색"
+      ],
+      "requirement": "목표별 오토스 탐색",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-360",
+      "line": 793,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "목표별 유튜브·Threads·Instagram·X 콘텐츠 추천"
+      ],
+      "requirement": "목표별 유튜브·Threads·Instagram·X 콘텐츠 추천",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-361",
+      "line": 795,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "콘텐츠에서 관련 작업 실행으로 연결"
+      ],
+      "requirement": "콘텐츠에서 관련 작업 실행으로 연결",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-362",
+      "line": 797,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "유용한 게시물 저장"
+      ],
+      "requirement": "유용한 게시물 저장",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-363",
+      "line": 799,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "공통 목표를 가진 사용자들의 콘텐츠 탐색"
+      ],
+      "requirement": "공통 목표를 가진 사용자들의 콘텐츠 탐색",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-364",
+      "line": 801,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "관련 상품 가격비교 및 쇼핑 연결"
+      ],
+      "requirement": "관련 상품 가격비교 및 쇼핑 연결",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-365",
+      "line": 805,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "친구 초대"
+      ],
+      "requirement": "친구 초대",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-366",
+      "line": 807,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "레퍼럴 코드·초대 보상"
+      ],
+      "requirement": "레퍼럴 코드·초대 보상",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-367",
+      "line": 809,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "친구와 에이전트 공동 채팅"
+      ],
+      "requirement": "친구와 에이전트 공동 채팅",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-368",
+      "line": 811,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "친구 간 일정 조율"
+      ],
+      "requirement": "친구 간 일정 조율",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-369",
+      "line": 813,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "동아리·팀프로젝트 일정 공동 관리"
+      ],
+      "requirement": "동아리·팀프로젝트 일정 공동 관리",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-370",
+      "line": 815,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "공유 대화·작업 내역 조회"
+      ],
+      "requirement": "공유 대화·작업 내역 조회",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-371",
+      "line": 817,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "공유 범위와 개인정보 공개 권한 관리"
+      ],
+      "requirement": "공유 범위와 개인정보 공개 권한 관리",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-372",
+      "line": 821,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "사이드 서랍 내 최근 대화"
+      ],
+      "requirement": "사이드 서랍 내 최근 대화",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-373",
+      "line": 823,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "중요한 대화 고정"
+      ],
+      "requirement": "중요한 대화 고정",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-374",
+      "line": 825,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "캐릭터 빠른 전환"
+      ],
+      "requirement": "캐릭터 빠른 전환",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-375",
+      "line": 827,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "서비스 연결 관리"
+      ],
+      "requirement": "서비스 연결 관리",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-376",
+      "line": 829,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "실행 작업 상태 관리"
+      ],
+      "requirement": "실행 작업 상태 관리",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-377",
+      "line": 831,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "예약된 작업 일시정지·수정"
+      ],
+      "requirement": "예약된 작업 일시정지·수정",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-378",
+      "line": 833,
+      "section": "11-2. 초기 아이디어 중 빠지지 않게 복원할 기능",
+      "path": [
+        "전체 기능 탐색 및 검색"
+      ],
+      "requirement": "전체 기능 탐색 및 검색",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-379",
+      "line": 837,
+      "section": "11-3. 초기 기획에서 수정하거나 후순위로 둘 항목",
+      "path": [
+        "커뮤니티·미디어 피드를 메인 최상단에 배치하지 않음"
+      ],
+      "requirement": "커뮤니티·미디어 피드를 메인 최상단에 배치하지 않음",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-380",
+      "line": 839,
+      "section": "11-3. 초기 기획에서 수정하거나 후순위로 둘 항목",
+      "path": [
+        "캐릭터 선택을 필수 온보딩 단계로 강제하지 않음"
+      ],
+      "requirement": "캐릭터 선택을 필수 온보딩 단계로 강제하지 않음",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-381",
+      "line": 841,
+      "section": "11-3. 초기 기획에서 수정하거나 후순위로 둘 항목",
+      "path": [
+        "모바일 홈에 모든 기능을 한꺼번에 펼치지 않음"
+      ],
+      "requirement": "모바일 홈에 모든 기능을 한꺼번에 펼치지 않음",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-382",
+      "line": 843,
+      "section": "11-3. 초기 기획에서 수정하거나 후순위로 둘 항목",
+      "path": [
+        "복잡한 그래프 기반 오토스 제작기는 초기 출시에서 제외"
+      ],
+      "requirement": "복잡한 그래프 기반 오토스 제작기는 초기 출시에서 제외",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-383",
+      "line": 845,
+      "section": "11-3. 초기 기획에서 수정하거나 후순위로 둘 항목",
+      "path": [
+        "쇼핑 유도는 사용자 목표와 관련 있을 때만 제공"
+      ],
+      "requirement": "쇼핑 유도는 사용자 목표와 관련 있을 때만 제공",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-384",
+      "line": 847,
+      "section": "11-3. 초기 기획에서 수정하거나 후순위로 둘 항목",
+      "path": [
+        "광고·제휴 상품은 일반 추천과 구분해서 표시"
+      ],
+      "requirement": "광고·제휴 상품은 일반 추천과 구분해서 표시",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-385",
+      "line": 849,
+      "section": "11-3. 초기 기획에서 수정하거나 후순위로 둘 항목",
+      "path": [
+        "친구 SNS·커뮤니티 자체 구축은 초기 핵심 기능에서 제외"
+      ],
+      "requirement": "친구 SNS·커뮤니티 자체 구축은 초기 핵심 기능에서 제외",
+      "status": "not_verified",
+      "evidence": [],
+      "reason": "기존 화면·보고만으로 완료 판정하지 않음. 이 세부 요구의 실제 성공 검증은 아직 없음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-386",
+      "line": 853,
+      "section": "12\\. 공통 시스템·출시 검증",
+      "path": [
+        "자동화 작업 공통 실행 엔진"
+      ],
+      "requirement": "자동화 작업 공통 실행 엔진",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi-chat-jobs.py",
+        "opencli-nubi/campus_actions.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/RunCoordinator.java"
+      ],
+      "reason": "기존 실행 소유권·취소·파일 해시·메일 승인/중복방지 검사를 통과. 서비스 전체의 업로드·제출·결제·사용자별 서버 계정 분리·종료 후 푸시·베타 지표 수집은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-387",
+      "line": 855,
+      "section": "12\\. 공통 시스템·출시 검증",
+      "path": [
+        "자동화 작업 공통 실행 엔진",
+        "웹 접속·읽기·클릭·입력·파일 다운로드"
+      ],
+      "requirement": "웹 접속·읽기·클릭·입력·파일 다운로드",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi-chat-jobs.py",
+        "opencli-nubi/campus_actions.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/RunCoordinator.java"
+      ],
+      "reason": "기존 실행 소유권·취소·파일 해시·메일 승인/중복방지 검사를 통과. 서비스 전체의 업로드·제출·결제·사용자별 서버 계정 분리·종료 후 푸시·베타 지표 수집은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-388",
+      "line": 857,
+      "section": "12\\. 공통 시스템·출시 검증",
+      "path": [
+        "자동화 작업 공통 실행 엔진",
+        "파일 업로드 및 제출 상태 확인"
+      ],
+      "requirement": "파일 업로드 및 제출 상태 확인",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi-chat-jobs.py",
+        "opencli-nubi/campus_actions.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/RunCoordinator.java"
+      ],
+      "reason": "기존 실행 소유권·취소·파일 해시·메일 승인/중복방지 검사를 통과. 서비스 전체의 업로드·제출·결제·사용자별 서버 계정 분리·종료 후 푸시·베타 지표 수집은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-389",
+      "line": 859,
+      "section": "12\\. 공통 시스템·출시 검증",
+      "path": [
+        "자동화 작업 공통 실행 엔진",
+        "CAPTCHA·2단계 인증 시 사용자에게 제어 전환"
+      ],
+      "requirement": "CAPTCHA·2단계 인증 시 사용자에게 제어 전환",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi-chat-jobs.py",
+        "opencli-nubi/campus_actions.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/RunCoordinator.java"
+      ],
+      "reason": "기존 실행 소유권·취소·파일 해시·메일 승인/중복방지 검사를 통과. 서비스 전체의 업로드·제출·결제·사용자별 서버 계정 분리·종료 후 푸시·베타 지표 수집은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-390",
+      "line": 861,
+      "section": "12\\. 공통 시스템·출시 검증",
+      "path": [
+        "자동화 작업 공통 실행 엔진",
+        "오류 발생 시 복구·재시도"
+      ],
+      "requirement": "오류 발생 시 복구·재시도",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi-chat-jobs.py",
+        "opencli-nubi/campus_actions.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/RunCoordinator.java"
+      ],
+      "reason": "기존 실행 소유권·취소·파일 해시·메일 승인/중복방지 검사를 통과. 서비스 전체의 업로드·제출·결제·사용자별 서버 계정 분리·종료 후 푸시·베타 지표 수집은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-391",
+      "line": 863,
+      "section": "12\\. 공통 시스템·출시 검증",
+      "path": [
+        "자동화 작업 공통 실행 엔진",
+        "중복 제출·중복 구매 방지"
+      ],
+      "requirement": "중복 제출·중복 구매 방지",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi-chat-jobs.py",
+        "opencli-nubi/campus_actions.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/RunCoordinator.java"
+      ],
+      "reason": "기존 실행 소유권·취소·파일 해시·메일 승인/중복방지 검사를 통과. 서비스 전체의 업로드·제출·결제·사용자별 서버 계정 분리·종료 후 푸시·베타 지표 수집은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-392",
+      "line": 865,
+      "section": "12\\. 공통 시스템·출시 검증",
+      "path": [
+        "자동화 작업 공통 실행 엔진",
+        "실행 화면과 로그 동기화"
+      ],
+      "requirement": "실행 화면과 로그 동기화",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi-chat-jobs.py",
+        "opencli-nubi/campus_actions.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/RunCoordinator.java"
+      ],
+      "reason": "기존 실행 소유권·취소·파일 해시·메일 승인/중복방지 검사를 통과. 서비스 전체의 업로드·제출·결제·사용자별 서버 계정 분리·종료 후 푸시·베타 지표 수집은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-393",
+      "line": 867,
+      "section": "12\\. 공통 시스템·출시 검증",
+      "path": [
+        "승인·권한 시스템"
+      ],
+      "requirement": "승인·권한 시스템",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi-chat-jobs.py",
+        "opencli-nubi/campus_actions.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/RunCoordinator.java"
+      ],
+      "reason": "기존 실행 소유권·취소·파일 해시·메일 승인/중복방지 검사를 통과. 서비스 전체의 업로드·제출·결제·사용자별 서버 계정 분리·종료 후 푸시·베타 지표 수집은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-394",
+      "line": 869,
+      "section": "12\\. 공통 시스템·출시 검증",
+      "path": [
+        "승인·권한 시스템",
+        "읽기·초안·전송·결제 권한 구분"
+      ],
+      "requirement": "읽기·초안·전송·결제 권한 구분",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi-chat-jobs.py",
+        "opencli-nubi/campus_actions.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/RunCoordinator.java"
+      ],
+      "reason": "기존 실행 소유권·취소·파일 해시·메일 승인/중복방지 검사를 통과. 서비스 전체의 업로드·제출·결제·사용자별 서버 계정 분리·종료 후 푸시·베타 지표 수집은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-395",
+      "line": 871,
+      "section": "12\\. 공통 시스템·출시 검증",
+      "path": [
+        "승인·권한 시스템",
+        "이메일 발송 전 승인"
+      ],
+      "requirement": "이메일 발송 전 승인",
+      "status": "implemented_fixture_verified",
+      "evidence": [
+        "opencli-nubi/test-campus-actions.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/CampusMailReview.java"
+      ],
+      "reason": "네이티브 검토 UI + 수신자/본문/첨부 해시 결합 + 한 번만 발송 요청 + 응답 미확인 시 재발송 차단. 실제 Graph 계정 설정이 없어 실제 발송은 수행하지 않음.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-396",
+      "line": 873,
+      "section": "12\\. 공통 시스템·출시 검증",
+      "path": [
+        "승인·권한 시스템",
+        "과제 최종 제출 전 승인"
+      ],
+      "requirement": "과제 최종 제출 전 승인",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi-chat-jobs.py",
+        "opencli-nubi/campus_actions.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/RunCoordinator.java"
+      ],
+      "reason": "기존 실행 소유권·취소·파일 해시·메일 승인/중복방지 검사를 통과. 서비스 전체의 업로드·제출·결제·사용자별 서버 계정 분리·종료 후 푸시·베타 지표 수집은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-397",
+      "line": 875,
+      "section": "12\\. 공통 시스템·출시 검증",
+      "path": [
+        "승인·권한 시스템",
+        "결제·예매 전 승인"
+      ],
+      "requirement": "결제·예매 전 승인",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi-chat-jobs.py",
+        "opencli-nubi/campus_actions.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/RunCoordinator.java"
+      ],
+      "reason": "기존 실행 소유권·취소·파일 해시·메일 승인/중복방지 검사를 통과. 서비스 전체의 업로드·제출·결제·사용자별 서버 계정 분리·종료 후 푸시·베타 지표 수집은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-398",
+      "line": 877,
+      "section": "12\\. 공통 시스템·출시 검증",
+      "path": [
+        "승인·권한 시스템",
+        "KTX 자동 변경 규칙 사전 동의"
+      ],
+      "requirement": "KTX 자동 변경 규칙 사전 동의",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi-chat-jobs.py",
+        "opencli-nubi/campus_actions.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/RunCoordinator.java"
+      ],
+      "reason": "기존 실행 소유권·취소·파일 해시·메일 승인/중복방지 검사를 통과. 서비스 전체의 업로드·제출·결제·사용자별 서버 계정 분리·종료 후 푸시·베타 지표 수집은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-399",
+      "line": 879,
+      "section": "12\\. 공통 시스템·출시 검증",
+      "path": [
+        "승인·권한 시스템",
+        "자동화 서비스별 이용정책 및 사용자 권한 확인"
+      ],
+      "requirement": "자동화 서비스별 이용정책 및 사용자 권한 확인",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi-chat-jobs.py",
+        "opencli-nubi/campus_actions.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/RunCoordinator.java"
+      ],
+      "reason": "기존 실행 소유권·취소·파일 해시·메일 승인/중복방지 검사를 통과. 서비스 전체의 업로드·제출·결제·사용자별 서버 계정 분리·종료 후 푸시·베타 지표 수집은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-400",
+      "line": 881,
+      "section": "12\\. 공통 시스템·출시 검증",
+      "path": [
+        "데이터·알림 시스템"
+      ],
+      "requirement": "데이터·알림 시스템",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi-chat-jobs.py",
+        "opencli-nubi/campus_actions.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/RunCoordinator.java"
+      ],
+      "reason": "기존 실행 소유권·취소·파일 해시·메일 승인/중복방지 검사를 통과. 서비스 전체의 업로드·제출·결제·사용자별 서버 계정 분리·종료 후 푸시·베타 지표 수집은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-401",
+      "line": 883,
+      "section": "12\\. 공통 시스템·출시 검증",
+      "path": [
+        "데이터·알림 시스템",
+        "계정 토큰·세션 안전하게 저장"
+      ],
+      "requirement": "계정 토큰·세션 안전하게 저장",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi-chat-jobs.py",
+        "opencli-nubi/campus_actions.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/RunCoordinator.java"
+      ],
+      "reason": "기존 실행 소유권·취소·파일 해시·메일 승인/중복방지 검사를 통과. 서비스 전체의 업로드·제출·결제·사용자별 서버 계정 분리·종료 후 푸시·베타 지표 수집은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-402",
+      "line": 885,
+      "section": "12\\. 공통 시스템·출시 검증",
+      "path": [
+        "데이터·알림 시스템",
+        "사용자별 학사정보 분리"
+      ],
+      "requirement": "사용자별 학사정보 분리",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi-chat-jobs.py",
+        "opencli-nubi/campus_actions.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/RunCoordinator.java"
+      ],
+      "reason": "기존 실행 소유권·취소·파일 해시·메일 승인/중복방지 검사를 통과. 서비스 전체의 업로드·제출·결제·사용자별 서버 계정 분리·종료 후 푸시·베타 지표 수집은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-403",
+      "line": 887,
+      "section": "12\\. 공통 시스템·출시 검증",
+      "path": [
+        "데이터·알림 시스템",
+        "주기적 공지 수집 스케줄러"
+      ],
+      "requirement": "주기적 공지 수집 스케줄러",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi-chat-jobs.py",
+        "opencli-nubi/campus_actions.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/RunCoordinator.java"
+      ],
+      "reason": "기존 실행 소유권·취소·파일 해시·메일 승인/중복방지 검사를 통과. 서비스 전체의 업로드·제출·결제·사용자별 서버 계정 분리·종료 후 푸시·베타 지표 수집은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-404",
+      "line": 889,
+      "section": "12\\. 공통 시스템·출시 검증",
+      "path": [
+        "데이터·알림 시스템",
+        "공지 중복 제거 및 출처 추적"
+      ],
+      "requirement": "공지 중복 제거 및 출처 추적",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi-chat-jobs.py",
+        "opencli-nubi/campus_actions.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/RunCoordinator.java"
+      ],
+      "reason": "기존 실행 소유권·취소·파일 해시·메일 승인/중복방지 검사를 통과. 서비스 전체의 업로드·제출·결제·사용자별 서버 계정 분리·종료 후 푸시·베타 지표 수집은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-405",
+      "line": 891,
+      "section": "12\\. 공통 시스템·출시 검증",
+      "path": [
+        "데이터·알림 시스템",
+        "중요 일정 누락 감지"
+      ],
+      "requirement": "중요 일정 누락 감지",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi-chat-jobs.py",
+        "opencli-nubi/campus_actions.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/RunCoordinator.java"
+      ],
+      "reason": "기존 실행 소유권·취소·파일 해시·메일 승인/중복방지 검사를 통과. 서비스 전체의 업로드·제출·결제·사용자별 서버 계정 분리·종료 후 푸시·베타 지표 수집은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-406",
+      "line": 893,
+      "section": "12\\. 공통 시스템·출시 검증",
+      "path": [
+        "데이터·알림 시스템",
+        "앱 종료 상태에서도 알림 전달"
+      ],
+      "requirement": "앱 종료 상태에서도 알림 전달",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi-chat-jobs.py",
+        "opencli-nubi/campus_actions.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/RunCoordinator.java"
+      ],
+      "reason": "기존 실행 소유권·취소·파일 해시·메일 승인/중복방지 검사를 통과. 서비스 전체의 업로드·제출·결제·사용자별 서버 계정 분리·종료 후 푸시·베타 지표 수집은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-407",
+      "line": 895,
+      "section": "12\\. 공통 시스템·출시 검증",
+      "path": [
+        "데이터·알림 시스템",
+        "연결 해제 시 보관 데이터 처리"
+      ],
+      "requirement": "연결 해제 시 보관 데이터 처리",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi-chat-jobs.py",
+        "opencli-nubi/campus_actions.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/RunCoordinator.java"
+      ],
+      "reason": "기존 실행 소유권·취소·파일 해시·메일 승인/중복방지 검사를 통과. 서비스 전체의 업로드·제출·결제·사용자별 서버 계정 분리·종료 후 푸시·베타 지표 수집은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-408",
+      "line": 897,
+      "section": "12\\. 공통 시스템·출시 검증",
+      "path": [
+        "베타 테스트"
+      ],
+      "requirement": "베타 테스트",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi-chat-jobs.py",
+        "opencli-nubi/campus_actions.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/RunCoordinator.java"
+      ],
+      "reason": "기존 실행 소유권·취소·파일 해시·메일 승인/중복방지 검사를 통과. 서비스 전체의 업로드·제출·결제·사용자별 서버 계정 분리·종료 후 푸시·베타 지표 수집은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-409",
+      "line": 899,
+      "section": "12\\. 공통 시스템·출시 검증",
+      "path": [
+        "베타 테스트",
+        "초기 비공개 테스터 모집"
+      ],
+      "requirement": "초기 비공개 테스터 모집",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi-chat-jobs.py",
+        "opencli-nubi/campus_actions.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/RunCoordinator.java"
+      ],
+      "reason": "기존 실행 소유권·취소·파일 해시·메일 승인/중복방지 검사를 통과. 서비스 전체의 업로드·제출·결제·사용자별 서버 계정 분리·종료 후 푸시·베타 지표 수집은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-410",
+      "line": 901,
+      "section": "12\\. 공통 시스템·출시 검증",
+      "path": [
+        "베타 테스트",
+        "튜토리얼 완료율 측정"
+      ],
+      "requirement": "튜토리얼 완료율 측정",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi-chat-jobs.py",
+        "opencli-nubi/campus_actions.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/RunCoordinator.java"
+      ],
+      "reason": "기존 실행 소유권·취소·파일 해시·메일 승인/중복방지 검사를 통과. 서비스 전체의 업로드·제출·결제·사용자별 서버 계정 분리·종료 후 푸시·베타 지표 수집은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-411",
+      "line": 903,
+      "section": "12\\. 공통 시스템·출시 검증",
+      "path": [
+        "베타 테스트",
+        "실제 웹 자동화 성공률 측정"
+      ],
+      "requirement": "실제 웹 자동화 성공률 측정",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi-chat-jobs.py",
+        "opencli-nubi/campus_actions.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/RunCoordinator.java"
+      ],
+      "reason": "기존 실행 소유권·취소·파일 해시·메일 승인/중복방지 검사를 통과. 서비스 전체의 업로드·제출·결제·사용자별 서버 계정 분리·종료 후 푸시·베타 지표 수집은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-412",
+      "line": 905,
+      "section": "12\\. 공통 시스템·출시 검증",
+      "path": [
+        "베타 테스트",
+        "과제·시험·장학공지 감지 정확도 측정"
+      ],
+      "requirement": "과제·시험·장학공지 감지 정확도 측정",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi-chat-jobs.py",
+        "opencli-nubi/campus_actions.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/RunCoordinator.java"
+      ],
+      "reason": "기존 실행 소유권·취소·파일 해시·메일 승인/중복방지 검사를 통과. 서비스 전체의 업로드·제출·결제·사용자별 서버 계정 분리·종료 후 푸시·베타 지표 수집은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-413",
+      "line": 907,
+      "section": "12\\. 공통 시스템·출시 검증",
+      "path": [
+        "베타 테스트",
+        "배너 클릭 → 작업 완료 전환율 측정"
+      ],
+      "requirement": "배너 클릭 → 작업 완료 전환율 측정",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi-chat-jobs.py",
+        "opencli-nubi/campus_actions.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/RunCoordinator.java"
+      ],
+      "reason": "기존 실행 소유권·취소·파일 해시·메일 승인/중복방지 검사를 통과. 서비스 전체의 업로드·제출·결제·사용자별 서버 계정 분리·종료 후 푸시·베타 지표 수집은 미완료.",
+      "priority": "user_first"
+    },
+    {
+      "id": "CHK-414",
+      "line": 909,
+      "section": "12\\. 공통 시스템·출시 검증",
+      "path": [
+        "베타 테스트",
+        "기능별 오류 제보와 빠른 UI 업데이트"
+      ],
+      "requirement": "기능별 오류 제보와 빠른 UI 업데이트",
+      "status": "partial",
+      "evidence": [
+        "opencli-nubi/nubi-chat-jobs.py",
+        "opencli-nubi/campus_actions.py",
+        "mobile-aside-mvp/app/src/main/java/ai/decisionos/aside/RunCoordinator.java"
+      ],
+      "reason": "기존 실행 소유권·취소·파일 해시·메일 승인/중복방지 검사를 통과. 서비스 전체의 업로드·제출·결제·사용자별 서버 계정 분리·종료 후 푸시·베타 지표 수집은 미완료.",
+      "priority": "user_first"
+    }
+  ],
+  "intent": "전체 구현을 목표로 유지. 사용자 우선순위: 3·4·5·7 및 하단. 골모드 사용 안 함.",
+  "counts": {
+    "not_verified": 229,
+    "verified_live": 4,
+    "verified_live_public_only": 2,
+    "partial": 152,
+    "not_implemented": 20,
+    "partial_sample_verified": 3,
+    "blocked_provider_connection": 3,
+    "implemented_fixture_verified": 1
+  }
+}

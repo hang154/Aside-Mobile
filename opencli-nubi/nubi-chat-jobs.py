@@ -19,9 +19,10 @@ class ChatJobs:
    ident=uuid.uuid4().hex;trace=self.directory/(ident+'.json');log=(self.directory/(ident+'.log')).open('w')
    current=body['task'].split('현재 사용자 지시:',1)[-1]
    transit=bool(re.search(r'KTX|코레일|버스|지하철|대중교통|기차.{0,15}(시간|운행|조회)|이동.{0,15}(경로|소요)',current,re.I))
-   campus=not transit and (current.startswith('[학교 실행]') or bool(re.search(r'UNIST|유니스트|학사|장학|학교\s*(공지|메일|포털)|수강|예비수강|COOP|인턴십|Outlook|아웃룩',current,re.I)))
+   campus=not transit and (current.startswith('[학교 실행]') or bool(re.search(r'블랙보드|blackboard|과제|강의자료|오픈북|시험|UNIST|유니스트|학사|장학|학교\s*(공지|메일|포털)|수강|예비수강|COOP|인턴십|Outlook|아웃룩',current,re.I)))
    document=bool(re.search(r'예산서|지원요청서|연구지원금|문서\s*작성|서류\s*작성|docx|hwpx|sharepoint|uirp|l시리즈',current,re.I))
-   interpreter=os.environ.get('NUBI_DOCUMENT_PYTHON',str(Path.home()/'.local/share/nubi-documents/venv/bin/python')) if document and not campus and not transit else sys.executable
+   base_python=str(Path.home()/'.local/share/nubi-documents/venv/bin/python')
+   interpreter=os.environ.get('NUBI_CAMPUS_PYTHON',base_python if Path(base_python).is_file() else sys.executable) if campus else os.environ.get('NUBI_DOCUMENT_PYTHON',base_python) if document and not transit else sys.executable
    runner='qwen-transit-chat.py' if transit else 'qwen-campus-chat.py' if campus else 'qwen-document-agent.py' if document else 'qwen-goal-agent.py'
    cmd=[interpreter,str(Path(__file__).with_name(runner)),'--goal',body['character'],'--goal-id',body['goal_id'],'--task',current.strip() if campus else body['task'],'--max-steps','16','--trace-file',str(trace)]
    try:p=subprocess.Popen(cmd,stdout=log,stderr=log,env=dict(self.env,NUBI_GOAL_DEVICE_SESSION=body['device_session'],NUBI_GOAL_JOB_ID=ident,NUBI_GOAL_REQUEST_ID=body['request_id']),start_new_session=True)
@@ -60,7 +61,7 @@ class ChatJobs:
    state='cancelled' if j['cancelled'] else 'running' if code is None else 'completed' if code==0 and trace.get('completed') else 'failed'
    result={'job_id':ident,'request_id':j['request']['request_id'],'goal_id':j['request']['goal_id'],'character':j['request']['character'],'state':state,'progress':progress[-12:],'answer':trace.get('answer') if state=='completed' else None,'error':trace.get('error','모델 응답 또는 연결을 확인해줘.') if state=='failed' else None,'items':items,'source_page':source_page,'reported_models':sorted(set(trace.get('reported_models',[])))}
    if trace.get('expires_at'):result['expires_at']=trace['expires_at']
-   if trace.get('kind')=='document':
+   if trace.get('kind')=='document' or trace.get('document'):
     result['kind']='document';result['document']=trace.get('document',{});result['document'].pop('artifacts',None)
    if result['error'] is None:result.pop('error')
    return result
@@ -83,8 +84,19 @@ class ChatJobs:
  def artifact(self,ident,goal_id,name):
   with self.lock:
    j=self.jobs.get(ident)
-   if not j or j['request']['goal_id']!=goal_id or name not in ('budget.docx','budget.hwpx','audit.json','preview.txt'):raise ValueError('Unknown goal document')
-   if j['process'].poll()!=0:raise ValueError('Document job is not complete')
+   if not j or j['request']['goal_id']!=goal_id or not re.fullmatch(r'[A-Za-z0-9._-]{1,100}',name):raise ValueError('Unknown goal document')
+   if j['process'].poll() is None:raise ValueError('Document job is not complete')
+   campus_trace=json.loads(j['trace'].read_text())
+   if campus_trace.get('kind')=='campus' and campus_trace.get('artifact_paths'):
+    import hashlib
+    root=Path(self.env.get('NUBI_CAMPUS_DRAFT_DIR',str(Path.home()/'.local/share/nubi-campus/drafts'))).expanduser().resolve()
+    path=Path(campus_trace['artifact_paths'].get(name,'/')).resolve()
+    expected=next((f for f in campus_trace.get('document',{}).get('manifest',{}).get('files',[]) if f.get('name')==name),None)
+    if not expected or not path.is_relative_to(root) or path.suffix not in ('.pdf','.docx') or not path.is_file() or path.stat().st_size>8*1024*1024:raise ValueError('Unknown campus artifact')
+    data=path.read_bytes()
+    if hashlib.sha256(data).hexdigest()!=expected['sha256']:raise ValueError('Document hash mismatch')
+    return data
+   if name not in ('budget.docx','budget.hwpx','audit.json','preview.txt') or j['process'].poll()!=0:raise ValueError('Document job is not complete')
    trace=json.loads(j['trace'].read_text())
    if trace.get('kind')!='document' or not trace.get('completed'):raise ValueError('No document output')
    import hashlib

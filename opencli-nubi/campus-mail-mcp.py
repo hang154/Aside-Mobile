@@ -97,8 +97,17 @@ def config():
  return _build_graph(g),Path(obj['draft_directory']).expanduser().resolve()
 
 def call(name,args):
+ if name=='nubi_campus_document_draft':
+  cfg=os.environ.get('NUBI_CAMPUS_MAIL_CONFIG')
+  root=Path(json.loads(Path(cfg).expanduser().read_text())['draft_directory']).expanduser().resolve() if cfg else Path.home()/'.local/share/nubi-campus/drafts'
+  return create_application(root,args)
  graph,root=config()
- if name=='nubi_campus_document_draft':return create_application(root,args)
+ if name=='nubi_campus_mail_prepare_send':
+  from campus_actions import MailActions
+  path=os.environ.get('NUBI_CAMPUS_ACTION_DB')
+  if not path:raise RuntimeError('앱의 메일 검토 연결이 필요합니다.')
+  if set(args)!={'draft_id'}:raise ValueError('임시저장 메일 ID만 전달하세요.')
+  return MailActions(path).prepare(os.environ.get('NUBI_GOAL_DEVICE_SESSION',''),graph,args['draft_id'])
  if name=='nubi_campus_mail_search':
   if set(args)!={'query'}:raise ValueError('검색어가 필요합니다')
   return {'items':find_mail(graph,args['query'])}
@@ -119,7 +128,7 @@ def main():
    if ident is None:continue
    if method=='initialize':result={'protocolVersion':'2024-11-05','capabilities':{'tools':{}},'serverInfo':{'name':'nubi-campus-mail','version':'0.1.0'}}
    elif method=='ping':result={}
-   elif method=='tools/list':result={'tools':[{'name':'nubi_campus_document_draft','description':'Create a draft from supplied facts and flag missing fields; never submits.','inputSchema':{'type':'object','properties':{'notice_title':{'type':'string'},'source':{'type':'string'},'applicant':{'type':'string'},'motivation':{'type':'string'},'experience':{'type':'string'}},'required':['notice_title'],'additionalProperties':False}},{'name':'nubi_campus_mail_search','description':'Search delegated Outlook for campus mail and classify titles.','inputSchema':{'type':'object','properties':{'query':{'type':'string','minLength':1,'maxLength':100}},'required':['query'],'additionalProperties':False}},{'name':'nubi_campus_mail_draft','description':'Create and verify a draft only; never sends. Attachment must be under configured draft folder.','inputSchema':{'type':'object','properties':{'subject':{'type':'string'},'body':{'type':'string'},'recipient':{'type':'string'},'attachment':{'type':'string'}},'required':['subject','body'],'additionalProperties':False}}]}
+   elif method=='tools/list':result={'tools':[{'name':'nubi_campus_mail_prepare_send','description':'Prepare an existing real draft for human review in the app. Never approves or sends.','inputSchema':{'type':'object','properties':{'draft_id':{'type':'string'}},'required':['draft_id'],'additionalProperties':False}},{'name':'nubi_campus_document_draft','description':'Create a draft from supplied facts and flag missing fields; never submits.','inputSchema':{'type':'object','properties':{'notice_title':{'type':'string'},'source':{'type':'string'},'applicant':{'type':'string'},'motivation':{'type':'string'},'experience':{'type':'string'}},'required':['notice_title'],'additionalProperties':False}},{'name':'nubi_campus_mail_search','description':'Search delegated Outlook for campus mail and classify titles.','inputSchema':{'type':'object','properties':{'query':{'type':'string','minLength':1,'maxLength':100}},'required':['query'],'additionalProperties':False}},{'name':'nubi_campus_mail_draft','description':'Create and verify a draft only; never sends. Attachment must be under configured draft folder.','inputSchema':{'type':'object','properties':{'subject':{'type':'string'},'body':{'type':'string'},'recipient':{'type':'string'},'attachment':{'type':'string'}},'required':['subject','body'],'additionalProperties':False}}]}
    elif method=='tools/call':
     try: result={'content':[{'type':'text','text':json.dumps(call(p.get('name'),p.get('arguments') or {}),ensure_ascii=False)}]}
     except Exception as e:result={'content':[{'type':'text','text':str(e)}],'isError':True}

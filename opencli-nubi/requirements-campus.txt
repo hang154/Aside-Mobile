@@ -1,0 +1,6 @@
+# Versions exercised in this workspace; Graph OAuth also requires msal.
+PyMuPDF==1.28.2
+python-docx==1.2.0
+websocket-client==1.9.0
+msal>=1.30,<2
+fonttools==4.63.0

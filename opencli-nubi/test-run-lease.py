@@ -4,7 +4,7 @@ from pathlib import Path
 source=Path(__file__).parent
 with tempfile.TemporaryDirectory(prefix='nubi-lease-') as temporary:
  root=Path(temporary)
- for name in ['nubi-goal-relay.py','nubi-chat-jobs.py','nubi-friends.py','nubi-friend-draft.py']:shutil.copy(source/name,root/name)
+ for name in ['nubi-goal-relay.py','nubi-chat-jobs.py','nubi-friends.py','nubi-friend-draft.py','nubi_group_qwen.py','nubi_persona.py','nubi_group_browser.py']:shutil.copy(source/name,root/name)
  (root/'qwen-goal-agent.py').write_text('import time;time.sleep(45)\n')
  token=secrets.token_urlsafe(32);(root/'token').write_text(token)
  subprocess.run(['openssl','req','-x509','-newkey','rsa:2048','-nodes','-keyout',str(root/'key'),'--out',str(root/'cert'),'-days','1','-subj','/CN=localhost'],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)

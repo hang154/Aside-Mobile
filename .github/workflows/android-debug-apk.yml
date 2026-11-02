@@ -7,6 +7,7 @@ on:
       - 'mobile-aside/**'
     paths:
       - 'mobile-aside-mvp/**'
+      - 'opencli-nubi/**'
       - '.github/workflows/android-debug-apk.yml'
 permissions:
   contents: read
@@ -35,6 +36,16 @@ jobs:
           python3 scripts/test_goal_security.py
           python3 scripts/test_static.py
           python3 scripts/test_collector.py
+      - name: Verify shared execution boundaries
+        run: |
+          python3 opencli-nubi/test-goal-mcp.py
+          python3 opencli-nubi/test-chat-jobs.py
+          python3 opencli-nubi/test-document-jobs.py
+          python3 opencli-nubi/test-group-qwen.py
+          python3 opencli-nubi/test-group-browser.py
+          python3 opencli-nubi/test-campus-actions.py
+          python3 opencli-nubi/test-campus-artifacts.py
+          python3 opencli-nubi/test-run-lease.py
       - name: Install Android SDK packages
         run: |
           SDK_MANAGER="$(find "${ANDROID_HOME:-/usr/local/lib/android/sdk}/cmdline-tools" -type f -name sdkmanager | head -1)"

@@ -1,0 +1,22 @@
+{
+  "state": "translated_needs_review",
+  "source_sha256": "c161ba1d718f94573380d815af8c87e43e3bafed3b283cc5fb0abd1f2b44ad73",
+  "source_pages": 1,
+  "translated_pages": 1,
+  "original_visuals_verified": true,
+  "layout": "각 원문 PDF 페이지를 그대로 보존한 뒤 한국어 번역 페이지를 추가함. 원래 레이아웃 위에 번역을 덮어쓰는 형식은 아님.",
+  "semantic_verification": "원문·번역 대조 검토 필요. 번역 정확도 자동 보증 아님.",
+  "drive_upload": "not_connected",
+  "files": [
+    {
+      "name": "lecture-ko.pdf",
+      "sha256": "c03919060c9a24886079d7d6eca6231fa906b0359fda72babb6b736e3de4d4a0",
+      "bytes": 9614
+    },
+    {
+      "name": "lecture-ko.docx",
+      "sha256": "452a4a4839e9c83f85c14ec85cecb996d023ee809ab6af6650dacc2f2aa0c8e1",
+      "bytes": 36858
+    }
+  ]
+}

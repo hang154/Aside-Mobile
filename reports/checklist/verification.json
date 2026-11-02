@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-02T12:32:55.330213",
+  "scope": "Priority sections 3,4,5,7 and common checklist; partial implementation, not full checklist completion",
+  "goal_mode_enabled": false,
+  "device": "SM-A546S; no connected tablet",
+  "phone_checks": {
+    "priority_fixtures": 11,
+    "school_sso_state_fixtures": 22,
+    "live_qwen_public_browser_checks": 6
+  },
+  "installed_apk_sha256_matches": true,
+  "portal_policy": "First portal sign-in interactive; shared app WebView cookie persistence; Blackboard/mail silent verification. IdP expiration/MFA can require portal reauthentication. Permanent authentication is not guaranteed.",
+  "retries": [
+    {
+      "issue": "isolated run-lease missing new module dependencies",
+      "resolution": "fixed fixture setup; passed"
+    },
+    {
+      "issue": "PDF font embedded whole TTC, 13.7MiB exceeded download limit",
+      "resolution": "fontTools glyph subset; real Qwen sample final PDF 9614 bytes"
+    },
+    {
+      "issue": "portal/Blackboard/mail authenticated session unavailable",
+      "attempts_per_service": 2,
+      "resolution": "Requires direct initial portal sign-in in current app; no false connected status"
+    }
+  ],
+  "not_complete": [
+    "Authenticated portal and Blackboard real data verification",
+    "Graph mailbox API account connection and real drafts/send verification",
+    "GPT/Claude/Gemini provider connections",
+    "Blackboard submission/upload workflow",
+    "Drive upload",
+    "Live lecture speech recognition/interpretation",
+    "Complete personalized recursive portal monitoring and calendar synchronization",
+    "Real KTX reservation/cancellation, shopping checkout and concert booking",
+    "Full remaining 414-item checklist implementation"
+  ],
+  "safety": "No actual emails, bookings, purchases, payments or coursework submissions performed; captures local only"
+}

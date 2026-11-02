@@ -1,0 +1,17 @@
+{
+  "state": "configuration",
+  "providers": {
+    "tago": "registration_required",
+    "seoul": "registration_required",
+    "tmap": "registration_required"
+  },
+  "source_urls": {
+    "tago": "https://www.data.go.kr/data/15098530/openapi.do",
+    "train": "https://www.data.go.kr/data/15098552/openapi.do",
+    "seoul": "https://data.seoul.go.kr/dataList/OA-12764/F/1/datasetView.do",
+    "tmap": "https://transit.tmapmobility.com/docs/routes",
+    "stops": "https://www.data.go.kr/data/15098534/openapi.do",
+    "position": "https://www.data.go.kr/data/15098533/openapi.do"
+  },
+  "limits": "KTX 시간표만 제공. 좌석·지연·예매·결제 지원 안 함. TMAP 경로 자동 재조회 없음."
+}

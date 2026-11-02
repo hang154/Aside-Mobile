@@ -6,7 +6,7 @@ with tempfile.TemporaryDirectory() as d:
  calls=[]
  def mock(messages,json_mode=False):
   calls.append(messages)
-  return (json.dumps({'agents':['love','grades'],'intro':'같이 해볼게'},ensure_ascii=False) if json_mode else '담당 답변 내용'),MODEL
+  return (json.dumps({'agents':['love','grades'],'intro':'같이 해볼게','action':'talk'},ensure_ascii=False) if json_mode else '담당 답변 내용'),MODEL
  q=GroupQwen(d,mock);b={'request_id':str(uuid.uuid4()),'device_session':str(uuid.uuid4()),'text':'연애와 학교','history':[]};x=q.submit(b);y=q.submit(b);assert x['job_id']==y['job_id']
  while q.status(x['job_id'],b['device_session'])['state']=='running':time.sleep(.01)
  result=q.status(x['job_id'],b['device_session']);assert result['state']=='completed' and len(calls)==4 and len(result['messages'])==4

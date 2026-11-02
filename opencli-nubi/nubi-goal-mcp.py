@@ -40,6 +40,7 @@ def post(path,data):
  if token is None:
   token=open(os.environ['NUBI_GOAL_RELAY_TOKEN_FILE'],encoding='ascii').read().strip();context=ssl.create_default_context(cafile=os.environ['NUBI_GOAL_RELAY_CA_FILE']);context.check_hostname=False
  if path=='/command' and os.environ.get('NUBI_GOAL_DEVICE_SESSION'):data={**data,'_session':os.environ['NUBI_GOAL_DEVICE_SESSION']}
+ if path=='/command' and os.environ.get('NUBI_GOAL_GROUP_ID'):data={**data,'_group':os.environ['NUBI_GOAL_GROUP_ID'],'_request':os.environ['NUBI_GOAL_REQUEST_ID']}
  if path=='/command' and os.environ.get('NUBI_GOAL_JOB_ID'):data={**data,'_job':os.environ['NUBI_GOAL_JOB_ID'],'_request':os.environ['NUBI_GOAL_REQUEST_ID']}
  request=urllib.request.Request(url+path,data=json.dumps(data).encode(),headers={'Authorization':'Bearer '+token,'Content-Type':'application/json'},method='POST')
  with urllib.request.urlopen(request,context=context,timeout=5) as r:return json.load(r)

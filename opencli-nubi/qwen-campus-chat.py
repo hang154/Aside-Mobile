@@ -15,6 +15,8 @@ try:
   try:item=json.loads(line)
   except ValueError:continue
   if 'tool' in item:trace['events'].append({'type':'campus','name':item['tool'],'error':bool(item.get('error')),'detail':str(item.get('detail',''))[:300]})
+  if item.get('artifacts'):
+   trace['document']={'state':'draft_only','manifest':{'files':[{k:v for k,v in f.items() if k!='path'} for f in item['artifacts']]}};trace['artifact_paths']={f['name']:f['path'] for f in item['artifacts']}
   if isinstance(item.get('answer'),str):
    trace['answer']=item['answer'];trace['reported_models']=[item.get('model','')];trace['completed']=proc.returncode==0 and item.get('finish_reason')!='length' and item.get('workflow_state')=='도구 오류 없음'
  if not trace['completed']:

@@ -1,0 +1,26 @@
+{
+  "items": [
+    {
+      "provider": "nubi",
+      "state": "completed",
+      "model": "Qwen3.8-27B-abliterated-AWQ-W4A16",
+      "answer": "이번 주말에 커피 한잔할래?라는 문자에 부담 없이 답장할 수 있는 초안 두 가지를 제안해 드릴게요.\n\n**1. 긍정적이며 가벼운 톤**\n> \"좋아! 나 요즘 카페 탐방 중이라 추천도 해줄게 😊\"\n\n**2. 일정 확인을 포함하되 유연한 톤**\n> \"나도 좋네~ 금요일에 시간 되면 바로 연락할게?\""
+    },
+    {
+      "provider": "gpt",
+      "state": "not_connected",
+      "reason": "gpt API 계정 연결이 없어요. 웹 로그인만으로 API 권한이 생기지는 않아요."
+    },
+    {
+      "provider": "claude",
+      "state": "not_connected",
+      "reason": "claude API 계정 연결이 없어요. 웹 로그인만으로 API 권한이 생기지는 않아요."
+    },
+    {
+      "provider": "gemini",
+      "state": "not_connected",
+      "reason": "gemini API 계정 연결이 없어요. 웹 로그인만으로 API 권한이 생기지는 않아요."
+    }
+  ],
+  "scope": "각 슬롯은 해당 서비스의 실제 응답만 표시. 외부 메시지 전송 없음."
+}

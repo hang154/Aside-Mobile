@@ -1,0 +1,11 @@
+[
+  {
+    "variant": "GROUP",
+    "file": "nubi-0.6.13-campus-core.apk",
+    "sha256": "a13d9bf8ce0414890c21df0d525a29991aeebd0d334e2765151a94b8f15d890a",
+    "bytes": 17518502,
+    "signature_verified": true,
+    "zip_entries_unchanged": 47,
+    "manifest": "package: name='ai.decisionos.nubi.groupchat.goals' versionCode='73' versionName='0.6.13-campus-core' platformBuildVersionName='15' platformBuildVersionCode='35' compileSdkVersion='35' compileSdkVersionCodename='15'"
+  }
+]

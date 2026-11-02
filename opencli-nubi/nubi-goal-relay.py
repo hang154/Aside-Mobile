@@ -28,12 +28,13 @@ jobs=None
 if args.chat_dir:
     spec=importlib.util.spec_from_file_location('nubi_chat_jobs',Path(__file__).with_name('nubi-chat-jobs.py'));module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
     env=dict(os.environ,NUBI_GOAL_RELAY_TOKEN_FILE=args.token_file,NUBI_GOAL_RELAY_CA_FILE=args.cert,NUBI_GOAL_RELAY_URL='https://127.0.0.1:'+str(args.port))
-    jobs=module.ChatJobs(args.chat_dir,env)
+    env['NUBI_CAMPUS_ACTION_DB']=str(Path(args.token_file).with_name('mail-actions.sqlite3'));jobs=module.ChatJobs(args.chat_dir,env)
 spec=importlib.util.spec_from_file_location('nubi_friends',Path(__file__).with_name('nubi-friends.py'));friends_module=importlib.util.module_from_spec(spec);spec.loader.exec_module(friends_module)
 friends=friends_module.Friends(str(Path(args.token_file).with_name('friends.sqlite3')))
 spec=importlib.util.spec_from_file_location('friend_draft',Path(__file__).with_name('nubi-friend-draft.py'));draft_module=importlib.util.module_from_spec(spec);spec.loader.exec_module(draft_module)
 from nubi_group_qwen import GroupQwen
-group_qwen=GroupQwen(Path(args.chat_dir or Path(args.token_file).parent)/"group-qwen")
+from nubi_group_browser import GroupBrowser
+group_qwen=GroupQwen(Path(args.chat_dir or Path(args.token_file).parent)/"group-qwen",browser=GroupBrowser(env) if jobs else None)
 class Handler(BaseHTTPRequestHandler):
     def log_message(self, *args): pass
     def respond(self, status, obj):
@@ -47,13 +48,38 @@ class Handler(BaseHTTPRequestHandler):
             body = json.loads(self.rfile.read(n))
             if not isinstance(body, dict): raise ValueError()
         except Exception: return self.respond(400, {'error':'invalid request'})
-        if self.path in ('/group-submit','/group-status'):
+        if self.path in ('/group-submit','/group-status','/group-cancel'):
             try:
                 if self.path=='/group-submit':result=group_qwen.submit(body)
-                elif set(body)=={'job_id','device_session'}:result=group_qwen.status(body['job_id'],body['device_session'])
+                elif set(body)=={'job_id','device_session'}:result=(group_qwen.cancel if self.path=='/group-cancel' else group_qwen.status)(body['job_id'],body['device_session'])
                 else:raise ValueError('Invalid group status fields')
                 return self.respond(200,result)
             except ValueError as e:return self.respond(400,{'error':str(e)})
+        if self.path=='/ai-compare':
+            try:
+                if set(body)!={'text','device_session'} or not re.fullmatch(r'[a-f0-9-]{36}',body.get('device_session','')):raise ValueError('Invalid compare request')
+                from nubi_ai_compare import compare
+                return self.respond(200,compare(body['text']))
+            except ValueError as e:return self.respond(400,{'error':str(e)})
+        if self.path=='/campus-actions':
+            try:
+                session=body.get('device_session','')
+                if not re.fullmatch(r'[a-f0-9-]{36}',session):raise ValueError('Invalid device session')
+                from campus_actions import MailActions
+                actions=MailActions(Path(args.token_file).with_name('mail-actions.sqlite3'))
+                action=body.get('action')
+                if action=='list' and set(body)=={'action','device_session'}:return self.respond(200,{'items':[{k:v for k,v in x.items() if k!='message'}|{'message':{'subject':x['message']['subject']}} for x in actions.list(session)]})
+                if action=='get' and set(body)=={'action','device_session','id'}:
+                    item=next((x for x in actions.list(session) if x['id']==body['id']),None)
+                    if item is None:raise ValueError('Unknown review item')
+                    return self.respond(200,item)
+                if action=='cancel' and set(body)=={'action','device_session','id'}:return self.respond(200,actions.cancel(session,body['id']))
+                if action=='send' and set(body)=={'action','device_session','id','digest'}:
+                    spec=importlib.util.spec_from_file_location('campus_mail_tools',Path(__file__).with_name('campus-mail-mcp.py'));m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+                    graph,_=m.config();graph.config['scopes']=['Mail.ReadWrite','Mail.Send']
+                    return self.respond(200,actions.send(session,body['id'],body['digest'],graph))
+                raise ValueError('Invalid review action')
+            except (ValueError,RuntimeError) as e:return self.respond(400,{'error':str(e)})
         if self.path=='/friends':
             try:
                 if body.get('action')=='draft':
@@ -124,7 +150,10 @@ class Handler(BaseHTTPRequestHandler):
             session=body.pop('_session',active_device)
             if not isinstance(session,str) or session!='default' and not re.fullmatch(r'[0-9a-f-]{36}',session):return self.respond(400,{'error':'invalid device session'})
             item.pop('_session',None)
-            job_id=item.pop('_job',None);request_id=item.pop('_request',None)
+            job_id=item.pop('_job',None);request_id=item.pop('_request',None);group_id=item.pop('_group',None)
+            if group_id is not None:
+                if job_id is not None or not group_qwen.permits(group_id,request_id,session,item.get('goal_id'),item.get('character') if op=='goal_open' else None):return self.respond(409,{'error':'stale group lease'})
+                item.update(group_job_id=group_id,request_id=request_id,device_session=session)
             if job_id is not None:
                 if jobs is None:return self.respond(409,{"error":"chat jobs disabled"})
                 with jobs.lock:

@@ -27,14 +27,16 @@ class Graph:
   url='https://graph.microsoft.com/v1.0'+path
   if self.transport:return self.transport(method,url,data,raw)
   body=data if isinstance(data,bytes) else json.dumps(data).encode() if data is not None else None
-  headers={'Authorization':'Bearer '+self.token()}
+  headers={'Authorization':'Bearer '+self.token(),'Prefer':'IdType="ImmutableId"'}
   if body is not None:headers['Content-Type']='application/octet-stream' if isinstance(data,bytes) else 'application/json'
   req=urllib.request.Request(url,data=body,headers=headers,method=method)
   # Do not forward Graph bearer to preauthenticated download domains on redirects.
   class NoRedirect(urllib.request.HTTPRedirectHandler):
    def redirect_request(self,*a,**kw):return None
   try:
-   with urllib.request.build_opener(NoRedirect).open(req,timeout=60) as r:b=r.read(16*1024*1024+1)
+   with urllib.request.build_opener(NoRedirect).open(req,timeout=60) as r:
+    b=r.read(16*1024*1024+1)
+    if not b and r.status in (202,204):return {'http_status':r.status}
   except urllib.error.HTTPError as e:
    if method=='GET' and raw and e.code in (301,302,303,307,308):
     target=e.headers['Location'];u=urllib.parse.urlsplit(target)

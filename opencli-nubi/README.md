@@ -60,3 +60,17 @@ adb forward --remove tcp:19333
 - `nubi_web_discover({"provider":"wikipedia","query":"UNIST"})`: Wikipedia 문서 검색. 제공자는 `wikipedia`, `google_news`, `google_suggest`, `duckduckgo_suggest`다. 두 suggest는 자동완성 제안이며 문서 검색이 아니다.
 
 각국 순위·33개 도메인의 실제 응답 및 명령 목록은 [점검 보고서](../docs/TOP_WEB_PLATFORMS_2026_09.md)를 참조한다. 국가별 방문량은 국적별 사용자 수나 앱 사용량이 아니다. 공개 페이지의 200 응답은 로그인, 검색, 해당 플랫폼의 서비스 기능이 정상 동작한다는 의미가 아니다.
+
+
+### 0.6.13 campus execution boundaries
+
+- Group chat can delegate public research to the existing Qwen/MCP foreground browser. Commands carry device, request and job ownership; cancellation revokes that lease. Observed result links return to the group thread. This is not authenticated school-account automation.
+- First launcher entry offers portal sign-in. App WebViews preserve the same cookie profile. Blackboard and UNIST's email SSO gateway are probed silently; separate Blackboard/mail credential forms are not shown. A school session can expire or require MFA, so one initial login cannot guarantee permanent authentication. Other APK package profiles are not imported.
+- Campus tasks now use the current groupchat package and installed ADB rather than a deleted build path. `NUBI_ANDROID_PACKAGE` and `NUBI_ADB` can override these. Exactly one non-home WebView must be selected; ambiguous targets fail closed.
+- `campus-blackboard-mcp.py` reads visible authenticated courses/activity/attachment links and downloads a currently observed same-origin PDF. It never submits assignments, reads hidden grades, or assumes an empty DOM means no assignments.
+- `nubi_lecture_pdf_translate` creates local PDF + DOCX using actual Qwen translations. Original PDF visual pages are retained and compared, followed by Korean pages. Scans require OCR; Drive upload and semantic correctness still need separate verification. Source file must be in the configured lecture folder.
+- `nubi_campus_mail_prepare_send` stages an existing Graph draft. Only the native school chat review dialog can request send after human confirmation. Approval binds recipients, body and attachment bytes. Changed content invalidates approval; ambiguous send is never automatically retried. Graph `202` means accepted, not delivered. Requires configured delegated Graph credentials with Mail.ReadWrite and Mail.Send; a WebView login alone does not grant Graph permissions.
+- Four-answer comparison uses actual configured provider slots. Missing GPT/Claude/Gemini accounts remain `not_connected`, never substituted with Qwen. Optional provider mapping: `~/.local/state/nubi-ai-compare/providers.json` contains service keys with existing Azrael `connection_id` and exact `model` values, never inline credentials.
+- Install tested Python dependencies with `requirements-campus.txt` in an isolated environment; the existing document venv is preferred for campus jobs. Backend mail OAuth also requires MSAL. Do not commit tokens, job contents from real accounts, captures or videos.
+
+The 414 source checklist entries and current limitations are tracked in `reports/checklist/requirements.json`. Code/fixture success is not a claim of live school-account or booking completion.
