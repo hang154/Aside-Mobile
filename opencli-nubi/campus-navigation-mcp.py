@@ -10,7 +10,7 @@ def open_workspace(endpoint,destination):
  if preferred_target is None:preferred_target=os.environ.get('NUBI_CDP_TARGET_ID')
  u=urlparse(endpoint)
  if u.scheme!='http' or u.hostname not in ('127.0.0.1','localhost') or u.username or u.password:raise ValueError('local CDP only')
- paths={'scholarship':'https://uspace.unist.ac.kr/uspace/Cabinet/MainPage.bzr?cabinetInstanceID=1126','academic':'https://uspace.unist.ac.kr/uspace/Cabinet/MainPage.bzr?cabinetInstanceID=1978','general':'https://uspace.unist.ac.kr/uspace/Cabinet/MainPage.bzr?cabinetInstanceID=1124','outlook':'https://sso-token.unist.ac.kr/email','course':'https://portal.unist.ac.kr/irj/portal','enrollment':'https://portal.unist.ac.kr/irj/portal'}
+ paths={'scholarship':'https://uspace.unist.ac.kr/uspace/Cabinet/MainPage.bzr?cabinetInstanceID=1126','academic':'https://uspace.unist.ac.kr/uspace/Cabinet/MainPage.bzr?cabinetInstanceID=1978','general':'https://uspace.unist.ac.kr/uspace/Cabinet/MainPage.bzr?cabinetInstanceID=1124','outlook':'https://outlook.cloud.microsoft/mail/','course':'https://portal.unist.ac.kr/irj/portal','enrollment':'https://portal.unist.ac.kr/irj/portal'}
  if destination not in paths:raise ValueError('지원하지 않는 화면')
  with urllib.request.urlopen(endpoint.rstrip('/')+'/json/list',timeout=5) as f:pages=json.load(f)
  found=[p for p in pages if p.get('type')=='page' and p.get('id')==preferred_target] if preferred_target else []

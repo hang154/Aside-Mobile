@@ -15,13 +15,10 @@
     <provider android:name=".NubiDocumentProvider" android:authorities="${applicationId}.documents" android:exported="false" android:grantUriPermissions="true" />
     <activity-alias android:name=".MainActivity" android:exported="false" android:targetActivity=".CompanionEntryActivity">
         </activity-alias>
-    <activity android:name=".InvestorDemoActivity" android:exported="true" />
+    <activity android:name=".InvestorDemoActivity" android:exported="true"><intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent-filter></activity>
     <activity android:name=".CredentialVaultActivity" android:exported="false" />
     <activity android:name=".CampusActivity" android:exported="true">
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
-        <category android:name="android.intent.category.LAUNCHER" />
-      </intent-filter>
+      
     </activity>
     <activity-alias android:name=".UnifiedToolsActivity" android:exported="false" android:targetActivity=".CompanionEntryActivity" />
 

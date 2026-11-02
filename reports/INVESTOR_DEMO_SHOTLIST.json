@@ -1,7 +1,7 @@
 {
   "source_plan": "018d44ca-72a6-4339-9342-cd5272b7c665/Pasted text.txt",
   "base_commit": "f72911f",
-  "branch": "demo/investor-20261102",
+  "branch": "demo/investor-en-20261102",
   "scope": "Android app source clips; founder/farm/station real-world photography is outside this capture request",
   "shots": [
     {
@@ -83,5 +83,6 @@
     "Live action never replaced with fixture responses",
     "Product vision labelled onscreen throughout",
     "Private raw mail/account screens stay local and require privacy check before sharing"
-  ]
+  ],
+  "language": "English app chrome, requests, Qwen responses and generated drafts; original university pages remain unmodified"
 }

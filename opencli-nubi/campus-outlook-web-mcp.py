@@ -60,13 +60,13 @@ def draft(endpoint,subject,body,attachment):
  def evaluate(expr):return call('Runtime.evaluate',{'expression':expr,'returnByValue':True}).get('result',{}).get('value')
  try:
   if evaluate("!!document.querySelector('input[placeholder=\"제목 추가\"]')"):raise RuntimeError('열려 있는 작성창을 먼저 닫아 주세요.')
-  if not evaluate("!!document.querySelector('button[label=\"새 메일\"]')"):
+  if not evaluate("!!document.querySelector('button[label=\"새 메일\"],button[aria-label=\"신규\"]')"):
    if not evaluate("(()=>{let b=document.querySelector('button[aria-label=\"검색 닫기\"]');if(!b)return false;b.click();return true})()"):raise RuntimeError('Outlook 검색 화면을 닫지 못했습니다.')
    for _ in range(12):
     time.sleep(.5)
-    if evaluate("!!document.querySelector('button[label=\"새 메일\"]')"):break
+    if evaluate("!!document.querySelector('button[label=\"새 메일\"],button[aria-label=\"신규\"]')"):break
    else:raise RuntimeError('Outlook 받은편지함을 확인하지 못했습니다.')
-  ok=evaluate("(()=>{if(document.querySelector('input[placeholder=\"제목 추가\"]'))return false;let b=document.querySelector('button[label=\"새 메일\"]');if(!b)return false;b.click();return true})()")
+  ok=evaluate("(()=>{if(document.querySelector('input[placeholder=\"제목 추가\"]'))return false;let b=document.querySelector('button[label=\"새 메일\"],button[aria-label=\"신규\"]');if(!b)return false;b.click();return true})()")
   if not ok:raise RuntimeError('열려 있는 작성창을 닫거나 Outlook 받은편지함을 확인하세요.')
   for _ in range(10):
    time.sleep(.5)

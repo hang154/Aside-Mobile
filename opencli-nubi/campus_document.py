@@ -12,12 +12,12 @@ def create_application(root,fields):
  fd=os.open(p,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600)
  missing=[]
  try:
-  doc=Document();doc.add_heading('지원서 초안 · 제출 전 확인 필요',0)
-  for key,label in [('notice_title','지원 공고'),('source','공고 출처'),('applicant','지원자'),('motivation','지원 동기'),('experience','관련 경험')]:
+  doc=Document();doc.add_heading('Application draft — review before submission',0)
+  for key,label in [('notice_title','Opportunity'),('source','Source'),('applicant','Applicant'),('motivation','Motivation'),('experience','Relevant experience')]:
    value=fields.get(key,'').strip()
-   if not value:missing.append(label);value='[직접 확인하여 입력]'
+   if not value:missing.append(label);value='[To be completed by the applicant]'
    doc.add_heading(label,level=2);doc.add_paragraph(value)
-  doc.add_paragraph('이 문서는 입력된 정보로 생성한 초안입니다. 지원 자격, 마감, 제출 양식 및 사실관계를 원문과 대조해 주세요.')
+  doc.add_paragraph('This is a draft, not an official application form. Verify eligibility, deadlines, required forms and all facts against the original notice.')
   with os.fdopen(fd,'wb') as f:doc.save(f)
  except BaseException:
   try:os.close(fd)
