@@ -4,10 +4,13 @@ import xml.etree.ElementTree as ET
 r=Path(__file__).resolve().parents[1];b=r/'app/src/main/java/ai/decisionos/aside';ns='{http://schemas.android.com/apk/res/android}'
 m=ET.parse(r/'app/src/main/AndroidManifest.xml').getroot()
 services=m.findall('.//service')
-assert {x.attrib[ns+'name'] for x in services}=={'.CampusNoticeMonitor','.EngagementService'}
+assert {x.attrib[ns+'name'] for x in services}=={'.CampusNoticeMonitor','.BlackboardNoticeMonitor'}
+debug=ET.parse(r/'app/src/debug/AndroidManifest.xml').getroot()
+assert debug.find('.//service').attrib[ns+'permission']=='android.permission.BIND_ACCESSIBILITY_SERVICE'
+assert 'getRootInActiveWindow' not in (b/'EngagementService.java').read_text()
 for service in services:
- if service.attrib[ns+'name']=='.CampusNoticeMonitor':
-  assert service.attrib.get(ns+'exported')=='false'
+ if service.attrib[ns+'name'] in {'.CampusNoticeMonitor','.BlackboardNoticeMonitor'}:
+  assert service.attrib.get(ns+'exported')=={'.CampusNoticeMonitor':'false','.BlackboardNoticeMonitor':'true'}[service.attrib[ns+'name']]
   assert service.attrib.get(ns+'permission')=='android.permission.BIND_JOB_SERVICE'
  else:
   assert service.attrib.get(ns+'permission')=='android.permission.BIND_ACCESSIBILITY_SERVICE'

@@ -1,0 +1,15 @@
+package ai.decisionos.aside;
+import android.content.*;import android.os.*;import org.json.*;import java.nio.file.*;
+final class GroupQwenChecks {
+ static void run(GoalInstrumentation i){Bundle out=new Bundle();GoalAgentActivity a=null;try{
+ a=(GoalAgentActivity)i.startActivitySync(new Intent(i.getTargetContext(),GoalAgentActivity.class).putExtra("companion_page","홈").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));final GoalAgentActivity h=a;HtmlHomeChecks.waitReady(i,h.chat.companion.tossHome);Path pair=h.getFilesDir().toPath().resolve("group-test-pairing");if(Files.exists(pair)){String secret=new String(Files.readAllBytes(pair),java.nio.charset.StandardCharsets.UTF_8);Files.delete(pair);i.runOnMainSync(()->{try{h.relay.connect(secret);}catch(Exception e){throw new RuntimeException("Pairing setup failed");}});}i.check(h.relay.connected(),"authenticated relay connected");i.runOnMainSync(()->h.chat.companion.select("누비톡"));Thread.sleep(600);NubiTossHomeUi home=h.chat.companion.tossHome;
+ String[][] cases={{"love","썸 타는 친구에게 커피 마시자고 할 자연스러운 문자 초안 2개 써줘. 실제 전송하지 마."},{"grades","블랙보드 연결이 안 돼. 포털 세션 재사용 확인 순서만 설명해줘. 실제 연결했다고 말하지 마."},{"mixed","시험 끝나고 애인과 여행을 가고 싶어. 학교 일정 준비, 데이트, KTX 이동, 예산을 담당끼리 나눠 계획만 짜줘. 실제 조회나 예약은 하지 마."}};
+ for(String[] test:cases){if(i.scenario.containsKey("groupQwenCase")&&!test[0].equals(i.scenario.getString("groupQwenCase")))continue;TossHomeChecks.js(i,home,"groupHistory=[];groupPending=null;saveGroup();openGroup(true)");TossHomeChecks.js(i,home,"groupSend("+JSONObject.quote(test[1])+")");boolean done=false;
+ for(int n=0;n<210;n++){Thread.sleep(1000);if("true".equals(TossHomeChecks.js(i,home,"groupPending===null"))){done=true;break;}}
+ i.check(done,test[0]+" turn completed");i.check("true".equals(TossHomeChecks.js(i,home,"!groupHistory.some(x=>x.error)")),test[0]+" no backend error: "+TossHomeChecks.js(i,home,"JSON.stringify(groupHistory.filter(x=>x.error))"));i.check("true".equals(TossHomeChecks.js(i,home,"groupHistory.filter(x=>x.actual).length>=3")),test[0]+" actual model answers displayed");i.check("true".equals(TossHomeChecks.js(i,home,"groupHistory.filter(x=>x.actual).every(x=>x.model==='Qwen3.8-27B-abliterated-AWQ-W4A16')")),test[0]+" exact model identity");
+ if(test[0].equals("mixed"))i.check("true".equals(TossHomeChecks.js(i,home,"new Set(groupHistory.filter(x=>x.actual&&x.role!=='nubi').map(x=>x.role)).size>=3")),"multiple Qwen specialist answers");else i.check("true".equals(TossHomeChecks.js(i,home,"groupHistory.some(x=>x.actual&&x.role==='"+test[0]+"')")),test[0]+" correct specialist");
+ String raw=TossHomeChecks.js(i,home,"JSON.stringify(groupHistory)");String json=new JSONArray("["+raw+"]").getString(0);Files.write(h.getExternalFilesDir(null).toPath().resolve("group-qwen-"+test[0]+".json"),json.getBytes(java.nio.charset.StandardCharsets.UTF_8));HomeUiChecks.shot(i,"group-qwen-"+test[0]+".png");
+ }
+ out.putString("stream","PASS "+i.checks+" live Qwen group checks\n");
+ }catch(Throwable e){out.putString("stream","FAIL "+e+"\n");}finally{if(a!=null){GoalAgentActivity h=a;i.runOnMainSync(h::finish);}}i.finish(out.getString("stream","").startsWith("PASS")?-1:0,out);}
+}

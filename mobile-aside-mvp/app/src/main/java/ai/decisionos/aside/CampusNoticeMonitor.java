@@ -41,9 +41,9 @@ public final class CampusNoticeMonitor extends JobService {
   if(title.matches("(?is).*(인턴|현장실습|intern).*"))return "인턴십";
   if(title.matches("(?is).*(학점\\s*교류|계절\\s*학기.*학점).*"))return "학점교류";
   if(title.matches("(?is).*(복학|휴학|중도포기).*"))return "학적";
-  if(title.matches("(?is).*(수강|정원).*"))return "수강";
+  if(title.matches("(?is).*(수강|정원|전공.{0,8}(신청|변경)).*"))return "수강";
   if(title.matches("(?is).*(시험|기말).*"))return "시험";
-  if(title.matches("(?is).*(졸업|학위논문).*"))return "졸업";
+  if(title.matches("(?is).*(졸업|학위논문|졸업논문).*"))return "졸업";
   if(title.matches("(?is).*(캠프|축제|축전|행사|강연|세미나).*"))return "행사";
   if(title.matches("(?is).*(화장실|사용\\s*불가).*"))return "시설";
   return "기타";
@@ -53,10 +53,12 @@ public final class CampusNoticeMonitor extends JobService {
  static String hash(String value){try{byte[] b=MessageDigest.getInstance("SHA-256").digest(value.getBytes(StandardCharsets.UTF_8));StringBuilder s=new StringBuilder();for(byte v:b)s.append(String.format(java.util.Locale.US,"%02x",v&255));return s.toString();}catch(Exception e){throw new IllegalStateException(e);}}
  @Override public boolean onStartJob(JobParameters params){if(running!=null)return false;running=params;done=false;combined=new JSONArray();handler.post(()->startWeb());return true;}
  private void startWeb(){
-  if(done)return;web=new WebView(this);web.measure(android.view.View.MeasureSpec.makeMeasureSpec(1080,android.view.View.MeasureSpec.EXACTLY),android.view.View.MeasureSpec.makeMeasureSpec(1600,android.view.View.MeasureSpec.EXACTLY));web.layout(0,0,1080,1600);web.getSettings().setJavaScriptEnabled(true);web.getSettings().setDomStorageEnabled(true);web.getSettings().setAllowFileAccess(false);web.getSettings().setAllowContentAccess(false);web.getSettings().setMixedContentMode(android.webkit.WebSettings.MIXED_CONTENT_NEVER_ALLOW);
-  web.setWebViewClient(new WebViewClient(){@Override public void onPageFinished(WebView v,String url){if(url.startsWith("https://portal.unist.ac.kr/irj/"))handler.postDelayed(()->switchTab("전체공지",0),8000);}});
-  handler.postDelayed(()->finish("시간 초과 · 포털을 열어 연결을 확인해 주세요.",true),45000);web.loadUrl("https://portal.unist.ac.kr/");
+  if(done)return;web=new WebView(this);web.measure(android.view.View.MeasureSpec.makeMeasureSpec(1080,1073741824),android.view.View.MeasureSpec.makeMeasureSpec(1600,1073741824));web.layout(0,0,1080,1600);web.getSettings().setJavaScriptEnabled(true);web.getSettings().setDomStorageEnabled(true);web.getSettings().setAllowFileAccess(false);web.getSettings().setAllowContentAccess(false);web.getSettings().setMixedContentMode(android.webkit.WebSettings.MIXED_CONTENT_NEVER_ALLOW);
+  final String key="nubiBoards_"+java.util.UUID.randomUUID().toString().replace("-","");
+  web.setWebViewClient(new WebViewClient(){boolean started;public void onPageFinished(WebView v,String url){if(done||started||!"uspace.unist.ac.kr".equals(android.net.Uri.parse(url).getHost()))return;started=true;v.evaluateJavascript(CampusBoardReader.start(key),ignored->handler.postDelayed(()->readBoards(key,0),1000));}});
+  handler.postDelayed(()->finish("시간 초과 · 학교 게시판 세션 확인 필요",true),45000);web.loadUrl("https://uspace.unist.ac.kr/uspace/Cabinet/MainPage.bzr?cabinetInstanceID=1978");
  }
+ private void readBoards(String key,int attempt){if(done||web==null)return;web.evaluateJavascript(CampusBoardReader.read(key),raw->{if(done)return;try{JSONObject data=new JSONObject(new JSONArray("["+raw+"]").getString(0));if(data.optString("state").equals("ok")){JSONArray rows=data.getJSONArray("rows");java.util.Set<String> boards=new java.util.HashSet<>();for(int n=0;n<rows.length();n++)boards.add(rows.getJSONObject(n).optString("board"));if(boards.size()!=3||!boards.containsAll(java.util.Arrays.asList("1978","1126","1124")))throw new IllegalStateException();saveRows(rows);return;}if(data.optString("state").equals("loading")&&attempt<30){handler.postDelayed(()->readBoards(key,attempt+1),1000);return;}finish("학사·장학·전체 게시판 확인 실패 · 기존 기록 유지",true);}catch(Exception e){finish("학교 게시판 응답을 확인하지 못했어요. 기존 기록 유지",true);}});}
  private void switchTab(String label,int phase){
   if(done||web==null)return;
   String js="(()=>{try{let f=document.querySelector('iframe[name=contentAreaFrame]');let d=f&&f.contentDocument;let a=d&&[...d.querySelectorAll('a')].find(x=>x.innerText.trim()==="+JSONObject.quote(label)+" && (x.getAttribute('href')||'').includes('go_board_switch'));if(!a)return false;a.click();return true}catch(e){return false}})()";
@@ -70,13 +72,13 @@ public final class CampusNoticeMonitor extends JobService {
  private void saveRows(JSONArray rows){
   if(rows.length()==0){finish("공지 목록이 비어 있어 이전 기록을 유지했어요.",true);return;}
   SharedPreferences p=getSharedPreferences(PREFS,MODE_PRIVATE);SharedPreferences.Editor edit=p.edit();String level=p.getString("student_level","전체");boolean initial=!p.getBoolean("baseline_ready",false);int found=0;String first="";JSONArray shown=new JSONArray();
-  for(int i=0;i<rows.length();i++){JSONObject r=rows.optJSONObject(i);if(r==null)continue;String id=r.optString("id"),board=r.optString("board"),title=r.optString("title"),date=r.optString("date");if(!id.matches("[0-9]{1,30}")||!board.matches("[0-9]{1,30}")||title.isEmpty())continue;if(relevant(title,level)){JSONObject item=new JSONObject();try{item.put("title",title);item.put("date",date);item.put("category",category(title));item.put("audience",audience(title));shown.put(item);}catch(Exception ignored){}}String key="notice_"+board+"_"+id,fingerprint=hash(title+"\n"+date);String previous=p.getString(key,"");edit.putString(key,fingerprint);if(!initial&&!fingerprint.equals(previous)&&relevant(title,level)&&!category(title).equals("기타")){found++;if(first.isEmpty())first=title;}}
-  edit.putString("latest_rows",shown.toString()).putBoolean("baseline_ready",true).putLong("last_checked",System.currentTimeMillis()).putString("last_status","포털 홈의 전체·학사 공지 "+rows.length()+"행 확인 · 미리보기만");edit.apply();
+  for(int i=0;i<rows.length();i++){JSONObject r=rows.optJSONObject(i);if(r==null)continue;String id=r.optString("id"),board=r.optString("board"),title=r.optString("title"),date=r.optString("date");if(!id.matches("[0-9]{1,30}")||!board.matches("[0-9]{1,30}")||title.isEmpty())continue;if(relevant(title,level)){JSONObject item=new JSONObject();try{item.put("title",title);item.put("date",date);item.put("category",category(title));item.put("audience",audience(title));shown.put(item);SchoolChatWork.publish(this,"portal",board+"/"+id+"/"+hash(title+"\n"+date),title,"게시판: "+board+" · "+category(title),"https://portal.unist.ac.kr/",date);}catch(Exception ignored){}}String key="notice_"+board+"_"+id,fingerprint=hash(title+"\n"+date);String previous=p.getString(key,"");edit.putString(key,fingerprint);if(!initial&&!fingerprint.equals(previous)&&relevant(title,level)&&!category(title).equals("기타")){found++;SchoolChatWork.publish(this,"portal",board+"/"+id+"/"+fingerprint,title,"게시판: "+board+" · "+category(title),"https://portal.unist.ac.kr/",date);if(first.isEmpty())first=title;}}
+  edit.putString("latest_rows",shown.toString()).putBoolean("baseline_ready",true).putLong("last_checked",System.currentTimeMillis()).putString("last_status","학사·장학·전체 게시판 "+rows.length()+"행 확인 · 각 첫 페이지");edit.apply();
   if(found>0)notifyChanges(this,found,first);finish(null,false);
  }
  static void notifyChanges(Context context,int count,String first){
   NotificationManager nm=(NotificationManager)context.getSystemService(NOTIFICATION_SERVICE);if(Build.VERSION.SDK_INT>=26)nm.createNotificationChannel(new NotificationChannel(CHANNEL,"학교 공지",NotificationManager.IMPORTANCE_DEFAULT));
-  Intent intent=new Intent(context,CampusToolsActivity.class);PendingIntent open=PendingIntent.getActivity(context,0,intent,PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE);
+  Intent intent=new Intent(context,CampusActivity.class).putExtra("companion_page","학교 시작하기");PendingIntent open=PendingIntent.getActivity(context,0,intent,PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE);
   Notification.Builder b=Build.VERSION.SDK_INT>=26?new Notification.Builder(context,CHANNEL):new Notification.Builder(context);b.setSmallIcon(android.R.drawable.ic_dialog_info).setContentTitle("누비가 학교 공지를 찾았어 · "+count+"건").setContentText(first).setStyle(new Notification.BigTextStyle().bigText(first+"\n포털 원문에서 대상과 기한을 확인해 줘." )).setContentIntent(open).setAutoCancel(true);
   try{nm.notify(90145,b.build());}catch(SecurityException ignored){}
  }

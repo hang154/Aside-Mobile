@@ -1,0 +1,13 @@
+package ai.decisionos.aside;
+import android.os.*;import android.content.*;import org.json.*;
+/** Real native chat -> relay -> Qwen -> transit MCP; verifies the missing-key path without fabricated arrivals. */
+final class TransitChatChecks {
+ static void run(GoalInstrumentation i){Bundle out=new Bundle();GoalAgentActivity a=null;String gid="";try(GoalStore store=new GoalStore(i.getTargetContext())){
+  JSONObject expired=new JSONObject().put("expiresAt",1000).put("text","old route").put("answer","old answer").put("items",new JSONArray().put("old"));TransitRetention.clean(expired,1000);i.check(!expired.getString("text").equals("old route"),"expired route text redacted");i.check(expired.getJSONArray("items").length()==0,"expired choices removed");JSONObject fresh=new JSONObject().put("expiresAt",2000).put("text","fresh");TransitRetention.clean(fresh,1000);i.check(fresh.getString("text").equals("fresh"),"unexpired route preserved");i.check(TransitRetention.next(new JSONArray().put(fresh),1000)==2000,"visible expiry timer scheduled");
+  gid=store.create("travel","REGRESSION_TRANSIT_065","교통 API 연결 검증",0).getString("id");a=(GoalAgentActivity)i.startActivitySync(new Intent(i.getTargetContext(),GoalAgentActivity.class).putExtra("goal_id",gid).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));final GoalAgentActivity host=a;i.waitForIdleSync();
+  i.check(host.relay.connected(),"existing relay configured");i.runOnMainSync(()->{host.chat.input.setText("서울역 지하철 도착 정보를 공식 API로 조회해줘. 키가 미설정이면 미연결 상태를 알려줘.");host.chat.send.performClick();});
+  boolean finished=false;for(int n=0;n<100;n++){Thread.sleep(1000);final boolean[] end={false};i.runOnMainSync(()->end[0]=!host.chat.running&&!host.chat.submitting&&host.chat.history.length()>=2);if(end[0]){finished=true;break;}}
+  i.check(finished,"native chat reached terminal state");final JSONObject[] last={null};i.runOnMainSync(()->last[0]=host.chat.history.optJSONObject(host.chat.history.length()-1));i.check(last[0]!=null&&last[0].optString("state").equals("failed"),"unconfigured API not marked success");String answer=last[0].optString("text");i.check(answer.matches("(?s).*(가입|인증키|키 설정|미연결|미설정|연결되지).*"),"registration requirement shown in native chat");
+  i.check(!answer.matches("(?s).*\\b[1-9][0-9]*분 (뒤|후).*"),"no invented arrival minute");out.putString("stream","PASS "+i.checks+" LIVE native transit missing-key checks\n"+answer+"\n");
+ }catch(Throwable e){out.putString("stream","FAIL "+e+"\n");}finally{if(a!=null){final GoalAgentActivity host=a;i.runOnMainSync(()->{if(host.runs.active()!=null)host.runs.cancel();host.finish();});}if(!gid.isEmpty())try(GoalStore s=new GoalStore(i.getTargetContext())){s.deleteGoal(gid);}}i.finish(out.getString("stream","").startsWith("PASS")?-1:0,out);}
+}

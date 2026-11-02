@@ -55,11 +55,11 @@ jobs:
           gradle --no-daemon :app:assembleDebug :app:assembleDebugAndroidTest
       - name: Verify package and checksums
         run: |
-          find mobile-aside-mvp/app/build/outputs/apk/debug -maxdepth 1 -name '*.apk' -print
-          sha256sum mobile-aside-mvp/app/build/outputs/apk/debug/*.apk
+          find mobile-aside-mvp/app/build/outputs/apk -path '*/debug/*.apk' -print
+          sha256sum mobile-aside-mvp/app/build/outputs/apk/*/debug/*.apk
       - uses: actions/upload-artifact@v4
         with:
           name: Aside-Mobile-Debug-APK
-          path: mobile-aside-mvp/app/build/outputs/apk/debug/*.apk
+          path: mobile-aside-mvp/app/build/outputs/apk/*/debug/*.apk
           if-no-files-found: error
           retention-days: 14

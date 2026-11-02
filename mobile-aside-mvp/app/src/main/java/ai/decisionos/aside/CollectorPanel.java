@@ -18,14 +18,14 @@ final class CollectorPanel extends CompanionPanel {
     private TextView state,summary; private LinearLayout root;
      public void onCreate(Bundle b){super.onCreate(b);ScrollView scroll=new ScrollView(this);root=Ui.vertical(this,0xffffffff,0);scroll.addView(root);
         root.addView(Ui.text(this,"화면 이벤트 수집",27,0xff111111,true),Ui.match(this,-2,7));
-        root.addView(Ui.text(this,"선택한 앱의 화면 전환·클릭·스크롤과 표시 구간, Aside WebView의 페이지 열기·터치만 기기에 저장합니다. 입력값·화면 문구·주소·사진은 수집하지 않습니다. 화면이 잠기면 수집을 멈춥니다. 기록은 최근 24시간과 5,000건 기준으로 다음 기록·조회 때 정리되며 이 화면에서 중지·삭제할 수 있습니다. 앱을 사용하는 기록도 민감할 수 있습니다.",14,0xff111111,false),Ui.match(this,-2,10));
+        root.addView(Ui.text(this,"선택한 앱의 화면 전환·클릭·스크롤과 표시 구간, 누비 브라우저의 페이지 열기·터치만 기기에 저장합니다. 입력값·화면 문구·주소·사진은 수집하지 않습니다. 화면이 잠기면 수집을 멈춥니다. 기록은 최근 24시간과 5,000건 기준으로 다음 기록·조회 때 정리되며 이 화면에서 중지·삭제할 수 있습니다. 앱을 사용하는 기록도 민감할 수 있습니다.",14,0xff111111,false),Ui.match(this,-2,10));
         root.addView(Ui.text(this,"수집할 앱 선택",18,0xff111111,true),Ui.match(this,-2,12));
         checkbox("누비 브라우저",getPackageName());checkbox("Chrome", "com.android.chrome");checkbox("카카오톡 (이벤트만)", "com.kakao.talk");checkbox("Android 설정", "com.android.settings");
         EditText packageName=new EditText(this);packageName.setSingleLine(true);packageName.setTextColor(0xff111111);packageName.setHintTextColor(0xff888888);packageName.setHint("다른 앱 패키지명 (예: com.example.app)");root.addView(packageName,Ui.match(this,48,4));
         button("패키지 추가",()->changePackage(packageName,true));button("패키지 제거",()->changePackage(packageName,false));
         state=Ui.text(this,"",14,0xff111111,true);root.addView(state,Ui.match(this,-2,10));
-        button("수집 시작",this::start);button("수집 중지",()->{CollectorStore.prefs(this).edit().putBoolean(CollectorStore.ACTIVE,false).apply();refresh();});
-        button("Android 접근성 수집 서비스 설정",()->startActivity(new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)));
+        if((a.getApplicationInfo().flags&android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE)!=0)button("개발용 수집 시작",this::start);button("수집 중지",()->{CollectorStore.prefs(this).edit().putBoolean(CollectorStore.ACTIVE,false).apply();refresh();});
+        if((a.getApplicationInfo().flags&android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE)!=0)button("개발용 접근성 수집 서비스 설정",()->startActivity(new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)));
         button("기록 새로 보기",this::refresh);button("기록 모두 삭제",()->new AlertDialog.Builder(this).setTitle("기록을 모두 지울까요?").setNegativeButton("취소",null).setPositiveButton("삭제",(d,w)->{CollectorStore.clear(this);refresh();}).show());
         summary=Ui.text(this,"",14,0xff111111,false);summary.setTextIsSelectable(true);root.addView(summary,Ui.match(this,-2,10));setContentView(scroll);refresh();
     }

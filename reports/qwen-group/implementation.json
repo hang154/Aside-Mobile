@@ -1,0 +1,43 @@
+{
+  "version": "0.6.12-qwen-group",
+  "purpose": "Persisted group chat with real Qwen planning, sequential specialist replies and Nubi synthesis",
+  "model": "Qwen3.8-27B-abliterated-AWQ-W4A16",
+  "roles": {
+    "love": "다정이",
+    "grades": "똑똑이",
+    "fitness": "건강이",
+    "home": "차곡이",
+    "career": "든든이",
+    "travel": "떠남이"
+  },
+  "architecture": [
+    "Bundled local WebView and validated native group bridge",
+    "Existing authenticated TLS relay /group-submit + /group-status",
+    "Qwen JSON planner chooses 0..4 specialists",
+    "Each specialist sees preceding replies; final Nubi call synthesizes",
+    "Request idempotency, per-device ownership, no automatic POST retries",
+    "Model credentials remain only on host; Android pairing encrypted in Keystore"
+  ],
+  "scope": "Real model conversation only. No browser/API tool execution, login, booking, transaction or external messaging in this group worker. Existing specialist workflows remain separately available.",
+  "preservation": "0.6.9 and 0.6.10 remain separate packages; prior 0.6.11 APK stored locally; groupchat updated to 0.6.12",
+  "evidence": "Initial server responses were collected before prompt refinement to student-level support. Final phone responses use refined prompt. Captures and videos kept local.",
+  "verification": {
+    "phone": "Samsung SM-A546S",
+    "cases": [
+      "love",
+      "grades",
+      "mixed"
+    ],
+    "checks_per_case": 6,
+    "passed": 18,
+    "installed_apk_sha256": "bf6b7bf93705112943812a0f69ce1cfe8ca8c261d411615070fef172d2cf7626",
+    "transport_viewports": 3,
+    "existing_chat_scheduler_checks": 31,
+    "network": "Authenticated TLS over WiFi; USB used for installation and instrumentation"
+  },
+  "known_quality_limitations": [
+    "Compound response sometimes assigns a specialist the wrong domain.",
+    "Unverified travel times/station names appeared in generated planning text. Responses are not verified service results.",
+    "Earlier planner JSON failures fixed with constrained JSON schema; instrumentation timeout increased to 25 seconds."
+  ]
+}

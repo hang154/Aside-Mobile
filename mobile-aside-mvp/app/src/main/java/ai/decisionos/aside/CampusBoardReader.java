@@ -1,0 +1,7 @@
+package ai.decisionos.aside;
+import org.json.JSONObject;
+/** Three verified U-Space board IDs; preserves partial-failure state instead of clearing old rows. */
+final class CampusBoardReader {
+ static String start(String key){return "window["+JSONObject.quote(key)+"]={state:'loading'};"+"(async()=>{try{if(location.hostname!=='uspace.unist.ac.kr')throw Error('origin');let rows=[];for(const id of ['1978','1126','1124']){let response=await fetch('/uspace/Cabinet/MainPage.bzr?cabinetInstanceID='+id,{credentials:'same-origin',cache:'no-store'});if(!response.ok||new URL(response.url).hostname!=='uspace.unist.ac.kr')throw Error('login');let doc=new DOMParser().parseFromString(await response.text(),'text/html');let list=[...doc.querySelectorAll('tr')].map(tr=>{let c=tr.cells;if(c.length!==8)return null;let a=c[4].querySelector('a[onclick*=TitleClick]');if(!a)return null;let m=(a.getAttribute('onclick')||'').match(/TitleClick\\('[^']*','(\\d+)','(\\d+)'/);let title=a.textContent.trim(),date=c[6].textContent.trim();return m&&title&&m[2]===id&&/^\\d{4}[-./]\\d{2}[-./]\\d{2}$/.test(date)?{id:m[1],board:m[2],title,date:date.replace(/[./]/g,'-')}:null}).filter(Boolean).slice(0,40);if(!list.length)throw Error('empty');rows.push(...list)}window["+JSONObject.quote(key)+"]={state:'ok',rows}}catch(e){window["+JSONObject.quote(key)+"]={state:'unverified'}}})()";}
+ static String read(String key){return "JSON.stringify(window["+JSONObject.quote(key)+"]||{state:'loading'})";}
+}

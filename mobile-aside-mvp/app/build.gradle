@@ -9,8 +9,23 @@ android {
         minSdk 26
         targetSdk 35
         testInstrumentationRunner 'ai.decisionos.aside.GoalInstrumentation'
-        versionCode 41
-        versionName '0.4.1-companion'
+        versionCode 72
+        versionName '0.6.12-qwen-group'
+        manifestPlaceholders = [appLabel: '누비']
+        buildConfigField 'int', 'HOME_STYLE', '0'
+        buildConfigField 'boolean', 'HOME_LIGHT', 'false'
+    }
+    buildFeatures { buildConfig = true }
+    flavorDimensions += "home"
+    productFlavors {
+        groupchat { dimension "home"; buildConfigField 'boolean', 'HOME_LIGHT', 'true'; applicationId "ai.decisionos.nubi.groupchat"; manifestPlaceholders = [appLabel: "누비 · 함께 대화"]; buildConfigField 'int', 'HOME_STYLE', '6' }
+        campushome { dimension "home"; buildConfigField 'boolean', 'HOME_LIGHT', 'true'; applicationId "ai.decisionos.nubi.campushome"; manifestPlaceholders = [appLabel: "누비 · 캠퍼스 홈"]; buildConfigField 'int', 'HOME_STYLE', '5' }
+        htmlhome { dimension "home"; buildConfigField 'boolean', 'HOME_LIGHT', 'true'; applicationId "ai.decisionos.nubi.htmlhome"; manifestPlaceholders = [appLabel: "누비 · 새 홈"]; buildConfigField 'int', 'HOME_STYLE', '5' }
+        standard { dimension "home" }
+        today { dimension "home"; buildConfigField 'boolean', 'HOME_LIGHT', 'true'; applicationId "ai.decisionos.nubi.hometoday"; manifestPlaceholders = [appLabel: "누비 A · 오늘의 생활"]; buildConfigField 'int', 'HOME_STYLE', '1' }
+        agents { dimension "home"; buildConfigField 'boolean', 'HOME_LIGHT', 'true'; applicationId "ai.decisionos.nubi.homeagents"; manifestPlaceholders = [appLabel: "누비 B · 메시지 화이트"]; buildConfigField 'int', 'HOME_STYLE', '2' }
+        feed { dimension "home"; buildConfigField 'boolean', 'HOME_LIGHT', 'true'; applicationId "ai.decisionos.nubi.homefeed"; manifestPlaceholders = [appLabel: "누비 C · 매거진 화이트"]; buildConfigField 'int', 'HOME_STYLE', '3' }
+        journey { dimension "home"; buildConfigField 'boolean', 'HOME_LIGHT', 'true'; applicationId "ai.decisionos.nubi.homejourney"; manifestPlaceholders = [appLabel: "누비 D · 하루의 흐름"]; buildConfigField 'int', 'HOME_STYLE', '4' }
     }
     packaging { jniLibs { useLegacyPackaging = true } }
     buildTypes {

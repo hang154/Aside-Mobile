@@ -6,7 +6,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 p=argparse.ArgumentParser();p.add_argument('task');p.add_argument('--max-steps',type=int,default=6);p.add_argument('--timeout',type=int,default=90);a=p.parse_args()
-if not a.task.strip() or len(a.task)>500 or not 1<=a.max_steps<=20:raise SystemExit('invalid task')
+if not a.task.strip() or len(a.task)>2000 or not 1<=a.max_steps<=20:raise SystemExit('invalid task')
 config=json.loads((Path.home()/'.azrael-ex/azrael/providers/api/connections.json').read_text())
 found=[c for c in config['connections'] if c.get('enabled') and any(m.get('id')=='Qwen3.8-27B-uncensored-FP8' for m in c.get('models',[]))]
 if len(found)!=1 or found[0].get('auth',{}).get('kind')!='bearerFile':raise SystemExit('Azrael Qwen connection unavailable')

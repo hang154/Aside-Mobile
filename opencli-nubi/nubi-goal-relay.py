@@ -15,7 +15,7 @@ args = parser.parse_args()
 token = open(args.token_file, encoding='ascii').read().strip()
 if len(token) < 32:
     raise SystemExit('Token must have at least 32 characters')
-queues={};active_device='default'
+queues={};poll_owners={};poll_epochs={};active_device='default'
 def device_queue(session):
     with lock:
         if session not in queues:
@@ -32,6 +32,8 @@ if args.chat_dir:
 spec=importlib.util.spec_from_file_location('nubi_friends',Path(__file__).with_name('nubi-friends.py'));friends_module=importlib.util.module_from_spec(spec);spec.loader.exec_module(friends_module)
 friends=friends_module.Friends(str(Path(args.token_file).with_name('friends.sqlite3')))
 spec=importlib.util.spec_from_file_location('friend_draft',Path(__file__).with_name('nubi-friend-draft.py'));draft_module=importlib.util.module_from_spec(spec);spec.loader.exec_module(draft_module)
+from nubi_group_qwen import GroupQwen
+group_qwen=GroupQwen(Path(args.chat_dir or Path(args.token_file).parent)/"group-qwen")
 class Handler(BaseHTTPRequestHandler):
     def log_message(self, *args): pass
     def respond(self, status, obj):
@@ -45,6 +47,13 @@ class Handler(BaseHTTPRequestHandler):
             body = json.loads(self.rfile.read(n))
             if not isinstance(body, dict): raise ValueError()
         except Exception: return self.respond(400, {'error':'invalid request'})
+        if self.path in ('/group-submit','/group-status'):
+            try:
+                if self.path=='/group-submit':result=group_qwen.submit(body)
+                elif set(body)=={'job_id','device_session'}:result=group_qwen.status(body['job_id'],body['device_session'])
+                else:raise ValueError('Invalid group status fields')
+                return self.respond(200,result)
+            except ValueError as e:return self.respond(400,{'error':str(e)})
         if self.path=='/friends':
             try:
                 if body.get('action')=='draft':
@@ -74,16 +83,30 @@ class Handler(BaseHTTPRequestHandler):
                 return self.respond(200,result)
             except ValueError as e:return self.respond(400,{'error':str(e)})
             except RuntimeError as e:return self.respond(409,{'error':str(e)})
-        if self.path == '/poll':
+        if self.path in ('/claim','/poll'):
             global active_device
-            session=body.get('device_session','default')
+            session=body.get('device_session','default');owner=body.get('poll_owner','')
             if not isinstance(session,str) or session!='default' and not re.fullmatch(r'[0-9a-f-]{36}',session):return self.respond(400,{'error':'invalid device session'})
+            if not isinstance(owner,str) or owner and not re.fullmatch(r'[0-9a-f-]{36}',owner):return self.respond(400,{'error':'invalid poll owner'})
+            if self.path=='/claim':
+                epoch=body.get('poll_epoch')
+                if not owner or type(epoch) is not int or epoch<1:return self.respond(400,{'error':'poll owner/epoch required'})
+                with lock:
+                    if epoch<poll_epochs.get(session,0) or epoch==poll_epochs.get(session,0) and poll_owners.get(session)!=owner:return self.respond(409,{'error':'superseded connection claim'})
+                    poll_owners[session]=owner;poll_epochs[session]=epoch
+                return self.respond(200,{'claimed':True})
+            with lock:valid=poll_owners.get(session,'')==owner
+            if not valid:return self.respond(409,{'error':'superseded connection'})
             active_device=session
             try:
-                command = device_queue(session).get(timeout=15)
-                if command.get('expires',0) < time.time(): command = None
-            except queue.Empty: command = None
-            return self.respond(200, {'command':command})
+                command=device_queue(session).get(timeout=15)
+                with lock:valid=poll_owners.get(session,'')==owner
+                if not valid:
+                    device_queue(session).put_nowait(command)
+                    command=None
+                elif command.get('expires',0)<time.time():command=None
+            except queue.Empty:command=None
+            return self.respond(200,{'command':command})
         if self.path == '/result':
             id = body.get('id')
             if not isinstance(id,str) or len(id)>64: return self.respond(400, {'error':'invalid id'})
@@ -101,6 +124,14 @@ class Handler(BaseHTTPRequestHandler):
             session=body.pop('_session',active_device)
             if not isinstance(session,str) or session!='default' and not re.fullmatch(r'[0-9a-f-]{36}',session):return self.respond(400,{'error':'invalid device session'})
             item.pop('_session',None)
+            job_id=item.pop('_job',None);request_id=item.pop('_request',None)
+            if job_id is not None:
+                if jobs is None:return self.respond(409,{"error":"chat jobs disabled"})
+                with jobs.lock:
+                    job=jobs.jobs.get(job_id)
+                    if not job or job['cancelled'] or job['process'].poll() is not None or job['request']['device_session']!=session or job['request']['request_id']!=request_id:return self.respond(409,{'error':'stale run lease'})
+                item.update(job_id=job_id,request_id=request_id,device_session=session)
+
             try: device_queue(session).put_nowait(item)
             except queue.Full: return self.respond(429, {'error':'queue full'})
             return self.respond(200, {'id':id})

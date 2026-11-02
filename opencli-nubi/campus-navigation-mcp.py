@@ -7,6 +7,7 @@ preferred_target=None
 
 def open_workspace(endpoint,destination):
  global preferred_target
+ if preferred_target is None:preferred_target=os.environ.get('NUBI_CDP_TARGET_ID')
  u=urlparse(endpoint)
  if u.scheme!='http' or u.hostname not in ('127.0.0.1','localhost') or u.username or u.password:raise ValueError('local CDP only')
  paths={'scholarship':'https://uspace.unist.ac.kr/uspace/Cabinet/MainPage.bzr?cabinetInstanceID=1126','academic':'https://uspace.unist.ac.kr/uspace/Cabinet/MainPage.bzr?cabinetInstanceID=1978','general':'https://uspace.unist.ac.kr/uspace/Cabinet/MainPage.bzr?cabinetInstanceID=1124','outlook':'https://sso-token.unist.ac.kr/email','course':'https://portal.unist.ac.kr/irj/portal','enrollment':'https://portal.unist.ac.kr/irj/portal'}
@@ -49,7 +50,7 @@ def open_workspace(endpoint,destination):
   return out.get('result',{}).get('value')
  try:
   nav=call('Page.navigate',{'url':paths[destination]})
-  if nav.get('errorText'):raise RuntimeError('화면 이동 실패')
+  if nav.get('errorText') and nav['errorText']!='net::ERR_ABORTED':raise RuntimeError('화면 이동 실패')
   for attempt in range(20):
    time.sleep(.7)
    try:
@@ -62,7 +63,7 @@ def open_workspace(endpoint,destination):
      elif destination=='outlook' and state['host'] in ('outlook.office.com','outlook.office365.com','outlook.cloud.microsoft'):
       if evaluate("!!document.querySelector('input[role=combobox][aria-label*=검색]')"):return {'state':'opened','destination':destination}
      elif destination in ('course','enrollment') and state['host']=='portal.unist.ac.kr':break
-     elif state['host'] in ('fs.unist.ac.kr','login.microsoftonline.com'):return {'state':'authentication_required','destination':destination}
+     elif state['host'] in ('fs.unist.ac.kr','login.microsoftonline.com','login.live.com'):return {'state':'authentication_required','destination':destination}
    except RuntimeError:pass
   else:raise RuntimeError('요청한 화면을 확인하지 못했습니다.')
   if destination in ('course','enrollment'):
