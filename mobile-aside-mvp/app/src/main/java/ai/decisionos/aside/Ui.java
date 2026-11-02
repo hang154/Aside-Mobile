@@ -25,11 +25,11 @@ public final class Ui {
         l.setBackgroundColor(color); l.setPadding(dp(c,pad),dp(c,pad),dp(c,pad),dp(c,pad)); return l;
     }
     public static TextView text(Context c, String s, int size, int color, boolean bold) {
-        TextView t=new TextView(c); t.setText(s); t.setTextSize(size);t.setTextColor(color);
+        TextView t=new TextView(c); t.setText(EnglishLabels.text(s)); t.setTextSize(size);t.setTextColor(color);
         if(bold)t.setTypeface(Typeface.DEFAULT, Typeface.BOLD);return t;
     }
     public static Button button(Context c, String label) {
-        Button b=new Button(c);b.setAllCaps(false);b.setText(label);b.setTextColor(BG);
+        Button b=new Button(c);b.setAllCaps(false);b.setText(EnglishLabels.text(label));b.setTextColor(BG);
         b.setTextSize(13);b.setBackground(bg(PRIMARY,11,c));return b;
     }
     public static LinearLayout.LayoutParams lp(Context c,int width,int height,int top) {
