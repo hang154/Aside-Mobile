@@ -1,0 +1,19 @@
+{
+  "checks": {
+    "financial_scenarios_verified": 3,
+    "slides": 23,
+    "vc_questions": 18
+  },
+  "legacy_sha256": "e04136c84419acecefba4618f4f4a946e471de7509a2f718be0edb0e2eb7ebca",
+  "release_date": "2026-11-02",
+  "sha256": {
+    "artifacts/NUBI_EXECUTIVE_BRIEF_v2_20261102.md": "9a40e87f0851533fdc9194b8b7a04612ef5d88afb226bc5561faf5a797ed2297",
+    "artifacts/NUBI_INVESTOR_DECK_23_SLIDES_v2_20261102.md": "774992471b85fc55ef364c9cc894dd2fa0f17729b61a657cdc456a4bf82d2a1e",
+    "artifacts/NUBI_INVESTOR_VC_QA_18_v2_20261102.md": "a2380c3e21cbaa03973f49a6737e528f92b366d0dce54b4e998e30dbb5f261ff",
+    "artifacts/NUBI_MASTER_BUSINESS_PLAN_v2_20261102.md": "0fae5758e4af66e98fce19afdf733d3661677b644d123905685c5a3760f1f3f7",
+    "reports/NUBI_PLAN_CHANGELOG.md": "29360393a812fb04fd399310ddf4020fd5fb875442e0206bf0dad50896384df1",
+    "reports/NUBI_PLAN_README.md": "0aced44e59a04c864779c7c2bb3396ae0c10cfe7e638a1f408c4cbe2a3da121b",
+    "reports/old_vs_new_diff.csv": "83a41d51506178e14387f61761e4c0ea459d70cca2d5646360180fafc845ab8c"
+  },
+  "source_sha256": "0fae5758e4af66e98fce19afdf733d3661677b644d123905685c5a3760f1f3f7"
+}
