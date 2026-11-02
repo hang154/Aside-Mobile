@@ -3,6 +3,7 @@ No browser, login, purchase, message-send or external service tools are availabl
 """
 import hashlib,json,threading,time,urllib.request,uuid,re
 from pathlib import Path
+from nubi_persona import persona
 MODEL='Qwen3.8-27B-abliterated-AWQ-W4A16'
 PEOPLE={'love':'다정이','grades':'똑똑이','fitness':'건강이','home':'차곡이','career':'든든이','travel':'떠남이'}
 class GroupQwen:
@@ -51,6 +52,7 @@ class GroupQwen:
    if not j or j['device_session']!=session:raise ValueError('Unknown group job')
    return {k:json.loads(json.dumps(j[k])) for k in ['job_id','request_id','state','messages','reported_models'] if k in j}|({'error':j['error']} if 'error' in j else {})
  def _ask(self,j,role,system,user,json_mode=False):
+  system=system+'\n'+persona(role)
   start=time.monotonic();answer,model=self.completion([{'role':'system','content':system},{'role':'user','content':user}],json_mode)
   with self.lock:
    j['reported_models'].append(model);j['calls'].append({'role':role,'seconds':round(time.monotonic()-start,3),'response':answer});self._save(j)
