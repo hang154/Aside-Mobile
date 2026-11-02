@@ -1,0 +1,70 @@
+{
+  "source": "hang154/Aside-Mobile-Backup plus existing local development branches",
+  "preserved_refs": [
+    {
+      "ref": "refs/heads/archive/private-main",
+      "sha": "95bf21a93bb4fbfdbc31626584ed9182aa9f410d"
+    },
+    {
+      "ref": "refs/heads/demo/existing-only-en-20261102",
+      "sha": "2c7027692ff26d9c63a8ef5ef9f0c408acbac565"
+    },
+    {
+      "ref": "refs/heads/demo/investor-20261102",
+      "sha": "f72911f6389a7f64b7730eb37830aba9f46f50b0"
+    },
+    {
+      "ref": "refs/heads/demo/investor-en-20261102",
+      "sha": "acaceaf0579f4fc17c1ce2e24b473a6862923f60"
+    },
+    {
+      "ref": "refs/heads/demo/investor-ko-20261102",
+      "sha": "6064fc7231e05954d30edd421088cf5caac77976"
+    },
+    {
+      "ref": "refs/heads/feature/secure-auth-vault",
+      "sha": "f94d23335f571541edb6d6952e0e252f9f8036bb"
+    },
+    {
+      "ref": "refs/heads/main",
+      "sha": "2c7027692ff26d9c63a8ef5ef9f0c408acbac565"
+    },
+    {
+      "ref": "refs/heads/mobile-aside/tablet-llm",
+      "sha": "660ebb87124f7c45613da1d9699f6dc06465abe1"
+    },
+    {
+      "ref": "refs/tags/nubi-agent-chat-v0.2.3",
+      "sha": "d4e33e7ad9cd2c16edceffce26d7291cc86876a3"
+    },
+    {
+      "ref": "refs/tags/nubi-companion-v0.3.0",
+      "sha": "02beb6d921f7fb101f1dc419c1d5f976e885c8f7"
+    },
+    {
+      "ref": "refs/tags/nubi-companion-v0.3.1",
+      "sha": "2becd7e78ad62a953c8e359fa73a5f2e0ecfc3c9"
+    },
+    {
+      "ref": "refs/tags/nubi-documents-v0.2.4",
+      "sha": "64cb6543040e3426bfb876b47afafdbb5097c1d7"
+    },
+    {
+      "ref": "refs/tags/nubi-goals-v0.2.0",
+      "sha": "f7d78f6084e204ece367285460343d2ea6c35574"
+    },
+    {
+      "ref": "refs/tags/nubi-goals-v0.2.1",
+      "sha": "cc4ab7a518ee5294638af9ae05b1e895c965aeee"
+    },
+    {
+      "ref": "refs/tags/nubi-goals-v0.2.2",
+      "sha": "0c3bc0f3b7e937f27177cceba73a74c0afb712c4"
+    },
+    {
+      "ref": "refs/tags/nubi-workspace-v0.2.5",
+      "sha": "d1574788a7b67e37ddf30f6de81f97d9249715e0"
+    }
+  ],
+  "note": "main will receive an additional public documentation commit; its preserved source commit is listed here."
+}

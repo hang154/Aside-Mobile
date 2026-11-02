@@ -1,0 +1,98 @@
+# 누비 개발 연혁
+
+공개 준비 시 확인한 원본 커밋 84개입니다. 각 링크에서 당시 코드와 변경 내역을 확인할 수 있습니다. 날짜는 원본 작성 일자입니다. 버전명·기능 설명은 당시 커밋의 기록이며 현재 전체 동작을 보증하지 않습니다.
+
+## 주요 흐름
+
+- Android 기본 앱과 로컬 모델 실험 → WebView 작업 공간과 생활 시나리오.
+- OpenCLI/MCP 조회 도구 → 외부 Qwen의 도구 선택과 기기 탐색.
+- 목적별 에이전트 → 대화·그룹 대화·홈과 보관함 통합.
+- 문서 초안·학교 연결 → 세션과 자격증명 보존, Blackboard 도구.
+- 촬영 전용 실험은 별도 브랜치로 보관하고 최신 소개는 기존 제품 화면만 사용.
+
+## 원본 커밋
+
+- 2026-10-30 · [`3bc41b6`](https://github.com/hang154/Aside-Mobile/commit/3bc41b65364932c71f7c5ef0ca56a9fefb642d23) — Back up Aside Mobile source and device verification
+- 2026-10-30 · [`3d0a98c`](https://github.com/hang154/Aside-Mobile/commit/3d0a98ca691c0cf327f8a8dd1216dd0cb9810caa) — Add experimental local model inference to Aside
+- 2026-10-30 · [`a3f4772`](https://github.com/hang154/Aside-Mobile/commit/a3f477261020013cd9f451b5951d057b2f63cd9b) — Add Android Vulkan feasibility build
+- 2026-10-30 · [`a6fa669`](https://github.com/hang154/Aside-Mobile/commit/a6fa669bdded445bbf1a639a0e958ca2b8773910) — Install Vulkan shader headers for Android build
+- 2026-10-30 · [`35c0194`](https://github.com/hang154/Aside-Mobile/commit/35c019490ace8c432c0f35d4e19efc1bfa76d056) — Use direct offline completion in app sandbox
+- 2026-10-30 · [`8f1df4d`](https://github.com/hang154/Aside-Mobile/commit/8f1df4d137b46ea01b159b362e38d5bc97c01271) — Include SPIR-V headers for Vulkan compilation
+- 2026-10-30 · [`43bd418`](https://github.com/hang154/Aside-Mobile/commit/43bd418b152e752d423739f9535dea0bb9be3542) — Fix tablet controls and format local model replies
+- 2026-10-30 · [`960e134`](https://github.com/hang154/Aside-Mobile/commit/960e134908abadad865e9fd38151bf33d51afe2b) — Use Qwen3.5 direct answer prompt on device
+- 2026-10-30 · [`58bdc3a`](https://github.com/hang154/Aside-Mobile/commit/58bdc3ae8cab15b612217cc2148b0b5ec0f2e2f9) — Build Vulkan engine with tablet CPU optimizations and benchmark
+- 2026-10-30 · [`520b063`](https://github.com/hang154/Aside-Mobile/commit/520b06343c16833905a2b2ac5d075a9d60713176) — Add on-device life planning and discovery flows
+- 2026-10-30 · [`799b4c8`](https://github.com/hang154/Aside-Mobile/commit/799b4c8fee13ccf8eed5c148b4b7431051fe5d09) — Add group budget split and explicit event time selection
+- 2026-10-30 · [`be9d759`](https://github.com/hang154/Aside-Mobile/commit/be9d759d22f384e470e1f92b46ff22bc7a4eb0d8) — Add interest app registry and bounded local AI proposals
+- 2026-10-30 · [`87a233e`](https://github.com/hang154/Aside-Mobile/commit/87a233e57fb1f3cb7fac66c578de4ba6ff1e9724) — Use user-selected app shortcuts without device inventory
+- 2026-10-30 · [`0c0c9f2`](https://github.com/hang154/Aside-Mobile/commit/0c0c9f2f93fc3de209fba3478637b37d19a22522) — Document tablet verification and remaining scope
+- 2026-10-30 · [`9cd31d0`](https://github.com/hang154/Aside-Mobile/commit/9cd31d0dedd20539155310818c4306ca3496f55e) — Implement concert return and lodging comparison scenario
+- 2026-10-30 · [`6c36a3c`](https://github.com/hang154/Aside-Mobile/commit/6c36a3c5e58288c344297b5bc78f83c29d3b764e) — Keep concert experiment alongside existing app
+- 2026-10-30 · [`55ebdee`](https://github.com/hang154/Aside-Mobile/commit/55ebdee19e3dbe74feca16f02a8493ce4cbedf37) — Record concert scenario device verification
+- 2026-10-30 · [`a4b96d9`](https://github.com/hang154/Aside-Mobile/commit/a4b96d9e7b5046dbf472979358f623cee36feeae) — Add user controlled Android browser workspace
+- 2026-10-30 · [`8df555f`](https://github.com/hang154/Aside-Mobile/commit/8df555ff2380eddd6f3d915659f60749503acf6b) — Record browser workspace device verification
+- 2026-10-30 · [`8c91039`](https://github.com/hang154/Aside-Mobile/commit/8c91039e1c74f6d1f09fe82ab23b0385f243fc4f) — Audit Pickle features and connect AI proposals to workspace
+- 2026-10-30 · [`aa10043`](https://github.com/hang154/Aside-Mobile/commit/aa10043e579103368728e9e7a1069ad349187043) — Use secure mobile Naver and report browser load failures
+- 2026-10-30 · [`74b2f72`](https://github.com/hang154/Aside-Mobile/commit/74b2f724c1a5f35b7dee011301820ff4505dce1f) — Record Pickle audit device verification
+- 2026-10-30 · [`2c151f5`](https://github.com/hang154/Aside-Mobile/commit/2c151f5b79417d77efb6878f78e052ff238ed41e) — Add local task workflow and invalidate stale proposals
+- 2026-10-30 · [`b807cb6`](https://github.com/hang154/Aside-Mobile/commit/b807cb6cf4cd06424223c49c0034e6b3ff7937d7) — Fix task action chooser on Android
+- 2026-10-30 · [`6241730`](https://github.com/hang154/Aside-Mobile/commit/62417303ff9090248dcf0f775f41e3e6d8932bce) — Record task and Busan browsing device checks
+- 2026-10-30 · [`60a581e`](https://github.com/hang154/Aside-Mobile/commit/60a581ea04c5575a0b132b0b4249940e61847404) — Plan engagement collection and record controlled device test
+- 2026-10-30 · [`84f8083`](https://github.com/hang154/Aside-Mobile/commit/84f808315355849787d3faa1dc6c60fbfc4dadd9) — Add opt-in local screen event collection
+- 2026-10-30 · [`cdd9158`](https://github.com/hang154/Aside-Mobile/commit/cdd915878a57bdddeadc54a807317a88b82574d0) — Record on-device collector verification
+- 2026-10-30 · [`ee3099f`](https://github.com/hang154/Aside-Mobile/commit/ee3099f302a2d670df335d64f752592dfe65733e) — Start collector directly from user action
+- 2026-10-30 · [`0dab1f7`](https://github.com/hang154/Aside-Mobile/commit/0dab1f729a5a4d253ed7826c1940d8d14af253fd) — Record continuous collector device test
+- 2026-10-30 · [`c73d58c`](https://github.com/hang154/Aside-Mobile/commit/c73d58c12b7833aca631628aa9b1ebda52419e70) — Create Nubi campus pilot and scenario entry points
+- 2026-10-30 · [`2e07358`](https://github.com/hang154/Aside-Mobile/commit/2e07358cda19ba79dc393cc50c45e8262885fdbe) — Add UNIST official campus information entry points
+- 2026-10-30 · [`e0e1fa5`](https://github.com/hang154/Aside-Mobile/commit/e0e1fa5dfc082459dda4a05b618e208cfc60bf0d) — Document UNIST campus scenarios and honest pilot messaging
+- 2026-10-30 · [`29ac2dc`](https://github.com/hang154/Aside-Mobile/commit/29ac2dc5b4399a4a27c1e49911101d8051f3fd36) — Clarify Nubi pilot and retain school in task drafts
+- 2026-10-30 · [`6c13a44`](https://github.com/hang154/Aside-Mobile/commit/6c13a4425288db0cf7070ba07da01d6f580ad5d2) — Record UNIST pilot device checks and demo assets
+- 2026-10-30 · [`6e1a326`](https://github.com/hang154/Aside-Mobile/commit/6e1a326ee511f0357586b95a4c2aac32fba41f6f) — Load upcoming UNIST academic events from official calendar
+- 2026-10-30 · [`2e37c70`](https://github.com/hang154/Aside-Mobile/commit/2e37c706f2b29041ecd4254860a1aad61e13c9d1) — Record live UNIST calendar and final pilot verification
+- 2026-10-31 · [`4ffc6a2`](https://github.com/hang154/Aside-Mobile/commit/4ffc6a26a9ed38c38407f0ed786e8cce90b5b533) — Record UNIST portal WebView pre-login test
+- 2026-10-31 · [`2e488c5`](https://github.com/hang154/Aside-Mobile/commit/2e488c511667ab8ad8b7bc268bf5035d2a4a1261) — Record Outlook WebView login verification
+- 2026-10-31 · [`1f0a2eb`](https://github.com/hang154/Aside-Mobile/commit/1f0a2eb7b7ce2495cf603393d64643e58974f0f8) — Add UNIST portal OpenCLI and local MCP pilot
+- 2026-10-31 · [`f1d7844`](https://github.com/hang154/Aside-Mobile/commit/f1d7844a8a02fa6f21d74c69c76b49b864e9c8da) — Add campus map and rail handoff pilot
+- 2026-10-31 · [`db5b927`](https://github.com/hang154/Aside-Mobile/commit/db5b927c81a36794249249e72f5ebd6cc09e2e52) — Expose map and rail page checks through local MCP
+- 2026-10-31 · [`c0f6d9b`](https://github.com/hang154/Aside-Mobile/commit/c0f6d9b6004feb4f21275b89ae6b2a2bbc994b27) — Read map results and campus research via MCP
+- 2026-10-31 · [`3a08c4a`](https://github.com/hang154/Aside-Mobile/commit/3a08c4a078b162c6523dc983414431a9559ba157) — Add weather forecast MCP for campus plans
+- 2026-10-31 · [`18063e3`](https://github.com/hang154/Aside-Mobile/commit/18063e30ba98e95d8b815c68f6f66768e78de64b) — Correct MCP capability documentation
+- 2026-10-31 · [`3a1c00f`](https://github.com/hang154/Aside-Mobile/commit/3a1c00f09e204f6cc67e5afd187a1f0b38d6d33b) — Add campus choices and shopping search workflows
+- 2026-10-31 · [`714dfd6`](https://github.com/hang154/Aside-Mobile/commit/714dfd65e6b6483413d58f59faa253e986e23bf9) — Connect Saramin and Wanted job search workflows
+- 2026-10-31 · [`6517f4f`](https://github.com/hang154/Aside-Mobile/commit/6517f4f0fa4662c3dcd4473977daeaf6c3194330) — Add hotel and research external workflows
+- 2026-10-31 · [`8d6871e`](https://github.com/hang154/Aside-Mobile/commit/8d6871ef0f4fb91bdcbeaee46e9e681bb582be3a) — Add ranked website discovery MCP and audit
+- 2026-10-31 · [`70545d2`](https://github.com/hang154/Aside-Mobile/commit/70545d26fc8f8eac51aff53da735c195796d775c) — Build reusable goal character workspaces with native web discovery
+- 2026-10-31 · [`f7d78f6`](https://github.com/hang154/Aside-Mobile/commit/f7d78f6084e204ece367285460343d2ea6c35574) — Verify goal workspaces and correct housing discovery fallback
+- 2026-10-31 · [`cc4ab7a`](https://github.com/hang154/Aside-Mobile/commit/cc4ab7a518ee5294638af9ae05b1e895c965aeee) — Fix resumable checkout drafts, offer identity and saved goal content
+- 2026-10-31 · [`3262408`](https://github.com/hang154/Aside-Mobile/commit/326240808fb4501fa3bb6d6c2fd61169454086ed) — Connect four goal workspaces to Qwen through bounded tablet MCP
+- 2026-10-31 · [`4ffc7e9`](https://github.com/hang154/Aside-Mobile/commit/4ffc7e98e0e833bacf950474f301e8c2ed6e0cb7) — Batch Qwen goal research and bound repeated observation failures
+- 2026-10-31 · [`0c3bc0f`](https://github.com/hang154/Aside-Mobile/commit/0c3bc0f3b7e937f27177cceba73a74c0afb712c4) — Verify Qwen exploration and persisted summaries for all four goals
+- 2026-10-31 · [`df7b848`](https://github.com/hang154/Aside-Mobile/commit/df7b848da8e2b31bb7082610dfed4f08f02796f8) — Add user-directed Qwen browsing mode and record gateway blocker
+- 2026-10-31 · [`9eda90c`](https://github.com/hang154/Aside-Mobile/commit/9eda90c53e32a37cdc8a64587e5295bf25d60edb) — Record recovered Qwen user-directed tablet browsing verification
+- 2026-10-31 · [`a601064`](https://github.com/hang154/Aside-Mobile/commit/a601064e5c9792776006ba57c363efc9dc14df1b) — Connect goal chats to Qwen MCP browser with OpenMuse-inspired UI
+- 2026-10-31 · [`ae41483`](https://github.com/hang154/Aside-Mobile/commit/ae41483d7db1dc7374e8f3bc3118feafebfe2582) — Read Naver post headings before deduplicating date and profile links
+- 2026-10-31 · [`6181dbf`](https://github.com/hang154/Aside-Mobile/commit/6181dbf57180bb820149eb0809059880620f6cb4) — Retry transient Qwen connection EOF and retain failed chat states
+- 2026-10-31 · [`d4e33e7`](https://github.com/hang154/Aside-Mobile/commit/d4e33e7ad9cd2c16edceffce26d7291cc86876a3) — Document four-agent native chat and real Qwen browsing verification
+- 2026-11-01 · [`64cb654`](https://github.com/hang154/Aside-Mobile/commit/64cb6543040e3426bfb876b47afafdbb5097c1d7) — Add evidence-backed document authoring and gated SharePoint delivery
+- 2026-11-01 · [`c9b717d`](https://github.com/hang154/Aside-Mobile/commit/c9b717d417214957de9726a9adf52c5ed0102fb0) — Record native UIRP document flow and verified test deployment
+- 2026-11-01 · [`5bb1fc2`](https://github.com/hang154/Aside-Mobile/commit/5bb1fc23d456e3a706c01d14c954da1574bc15e9) — Add selectable coworker chat workspace with real Qwen activity and files
+- 2026-11-01 · [`d157478`](https://github.com/hang154/Aside-Mobile/commit/d1574788a7b67e37ddf30f6de81f97d9249715e0) — Avoid double deleting the workspace lifecycle test goal
+- 2026-11-01 · [`7613e4a`](https://github.com/hang154/Aside-Mobile/commit/7613e4ab0b514e5aa1efe9109383fb4fa5198262) — Record four-agent workspace UI device and release verification
+- 2026-11-01 · [`30adbca`](https://github.com/hang154/Aside-Mobile/commit/30adbca1cfe9b953313bdccda01f8917b3728cec) — Back up Nubi campus agent and verification
+- 2026-11-01 · [`02beb6d`](https://github.com/hang154/Aside-Mobile/commit/02beb6d921f7fb101f1dc419c1d5f976e885c8f7) — Add Nubi companion conversation shell with purpose agents
+- 2026-11-01 · [`415672a`](https://github.com/hang154/Aside-Mobile/commit/415672a5794aa5f5d64713ad2ca76d132c1203f3) — Record companion UI device and four-agent verification
+- 2026-11-01 · [`2becd7e`](https://github.com/hang154/Aside-Mobile/commit/2becd7e78ad62a953c8e359fa73a5f2e0ecfc3c9) — Match observed tablet companion layout and wire discovery and library
+- 2026-11-01 · [`0edaa42`](https://github.com/hang154/Aside-Mobile/commit/0edaa420773b59ccfd798d4164e8d07331053dff) — Record observed UI and four-agent companion 0.3.1 verification
+- 2026-11-01 · [`e6f4411`](https://github.com/hang154/Aside-Mobile/commit/e6f441140a346bbe9864cdbfb602172e0e7abefc) — Unify Nubi companion UI and purpose-agent capabilities with verified legacy features
+- 2026-11-02 · [`da9f897`](https://github.com/hang154/Aside-Mobile/commit/da9f89712e10cc6350588879cdda74369de4fb80) — Preserve Nubi home variants and connect group chat to live Qwen
+- 2026-11-02 · [`3751ab3`](https://github.com/hang154/Aside-Mobile/commit/3751ab322b96c6e9075b1c528ec57bbf87e62c2d) — Trial conversational Nubi persona on Qwen and record live limitations
+- 2026-11-02 · [`244860b`](https://github.com/hang154/Aside-Mobile/commit/244860b4cc14ce2400df246a62f216e0fff533d3) — Implement priority campus chat workflows and shared portal session onboarding
+- 2026-11-02 · [`a3755e4`](https://github.com/hang154/Aside-Mobile/commit/a3755e4c3cc9410eb295b1f0c9d41c48cf6df135) — Persist school browser cookies across page and activity lifecycle
+- 2026-11-02 · [`f94d233`](https://github.com/hang154/Aside-Mobile/commit/f94d23335f571541edb6d6952e0e252f9f8036bb) — Add isolated Android Keystore credential vault experiment with device tests
+- 2026-11-02 · [`95bf21a`](https://github.com/hang154/Aside-Mobile/commit/95bf21a93bb4fbfdbc31626584ed9182aa9f410d) — docs: import reproducible NUBI v2 strategy and user prompt archive
+- 2026-11-02 · [`95caae8`](https://github.com/hang154/Aside-Mobile/commit/95caae81e8d33e1dcc37dc17893588fb3293490b) — Add Blackboard extension workflows and persistent school browser sessions
+- 2026-11-02 · [`f72911f`](https://github.com/hang154/Aside-Mobile/commit/f72911f6389a7f64b7730eb37830aba9f46f50b0) — Integrate credential vault and verify Ultra materials downloads and announcements
+- 2026-11-02 · [`6064fc7`](https://github.com/hang154/Aside-Mobile/commit/6064fc7231e05954d30edd421088cf5caac77976) — Add isolated investor filming app with live Qwen receipts and labelled vision scenes
+- 2026-11-02 · [`acaceaf`](https://github.com/hang154/Aside-Mobile/commit/acaceaf0579f4fc17c1ce2e24b473a6862923f60) — Localize investor demo to English and verify real campus mail draft workflow
+- 2026-11-02 · [`660ebb8`](https://github.com/hang154/Aside-Mobile/commit/660ebb87124f7c45613da1d9699f6dc06465abe1) — Save portal credentials natively after authenticated login evidence
+- 2026-11-02 · [`2c70276`](https://github.com/hang154/Aside-Mobile/commit/2c7027692ff26d9c63a8ef5ef9f0c408acbac565) — Use existing production app for English overview recording
