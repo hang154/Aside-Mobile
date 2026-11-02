@@ -1,0 +1,25 @@
+{
+  "version": "0.6.16-portal-autosave",
+  "behavior": "Foreground official portal form input stays in native memory; successful logout control evidence commits AES-GCM school record. No JS bridge. Pending expires after 120 seconds; hidden/background/off-origin clears input.",
+  "native_checks": 26,
+  "synthetic_probe_checks": 7,
+  "real_credential_autosave": "not verified; existing authenticated session preserved, no forced logout",
+  "limits": [
+    "200ms native polling can miss a final input change immediately followed by submission. Such fast-input behavior requires live validation.",
+    "Unrecognized forms fail closed. Password manager autofill and first-login user typing need live validation.",
+    "Session reuse is distinct from password vault storage."
+  ],
+  "apk": [
+    {
+      "variant": "GROUP",
+      "file": "nubi-0.6.16-portal-autosave.apk",
+      "sha256": "6d2be964d7e20c1000defa8a79eafdf8091299b4c291261833b24ca867b7383f",
+      "bytes": 17555438,
+      "signature_verified": true,
+      "zip_entries_unchanged": 48,
+      "manifest": "package: name='ai.decisionos.nubi.groupchat.goals' versionCode='78' versionName='0.6.16-portal-autosave' platformBuildVersionName='15' platformBuildVersionCode='35' compileSdkVersion='35' compileSdkVersionCodename='15'"
+    }
+  ],
+  "live_session_checks": 3,
+  "installed_apk_matches_release": true
+}

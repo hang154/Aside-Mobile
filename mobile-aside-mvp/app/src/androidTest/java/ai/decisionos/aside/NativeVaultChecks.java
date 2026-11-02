@@ -15,6 +15,14 @@ final class NativeVaultChecks {
   v.delete("test_one");i.check(v.load("test_one")==null,"delete removes data");Files.write(v.file("test_one").toPath(),first);boolean lost=false;try{v.load("test_one");}catch(Exception e){lost=true;}i.check(lost,"missing key fails closed");
   boolean scope=false;try{v.load("../../other");}catch(IllegalArgumentException e){scope=true;}i.check(scope,"invalid slot rejected");
   i.check(CredentialVaultActivity.portalOrigin("https://portal.unist.ac.kr/irj/portal"),"official portal accepted");i.check(!CredentialVaultActivity.portalOrigin("http://portal.unist.ac.kr/"),"HTTP rejected");i.check(!CredentialVaultActivity.portalOrigin("https://portal.unist.ac.kr.evil.example/"),"lookalike rejected");i.check(!CredentialVaultActivity.portalOrigin("https://user@portal.unist.ac.kr/"),"userinfo rejected");i.check(!CredentialVaultActivity.portalOrigin("https://portal.unist.ac.kr:444/"),"unexpected port rejected");
+  PortalCredentialCapture capture=new PortalCredentialCapture(null);
+  i.check(!capture.accept(new JSONObject().put("ok",true),100),"authenticated cookie alone never saves credentials");
+  i.check(!capture.accept(j,100),"input remains pending before successful login");
+  i.check(!capture.accept(new JSONObject().put("ok",false),200),"failed authentication never commits");
+  i.check(capture.accept(new JSONObject().put("ok",true),300),"verified authentication permits pending credential commit");
+  i.check(!capture.accept(new JSONObject().put("ok",true),120101),"expired input never commits");
+  capture.accept(j,130000);capture.accept(new JSONObject().put("account","").put("secret",""),130001);
+  i.check(!capture.accept(new JSONObject().put("ok",true),130002),"cleared form clears pending credential");
   activity=(CredentialVaultActivity)i.startActivitySync(new Intent(i.getTargetContext(),CredentialVaultActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));final CredentialVaultActivity a=activity;
   i.check((a.getWindow().getAttributes().flags&WindowManager.LayoutParams.FLAG_SECURE)!=0,"screen capture blocked");i.check(!i.getTargetContext().getPackageManager().getActivityInfo(new android.content.ComponentName(i.getTargetContext(),CredentialVaultActivity.class),0).exported,"native editor not exported");
   out.putString("stream","PASS "+i.checks+" native vault checks; AndroidKeyStore hardware-backed="+hw+"; production UI device-confirmation success not automated\n");
