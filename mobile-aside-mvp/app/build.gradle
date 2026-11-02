@@ -9,8 +9,8 @@ android {
         minSdk 26
         targetSdk 35
         testInstrumentationRunner 'ai.decisionos.aside.GoalInstrumentation'
-        versionCode 77
-        versionName '0.6.15-school-vault'
+        versionCode 78
+        versionName '0.7.0-investor-demo'
         manifestPlaceholders = [appLabel: '누비']
         buildConfigField 'int', 'HOME_STYLE', '0'
         buildConfigField 'boolean', 'HOME_LIGHT', 'false'
@@ -18,7 +18,7 @@ android {
     buildFeatures { buildConfig = true }
     flavorDimensions += "home"
     productFlavors {
-        groupchat { dimension "home"; buildConfigField 'boolean', 'HOME_LIGHT', 'true'; applicationId "ai.decisionos.nubi.groupchat"; manifestPlaceholders = [appLabel: "누비 · 함께 대화"]; buildConfigField 'int', 'HOME_STYLE', '6' }
+        groupchat { dimension "home"; buildConfigField 'boolean', 'HOME_LIGHT', 'true'; applicationId "ai.decisionos.nubi.groupchat"; manifestPlaceholders = [appLabel: "누비 · 시연"]; buildConfigField 'int', 'HOME_STYLE', '6' }
         campushome { dimension "home"; buildConfigField 'boolean', 'HOME_LIGHT', 'true'; applicationId "ai.decisionos.nubi.campushome"; manifestPlaceholders = [appLabel: "누비 · 캠퍼스 홈"]; buildConfigField 'int', 'HOME_STYLE', '5' }
         htmlhome { dimension "home"; buildConfigField 'boolean', 'HOME_LIGHT', 'true'; applicationId "ai.decisionos.nubi.htmlhome"; manifestPlaceholders = [appLabel: "누비 · 새 홈"]; buildConfigField 'int', 'HOME_STYLE', '5' }
         standard { dimension "home" }

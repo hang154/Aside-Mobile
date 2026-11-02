@@ -1,0 +1,87 @@
+{
+  "source_plan": "018d44ca-72a6-4339-9342-cd5272b7c665/Pasted text.txt",
+  "base_commit": "f72911f",
+  "branch": "demo/investor-20261102",
+  "scope": "Android app source clips; founder/farm/station real-world photography is outside this capture request",
+  "shots": [
+    {
+      "id": "01",
+      "timeline": "00:00–00:24",
+      "kind": "LIVE",
+      "must_show": [
+        "native user instruction",
+        "Qwen tool-driven official scholarship board navigation",
+        "selected notice body",
+        "source-backed answer"
+      ]
+    },
+    {
+      "id": "02",
+      "timeline": "00:24–00:38",
+      "kind": "LIVE B-ROLL",
+      "must_show": [
+        "portal",
+        "Blackboard",
+        "Outlook separate views"
+      ]
+    },
+    {
+      "id": "03",
+      "timeline": "00:38–00:57",
+      "kind": "LIVE",
+      "must_show": [
+        "official school email search and opened announcement",
+        "generated DOCX content",
+        "actual Outlook draft with attachment",
+        "saved draft reopened or search verified"
+      ],
+      "external_write": "one recipient-free draft; no sending"
+    },
+    {
+      "id": "04",
+      "timeline": "01:44–02:01",
+      "kind": "PRODUCT VISION",
+      "must_show": [
+        "large microphone and text",
+        "clearly labelled example hamburger request",
+        "in-store coupon use guidance",
+        "no invented coupon barcode/discount/issued ticket"
+      ]
+    },
+    {
+      "id": "05",
+      "timeline": "01:44–02:01",
+      "kind": "PRODUCT VISION",
+      "must_show": [
+        "train boarding assistance concept",
+        "ticket check and station-sign verification guidance",
+        "no claimed real platform query"
+      ]
+    },
+    {
+      "id": "06",
+      "timeline": "02:01–02:19",
+      "kind": "PRODUCT VISION",
+      "must_show": [
+        "student to parent to grandparent family flow",
+        "native share affordance; do not send"
+      ]
+    },
+    {
+      "id": "07",
+      "timeline": "02:19–02:30",
+      "kind": "BRAND",
+      "must_show": [
+        "Nubi logo",
+        "AI should work for everyone"
+      ]
+    }
+  ],
+  "integrity": [
+    "Raw screenrecord originals unretimed and uncut",
+    "Failing takes kept outside deliverable raw folder",
+    "Live action never replaced with fixture responses",
+    "Product vision labelled onscreen throughout",
+    "Private raw mail/account screens stay local and require privacy check before sharing"
+  ]
+}
