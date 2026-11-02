@@ -9,8 +9,8 @@ android {
         minSdk 26
         targetSdk 35
         testInstrumentationRunner 'ai.decisionos.aside.GoalInstrumentation'
-        versionCode 76
-        versionName '0.6.14-blackboard'
+        versionCode 77
+        versionName '0.6.15-school-vault'
         manifestPlaceholders = [appLabel: '누비']
         buildConfigField 'int', 'HOME_STYLE', '0'
         buildConfigField 'boolean', 'HOME_LIGHT', 'false'

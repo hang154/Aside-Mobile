@@ -27,7 +27,7 @@ def inspect(endpoint,mode,source_url=None):
   if mode=='open':
    rpc('Page.navigate',{'url':'https://'+HOST+'/ultra/course'});time.sleep(3)
    rpc('Runtime.evaluate',{'expression':"(()=>{const b=document.getElementById('unist-portal-login');if(b&&b.getClientRects().length)b.click()})()"});time.sleep(3)
-  if mode in ('status','calendar','materials','attempt','todo_list','keepalive'):
+  if mode in ('status','calendar','materials','attempt','todo_list','keepalive','notices'):
    asset=Path(__file__).resolve().parents[1]/'mobile-aside-mvp/app/src/main/assets/blackboard_tools.js'
    result=rpc('Runtime.evaluate',{'expression':asset.read_text()+'\nNubiBBTools.run('+json.dumps({'mode':mode})+')','returnByValue':True,'awaitPromise':True})['result'].get('value')
    if not isinstance(result,dict):raise RuntimeError('Blackboard tool response unavailable')
@@ -44,8 +44,11 @@ def inspect(endpoint,mode,source_url=None):
   result=rpc('Runtime.evaluate',{'expression':script,'returnByValue':True})['result'].get('value')
   if not isinstance(result,dict):raise RuntimeError('Blackboard 화면 응답이 없어요.')
   if mode=='download_pdf':
+   asset=Path(__file__).resolve().parents[1]/'mobile-aside-mvp/app/src/main/assets/blackboard_tools.js'
+   materials=rpc('Runtime.evaluate',{'expression':asset.read_text()+';NubiBBTools.run({mode:"materials"})','returnByValue':True,'awaitPromise':True})['result'].get('value',{})
+   if materials.get('state')=='observed':result['attachments']=materials.get('items',[])
    if result.get('state')!='observed' or not any(x.get('url')==source_url for x in result.get('attachments',[])):raise ValueError('현재 보이는 강의자료 링크만 다운로드할 수 있어요.')
-   script='''(async()=>{const response=await fetch(SOURCE,{method:'GET',credentials:'same-origin',redirect:'error'});if(!response.ok)throw Error('download failed');if(Number(response.headers.get('content-length'))>8*1024*1024)throw Error('file too large');const bytes=new Uint8Array(await response.arrayBuffer());if(bytes.length>8*1024*1024)throw Error('file too large');let binary='';for(let n=0;n<bytes.length;n+=8192)binary+=String.fromCharCode(...bytes.subarray(n,n+8192));return btoa(binary)})()'''.replace('SOURCE',json.dumps(source_url))
+   script='''(async()=>{const response=await fetch(SOURCE,{method:'GET',credentials:'same-origin',redirect:'follow'});if(!['blackboard.unist.ac.kr','prod01-apne2-prod01-xythos.prod.files.blackboard.com'].includes(new URL(response.url).hostname))throw Error('Unexpected download host');if(!response.ok)throw Error('download failed');if(Number(response.headers.get('content-length'))>8*1024*1024)throw Error('file too large');const bytes=new Uint8Array(await response.arrayBuffer());if(bytes.length>8*1024*1024)throw Error('file too large');let binary='';for(let n=0;n<bytes.length;n+=8192)binary+=String.fromCharCode(...bytes.subarray(n,n+8192));return btoa(binary)})()'''.replace('SOURCE',json.dumps(source_url))
    raw=rpc('Runtime.evaluate',{'expression':script,'returnByValue':True,'awaitPromise':True})['result'].get('value')
    data=base64.b64decode(raw,validate=True)
    if not data.startswith(b'%PDF-'):raise ValueError('다운로드 응답이 실제 PDF가 아니에요. 로그인이나 파일 형식을 확인해 주세요.')
@@ -58,7 +61,7 @@ def inspect(endpoint,mode,source_url=None):
   return result
  finally:ws.close()
 def definitions():
- return [{'name':'nubi_blackboard_'+mode,'description':description,'inputSchema':{'type':'object','properties':{},'additionalProperties':False}} for mode,description in [('open','Open Blackboard using the existing portal WebView session, then check visible authentication. Never enters credentials.'),('calendar','Read authenticated Blackboard calendar deadlines and synchronize local todo cache; no submission.'),('materials','Recursively list actual same-origin course material links with depth and size limits.'),('attempt','Read current assignment instructions and own submission links; no writes.'),('todo_list','Read locally imported Blackboard tasks.'),('status','Read current Blackboard course links and authentication state.'),('keepalive','Check existing Blackboard session only while the document is visible; cannot bypass server expiry.'),('read','Read actually visible courses, activity announcements, assignment/exam hints and attachment links. Never submits. Empty means unverified, not no assignments.')]]
+ return [{'name':'nubi_blackboard_'+mode,'description':description,'inputSchema':{'type':'object','properties':{},'additionalProperties':False}} for mode,description in [('open','Open Blackboard using the existing portal WebView session, then check visible authentication. Never enters credentials.'),('notices','Read actual open Blackboard announcement text and observed navigation links; missing DOM means unavailable.'),('calendar','Read authenticated Blackboard calendar deadlines and synchronize local todo cache; no submission.'),('materials','Recursively list actual same-origin course material links with depth and size limits.'),('attempt','Read current assignment instructions and own submission links; no writes.'),('todo_list','Read locally imported Blackboard tasks.'),('status','Read current Blackboard course links and authentication state.'),('keepalive','Check existing Blackboard session only while the document is visible; cannot bypass server expiry.'),('read','Read actually visible courses, activity announcements, assignment/exam hints and attachment links. Never submits. Empty means unverified, not no assignments.')]]
 def main():
  for line in sys.stdin:
   ident=None

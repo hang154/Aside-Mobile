@@ -1,0 +1,68 @@
+{
+  "version": "0.6.15-school-vault",
+  "vault_source_commit": "f94d23335f571541edb6d6952e0e252f9f8036bb",
+  "implementation": [
+    "Native AndroidKeyStore AES-256-GCM vault integrated into existing package",
+    "Device-confirmed vault access; password entry only on validated HTTPS portal form and same-origin form action",
+    "Secrets excluded from AI/MCP/clipboard; WebView debugging disabled in credential flow",
+    "Shared portal/Blackboard/Outlook cookie profile preserved",
+    "Ultra learning module GET adapter extracts file metadata and source sizes",
+    "Bounded native downloader follows observed Blackboard redirects; school cookies sent only to original school host; known signed-file hosts receive no school cookie",
+    "Dedicated announcement GET adapter, source dates/body, conversation events and deduplicated periodic monitoring",
+    "School chat routing and MCP announcements/materials/PDF tools"
+  ],
+  "observed_before_final_checks": {
+    "real_vault_school_record_exists": false,
+    "real_password_autofill_login_verified": false,
+    "real_vault_device_confirmation_completed": false,
+    "portal_blackboard_outlook_session_reuse_checks": 3,
+    "vault_native_checks": 20,
+    "hardware_backed": true,
+    "course_materials": 11,
+    "course_announcements": 18
+  },
+  "download_fixes": [
+    "Initial adapter rejected all redirects (HTTP 302)",
+    "Observed signed file CDN redirect, then observed intermediate alt-5a8801a04ee83.blackboard.com host",
+    "Restrict permitted hosts to actual observed Blackboard hosts; never send school cookie to either file host; max redirect hops 3; upgrade school-origin HTTP redirect to HTTPS before sending",
+    "Observed intermediate alt host and official signed file host; only exact observed hosts allowed. A single PDF downloaded natively and through MCP with identical SHA-256."
+  ],
+  "pending_user_step": "Device authentication and one actual school credential save in the integrated vault; existing school login is retained. No password requested in chat.",
+  "limitations": [
+    "Fresh real-account vault login not proven while production vault is empty",
+    "Background checks depend on Android JobScheduler and session validity",
+    "One observed course is used for live file and announcement verification; entire-account completeness not asserted",
+    "No tablet connected; this execution verified the connected SM-A546S"
+  ],
+  "captures": "Local only; no credentials/cookies or course bodies in this report",
+  "apk": {
+    "variant": "GROUP",
+    "file": "nubi-0.6.15-school-vault.apk",
+    "sha256": "d0836e3ea5bd5db6c706d3a755b702b799f11728865eda1f0890cef606bef7de",
+    "bytes": 17551342,
+    "signature_verified": true,
+    "zip_entries_unchanged": 48,
+    "manifest": "package: name='ai.decisionos.nubi.groupchat.goals' versionCode='77' versionName='0.6.15-school-vault' platformBuildVersionName='15' platformBuildVersionCode='35' compileSdkVersion='35' compileSdkVersionCodename='15'"
+  },
+  "native_file_checks": {
+    "checks": 6,
+    "materials": 11,
+    "notices": 74,
+    "bytes": 4486644,
+    "sha256": "4f81aae68a6ce8572fa04416de8b7ff50118102e1a72292f32d824098cc68c9a"
+  },
+  "live_course_announcements": {
+    "state": "observed",
+    "items": 18,
+    "requests": 1,
+    "with_dates": true
+  },
+  "mcp_pdf_download": {
+    "state": "downloaded",
+    "sha256": "4f81aae68a6ce8572fa04416de8b7ff50118102e1a72292f32d824098cc68c9a",
+    "bytes": 4486644
+  },
+  "native_and_mcp_file_sha256_match": true,
+  "installed_apk_matches_release": true,
+  "final_three_service_sso": "PASS 3 on installed final APK; no credential entry"
+}

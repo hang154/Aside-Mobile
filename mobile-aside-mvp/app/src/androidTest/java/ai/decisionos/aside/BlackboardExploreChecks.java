@@ -1,0 +1,11 @@
+package ai.decisionos.aside;
+import android.os.*;import android.content.*;import org.json.*;
+final class BlackboardExploreChecks {
+ static void run(GoalInstrumentation i){Bundle out=new Bundle();try{
+ String id="";try(GoalStore s=new GoalStore(i.getTargetContext())){for(JSONObject g:s.goals())if(!GoalStore.fixture(g)&&g.optString("character").equals("grades")){id=g.optString("id");break;}}
+ GoalAgentActivity a=(GoalAgentActivity)i.startActivitySync(new Intent(i.getTargetContext(),GoalAgentActivity.class).putExtra("goal_id",id).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));final BlackboardTools[] t={null};i.runOnMainSync(()->{t[0]=new BlackboardTools(a.chat);t[0].show();});Thread.sleep(14000);
+ String url=i.scenario.getString("bbUrl","");if(!url.isEmpty()){if(!BlackboardDownloads.allowed(url))throw new Exception("unsafe URL");final String u=url;i.runOnMainSync(()->t[0].web.loadUrl(u));}else i.runOnMainSync(()->t[0].web.evaluateJavascript("(()=>{const a=document.querySelector('a[href*=\"/ultra/courses/\"]');if(a)a.click()})()",v->{}));Thread.sleep(12000);
+ java.util.concurrent.CountDownLatch latch=new java.util.concurrent.CountDownLatch(1);final String[] result={null};i.runOnMainSync(()->t[0].web.evaluateJavascript("JSON.stringify((()=>{const docs=[document];for(const f of document.querySelectorAll('iframe'))try{if(f.contentDocument)docs.push(f.contentDocument)}catch{}return docs.map(d=>({url:d.URL,headings:[...d.querySelectorAll('h1,h2,h3')].map(e=>e.innerText),links:[...d.querySelectorAll('a[href]')].map(e=>({title:(e.innerText||e.title||'').slice(0,150),url:e.href})).filter(e=>e.title||/bbcswebdav|contentList|listContent/.test(e.url)).slice(0,120)}))})())",v->{result[0]=v;latch.countDown();}));latch.await(8,java.util.concurrent.TimeUnit.SECONDS);try(java.io.FileOutputStream f=new java.io.FileOutputStream(new java.io.File(a.getCacheDir(),"bb-explore.json"))){f.write(result[0].getBytes(java.nio.charset.StandardCharsets.UTF_8));}
+ Thread.sleep(240000);out.putString("stream","PASS observed actual course DOM; no submission or modification\n");
+ }catch(Throwable e){out.putString("stream","FAIL "+e+"\n");}i.finish(out.getString("stream","").startsWith("PASS")?-1:0,out);}
+}
