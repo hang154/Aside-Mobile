@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-02T12:49:59.399416",
+  "version": "0.6.13.1-session",
+  "changes": [
+    "Enable first-party cookies explicitly on main WebView",
+    "Enable third-party cookies only on allowed school/identity navigation",
+    "Flush cookies after main/login pages finish and Activity onPause"
+  ],
+  "persistence_test": {
+    "synthetic_cookie_survives_background_force_stop_relaunch": true,
+    "scope": "Synthetic HttpOnly Secure persistent cookie only. Does not prove school authentication or server session lifetime.",
+    "real_cookie_values_exported": false
+  },
+  "school_state_checks": "PASS 22 school chat and SSO state checks",
+  "previous_same_app_login_user_reported": true,
+  "authenticated_school_services_proven": false,
+  "reason": "Repeated real service navigation reached sign-in forms; cannot infer successful authentication from user report or cookie persistence alone. No authenticated cookie/token exported.",
+  "apk": [
+    {
+      "variant": "GROUP",
+      "file": "nubi-0.6.13.1-session.apk",
+      "sha256": "6641bf6de7f4379fbb6472e7e2b6b92f793d66d44d65e13869594530cc620797",
+      "bytes": 17518502,
+      "signature_verified": true,
+      "zip_entries_unchanged": 47,
+      "manifest": "package: name='ai.decisionos.nubi.groupchat.goals' versionCode='74' versionName='0.6.13.1-session' platformBuildVersionName='15' platformBuildVersionCode='35' compileSdkVersion='35' compileSdkVersionCodename='15'"
+    }
+  ]
+}

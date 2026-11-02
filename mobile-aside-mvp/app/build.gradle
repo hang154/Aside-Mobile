@@ -9,8 +9,8 @@ android {
         minSdk 26
         targetSdk 35
         testInstrumentationRunner 'ai.decisionos.aside.GoalInstrumentation'
-        versionCode 73
-        versionName '0.6.13-campus-core'
+        versionCode 74
+        versionName '0.6.13.1-session'
         manifestPlaceholders = [appLabel: '누비']
         buildConfigField 'int', 'HOME_STYLE', '0'
         buildConfigField 'boolean', 'HOME_LIGHT', 'false'
