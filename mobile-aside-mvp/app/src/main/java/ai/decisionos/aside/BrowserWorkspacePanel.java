@@ -45,12 +45,12 @@ final class BrowserWorkspacePanel extends CompanionPanel {
         LinearLayout nav=new LinearLayout(this);nav.setGravity(android.view.Gravity.CENTER_VERTICAL);nav.setPadding(Ui.dp(this,15),0,Ui.dp(this,5),0);nav.setBackground(Ui.bg(0xfff1f1f1,24,this));
         address=new EditText(this);address.setSingleLine(true);address.setTextColor(0xff202020);address.setHintTextColor(0xff888888);address.setTextSize(14);address.setBackgroundColor(android.graphics.Color.TRANSPARENT);address.setHint("웹 주소 입력");address.setContentDescription("웹 주소");address.setText("https://example.com");address.setInputType(android.text.InputType.TYPE_CLASS_TEXT|android.text.InputType.TYPE_TEXT_VARIATION_URI);address.setImeOptions(android.view.inputmethod.EditorInfo.IME_ACTION_GO);nav.addView(address,new LinearLayout.LayoutParams(0,Ui.dp(this,48),1));
         TextView go=chromeButton("→","주소 열기");nav.addView(go,new LinearLayout.LayoutParams(Ui.dp(this,40),Ui.dp(this,40)));root.addView(nav,Ui.match(this,48,8));
-        web=new WebView(this){ public boolean dispatchTouchEvent(android.view.MotionEvent e){if(e.getActionMasked()==android.view.MotionEvent.ACTION_UP)CollectorStore.record(BrowserWorkspacePanel.this,getPackageName(),"web_touch",0);return super.dispatchTouchEvent(e);}};web.getSettings().setJavaScriptEnabled(true);web.getSettings().setDomStorageEnabled(true);web.getSettings().setAllowFileAccess(false);web.getSettings().setAllowContentAccess(false);web.getSettings().setJavaScriptCanOpenWindowsAutomatically(false);web.getSettings().setSupportMultipleWindows(true);web.getSettings().setMixedContentMode(android.webkit.WebSettings.MIXED_CONTENT_NEVER_ALLOW);web.setWebChromeClient(new PopupChromeClient());
+        web=new WebView(this){ public boolean dispatchTouchEvent(android.view.MotionEvent e){if(e.getActionMasked()==android.view.MotionEvent.ACTION_UP)CollectorStore.record(BrowserWorkspacePanel.this,getPackageName(),"web_touch",0);return super.dispatchTouchEvent(e);}};WebSessionPolicy.attach(web);web.getSettings().setJavaScriptEnabled(true);web.getSettings().setDomStorageEnabled(true);web.getSettings().setAllowFileAccess(false);web.getSettings().setAllowContentAccess(false);web.getSettings().setJavaScriptCanOpenWindowsAutomatically(false);web.getSettings().setSupportMultipleWindows(true);web.getSettings().setMixedContentMode(android.webkit.WebSettings.MIXED_CONTENT_NEVER_ALLOW);web.setWebChromeClient(new PopupChromeClient());
         web.setWebViewClient(new WebViewClient(){
              public boolean shouldOverrideUrlLoading(WebView view,WebResourceRequest req){Uri u=req.getUrl();if(!"https".equalsIgnoreCase(u.getScheme())){if(req.isForMainFrame()){loadFailed=true;info.setText("HTTPS가 아닌 이동은 차단했어요.");}return true;}return false;}
              public void onPageStarted(WebView v,String url,Bitmap icon){endWeb();observedUrl="";candidates=new JSONArray();loadFailed=false;address.setText(url);info.setText("페이지를 불러오는 중");}
              public void onReceivedError(WebView v,WebResourceRequest req,android.webkit.WebResourceError error){if(req.isForMainFrame()){loadFailed=true;info.setText("페이지를 열지 못했어요. 주소와 연결을 확인하세요.");}}
-             public void onPageFinished(WebView v,String url){address.setText(url);if(!loadFailed && url.startsWith("https://")){info.setText("");beginWeb();}}
+             public void onPageFinished(WebView v,String url){WebSessionPolicy.checkpoint();address.setText(url);if(!loadFailed && url.startsWith("https://")){info.setText("");beginWeb();}}
              public void doUpdateVisitedHistory(WebView v,String url,boolean reload){super.doUpdateVisitedHistory(v,url,reload);if(url!=null && !address.hasFocus())address.setText(url);if(!observedUrl.isEmpty()&&!observedUrl.equals(url)){observedUrl="";candidates=new JSONArray();}}
         });
         info=Ui.text(this,"",12,0xff777777,false);root.addView(info,Ui.match(this,-2,2));
@@ -80,7 +80,7 @@ final class BrowserWorkspacePanel extends CompanionPanel {
         }
          public boolean onCreateWindow(WebView parent,boolean isDialog,boolean isUserGesture,android.os.Message resultMsg){
             if(!isUserGesture || popupDialog!=null || resultMsg==null || !(resultMsg.obj instanceof WebView.WebViewTransport))return false;
-            final WebView child=new WebView(BrowserWorkspacePanel.this);
+            final WebView child=new WebView(BrowserWorkspacePanel.this);WebSessionPolicy.attach(child);
             child.getSettings().setJavaScriptEnabled(true);child.getSettings().setDomStorageEnabled(true);
             child.getSettings().setAllowFileAccess(false);child.getSettings().setAllowContentAccess(false);
             child.getSettings().setMixedContentMode(android.webkit.WebSettings.MIXED_CONTENT_NEVER_ALLOW);

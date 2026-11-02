@@ -25,7 +25,13 @@ def inspect(endpoint,mode,source_url=None):
     return row.get('result',{})
  try:
   if mode=='open':
-   rpc('Page.navigate',{'url':'https://'+HOST+'/ultra/stream'});time.sleep(3)
+   rpc('Page.navigate',{'url':'https://'+HOST+'/ultra/course'});time.sleep(3)
+   rpc('Runtime.evaluate',{'expression':"(()=>{const b=document.getElementById('unist-portal-login');if(b&&b.getClientRects().length)b.click()})()"});time.sleep(3)
+  if mode in ('status','calendar','materials','attempt','todo_list','keepalive'):
+   asset=Path(__file__).resolve().parents[1]/'mobile-aside-mvp/app/src/main/assets/blackboard_tools.js'
+   result=rpc('Runtime.evaluate',{'expression':asset.read_text()+'\nNubiBBTools.run('+json.dumps({'mode':mode})+')','returnByValue':True,'awaitPromise':True})['result'].get('value')
+   if not isinstance(result,dict):raise RuntimeError('Blackboard tool response unavailable')
+   return result
   script="""(()=>{const visible=e=>!!e.getClientRects().length;const host=location.hostname;
   if(host!=='blackboard.unist.ac.kr')return {state:'sso_unverified',host,reason:'포털 세션 자동 연결 미확인. 별도 로그인창은 입력하지 않음.'};
   if([...document.querySelectorAll('input[type=password],input[type=email]')].some(visible))return {state:'reauthentication_required',reason:'포털 세션으로 인증된 Blackboard 데이터를 확인하지 못함.'};
@@ -52,7 +58,7 @@ def inspect(endpoint,mode,source_url=None):
   return result
  finally:ws.close()
 def definitions():
- return [{'name':'nubi_blackboard_'+mode,'description':description,'inputSchema':{'type':'object','properties':{},'additionalProperties':False}} for mode,description in [('open','Open Blackboard using the existing portal WebView session, then check visible authentication. Never enters credentials.'),('read','Read actually visible courses, activity announcements, assignment/exam hints and attachment links. Never submits. Empty means unverified, not no assignments.')]]
+ return [{'name':'nubi_blackboard_'+mode,'description':description,'inputSchema':{'type':'object','properties':{},'additionalProperties':False}} for mode,description in [('open','Open Blackboard using the existing portal WebView session, then check visible authentication. Never enters credentials.'),('calendar','Read authenticated Blackboard calendar deadlines and synchronize local todo cache; no submission.'),('materials','Recursively list actual same-origin course material links with depth and size limits.'),('attempt','Read current assignment instructions and own submission links; no writes.'),('todo_list','Read locally imported Blackboard tasks.'),('status','Read current Blackboard course links and authentication state.'),('keepalive','Check existing Blackboard session only while the document is visible; cannot bypass server expiry.'),('read','Read actually visible courses, activity announcements, assignment/exam hints and attachment links. Never submits. Empty means unverified, not no assignments.')]]
 def main():
  for line in sys.stdin:
   ident=None
@@ -65,7 +71,7 @@ def main():
     args=p.get('arguments') or {}
     if set(args)!={'source_url'}:raise ValueError('현재 관측한 PDF 링크가 필요해요.')
     data=inspect(os.environ.get('NUBI_CDP_ENDPOINT','http://127.0.0.1:19333'),'download_pdf',args['source_url']);out={'content':[{'type':'text','text':json.dumps(data,ensure_ascii=False)}]}
-   elif method=='tools/call' and p.get('name') in ('nubi_blackboard_open','nubi_blackboard_read'):
+   elif method=='tools/call' and p.get('name') in tuple(t['name'] for t in definitions()):
     if p.get('arguments') not in ({},None):raise ValueError('No arguments accepted')
     data=inspect(os.environ.get('NUBI_CDP_ENDPOINT','http://127.0.0.1:19333'),p['name'].removeprefix('nubi_blackboard_'));out={'isError':data.get('state')!='observed','content':[{'type':'text','text':json.dumps(data,ensure_ascii=False)}]}
    elif method=='ping':out={}

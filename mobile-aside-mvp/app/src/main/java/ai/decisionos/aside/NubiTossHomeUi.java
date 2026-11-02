@@ -19,7 +19,7 @@ final class NubiTossHomeUi {
  boolean ready; String groupLease="";JSONObject groupGoals=new JSONObject();LinearLayout groupPreview;ViewGroup browserParent;ViewGroup.LayoutParams browserParams;
  static boolean enabled(){return BuildConfig.HOME_STYLE==1||BuildConfig.HOME_STYLE==4||BuildConfig.HOME_STYLE==5||BuildConfig.HOME_STYLE==6;}
  @SuppressLint("SetJavaScriptEnabled") NubiTossHomeUi(NubiCompanionUi ui){
-  u=ui;a=u.a;prefs=a.getSharedPreferences("home_studies",0);web=new WebView(a);web.setContentDescription("누비 A·D 인터랙티브 홈");
+  u=ui;a=u.a;prefs=a.getSharedPreferences("home_studies",0);web=new WebView(a);WebSessionPolicy.attach(web);web.setContentDescription("누비 A·D 인터랙티브 홈");
   web.setBackgroundColor(0xfff2f4f6);web.setOverScrollMode(View.OVER_SCROLL_NEVER);
   WebSettings s=web.getSettings();s.setJavaScriptEnabled(true);s.setDomStorageEnabled(true);s.setAllowFileAccess(false);s.setAllowContentAccess(false);s.setAllowFileAccessFromFileURLs(false);s.setAllowUniversalAccessFromFileURLs(false);s.setBlockNetworkLoads(true);s.setTextZoom(Math.round(a.getResources().getConfiguration().fontScale*100));
   web.addJavascriptInterface(new Bridge(),"NubiHome");

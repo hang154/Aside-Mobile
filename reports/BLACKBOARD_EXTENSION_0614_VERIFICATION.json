@@ -1,0 +1,54 @@
+{
+  "reference": {
+    "repository": "https://github.com/See-Y/blackboard-extension",
+    "commit": "e9f28b8b2b45cc14dc02618648a36400b0e1c975",
+    "installed_version": "2.10",
+    "installation": "isolated local Chromium unpacked extension; manifest image path case corrected"
+  },
+  "nubi_version": "0.6.14-blackboard",
+  "implemented": [
+    "official UNIST Portal Login and shared WebView session",
+    "foreground session activity check",
+    "authenticated calendar import into school task store",
+    "todo create/edit/done/delete and persistence",
+    "recursive same-origin materials list and bounded native bulk download",
+    "weekly Collaborate schedules and background notification",
+    "optional UNIST Zoom display name",
+    "current assignment instructions, own download links and visible score read-only",
+    "MCP status/calendar/materials/attempt/todo_list/keepalive tools"
+  ],
+  "verification": {
+    "extension_synthetic": "Actual content scripts: calendar import, todo panel, Download All button and keepalive hook observed",
+    "nubi_browser_fixture_checks": 7,
+    "native_three_service_sso": "PASS 3 after update, no credentials entered",
+    "native_calendar": "PASS 2; authenticated source returned 2 events",
+    "native_calendar_final_apk": "PASS 2; authenticated source returned 2 events",
+    "courses": 4,
+    "mcp_calendar": "observed; 2 actual authenticated events",
+    "installed_matches_release": true
+  },
+  "not_live_verified": [
+    "bulk file bytes on actual course materials",
+    "live Collaborate join and real alarm delivery",
+    "Zoom display-name result",
+    "own assignment download/grade view without open assignment",
+    "tablet layout: no tablet currently connected"
+  ],
+  "limitations": [
+    "Android background auto activity launch is restricted; notification opens the scheduled school agent instead",
+    "Server authentication expiry and MFA cannot be bypassed",
+    "No extension source copied into application; behavior independently implemented",
+    "Extension popup alarm observation timed out; schedule behavior additionally reviewed in source, not reported as runtime pass",
+    "This does not implement submission or send messages"
+  ],
+  "captures": "Local only; never included in Git repository",
+  "apk": {
+    "variant": "GROUP",
+    "file": "nubi-0.6.14-blackboard.apk",
+    "sha256": "5687d7983ed14e48235bf85b8e3712535cf75351fdbf0985f3ef84610510272a",
+    "bytes": 17543150,
+    "signature_verified": true,
+    "zip_entries_unchanged": 48,
+    "manifest": "package: name='ai.decisionos.nubi.groupchat.goals' versionCode='76' versionName='0.6.14-blackboard' platformBuildVersionName='15' platformBuildVersionCode='35' compileSdkVersion='35' compileSdkVersionCodename='15'"
+  }
+}

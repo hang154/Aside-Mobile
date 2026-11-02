@@ -17,6 +17,7 @@ final class SchoolChatUi {
   Button connect=c.a.button("학교 계정으로 한 번에 연결",true);connect.setOnClickListener(v->new SchoolSignIn(c).show());box.addView(connect,Ui.match(c.a,52,14));
   LinearLayout actions=new LinearLayout(c.a);for(String[] item:new String[][]{{"학교 소식","inbox"},{"진행 중인 일","jobs"}}){Button b=secondary(c,item[0]);b.setOnClickListener(v->tools(c,item[1]));actions.addView(b,new LinearLayout.LayoutParams(0,-2,1));}box.addView(actions,Ui.match(c.a,-2,8));
   Button watch=secondary(c,"새 학교 소식, 채팅으로 알려줘");watch.setOnClickListener(v->{SchoolChatWork.watch(c);c.a.toast("주기 확인을 요청했어. 실제 조회 결과를 이 채팅에 남길게.");});box.addView(watch,Ui.match(c.a,-2,8));
+  Button blackboard=secondary(c,"Blackboard 과제·할 일·강의자료");blackboard.setOnClickListener(v->new BlackboardTools(c).show());box.addView(blackboard,Ui.match(c.a,-2,8));
   Button mail=secondary(c,"작성된 메일 검토·발송");mail.setOnClickListener(v->CampusMailReview.show(c));box.addView(mail,Ui.match(c.a,-2,8));
   c.messages.addView(box,Ui.match(c.a,-2,8));
  }
