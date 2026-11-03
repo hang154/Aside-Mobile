@@ -55,6 +55,13 @@ class Handler(BaseHTTPRequestHandler):
                 else:raise ValueError('Invalid group status fields')
                 return self.respond(200,result)
             except ValueError as e:return self.respond(400,{'error':str(e)})
+        if self.path=='/lecture-translate':
+            try:
+                if set(body)!={'text','source','target','device_session'} or not re.fullmatch(r'[a-f0-9-]{36}',body.get('device_session','')):raise ValueError('Invalid lecture request')
+                from nubi_lecture_translation import translate_segment
+                return self.respond(200,translate_segment(body['text'],body['source'],body['target']))
+            except ValueError as e:return self.respond(400,{'error':str(e)})
+            except Exception:return self.respond(502,{'error':'통역 모델 연결 또는 응답을 확인하지 못했어요. 다시 시도해 주세요.'})
         if self.path=='/ai-compare':
             try:
                 if set(body)!={'text','device_session'} or not re.fullmatch(r'[a-f0-9-]{36}',body.get('device_session','')):raise ValueError('Invalid compare request')
@@ -144,7 +151,7 @@ class Handler(BaseHTTPRequestHandler):
         if self.client_address[0] not in ('127.0.0.1','::1'): return self.respond(403, {'error':'local controller only'})
         if self.path == '/command':
             op=body.get('op')
-            valid={'goal_open','goal_search','goal_observe','goal_select','goal_report'}
+            valid={'goal_open','goal_search','goal_observe','goal_select','goal_report','goal_service_open','goal_gpt'}
             if op not in valid: return self.respond(400, {'error':'unsupported goal command'})
             id=secrets.token_hex(12); item=dict(body);item['id']=id;item['expires']=time.time()+30
             session=body.pop('_session',active_device)

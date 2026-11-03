@@ -10,6 +10,13 @@ with tempfile.TemporaryDirectory() as d:
  for name,goal in [('../lecture-ko.pdf',gid),(file.name,str(uuid.uuid4()))]:
   try:q.artifact('x',goal,name);raise AssertionError()
   except ValueError:pass
+ ident=uuid.uuid4().hex;durable=dict(body,completed=True,goal_id=gid);(q.directory/(ident+'.json')).write_text(json.dumps(durable))
+ assert q.artifact(ident,gid,file.name)==b'%PDF-fixture'
+ try:q.artifact(ident,str(uuid.uuid4()),file.name);raise AssertionError('restart ownership bypass')
+ except ValueError:pass
+ durable['completed']=False;(q.directory/(ident+'.json')).write_text(json.dumps(durable))
+ try:q.artifact(ident,gid,file.name);raise AssertionError('unfinished recovery')
+ except ValueError:pass
  file.write_bytes(b'tampered')
  try:q.artifact('x',gid,file.name);raise AssertionError()
  except ValueError:pass

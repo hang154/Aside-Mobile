@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Read authenticated Blackboard DOM over the local app CDP. No submission tools."""
+"""Read authenticated Blackboard DOM over the local app CDP. Includes exact-target submission tools."""
 import json,os,re,sys,time,urllib.request,base64,hashlib
 from pathlib import Path
 from urllib.parse import urlsplit
 import websocket
 HOST='blackboard.unist.ac.kr'
-def inspect(endpoint,mode,source_url=None):
+def inspect(endpoint,mode,source_url=None,plan_id=None):
  u=urlsplit(endpoint)
  if u.scheme!='http' or u.hostname not in ('127.0.0.1','localhost') or u.username or u.password or u.query or u.fragment:raise ValueError('Local CDP endpoint required')
  with urllib.request.urlopen(endpoint.rstrip('/')+'/json/list',timeout=5) as response:pages=json.load(response)
@@ -24,8 +24,11 @@ def inspect(endpoint,mode,source_url=None):
     if row.get('error') or row.get('result',{}).get('exceptionDetails'):raise RuntimeError('Blackboard DOM 판독 실패')
     return row.get('result',{})
  try:
+  if mode.startswith('submission_'):
+   from blackboard_submission import run
+   return run(rpc,mode.removeprefix('submission_'),plan_id)
   if mode=='open':
-   rpc('Page.navigate',{'url':'https://'+HOST+'/ultra/course'});time.sleep(3)
+   rpc('Page.navigate',{'url':'https://'+HOST+'/'});time.sleep(3)
    rpc('Runtime.evaluate',{'expression':"(()=>{const b=document.getElementById('unist-portal-login');if(b&&b.getClientRects().length)b.click()})()"});time.sleep(3)
   if mode in ('status','calendar','materials','attempt','todo_list','keepalive','notices'):
    asset=Path(__file__).resolve().parents[1]/'mobile-aside-mvp/app/src/main/assets/blackboard_tools.js'
@@ -61,7 +64,8 @@ def inspect(endpoint,mode,source_url=None):
   return result
  finally:ws.close()
 def definitions():
- return [{'name':'nubi_blackboard_'+mode,'description':description,'inputSchema':{'type':'object','properties':{},'additionalProperties':False}} for mode,description in [('open','Open Blackboard using the existing portal WebView session, then check visible authentication. Never enters credentials.'),('notices','Read actual open Blackboard announcement text and observed navigation links; missing DOM means unavailable.'),('calendar','Read authenticated Blackboard calendar deadlines and synchronize local todo cache; no submission.'),('materials','Recursively list actual same-origin course material links with depth and size limits.'),('attempt','Read current assignment instructions and own submission links; no writes.'),('todo_list','Read locally imported Blackboard tasks.'),('status','Read current Blackboard course links and authentication state.'),('keepalive','Check existing Blackboard session only while the document is visible; cannot bypass server expiry.'),('read','Read actually visible courses, activity announcements, assignment/exam hints and attachment links. Never submits. Empty means unverified, not no assignments.')]]
+ from blackboard_submission import definitions as submission_definitions
+ return submission_definitions()+[{'name':'nubi_blackboard_'+mode,'description':description,'inputSchema':{'type':'object','properties':{},'additionalProperties':False}} for mode,description in [('open','Open Blackboard using the existing portal WebView session, then check visible authentication. Never enters credentials.'),('notices','Read actual open Blackboard announcement text and observed navigation links; missing DOM means unavailable.'),('calendar','Read authenticated Blackboard calendar deadlines and synchronize local todo cache; no submission.'),('materials','Recursively list actual same-origin course material links with depth and size limits.'),('attempt','Read current assignment instructions and own submission links; no writes.'),('todo_list','Read locally imported Blackboard tasks.'),('status','Read current Blackboard course links and authentication state.'),('keepalive','Check existing Blackboard session only while the document is visible; cannot bypass server expiry.'),('read','Read actually visible courses, activity announcements, assignment/exam hints and attachment links. Never submits. Empty means unverified, not no assignments.')]]
 def main():
  for line in sys.stdin:
   ident=None
@@ -70,6 +74,10 @@ def main():
    if ident is None:continue
    if method=='initialize':out={'protocolVersion':'2024-11-05','capabilities':{'tools':{}},'serverInfo':{'name':'nubi-blackboard','version':'0.1'}}
    elif method=='tools/list':out={'tools':definitions()+[{'name':'nubi_blackboard_download_pdf','description':'Download an exact currently observed same-origin Blackboard PDF link into the private lecture folder. GET only; rejects login pages and files over 8MiB.','inputSchema':{'type':'object','properties':{'source_url':{'type':'string'}},'required':['source_url'],'additionalProperties':False}}]}
+   elif method=='tools/call' and p.get('name','').startswith('nubi_blackboard_submission_'):
+    args=p.get('arguments') or {}
+    if set(args)!={'plan_id'}:raise ValueError('정확한 제출 계획이 필요해요.')
+    data=inspect(os.environ.get('NUBI_CDP_ENDPOINT','http://127.0.0.1:19333'),p['name'].removeprefix('nubi_blackboard_'),plan_id=args['plan_id']);out={'isError':data.get('state')=='receipt_not_found','content':[{'type':'text','text':json.dumps(data,ensure_ascii=False)}]}
    elif method=='tools/call' and p.get('name')=='nubi_blackboard_download_pdf':
     args=p.get('arguments') or {}
     if set(args)!={'source_url'}:raise ValueError('현재 관측한 PDF 링크가 필요해요.')

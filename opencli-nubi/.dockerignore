@@ -1,0 +1,10 @@
+*
+!requirements-transport.txt
+!nubi_transport_api.py
+!nubi_transit.py
+!rail_journey.py
+!express_bus.py
+!tago_catalog.py
+!kakao_location.py
+!public_info.py
+!Dockerfile.transport

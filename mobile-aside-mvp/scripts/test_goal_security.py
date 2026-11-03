@@ -4,13 +4,13 @@ import xml.etree.ElementTree as ET
 r=Path(__file__).resolve().parents[1];b=r/'app/src/main/java/ai/decisionos/aside';ns='{http://schemas.android.com/apk/res/android}'
 m=ET.parse(r/'app/src/main/AndroidManifest.xml').getroot()
 services=m.findall('.//service')
-assert {x.attrib[ns+'name'] for x in services}=={'.CampusNoticeMonitor','.BlackboardNoticeMonitor'}
+assert {x.attrib[ns+'name'] for x in services}=={'.CampusNoticeMonitor','.BlackboardNoticeMonitor','.ChatWork'}
 debug=ET.parse(r/'app/src/debug/AndroidManifest.xml').getroot()
 assert debug.find('.//service').attrib[ns+'permission']=='android.permission.BIND_ACCESSIBILITY_SERVICE'
 assert 'getRootInActiveWindow' not in (b/'EngagementService.java').read_text()
 for service in services:
- if service.attrib[ns+'name'] in {'.CampusNoticeMonitor','.BlackboardNoticeMonitor'}:
-  assert service.attrib.get(ns+'exported')=={'.CampusNoticeMonitor':'false','.BlackboardNoticeMonitor':'true'}[service.attrib[ns+'name']]
+ if service.attrib[ns+'name'] in {'.CampusNoticeMonitor','.BlackboardNoticeMonitor','.ChatWork'}:
+  assert service.attrib.get(ns+'exported')=={'.CampusNoticeMonitor':'false','.BlackboardNoticeMonitor':'true','.ChatWork':'false'}[service.attrib[ns+'name']]
   assert service.attrib.get(ns+'permission')=='android.permission.BIND_JOB_SERVICE'
  else:
   assert service.attrib.get(ns+'permission')=='android.permission.BIND_ACCESSIBILITY_SERVICE'
@@ -30,5 +30,11 @@ for name in ['MainActivity','GoalHomeActivity','CharacterWorkspaceActivity','Goa
  assert len(aliases)==1 and aliases[0].get(ns+'targetActivity')=='.CompanionEntryActivity',name
  assert not any(x.get(ns+'name')=='.'+name for x in m.findall('.//activity')),name
 assert 'return true;' in (b/'GoalChatUi.java').read_text().split('boolean companionMode()')[1].split('boolean modern()')[0]
-assert 'ActivityLifecycleCallbacks' not in (b/'NubiApplication.java').read_text()
+# Session checkpoints may use lifecycle callbacks, but must not restore legacy navigation
+# wrappers, inspect content or start passive microphone/network collection.
+application=(b/'NubiApplication.java').read_text()
+assert 'WebSessionPolicy.checkpoint()' in application
+assert 'WeakReference' in application
+for forbidden in ('startActivity(', 'new Intent(', 'getText(', 'getUrl(', 'SpeechRecognizer', 'AudioRecord', 'HttpURLConnection', 'addJavascriptInterface'):
+ assert forbidden not in application,forbidden
 print('PASS companion-only launcher aliases and absence of legacy wrapper')

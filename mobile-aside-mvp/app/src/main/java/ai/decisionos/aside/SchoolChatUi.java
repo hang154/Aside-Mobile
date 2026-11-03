@@ -19,6 +19,7 @@ final class SchoolChatUi {
   Button watch=secondary(c,"새 학교 소식, 채팅으로 알려줘");watch.setOnClickListener(v->{SchoolChatWork.watch(c);c.a.toast("주기 확인을 요청했어. 실제 조회 결과를 이 채팅에 남길게.");});box.addView(watch,Ui.match(c.a,-2,8));
   Button blackboard=secondary(c,"Blackboard 과제·할 일·강의자료");blackboard.setOnClickListener(v->new BlackboardTools(c).show());box.addView(blackboard,Ui.match(c.a,-2,8));
   Button vault=secondary(c,"학교 계정 보관·저장 계정 로그인");vault.setOnClickListener(v->c.a.startActivity(new android.content.Intent(c.a,CredentialVaultActivity.class)));box.addView(vault,Ui.match(c.a,-2,8));
+  Button lecture=secondary(c,"강의 구간별 통역");lecture.setOnClickListener(v->new LectureInterpretation(c).show());box.addView(lecture,Ui.match(c.a,-2,8));
   Button mail=secondary(c,"작성된 메일 검토·발송");mail.setOnClickListener(v->CampusMailReview.show(c));box.addView(mail,Ui.match(c.a,-2,8));
   c.messages.addView(box,Ui.match(c.a,-2,8));
  }

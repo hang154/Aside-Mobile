@@ -28,7 +28,7 @@ import java.util.Set;
 public final class CampusNoticeMonitor extends JobService {
  static final int JOB_ID=90145, NOW_JOB_ID=90146;
  static final String PREFS="campus_notice_monitor", CHANNEL="campus_notice_alerts";
- private WebView web;private JobParameters running;private Handler handler=new Handler(Looper.getMainLooper());private boolean done;private JSONArray combined=new JSONArray();
+ private java.util.List<String> scheduledIds=new java.util.ArrayList<>();private WebView web;private JobParameters running;private Handler handler=new Handler(Looper.getMainLooper());private boolean done;private JSONArray combined=new JSONArray();
  static boolean schedule(Context c){
   JobScheduler scheduler=(JobScheduler)c.getSystemService(Context.JOB_SCHEDULER_SERVICE);
   JobInfo job=new JobInfo.Builder(JOB_ID,new ComponentName(c,CampusNoticeMonitor.class)).setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY).setPeriodic(6L*60*60*1000).setPersisted(true).build();
@@ -51,7 +51,7 @@ public final class CampusNoticeMonitor extends JobService {
  static String audience(String title){boolean ug=title.matches("(?is).*\\b(UG|undergraduate)\\b.*|.*\\[학부\\].*");boolean g=title.matches("(?is).*\\b(G|graduate)\\b.*|.*\\[대학원\\].*");if(ug&&g)return "전체";if(ug)return "학부";if(g)return "대학원";return "확인 필요";}
  static boolean relevant(String title,String level){String a=audience(title);return level.equals("전체")||a.equals("전체")||a.equals("확인 필요")||a.equals(level);}
  static String hash(String value){try{byte[] b=MessageDigest.getInstance("SHA-256").digest(value.getBytes(StandardCharsets.UTF_8));StringBuilder s=new StringBuilder();for(byte v:b)s.append(String.format(java.util.Locale.US,"%02x",v&255));return s.toString();}catch(Exception e){throw new IllegalStateException(e);}}
- @Override public boolean onStartJob(JobParameters params){if(running!=null)return false;running=params;done=false;combined=new JSONArray();handler.post(()->startWeb());return true;}
+ @Override public boolean onStartJob(JobParameters params){if(running!=null)return false;running=params;try(ScheduledWorkStore scheduled=new ScheduledWorkStore(this)){scheduledIds=scheduled.waiting();}done=false;combined=new JSONArray();handler.post(()->startWeb());return true;}
  private void startWeb(){
   if(done)return;web=new WebView(this);WebSessionPolicy.attach(web);web.measure(android.view.View.MeasureSpec.makeMeasureSpec(1080,1073741824),android.view.View.MeasureSpec.makeMeasureSpec(1600,1073741824));web.layout(0,0,1080,1600);web.getSettings().setJavaScriptEnabled(true);web.getSettings().setDomStorageEnabled(true);web.getSettings().setAllowFileAccess(false);web.getSettings().setAllowContentAccess(false);web.getSettings().setMixedContentMode(android.webkit.WebSettings.MIXED_CONTENT_NEVER_ALLOW);
   final String key="nubiBoards_"+java.util.UUID.randomUUID().toString().replace("-","");
@@ -82,6 +82,6 @@ public final class CampusNoticeMonitor extends JobService {
   Notification.Builder b=Build.VERSION.SDK_INT>=26?new Notification.Builder(context,CHANNEL):new Notification.Builder(context);b.setSmallIcon(android.R.drawable.ic_dialog_info).setContentTitle("누비가 학교 공지를 찾았어 · "+count+"건").setContentText(first).setStyle(new Notification.BigTextStyle().bigText(first+"\n포털 원문에서 대상과 기한을 확인해 줘." )).setContentIntent(open).setAutoCancel(true);
   try{nm.notify(90145,b.build());}catch(SecurityException ignored){}
  }
- private void finish(String error,boolean retry){if(done)return;done=true;if(error!=null)getSharedPreferences(PREFS,MODE_PRIVATE).edit().putString("last_status",error).apply();handler.removeCallbacksAndMessages(null);if(web!=null){web.stopLoading();web.destroy();web=null;}if(running!=null)jobFinished(running,retry);running=null;}
+ private void finish(String error,boolean retry){if(done)return;done=true;ScheduledWork.refreshFinished(this,scheduledIds,error,getSharedPreferences(PREFS,MODE_PRIVATE).getString("last_status","학교 게시판 조회 결과를 확인해 주세요."));scheduledIds=new java.util.ArrayList<>();if(error!=null)getSharedPreferences(PREFS,MODE_PRIVATE).edit().putString("last_status",error).apply();handler.removeCallbacksAndMessages(null);if(web!=null){web.stopLoading();web.destroy();web=null;}if(running!=null)jobFinished(running,retry);running=null;}
  @Override public boolean onStopJob(JobParameters p){if(running==p)handler.post(()->{if(running==p)finish("운영체제가 조회를 중단했어요. 다음 실행 때 다시 확인해요.",false);});return true;}
 }

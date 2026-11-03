@@ -165,6 +165,8 @@ function campusRows(){
 const HOME_CONTEXTS=[["first", "처음 시작", "귀찮은 일은, 누비에게", "학교 연결부터 오늘 할 일까지 한 번에 시작해.", "학교 서비스 연결하기", "grades", 5], ["ot", "OT 직후", "이번 학기, 놓치지 않게", "출석·퀴즈·평가 규정을 근거와 함께 정리해.", "수업 규정 정리해줘", "grades", 9], ["quiz", "시작 직후 퀴즈", "퀴즈 전에, 핵심만", "수업 자료와 교수님 강조 내용을 확인해.", "퀴즈 준비 도와줘", "grades", 9], ["quiz-end", "종료 직전 퀴즈", "수업 끝나기 전, 차근차근", "퀴즈 시간과 준비할 범위를 확인해.", "수업 퀴즈 일정 확인해줘", "grades", 9], ["during", "수업 중", "영어 강의도, 놓치지 않고 따라가자.", "듣고 있는 강의의 통역과 노트를 시작해.", "강의 통역 시작해줘", "grades", 5], ["after", "수업 직후", "오늘 배운 것, 정리해둘까?", "강의 노트와 다음 할 일을 이어서 확인해.", "강의 노트 정리해줘", "grades", 9], ["exam", "시험 D-7", "시험 준비, 어디부터 할까?", "범위·자료·강조 내용을 공부 순서로.", "시험 공부 계획 짜줘", "grades", 9], ["deadline", "과제 마감 직전", "제출 전에, 한 번 더", "파일·출처·마감 시간을 함께 확인해.", "과제 제출 준비 확인해줘", "grades", 5], ["change", "공지 변경", "바뀐 공지, 알려줄게", "변경 전후와 준비할 일을 먼저 확인해.", "변경된 학교 공지 확인해줘", "grades", 1], ["grades", "성적 발표", "점수보다 먼저, 기준부터", "성적과 평가 기준을 확인하고 문의 초안까지.", "성적 기준과 문의 초안 도와줘", "grades", 9], ["scholar", "장학금 발견", "나도 신청할 수 있을까?", "장학금 조건과 준비 서류부터 확인해.", "나에게 맞는 장학금 찾아줘", "grades", 1], ["team", "팀플 중", "발표 준비, 같이 하자", "주제에 맞는 논문부터 팀 일정까지.", "팀플 논문과 일정 정리해줘", "grades", 5], ["free", "공강", "잠깐의 여유, 나를 위해", "오늘 목표에 맞는 작은 행동을 찾아봐.", "공강 때 할 일 추천해줘", "fitness", 2]];
 let homeContext='first';
 function nativeDraft(agent,prompt){if(window.NubiHome){window.NubiHome.chat(agent,prompt);}else notify('앱에서는 담당 누비의 실제 대화 초안을 열어요.');}
+function scheduledPanel(){const rows=window.nativeHomeState?.scheduledWork||[];if(!window.NubiHome)return '';return `<section class="section"><div class="section-head"><h3 class="section-title">누비가 맡은 일</h3></div><div class="menu-list">${rows.map(r=>`<button class="menu-row" data-action="scheduledWork" data-id="${esc(r.id)}"><span class="left-icon">${icon('bell',18)}</span><span style="flex:1;min-width:0;text-align:left"><strong>${esc(r.title)}</strong><small style="display:block;margin-top:5px">${esc(r.label)} · ${esc(new Date(r.due_at).toLocaleString('ko-KR',{timeZone:'Asia/Seoul',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}))}</small></span>${icon('chevron-right',15)}</button>`).join('')}<button class="menu-row" data-action="scheduledWork" data-id="new"><span class="left-icon">${icon('calendar',18)}</span><strong>나중에 챙겨줘</strong><span class="mini">알림·포털 조회</span></button></div></section>`;}
+
 function home(){
  const ctx=HOME_CONTEXTS.find(x=>x[0]===homeContext)||HOME_CONTEXTS[0];
  const ids=['grade','health','romance','career','travel'];
@@ -446,7 +448,7 @@ function copyText(value){
 function fallbackCopy(value){
  let el=document.createElement('textarea');el.value=value;el.style.position='fixed';el.style.opacity='0';document.body.appendChild(el);el.select();let done=false;try{done=document.execCommand('copy')}catch(_e){}el.remove();notify(done?'클립보드에 복사했어! ✓':'복사할 수 없었어. 파일 접근 권한을 확인해줘.')
 }
-function clickAction(act,el){const ds=el.dataset;
+function clickAction(act,el){const ds=el.dataset;if(act==='scheduledWork'){window.NubiHome?.scheduled(ds.id);return;}
  const map={campus:'grades',grade:'grades',health:'fitness',romance:'love',career:'career',lab:'grades',travel:'travel',shopping:'home',quant:'home'};
  if(act==='contextChat'){const c=HOME_CONTEXTS.find(x=>x[0]===homeContext)||HOME_CONTEXTS[0];if(homeContext==='first')window.NubiHome?.route('학교 시작하기');else nativeDraft(c[5],c[4]);return;}
  if(act==='nativeFeature'){nativeDraft(ds.agent,ds.prompt);return;}
@@ -544,6 +546,6 @@ document.addEventListener('input',e=>{
 render();
 
 document.addEventListener('change',e=>{if(e.target.id==='home-context'&&HOME_CONTEXTS.some(x=>x[0]===e.target.value)){homeContext=e.target.value;render();}});
-window.NubiHomeState=function(value){window.nativeHomeState=value;window.homeHydrated=true;};
+window.NubiHomeState=function(value){window.nativeHomeState=value;window.homeHydrated=true;if(st.page==='home')render();};
 window.nubiBack=function(){if(st.sheet||st.drawer){closeOverlays();return true;}if(st.page!=='home'){setPage('home');return true;}return false;};
 window.NubiHome?.ready();

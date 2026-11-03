@@ -1,10 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
   <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+  <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
   <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
   <uses-permission android:name="android.permission.RECORD_AUDIO" />
   <queries>
+    <package android:name="com.korail.talk" />
     <intent>
       <action android:name="android.speech.RecognitionService" />
     </intent>
@@ -12,6 +16,7 @@
   <application android:name=".NubiApplication" android:allowBackup="false" android:extractNativeLibs="true" android:label="${appLabel}" android:icon="@drawable/nubi_icon" android:theme="@android:style/Theme.Material.Light.NoActionBar" android:usesCleartextTraffic="false">
     <activity android:name=".CompanionEntryActivity" android:exported="false" />
     <receiver android:name=".BlackboardSchedule" android:exported="false"><intent-filter><action android:name="android.intent.action.BOOT_COMPLETED" /></intent-filter></receiver>
+    <receiver android:name=".ScheduledWork" android:exported="false"><intent-filter><action android:name="android.intent.action.BOOT_COMPLETED" /><action android:name="android.intent.action.MY_PACKAGE_REPLACED" /><action android:name="android.intent.action.TIME_SET" /><action android:name="android.intent.action.TIMEZONE_CHANGED" /><action android:name="android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED" /></intent-filter></receiver>
     <provider android:name=".NubiDocumentProvider" android:authorities="${applicationId}.documents" android:exported="false" android:grantUriPermissions="true" />
     <activity-alias android:name=".MainActivity" android:exported="false" android:targetActivity=".CompanionEntryActivity">
         </activity-alias>
@@ -45,5 +50,6 @@
       </intent-filter>
     </activity-alias>
   <service android:name=".BlackboardNoticeMonitor" android:permission="android.permission.BIND_JOB_SERVICE" android:exported="true" />
-  </application>
+  <service android:name=".ChatWork" android:permission="android.permission.BIND_JOB_SERVICE" android:exported="false" />
+</application>
 </manifest>

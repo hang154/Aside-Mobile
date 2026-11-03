@@ -1,0 +1,6 @@
+const assert=require('node:assert/strict');const E=require('../app/src/main/assets/scenario_lab/engine.js');
+const menu={source:'fixture',data:[{cafeteria:'STUDENT',meals:[{date:'2026-11-03',timeType:'LUNCH',isClosed:false,menusByType:[{sections:[{menus:[{ko:'보쌈'},{ko:'두부조림'}]}]}]}]}]};
+let p=E.mealPlan(menu,'2026-11-03',[{start:'2026-11-03T11:30:00+09:00',end:'2026-11-03T12:30:00+09:00'}],7,'11:00',true);
+assert.equal(p.state,'planned');assert.equal(p.slot.arrive_at,'2026-11-03T02:10:00.000Z');assert.equal(p.queue_measured,false);assert.equal(p.protein_grams,null);
+p=E.mealPlan(menu,'2026-11-03',[{start:'2026-11-03T10:30:00+09:00',end:'2026-11-03T12:30:00+09:00'}],7,'11:00',true);assert.equal(p.state,'no_prepeak_slot');assert.equal(p.slot,null);
+let s=E.seedTrip('15:20');s=E.advance(s,0);assert.equal(s.ticket.train,'TEST-KTX-A');s=E.advance(s,15);assert.equal(s.ticket.train,'TEST-KTX-B');assert.equal(s.changes.length,1);s=E.advance(s,0);assert.equal(s.changes.length,1);assert.equal(s.real_payment,false);assert.equal(s.real_reservation,false);s=E.advance(s,120);assert.equal(s.ticket.train,'TEST-KTX-B');assert.match(s.error,/기존 테스트 표 유지/);assert.throws(()=>E.advance(s,-1));console.log('PASS meal clash/no-slot/unknown nutrition and simulated rebook/no-duplicate/no-seat-preserve boundaries');

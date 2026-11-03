@@ -1,0 +1,7 @@
+package ai.decisionos.aside;
+import java.time.*;
+public class ChatTimeTest{
+ static long at(String s){return LocalDateTime.parse(s).atZone(ChatTime.SEOUL).toInstant().toEpochMilli();}
+ static void check(boolean ok,String label){if(!ok)throw new AssertionError(label);}
+ public static void main(String[] args){long now=at("2026-11-03T10:00");String[][] cases={{"내일 오전 11시 20분에 학식 확인해줘","2026-11-04T11:20"},{"오늘 오후 3시 40분","2026-11-03T15:40"},{"모레 11:20","2026-11-05T11:20"},{"2026-11-10T17:30 마감 1시간 전","2026-11-10T17:30"},{"11월 7일 오후 12시 반","2026-11-07T12:30"},{"목요일 오후 4시","2026-11-05T16:00"},{"다음 주 월요일 오전 9시","2026-11-09T09:00"},{"매일 오전 9시","2026-11-04T09:00"},{"매일 오전 11시","2026-11-03T11:00"},{"오늘 밤 12시","2026-11-04T00:00"},{"오전 12시 10분","2026-11-04T00:10"}};for(String[] c:cases)check(ChatTime.parse(c[0],now)==at(c[1]),c[0]);check(ChatTime.parse("20초 후 학식",now)==now+20000,"relative seconds");check(ChatTime.parse("2시간 뒤",now)==now+7200000,"relative hours");check(ChatTime.parse("알려줘",now)==0,"no invented time");check(ChatTime.next(at("2026-11-06T11:20"),"weekdays",at("2026-11-06T11:21"))==at("2026-11-09T11:20"),"skip weekend");check(ChatTime.next(at("2026-11-03T11:20"),"daily",at("2026-11-10T15:00"))==at("2026-11-11T11:20"),"skip expired repeats");check(ChatTime.repeat("평일마다 조회").equals("weekdays"),"weekday rule");boolean threw=false;try{ChatTime.parse("내일 25:10",now);}catch(Exception e){threw=true;}check(threw,"invalid hour");System.out.println("PASS 18 natural schedule time and recurrence checks");}
+}

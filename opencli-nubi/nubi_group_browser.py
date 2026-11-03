@@ -1,9 +1,12 @@
 """Bound group-chat research to the existing read-only on-device MCP browser."""
 import json,os,signal,subprocess,sys,time
 from pathlib import Path
+from nubi_group_services import GroupServices
 class GroupBrowser:
- def __init__(self,env):self.env=dict(env)
+ def __init__(self,env):self.env=dict(env);self.services=GroupServices(env)
  def __call__(self,job,role,progress,cancel):
+  service=self.services(job,role,progress,cancel)
+  if service is not None:return service
   root=Path(job['_directory']);trace=root/(job['job_id']+'-browser.json');log=root/(job['job_id']+'-browser.log')
   task=job['text']+'\n공개 웹의 읽기 전용 조회만 수행. 로그인·메일 발송·신청·구매·예약은 실행하지 마. 지원하지 않는 작업은 정확히 한계를 밝혀. 실시간 시간표·요금은 일반 검색으로 확인됐다고 주장하지 마.'
   env=dict(self.env,NUBI_GOAL_DEVICE_SESSION=job['device_session'],NUBI_GOAL_GROUP_ID=job['job_id'],NUBI_GOAL_REQUEST_ID=job['request_id'])

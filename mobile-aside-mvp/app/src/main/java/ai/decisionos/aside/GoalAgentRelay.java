@@ -40,7 +40,7 @@ final class GoalAgentRelay {
     void forget(){stop();activity.getSharedPreferences("nubi_relay_session",0).edit().clear().apply();sessionPairing=null;GoalAgentPairing.clear(activity);}
     interface Response {void receive(JSONObject data);}
     void chat(String path,JSONObject payload,Response response){
-        if(!path.equals("/chat-submit")&&!path.equals("/chat-status")&&!path.equals("/chat-cancel")&&!path.equals("/group-submit")&&!path.equals("/group-status")&&!path.equals("/group-cancel")&&!path.equals("/campus-actions")&&!path.equals("/ai-compare"))throw new IllegalArgumentException();
+        if(!path.equals("/chat-submit")&&!path.equals("/chat-status")&&!path.equals("/chat-cancel")&&!path.equals("/group-submit")&&!path.equals("/group-status")&&!path.equals("/group-cancel")&&!path.equals("/campus-actions")&&!path.equals("/ai-compare")&&!path.equals("/lecture-translate"))throw new IllegalArgumentException();
         new Thread(()->{JSONObject out;try{out=post(path,payload);}catch(Exception e){out=new JSONObject();GoalStore.put(out,"error","연결을 확인하고 다시 시도해줘. ("+e.getClass().getSimpleName()+")");}final JSONObject answer=out;ui.post(()->response.receive(answer));},"nubi-chat-request").start();
     }
     void friends(JSONObject payload,Response response){
@@ -48,7 +48,7 @@ final class GoalAgentRelay {
     }
     void document(String job,String goal,String name,String sha,Response response){
         new Thread(()->{JSONObject result=new JSONObject();try{
-            if(!name.matches("[A-Za-z0-9._-]{1,100}\\.(docx|hwpx|pdf)")||!sha.matches("[0-9a-f]{64}"))throw new IOException("invalid document");
+            if(!name.matches("[A-Za-z0-9._-]{1,100}\\.(docx|hwpx|pdf|pptx)")||!sha.matches("[0-9a-f]{64}"))throw new IOException("invalid document");
             if(!connected()&&!restore())throw new IOException("not connected");
             JSONObject body=new JSONObject();body.put("job_id",job);body.put("goal_id",goal);body.put("name",name);
             HttpsURLConnection c=(HttpsURLConnection)new URL(endpoint+"/document-file").openConnection();c.setSSLSocketFactory(sockets);c.setHostnameVerifier((h,se)->true);c.setInstanceFollowRedirects(false);c.setConnectTimeout(7000);c.setReadTimeout(22000);c.setRequestMethod("POST");c.setDoOutput(true);c.setRequestProperty("Authorization","Bearer "+token);c.setRequestProperty("Content-Type","application/json");byte[] request=body.toString().getBytes(StandardCharsets.UTF_8);c.setFixedLengthStreamingMode(request.length);try(OutputStream stream=c.getOutputStream()){stream.write(request);}

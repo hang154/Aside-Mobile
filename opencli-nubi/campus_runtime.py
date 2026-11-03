@@ -26,7 +26,11 @@ def current_browser(env=None):
   endpoint='http://127.0.0.1:'+port
   with urllib.request.urlopen(endpoint+'/json/list',timeout=5) as response:pages=json.load(response)
   pages=[p for p in pages if p.get('type')=='page' and not p.get('url','').startswith('file:///android_asset/')]
+  # A native school dialog can coexist with the unused about:blank workspace.
+  # Prefer actual documents; never choose between two live service pages.
+  documents=[p for p in pages if p.get('url','').startswith('https://')]
   requested=env.get('NUBI_CDP_TARGET_ID')
+  if documents and not requested:pages=documents
   if requested:pages=[p for p in pages if p.get('id')==requested]
   if len(pages)!=1:raise RuntimeError('누비 연결창을 닫고 브라우저 하나만 남겨 주세요.')
   env.update(NUBI_CDP_ENDPOINT=endpoint,NUBI_CDP_TARGET_ID=pages[0]['id'],NUBI_ANDROID_SERIAL=serial)

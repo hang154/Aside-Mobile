@@ -14,7 +14,7 @@ final class SchoolChatWork {
   if(text.matches(".*(알림|감시|주기|공지).*(꺼|끄|중지|그만).*")){CampusNoticeMonitor.stop(c.a);BlackboardNoticeMonitor.stop(c.a);c.a.getSharedPreferences("nubi_campus_ui",0).edit().putBoolean("chat_watch",false).apply();reply(c,text,"학교 소식 주기 확인을 껐어. 기존 대화와 기록은 그대로 남겨 둘게.","");return true;}
   if(text.matches(".*(자동|주기|계속).*(알려|감시|확인).*")){watch(c);reply(c,text,"포털·Blackboard 주기 확인을 요청했어. 새로 확인한 소식은 이 채팅에 남길게. 학교 로그인과 Android 실행 상태에 따라 확인이 늦어질 수 있어.","");return true;}
   if(text.matches(".*(진행|내 작업|작업 상태).*")){SchoolChatUi.tools(c,"jobs");return true;}
-  CampusWorkflows.Flow f=match(text);if(f==null)return false;
+  CampusWorkflows.Flow f=match(text);if(f==null)return false;if(f.id.equals("lecture")){reply(c,text,"강의 구간별 통역을 열게. 시작을 누르면 Android 음성 인식 결과를 Qwen으로 번역해. 끝난 구간은 검토해서 이 대화에 보관할 수 있어.","");new LectureInterpretation(c).show();return true;}
   JSONObject job=new JSONObject();GoalStore.put(job,"flow",f.id);GoalStore.put(job,"title",f.title);GoalStore.put(job,"context",text);GoalStore.put(job,"state","draft");GoalStore.put(job,"goal",c.goalId);GoalStore.put(job,"conversation",c.conversationId);String id;try(CampusFlowStore store=new CampusFlowStore(c.a)){id=store.save("jobs",job);}
   reply(c,text,"좋아, "+f.title+"부터 준비할게. 요청과 진행 기록은 아래에 남겨 둘게.",id);
   // Execute supported public exploration automatically. Other tasks stay visibly pending until their adapter is available.

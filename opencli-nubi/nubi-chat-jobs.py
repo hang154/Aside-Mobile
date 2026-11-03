@@ -18,8 +18,8 @@ class ChatJobs:
    if len(self.jobs)>=100:raise RuntimeError('Session job limit reached; restart relay')
    ident=uuid.uuid4().hex;trace=self.directory/(ident+'.json');log=(self.directory/(ident+'.log')).open('w')
    current=body['task'].split('현재 사용자 지시:',1)[-1]
-   transit=bool(re.search(r'KTX|코레일|버스|지하철|대중교통|기차.{0,15}(시간|운행|조회)|이동.{0,15}(경로|소요)',current,re.I))
-   campus=not transit and (current.startswith('[학교 실행]') or bool(re.search(r'블랙보드|blackboard|과제|강의자료|오픈북|시험|UNIST|유니스트|학사|장학|학교\s*(공지|메일|포털)|수강|예비수강|COOP|인턴십|Outlook|아웃룩',current,re.I)))
+   transit=bool(re.search(r'KTX|SRT|코레일|버스|지하철|대중교통|택시|택시비|날씨|기온|미세먼지|대기질|관광지|항공편|항공기|비행기|여객선|선박.{0,15}(시간|운항|조회)|(기차|열차).{0,15}(시간|운행|조회|찾)|이동.{0,15}(경로|소요)',current,re.I))
+   campus=not transit and (current.startswith('[학교 실행]') or bool(re.search(r'블랙보드|blackboard|과제|강의자료|오픈북|시험|UNIST|유니스트|학식|식단|특식|밥먹어|학사|장학|학교\s*(공지|메일|포털)|수강|예비수강|COOP|인턴십|Outlook|아웃룩',current,re.I)))
    document=bool(re.search(r'예산서|지원요청서|연구지원금|문서\s*작성|서류\s*작성|docx|hwpx|sharepoint|uirp|l시리즈',current,re.I))
    base_python=str(Path.home()/'.local/share/nubi-documents/venv/bin/python')
    interpreter=os.environ.get('NUBI_CAMPUS_PYTHON',base_python if Path(base_python).is_file() else sys.executable) if campus else os.environ.get('NUBI_DOCUMENT_PYTHON',base_python) if document and not transit else sys.executable
@@ -61,6 +61,7 @@ class ChatJobs:
    state='cancelled' if j['cancelled'] else 'running' if code is None else 'completed' if code==0 and trace.get('completed') else 'failed'
    result={'job_id':ident,'request_id':j['request']['request_id'],'goal_id':j['request']['goal_id'],'character':j['request']['character'],'state':state,'progress':progress[-12:],'answer':trace.get('answer') if state=='completed' else None,'error':trace.get('error','모델 응답 또는 연결을 확인해줘.') if state=='failed' else None,'items':items,'source_page':source_page,'reported_models':sorted(set(trace.get('reported_models',[])))}
    if trace.get('expires_at'):result['expires_at']=trace['expires_at']
+   if state=='completed' and trace.get('rail_journey'):result['rail_journey']=trace['rail_journey']
    if trace.get('kind')=='document' or trace.get('document'):
     result['kind']='document';result['document']=trace.get('document',{});result['document'].pop('artifacts',None)
    if result['error'] is None:result.pop('error')
@@ -84,15 +85,22 @@ class ChatJobs:
  def artifact(self,ident,goal_id,name):
   with self.lock:
    j=self.jobs.get(ident)
-   if not j or j['request']['goal_id']!=goal_id or not re.fullmatch(r'[A-Za-z0-9._-]{1,100}',name):raise ValueError('Unknown goal document')
-   if j['process'].poll() is None:raise ValueError('Document job is not complete')
-   campus_trace=json.loads(j['trace'].read_text())
+   if not re.fullmatch(r'[A-Za-z0-9._-]{1,100}',name):raise ValueError('Unknown goal document')
+   if j:
+    if j['request']['goal_id']!=goal_id:raise ValueError('Unknown goal document')
+    if j['process'].poll() is None:raise ValueError('Document job is not complete')
+    campus_trace=json.loads(j['trace'].read_text())
+   else:
+    # Completed campus exports survive an owned relay restart, still goal scoped.
+    if not re.fullmatch(r'[0-9a-f]{32}',ident):raise ValueError('Unknown goal document')
+    campus_trace=json.loads((self.directory/(ident+'.json')).read_text())
+    if campus_trace.get('kind')!='campus' or campus_trace.get('goal_id')!=goal_id or not campus_trace.get('completed'):raise ValueError('Unknown goal document')
    if campus_trace.get('kind')=='campus' and campus_trace.get('artifact_paths'):
     import hashlib
     root=Path(self.env.get('NUBI_CAMPUS_DRAFT_DIR',str(Path.home()/'.local/share/nubi-campus/drafts'))).expanduser().resolve()
     path=Path(campus_trace['artifact_paths'].get(name,'/')).resolve()
     expected=next((f for f in campus_trace.get('document',{}).get('manifest',{}).get('files',[]) if f.get('name')==name),None)
-    if not expected or not path.is_relative_to(root) or path.suffix not in ('.pdf','.docx') or not path.is_file() or path.stat().st_size>8*1024*1024:raise ValueError('Unknown campus artifact')
+    if not expected or not path.is_relative_to(root) or path.suffix not in ('.pdf','.docx','.pptx') or not path.is_file() or path.stat().st_size>8*1024*1024:raise ValueError('Unknown campus artifact')
     data=path.read_bytes()
     if hashlib.sha256(data).hexdigest()!=expected['sha256']:raise ValueError('Document hash mismatch')
     return data

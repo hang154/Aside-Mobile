@@ -6,7 +6,7 @@ with tempfile.TemporaryDirectory() as d:
  calls=[]
  def mock(messages,json_mode=False):
   calls.append(messages)
-  return (json.dumps({'agents':['love','grades'],'intro':'같이 해볼게','action':'talk'},ensure_ascii=False) if json_mode else '담당 답변 내용'),MODEL
+  return (json.dumps({'agents':['love','grades'],'intro':'같이 해볼게','action':'talk'},ensure_ascii=False) if json_mode else '담당 답변 내용 '+str(len(calls))),MODEL
  q=GroupQwen(d,mock);b={'request_id':str(uuid.uuid4()),'device_session':str(uuid.uuid4()),'text':'연애와 학교','history':[]};x=q.submit(b);y=q.submit(b);assert x['job_id']==y['job_id']
  while q.status(x['job_id'],b['device_session'])['state']=='running':time.sleep(.01)
  result=q.status(x['job_id'],b['device_session']);assert result['state']=='completed' and len(calls)==4 and len(result['messages'])==4
@@ -15,6 +15,7 @@ with tempfile.TemporaryDirectory() as d:
  try:q.submit(dict(b,text='다른 내용'));raise AssertionError('conflict')
  except ValueError:pass
  assert '담당 답변 내용' in calls[-1][-1]['content']
+ before=len(result['messages']);job=q.jobs[x['job_id']];q._message(job,'grades',result['messages'][1]['text']);assert len(q.status(x['job_id'],b['device_session'])['messages'])==before
  print('PASS deduplication, ownership, sequential collaborator context and synthesis')
 # Actual configured endpoint, no tool execution; explicitly opt in.
 if '--live' not in sys.argv:raise SystemExit(0)

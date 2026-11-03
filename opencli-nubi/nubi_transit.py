@@ -20,9 +20,11 @@ class Transit:
   self.db.executescript('CREATE TABLE IF NOT EXISTS cache(k TEXT PRIMARY KEY,t REAL,data TEXT);CREATE TABLE IF NOT EXISTS quota(day TEXT,p TEXT,n INTEGER,PRIMARY KEY(day,p));');self.db.commit()
  def key(self,provider):
   name={'tago':'TAGO','seoul':'SEOUL_SUBWAY','tmap':'TMAP'}[provider];p=Path(os.environ.get('NUBI_'+name+'_KEY_FILE',self.root/(provider+'.key')))
-  if not p.is_file():raise TransitError('registration_required',provider+' 가입·활용신청 및 서버 인증키 설정이 필요해요.')
-  if p.stat().st_mode&0o077:raise TransitError('configuration_error','인증키 파일 권한을 600으로 설정해 주세요.')
-  value=p.read_text().strip()
+  value=os.environ.get('TAGO_SERVICE_KEY') if provider=='tago' and not os.environ.get('NUBI_TAGO_KEY_FILE') else None
+  if value is None:
+   if not p.is_file():raise TransitError('registration_required',provider+' 가입·활용신청 및 서버 인증키 설정이 필요해요.')
+   if p.stat().st_mode&0o077:raise TransitError('configuration_error','인증키 파일 권한을 600으로 설정해 주세요.')
+   value=p.read_text().strip()
   if not value or len(value)>1000 or any(x in value for x in '\r\n'):raise TransitError('configuration_error','인증키 파일 형식을 확인해 주세요.')
   return unquote(value) if provider=='tago' else value
  def status(self):
@@ -54,7 +56,11 @@ class Transit:
   self.db.execute('BEGIN IMMEDIATE');n=self.db.execute('SELECT n FROM quota WHERE day=? AND p=?',(day,provider)).fetchone()
   if n and n[0]>=limit:self.db.rollback();raise TransitError('local_daily_limit','서버에 설정한 일일 호출 상한에 도달했어요.')
   self.db.execute('INSERT INTO quota VALUES(?,?,1) ON CONFLICT(day,p) DO UPDATE SET n=n+1',(day,provider));self.db.commit()
-  if provider=='tago':url='https://apis.data.go.kr/1613000/'+path+'?'+urlencode(dict(params,serviceKey=key,_type='json'));headers={}
+  if provider=='tago':
+   if path in ('B551457/run/v2/codes2','B551457/run/v2/travelerTrainRunPlan2','B551457/run/v2/travelerTrainRunInfo2'):
+    url='https://apis.data.go.kr/'+path+'?'+urlencode(dict(params,serviceKey=key,returnType='json'))
+   else:url='https://apis.data.go.kr/1613000/'+path+'?'+urlencode(dict(params,serviceKey=key,_type='json'))
+   headers={}
   elif provider=='seoul':url='http://swopenapi.seoul.go.kr/api/subway/'+quote(key,safe='')+'/json/realtimeStationArrival/0/5/'+quote(params['station'],safe='');headers={}
   else:url='https://apis.openapi.sk.com/transit/routes';headers={'appKey':key,'Content-Type':'application/json','Accept':'application/json'}
   result=self.transport(url,headers,body)
@@ -85,7 +91,7 @@ class Transit:
   if operation=='status':return self.status()
   specs={
    'bus_cities':('tago','ArvlInfoInqireService/getCtyCodeList',{},86400,'tago'),
-   'bus_arrivals':('tago','ArvlInfoInqireService/getSttnAcctoArvlPrearngeInfoList',{'cityCode':a.get('city_code'),'nodeId':a.get('stop_id'),'pageNo':a.get('page',1),'numOfRows':20},30,'tago'),
+   'bus_arrivals':('tago','ArvlInfoInqireService/getSttnAcctoArvlPrearngeInfoList',{'cityCode':a.get('city_code'),'nodeId':a.get('stop_id'),'pageNo':a.get('page',1),'numOfRows':20},20,'tago'),
    'bus_stops':('tago','BusSttnInfoInqireService/getSttnNoList',{'cityCode':a.get('city_code'),'nodeNm':a.get('name'),'pageNo':a.get('page',1),'numOfRows':20},300,'stops'),
    'bus_positions':('tago','BusLcInfoInqireService/getRouteAcctoBusLcList',{'cityCode':a.get('city_code'),'routeId':a.get('route_id'),'pageNo':a.get('page',1),'numOfRows':20},30,'position'),
    'train_cities':('tago','TrainInfo/GetCtyCodeList',{},86400,'train'),
